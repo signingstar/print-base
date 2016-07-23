@@ -40,3 +40,5 @@ jspm_packages
 
 build/worker.js
 core/*.js
+
+public
