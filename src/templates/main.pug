@@ -1,0 +1,26 @@
+html
+  head
+    title= 'Project KickOff'
+    link(
+      rel='stylesheet'
+      href='/assets/main.css'
+      type='text/css'
+    )
+    script().
+      window.payload={"title": 'My Title'};
+  body
+    #contents
+      .promotion-header
+        include ./promotion_header.pug
+      .header
+        include ./header.pug
+      .selection-items
+        include ./menu_options.pug
+      .contents
+        include ./contents.pug
+      .footer
+        include ./footer.pug
+
+  script(
+    src='/assets/main.js'
+  )

@@ -1,0 +1,35 @@
+.header {
+  background-color: #0A6689;
+  color: white;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  height: 45px;
+
+  .header-content {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: auto 15px;
+
+    .company-info, .contact-info, .user-info {
+      height: 100%;
+    }
+
+    .company-info {
+      font-size: 19px;
+      font-weight: bolder;
+      text-align: left;
+      width: 30%
+    }
+
+    .contact-info {
+      text-align: center;
+      width: 30%;
+    }
+
+    .user-info {
+      text-align: right;
+      width: 39%;
+    }
+  }
+}

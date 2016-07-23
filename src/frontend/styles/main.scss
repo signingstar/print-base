@@ -1,0 +1,14 @@
+@import 'promotion_header';
+@import 'header';
+@import 'menu_options';
+@import 'contents';
+@import 'footer';
+
+body {
+  margin: 0;
+
+  a {
+    text-decoration: none;
+    color: #126482
+  }
+}
