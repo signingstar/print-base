@@ -1,15 +1,26 @@
 var path = require('path');
-var mustache = require('mustache-express');
-var pathString = './src/templates';
+var pug = require('pug');
 
-console.log(pathString);
+var srcPath = './src/templates/main.pug';
+var navigationConfig = require('../core/navigation-config.json');
 
 export function routes(app:any, staticCall:any) {
 	app.set("view engine", "pug");
-  app.set('views', pathString);
 
 	app.get("/", function(req:any, res:any){
-		res.render('main', { title: 'Hey', message: 'Hello there!'});
+		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+		var navigationConfig = require('../core/navigation-config.json');
+
+		var html = fn({
+			navigationConfig: navigationConfig
+		});
+
+		res.writeHead(200, {
+			"Content-Type": "text/html"
+		});
+
+		res.write(html);
+		res.end();
 	});
 	app.use('/assets', staticCall('./public'));
 }

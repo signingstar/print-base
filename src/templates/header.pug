@@ -1,10 +1,23 @@
-.header-content
-  div(
-    class = 'company-info'
-  ) Simpy Printing
-  div(
-    class = 'contact-info'
-  ) Call: +91 987 654 3210
-  div(
-    class = 'user-info'
-  ) My Account
+header
+  .header-content
+    div(
+      class = 'company-info'
+    )
+      a(
+        href="/"
+      ) Simpy Printing
+    div(
+      class = 'contact-info'
+    ) Call: +91 987 654 3210
+    div(
+      class = 'user-info'
+    ) My Account
+
+  ul.list-options
+    each val, index in navigationConfig
+      - menu = val.subElements
+      li(
+        id= val.id
+        )= val.displayText
+
+      include ./menu-items
