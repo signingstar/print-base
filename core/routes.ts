@@ -8,7 +8,7 @@ export function routes(app:any, staticCall:any) {
 	app.set("view engine", "pug");
 
 	app.get("/", function(req:any, res:any){
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+		var fn = pug.compileFile(srcPath , {cache: true, pretty: true});
 		var navigationConfig = require('../core/navigation-config.json');
 
 		var html = fn({
