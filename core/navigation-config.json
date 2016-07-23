@@ -1,0 +1,49 @@
+module.exports = [
+  {
+    "id": "why-us",
+    "displayText": "Why Us",
+    "url": "",
+    "index": 1,
+    "subElements": []
+  },
+  {
+    "id": "our-services",
+    "displayText": "Services we offer",
+    "url": "",
+    "index": 2,
+    "subElements": [
+      {
+        "id": "l-2-1",
+        "displayText": "Business Cards",
+        "url": "",
+        "index": 1,
+      },
+      {
+        "id": "l-2-2",
+        "displayText": "Stationary",
+        "url": "",
+        "index": 2,
+      },
+      {
+        "id": "l-2-3",
+        "displayText": "Brouchers",
+        "url": "",
+        "index": 3,
+      }
+    ]
+  },
+  {
+    "id": "place-order",
+    "displayText": "Place an order",
+    "url": "",
+    "index": 3,
+    "subElements": []
+  },
+  {
+    "id": "contact-us",
+    "displayText": "Contact Us",
+    "url": "",
+    "index": 4,
+    "subElements": []
+  }
+]

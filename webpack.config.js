@@ -6,13 +6,14 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var sass = require('node-sass');
 
 var DEBUG = !process.argv.includes('--release');
-var GLOBALS = {
-  'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
-  __DEV__: DEBUG,
-};
 
 var srcPath = path.join(__dirname, "./src/frontend");
 var destPath = path.join(__dirname, "./public");
+
+var GLOBALS = {
+  'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
+  __DEV__: DEBUG
+};
 
 var nodeModules = {};
 fs.readdirSync('node_modules')

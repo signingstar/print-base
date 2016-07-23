@@ -1,8 +1,8 @@
 .promotion-header {
   align-items: center;
+  border-bottom: 1px solid black;
   display: flex;
-  justify-content: space-between;
-  height: 30px;
+  height: 33px;
 
   .promotion-text {
     margin: 0 auto;
@@ -16,6 +16,7 @@
   }
 
   .close-icon {
+    cursor: pointer;
     font-size: 28px;
     margin-right: 20px;
 

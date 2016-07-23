@@ -1,15 +1,13 @@
-.header {
-  background-color: #0A6689;
-  color: white;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  height: 45px;
-
+header {
   .header-content {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin: auto 15px;
+    padding: 0 15px;
+    background-color: #0A6689;
+    color: white;
+    border-bottom: 1px solid black;
+    height: 45px;
 
     .company-info, .contact-info, .user-info {
       height: 100%;
@@ -19,7 +17,11 @@
       font-size: 19px;
       font-weight: bolder;
       text-align: left;
-      width: 30%
+      width: 30%;
+
+      a {
+        color: white;
+      }
     }
 
     .contact-info {
@@ -30,6 +32,27 @@
     .user-info {
       text-align: right;
       width: 39%;
+    }
+  }
+
+  .list-options {
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    height: 30px;
+    margin: 5px 0;
+    padding: 0;
+
+    li {
+      display: inline-block;
+      height: 100%;
+      text-align: center;
+      width: 20%;
+
+      &:last-child {
+        width: 19%;
+      }
     }
   }
 }
