@@ -10,4 +10,20 @@ body {
     text-decoration: none;
     color: #126482
   }
+
+  .icon-down-arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #126482;
+  }
+
+  .icon-up-arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #126482;
+  }
 }

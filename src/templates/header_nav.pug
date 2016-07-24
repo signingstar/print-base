@@ -1,0 +1,25 @@
+ul#menu-options
+  each top_option in navigationConfig
+    if top_option.display
+      li(
+        id= top_option.id
+        )
+        a(
+          href='#'
+          id= top_option.anchorId
+          role= 'menuitem'
+        )= top_option.displayText
+          if top_option.subElements.length > 0
+            .icon-down-arrow.menu-pointer
+        - sub_elements = top_option.subElements
+        if sub_elements.length > 0
+          nav#inner-nav(
+            role="menu"
+            )
+            ul#submenu-options
+              each child_option in sub_elements
+                li
+                  a(
+                    href='#'
+                    id= child_option.id
+                    )= child_option.displayText
