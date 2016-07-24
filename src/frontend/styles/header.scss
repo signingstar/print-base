@@ -1,93 +1,150 @@
-header {
-  .header-content {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 15px;
+.header {
+  margin-bottom: 15px;
+
+  .full-header {
     background-color: #0A6689;
-    color: white;
     border-bottom: 1px solid #999;
-    height: 50px;
 
-    .company-info, .contact-info, .user-info {
-      height: 100%;
-    }
+    .header-content {
+      align-items: center;
+      color: white;
+      display: flex;
+      height: 50px;
+      justify-content: space-between;
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 10px;
 
-    .company-info {
-      font-size: 19px;
-      font-weight: bolder;
-      text-align: left;
-      width: 30%;
-
-      a {
-        color: white;
+      .company-info, .contact-info, .user-info {
+        height: 100%;
       }
-    }
 
-    .contact-info {
-      text-align: center;
-      width: 30%;
-    }
+      .company-info {
+        font-size: 19px;
+        font-weight: bolder;
+        text-align: left;
+        width: 30%;
 
-    .user-info {
-      text-align: right;
-      width: 39%;
+        a {
+          color: white;
+        }
+      }
+
+      .contact-info {
+        text-align: center;
+        width: 30%;
+      }
+
+      .user-info {
+        text-align: right;
+        width: 39%;
+      }
     }
   }
 
-  nav#top-nav {
-    border-bottom: 1px solid #999;
+  @media only screen and (min-width: 581px) {
+    nav {
+      border-bottom: 1px solid #999;
 
-    ul#menu-options {
-      align-items: center;
-      display: flex;
-      justify-content: space-between;
-      list-style-type: none;
-      margin: 0;
-      padding: 0 80px;
+      #menu-options {
+        align-items: center;
+        display: flex;
+        justify-content: space-between;
+        list-style-type: none;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 0 10px;
 
-      > li {
-        display: inline-block;
-        margin: 0 15px;
-
-        &:hover{
-          // border-bottom: 2px solid #0a6689;
-
-          nav {
-            display: block;
-          }
-        }
-
-        > a {
-          font-weight: 600;
-          line-height: 35px;
-        }
-
-        .menu-pointer {
+        > li {
           display: inline-block;
 
+          &:hover nav {
+            display: block;
+          }
+
+          .menu-pointer {
+            display: inline-block;
+          }
+
+          > a {
+            font-weight: 600;
+            line-height: 35px;
+          }
+
+          nav {
+            background-color: #fff;
+            display: none;
+            min-width: 150px;
+            position: absolute;
+
+            .submenu-options {
+              border: 1px solid #bbb;
+              border-top: none;
+              line-height: 1.5em;
+              list-style-type: none;
+              padding: 0;
+              text-align: left;
+
+              li {
+                padding: 2px 0 2px 8px;
+
+                &:hover {
+                  background-color: #ccc;
+                }
+              }
+            }
+          }
         }
+      }
+    }
+  }
+  @media only screen and (max-width: 580px) {
+    nav {
+      border-bottom: 1px solid #999;
 
-        nav {
-          background-color: #fff;
-          display: none;
-          min-width: 150px;
-          position: absolute;
+      #menu-options {
+        list-style-type: none;
+        margin: 0 auto;
+        max-width: 1200px;
+        padding: 0;
 
-          ul {
-            border: 1px solid #bbb;
-            border-top: none;
-            line-height: 1.5em;
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            text-align: left;
+        li {
+          a {
+            margin-left: 15px;
+          }
 
-            li {
-              padding: 2px 0 2px 8px;
+          &:hover {
+            background-color: #0A6689;
 
-              &:hover {
-                background-color: #ccc;
+            a {
+              color: white;
+            }
+
+            nav {
+              display: block;
+            }
+          }
+
+          .menu-pointer {
+            display: inline-block;
+          }
+
+          > a {
+            font-weight: 600;
+            line-height: 35px;
+          }
+
+          nav {
+            display: none;
+
+            .submenu-options {
+              line-height: 1.5em;
+              list-style-type: none;
+              padding: 0;
+              text-align: left;
+
+              li {
+                font-size: 0.8em;
               }
             }
           }

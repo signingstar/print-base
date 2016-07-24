@@ -40,7 +40,7 @@ jspm_packages
 *.js.map
 
 # Compiled js files
-build/worker.js
+build
 src/*.js
 core/*.js
 

@@ -2,7 +2,7 @@ module.exports = [
   {
     "id": "why-us",
     "displayText": "Why Us",
-    "url": "",
+    "url": "/",
     "index": 1,
     "anchorId": "l-1",
     "subElements": [],
@@ -11,7 +11,7 @@ module.exports = [
   {
     "id": "our-services",
     "displayText": "Services we offer",
-    "url": "",
+    "url": "/",
     "index": 2,
     "anchorId": "l-2",
     "display": true,

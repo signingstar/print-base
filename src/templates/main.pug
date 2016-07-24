@@ -14,15 +14,22 @@ html
     script().
       window.payload={"title": 'My Title'};
   body
-    .promotion-header
-      include ./promotion_header.pug
-    .header
-      include ./header.pug
-    .contents
-      include ./contents.pug
-    footer
-      include ./footer.pug
+    .body-contents
+      .promotion-header
+        include ./promotion_header.pug
+      .header
+        include ./header.pug
+      .contents
+        include ./contents.pug
+      footer
+        include ./footer.pug
 
+  //- script(
+  //-   src='https://fb.me/react-15.2.1.min.js'
+  //- )
+  //- script(
+  //-   src='https://fb.me/react-dom-15.2.1.min.js'
+  //- )
   script(
     src='/assets/main.js'
   )

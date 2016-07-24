@@ -70,6 +70,10 @@ var clientConfig = extend({}, true, config, {
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", "css", "scss"]
   },
+  // externals: {
+  //   "react": "React",
+  //   "react-dom": "ReactDOM"
+  // }
 });
 
 var serverConfig = extend({}, true, config, {
