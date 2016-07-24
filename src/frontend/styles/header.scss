@@ -6,8 +6,8 @@ header {
     padding: 0 15px;
     background-color: #0A6689;
     color: white;
-    border-bottom: 1px solid black;
-    height: 45px;
+    border-bottom: 1px solid #999;
+    height: 50px;
 
     .company-info, .contact-info, .user-info {
       height: 100%;
@@ -35,23 +35,63 @@ header {
     }
   }
 
-  .list-options {
-    border-bottom: 1px solid black;
-    display: flex;
-    justify-content: space-between;
-    list-style-type: none;
-    height: 30px;
-    margin: 5px 0;
-    padding: 0;
+  nav#top-nav {
+    border-bottom: 1px solid #999;
 
-    li {
-      display: inline-block;
-      height: 100%;
-      text-align: center;
-      width: 20%;
+    ul#menu-options {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      list-style-type: none;
+      margin: 0;
+      padding: 0 80px;
 
-      &:last-child {
-        width: 19%;
+      > li {
+        display: inline-block;
+        margin: 0 15px;
+
+        &:hover{
+          // border-bottom: 2px solid #0a6689;
+
+          nav {
+            display: block;
+          }
+        }
+
+        > a {
+          font-weight: 600;
+          line-height: 35px;
+        }
+
+        .menu-pointer {
+          display: inline-block;
+
+        }
+
+        nav {
+          background-color: #fff;
+          display: none;
+          min-width: 150px;
+          position: absolute;
+
+          ul {
+            border: 1px solid #bbb;
+            border-top: none;
+            line-height: 1.5em;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: left;
+
+            li {
+              padding: 2px 0 2px 8px;
+
+              &:hover {
+                background-color: #ccc;
+              }
+            }
+          }
+        }
       }
     }
   }

@@ -41,17 +41,30 @@ var clientConfig = extend({}, true, config, {
     loaders: [
         // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
         { test: /\.tsx?$/, loader: "ts-loader" },
+
         {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract("style-loader", "css-loader")
         },
-                { test: /\.scss$/i, loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")},
+        // All files with a '.scss' extension will be handled by 'sass-loader'.
+        {
+          test: /\.scss$/i,
+          loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+        },
     ],
   },
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name]")
+      new ExtractTextPlugin("[name]"),
+      new webpack.optimize.UglifyJsPlugin( {
+        compress: {
+          warnings: false
+        },
+        mangle: {
+          except: ['$', 'exports', 'require']
+        }
+      })
   ],
 
   resolve: {

@@ -4,31 +4,38 @@ module.exports = [
     "displayText": "Why Us",
     "url": "",
     "index": 1,
-    "subElements": []
+    "anchorId": "l-1",
+    "subElements": [],
+    "display": true
   },
   {
     "id": "our-services",
     "displayText": "Services we offer",
     "url": "",
     "index": 2,
+    "anchorId": "l-2",
+    "display": true,
     "subElements": [
       {
         "id": "l-2-1",
         "displayText": "Business Cards",
         "url": "",
         "index": 1,
+        "display": true
       },
       {
         "id": "l-2-2",
         "displayText": "Stationary",
         "url": "",
         "index": 2,
+        "display": true
       },
       {
         "id": "l-2-3",
         "displayText": "Brouchers",
         "url": "",
         "index": 3,
+        "display": true
       }
     ]
   },
@@ -37,13 +44,17 @@ module.exports = [
     "displayText": "Place an order",
     "url": "",
     "index": 3,
-    "subElements": []
+    "anchorId": "l-3",
+    "subElements": [],
+    "display": true
   },
   {
     "id": "contact-us",
     "displayText": "Contact Us",
     "url": "",
     "index": 4,
-    "subElements": []
+    "anchorId": "l-4",
+    "subElements": [],
+    "display": true
   }
 ]

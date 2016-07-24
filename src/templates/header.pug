@@ -13,11 +13,7 @@ header
       class = 'user-info'
     ) My Account
 
-  ul.list-options
-    each val, index in navigationConfig
-      - menu = val.subElements
-      li(
-        id= val.id
-        )= val.displayText
-
-      //- include ./menu-items
+  nav#top-nav(
+    role="navigation"
+    )
+    include ./header_nav
