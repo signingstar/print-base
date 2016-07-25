@@ -31,7 +31,9 @@ var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
       'main.css': srcPath + '/styles/main.scss',
+      'session.css': srcPath + '/styles/session.scss',
       'main.js': srcPath + '/main.ts',
+      'session.js': srcPath + '/js/session.ts'
   },
   output: {
     filename: '[name]',

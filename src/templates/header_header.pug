@@ -1,0 +1,26 @@
+.full-header
+  .header-content
+    div(
+      class = 'company-info'
+    )
+      a(
+        href="/"
+      ) Super Digital Printing
+    div.contact-info
+      span.call-text Call:
+      span.call-info +91 987 654 3210
+    - logged = true
+    nav.user-info(
+      class=(logged?'signed':'unsigned')
+    )
+      span#user-cart.user-info-item
+        a#cart-nav(
+          href='#'
+          )
+          span Cart
+      a#user-signin.user-info-item(
+        href='/login'
+        ) Login
+      a#user-signup.user-info-item(
+        href='/signup'
+        ) Register

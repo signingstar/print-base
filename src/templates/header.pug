@@ -1,20 +1,4 @@
 header
-  .full-header
-    .header-content
-      div(
-        class = 'company-info'
-      )
-        a(
-          href="/"
-        ) Simpy Printing
-      div(
-        class = 'contact-info'
-      ) Call: +91 987 654 3210
-      div(
-        class = 'user-info'
-      ) My Account
+  include ./header_base
 
-  nav#top-nav(
-    role="navigation"
-    )
-    include ./header_nav
+  include ./header_nav
