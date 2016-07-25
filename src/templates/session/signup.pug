@@ -1,0 +1,25 @@
+html
+  head
+    title= 'Keshari Printing Services'
+    link(
+      rel='icon'
+      href='/assets/header.png'
+      type='image/png'
+      )
+    link(
+      rel='stylesheet'
+      href='/assets/session.css'
+      type='text/css'
+    )
+    script().
+      window.payload={"title": 'My Title'};
+  body
+    .body-contents
+      .header
+        include ../header_header.pug
+      .contents
+        include ./signup_contents.pug
+
+  script(
+    src='/assets/session.js'
+  )
