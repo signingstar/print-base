@@ -1,4 +1,9 @@
 .contents {
-  margin: auto 15px;
-  min-height: 600px
+  min-height: 600px;
+
+  .main-content {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 10px;
+  }
 }

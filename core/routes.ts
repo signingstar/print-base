@@ -54,5 +54,33 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
+	app.get("/forgot_password", function(req:any, res:any){
+		srcPath = `${templatePath}/session/forgot_password.pug`;
+
+		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+		var html = fn();
+
+		res.writeHead(200, {
+			"Content-Type": "text/html"
+		});
+
+		res.write(html);
+		res.end();
+	});
+
+	app.get("/contact", function(req:any, res:any){
+		srcPath = `${templatePath}/contact_us/contact_us.pug`;
+
+		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+		var html = fn();
+
+		res.writeHead(200, {
+			"Content-Type": "text/html"
+		});
+
+		res.write(html);
+		res.end();
+	});
+
 	app.use('/assets', staticCall('./public'));
 }
