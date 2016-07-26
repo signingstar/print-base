@@ -32,8 +32,10 @@ var clientConfig = extend({}, true, config, {
   entry: {
       'main.css': srcPath + '/styles/main.scss',
       'session.css': srcPath + '/styles/session.scss',
+      'contact.css': srcPath + '/styles/contact.scss',
       'main.js': srcPath + '/main.ts',
-      'session.js': srcPath + '/js/session.ts'
+      'session.js': srcPath + '/js/session.ts',
+      'contact.js': srcPath + '/js/contact.js'
   },
   output: {
     filename: '[name]',
@@ -59,14 +61,14 @@ var clientConfig = extend({}, true, config, {
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
       new ExtractTextPlugin("[name]"),
-      new webpack.optimize.UglifyJsPlugin( {
-        compress: {
-          warnings: false
-        },
-        mangle: {
-          except: ['$', 'exports', 'require']
-        }
-      })
+      // new webpack.optimize.UglifyJsPlugin( {
+      //   compress: {
+      //     warnings: false
+      //   },
+      //   mangle: {
+      //     except: ['$', 'exports', 'require']
+      //   }
+      // })
   ],
 
   resolve: {

@@ -34,10 +34,11 @@ form
       label(
         for='query-type'
         ) Query Type
-      input(
+      select(
         name='query-type'
-        type='select'
         )
+        option General Enquiry
+        option Related to your order
     #message.field
       label(
         for='query'
@@ -45,7 +46,7 @@ form
       textarea(
         name='query'
         )
-    .session-button
+    .contact-button
       a(
         role='button'
         href='#'
