@@ -1,0 +1,17 @@
+#session-content
+  .session-header
+    span.session-header-main
+      h3 Register
+    span.session-header-optional
+      | or
+      a.session-header-session(
+        href='/login'
+        ) Login
+  .session-body
+    .session-form
+      include ./signup_form
+
+    .separator
+
+    .session-optional
+      include ./signup_optional

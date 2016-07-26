@@ -1,0 +1,52 @@
+form
+  fieldset
+    #name-input.field
+      label(
+        for='username'
+        ) Full Name
+      input#username-value(
+        name='username'
+        placeholder=''
+        required
+        type='text'
+        )
+    #email-input.field
+      label(
+        for='userid'
+        ) Email Id
+      input#userid-value(
+        name='userid'
+        placeholder='youremail@gmail.com'
+        required
+        type='email'
+        )
+    #phone-input.field
+      label(
+        for='telephone'
+        ) Mobile Number
+      input#telephone-value(
+        name='telephone'
+        placeholder=''
+        required
+        type='tel'
+        )
+    #message-type.field
+      label(
+        for='query-type'
+        ) Query Type
+      input(
+        name='query-type'
+        type='select'
+        )
+    #message.field
+      label(
+        for='query'
+        ) Your Message
+      textarea(
+        name='query'
+        )
+    .session-button
+      a(
+        role='button'
+        href='#'
+        ) Submit

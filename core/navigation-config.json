@@ -45,7 +45,7 @@ module.exports = [
   {
     "id": "contact-us",
     "displayText": "Contact Us",
-    "url": "",
+    "url": "/contact",
     "anchorId": "l-4",
     "subElements": [],
     "display": true
