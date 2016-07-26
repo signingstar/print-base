@@ -1,15 +1,15 @@
 var path = require('path');
 var pug = require('pug');
+import * as express from "express";
 
 const templatePath:string = './src/templates';
 let srcPath:string = '';
 
-export function routes(app:any, staticCall:any) {
-	app.set("view engine", "pug");
+module.exports = function (app:any) {
+	// app.set("view engine", "pug");
 
-	app.get("/", function(req:any, res:any){
+	app.get("/", function(req:express.Request, res:express.Response){
 		srcPath = `${templatePath}/main.pug`;
-		var navigationConfig = require('../core/navigation-config.json');
 
 		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 		var navigationConfig = require('../core/navigation-config.json');
@@ -26,7 +26,7 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
-	app.get("/login", function(req:any, res:any){
+	app.get("/login", function(req:express.Request, res:express.Response){
 		srcPath = `${templatePath}/session/login.pug`;
 
 		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -40,7 +40,7 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
-	app.get("/signup", function(req:any, res:any){
+	app.get("/signup", function(req:express.Request, res:express.Response){
 		srcPath = `${templatePath}/session/signup.pug`;
 
 		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -54,7 +54,7 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
-	app.get("/forgot_password", function(req:any, res:any){
+	app.get("/forgot_password", function(req:express.Request, res:express.Response){
 		srcPath = `${templatePath}/session/forgot_password.pug`;
 
 		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -68,7 +68,7 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
-	app.get("/contact", function(req:any, res:any){
+	app.get("/contact", function(req:express.Request, res:express.Response){
 		srcPath = `${templatePath}/contact_us/contact_us.pug`;
 
 		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -82,5 +82,5 @@ export function routes(app:any, staticCall:any) {
 		res.end();
 	});
 
-	app.use('/assets', staticCall('./public'));
-}
+	app.use('/assets', express.static('./public'));
+};

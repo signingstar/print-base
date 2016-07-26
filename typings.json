@@ -5,12 +5,12 @@
     "express": "registry:dt/express#4.0.0+20160708185218",
     "express-serve-static-core": "registry:dt/express-serve-static-core#4.0.0+20160715232503",
     "jquery": "registry:dt/jquery#1.10.0+20160704162008",
-    "lodash": "registry:dt/lodash#3.10.0+20160619033623",
     "mime": "registry:dt/mime#0.0.0+20160316155526",
     "node": "registry:dt/node#6.0.0+20160709114037",
     "pathjs": "registry:dt/pathjs#0.8.4+20160602154448",
     "react": "registry:dt/react#0.14.0+20160630100702",
     "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
-    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157"
+    "serve-static": "registry:dt/serve-static#0.0.0+20160606155157",
+    "underscore": "registry:dt/underscore#1.7.0+20160720002543"
   }
 }

@@ -1,12 +1,24 @@
 import * as express from "express";
-import * as _ from "lodash";
+import {map,object} from "underscore";
 import * as http from 'http';
-import {routes} from "./routes";
+import * as routes from "./routes";
 
 var app = express();
 var server = http.createServer(app);
 
-routes(app, express.static);
+let routingFunctions = function(app:express.Application) {
+	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method:string) {
+		let func = function(route:string) {
+			console.log(`Adding routes ${route}`);
+			return app[method].apply(app, arguments);
+		};
+		return [method, func];
+	}));
+};
+
+let wrapperApp:any = routingFunctions(app);
+
+routes(wrapperApp);
 
 server.listen(8000, function() {
 	console.log("listening on part 8000");
