@@ -1,6 +1,6 @@
 html
   head
-    title= 'Register'
+    title= 'Login'
     link(
       rel='icon'
       href='/assets/header.png'
@@ -14,9 +14,10 @@ html
   body
     .body-contents
       .header
-        include ../header_header.pug
+        header
+          include ../header/header_header
       .contents
-        include ./signup_contents.pug
+        include ./login_contents
 
   script(
     src='/assets/session.js'

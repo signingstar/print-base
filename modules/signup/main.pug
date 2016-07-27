@@ -1,6 +1,6 @@
 html
   head
-    title= 'Forgot Password'
+    title= 'Register'
     link(
       rel='icon'
       href='/assets/header.png'
@@ -14,10 +14,9 @@ html
   body
     .body-contents
       .header
-        header
-          include ../header_header
+        include ../header/header_header.pug
       .contents
-        include ./forgot_password_contents
+        include ./signup_contents.pug
 
   script(
     src='/assets/session.js'

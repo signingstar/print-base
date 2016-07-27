@@ -7,7 +7,7 @@ var sass = require('node-sass');
 
 var DEBUG = !process.argv.includes('--release');
 
-var srcPath = path.join(__dirname, "./src/frontend");
+var srcPath = path.join(__dirname, "./modules");
 var destPath = path.join(__dirname, "./public");
 
 var GLOBALS = {
@@ -30,12 +30,12 @@ var config = {
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
-      'main.css': srcPath + '/styles/main.scss',
-      'session.css': srcPath + '/styles/session.scss',
-      'contact.css': srcPath + '/styles/contact.scss',
-      'main.js': srcPath + '/main.ts',
-      'session.js': srcPath + '/js/session.ts',
-      'contact.js': srcPath + '/js/contact.js'
+      'main.css': srcPath + '/home/frontend/main.scss',
+      'session.css': srcPath + '/session/frontend/session.scss',
+      'contact.css': srcPath + '/contact_us/frontend/contact.scss',
+      'main.js': srcPath + '/home/frontend/main.ts',
+      'session.js': srcPath + '/session/frontend/session.ts',
+      'contact.js': srcPath + '/contact_us/frontend/contact.js'
   },
   output: {
     filename: '[name]',

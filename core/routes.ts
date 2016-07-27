@@ -1,86 +1,69 @@
+import {Request, Response, static} from "express";
+
 var path = require('path');
 var pug = require('pug');
 
-const templatePath:string = './src/templates';
-let srcPath:string = '';
+import * as controller from './controller';
+import * as responder from './responder';
 
-export function routes(app:any, staticCall:any) {
-	app.set("view engine", "pug");
+module.exports = function (app:any) {
+	// app.set("view engine", "pug");
 
-	app.get("/", function(req:any, res:any){
-		srcPath = `${templatePath}/main.pug`;
-		var navigationConfig = require('../core/navigation-config.json');
+	let appControllers = {
+		login: require('../modules/login/controller.ts'),
+		home: require('../modules/home/controller.ts'),
+		signup: require('../modules/signup/controller.ts'),
+		forgot_password: require('../modules/forgot_password/controller.ts'),
+		contact_us: require('../modules/contact_us/controller.ts')
 
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-		var navigationConfig = require('../core/navigation-config.json');
+	};
 
-		var html = fn({
-			navigationConfig: navigationConfig
-		});
+	let {processRequest} = controller(appControllers);
 
-		res.writeHead(200, {
-			"Content-Type": "text/html"
-		});
+	app.get("/", processRequest('home', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
 
-		res.write(html);
-		res.end();
-	});
+	app.get("/login", processRequest('login', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
 
-	app.get("/login", function(req:any, res:any){
-		srcPath = `${templatePath}/session/login.pug`;
+	app.get("/signup", processRequest('signup', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
 
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-		var html = fn();
+	app.get("/forgot_password", processRequest('forgot_password', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
 
-		res.writeHead(200, {
-			"Content-Type": "text/html"
-		});
+	app.get("/contact", processRequest('contact_us', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
 
-		res.write(html);
-		res.end();
-	});
-
-	app.get("/signup", function(req:any, res:any){
-		srcPath = `${templatePath}/session/signup.pug`;
-
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-		var html = fn();
-
-		res.writeHead(200, {
-			"Content-Type": "text/html"
-		});
-
-		res.write(html);
-		res.end();
-	});
-
-	app.get("/forgot_password", function(req:any, res:any){
-		srcPath = `${templatePath}/session/forgot_password.pug`;
-
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-		var html = fn();
-
-		res.writeHead(200, {
-			"Content-Type": "text/html"
-		});
-
-		res.write(html);
-		res.end();
-	});
-
-	app.get("/contact", function(req:any, res:any){
-		srcPath = `${templatePath}/contact_us/contact_us.pug`;
-
-		var fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-		var html = fn();
-
-		res.writeHead(200, {
-			"Content-Type": "text/html"
-		});
-
-		res.write(html);
-		res.end();
-	});
-
-	app.use('/assets', staticCall('./public'));
-}
+	app.use('/assets', static('./public'));
+};

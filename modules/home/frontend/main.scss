@@ -1,7 +1,7 @@
-@import 'promotion_header';
-@import 'header';
-@import 'contents';
-@import 'footer';
+@import '../../promotion_header/frontend/main';
+@import '../../header/frontend/main';
+@import './contents';
+@import '../../footer/frontend/main';
 
 body {
   margin: 0;
