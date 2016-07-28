@@ -1,6 +1,5 @@
 import {slidePromotionalHeader} from '../../promotion_header/frontend/main';
 
-
 import * as $ from "jquery";
 // require ("./js/promotion_header");
 
@@ -15,5 +14,6 @@ function slideShow() {
     $('.slide-image').css('background-image', imageUrl);
   }, 3000);
 }
+
 slidePromotionalHeader();
 slideShow();
