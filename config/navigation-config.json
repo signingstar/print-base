@@ -37,7 +37,7 @@ module.exports = [
   {
     "id": "place-order",
     "displayText": "Place an order",
-    "url": "",
+    "url": "/order",
     "anchorId": "l-3",
     "subElements": [],
     "display": true

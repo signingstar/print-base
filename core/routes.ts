@@ -1,7 +1,7 @@
 import {Request, Response, static} from "express";
 
-var path = require('path');
-var pug = require('pug');
+let path = require('path');
+let pug = require('pug');
 
 import * as controller from './controller';
 import * as responder from './responder';
@@ -14,6 +14,7 @@ module.exports = function (app:any) {
 		home: require('../modules/home/controller.ts'),
 		signup: require('../modules/signup/controller.ts'),
 		forgot_password: require('../modules/forgot_password/controller.ts'),
+		order: require('../modules/order/controller.ts'),
 		contact_us: require('../modules/contact_us/controller.ts')
 
 	};
@@ -57,6 +58,15 @@ module.exports = function (app:any) {
 	}));
 
 	app.get("/contact", processRequest('contact_us', 'main', {
+		attributes: function (req:Request, res:Response, next:any) {
+			return {req, res}
+		},
+		responders: {
+			html: responder.html
+		}
+	}));
+
+	app.get("/order", processRequest('order', 'main', {
 		attributes: function (req:Request, res:Response, next:any) {
 			return {req, res}
 		},
