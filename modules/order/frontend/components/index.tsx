@@ -3,8 +3,8 @@ import * as ReactDOM from "react-dom";
 
 class App extends React.Component<{}, {}> {
   render () {
-    return <h2>First text from kickoff</h2>;
+    return <h2>Place an Order</h2>;
   }
 }
 
-ReactDOM.render(<App />, document.getElementsByClassName('main-content')[0]);
+ReactDOM.render(<App />, document.getElementById('order-header'));

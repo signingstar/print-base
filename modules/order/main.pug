@@ -11,24 +11,6 @@ html
       href='/assets/main.css'
       type='text/css'
     )
-    script().
-      window.payload={"title": 'My Title'};
-    link(
-      rel='prefetch'
-      href='/assets/slide_image1.jpg'
-      )
-    link(
-      rel='prefetch'
-      href='/assets/slide_image2.jpg'
-      )
-    link(
-      rel='prefetch'
-      href='https://fb.me/react-15.2.1.js'
-      )
-    link(
-      rel='prefetch'
-      href='https://fb.me/react-dom-15.2.1.js'
-      )
   body
     .body-contents
       .promotion-header
@@ -38,10 +20,16 @@ html
           include ../header/main
       .contents
         section
-          include ./contents.pug
+          include ./contents
       footer
         include ../footer/main
 
   script(
-    src='/assets/main.js'
+    src='https://fb.me/react-15.2.1.js'
+  )
+  script(
+    src='https://fb.me/react-dom-15.2.1.js'
+  )
+  script(
+    src='/assets/order.js'
   )

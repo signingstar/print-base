@@ -34,6 +34,7 @@ var clientConfig = extend({}, true, config, {
       'session.css': srcPath + '/session/frontend/session.scss',
       'contact.css': srcPath + '/contact_us/frontend/contact.scss',
       'main.js': srcPath + '/home/frontend/main.ts',
+      'order.js': srcPath + '/order/frontend/main.ts',
       'session.js': srcPath + '/session/frontend/session.ts',
       'contact.js': srcPath + '/contact_us/frontend/contact.js'
   },
@@ -74,10 +75,10 @@ var clientConfig = extend({}, true, config, {
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", "css", "scss"]
   },
-  // externals: {
-  //   "react": "React",
-  //   "react-dom": "ReactDOM"
-  // }
+  externals: {
+    "react": "React",
+    "react-dom": "ReactDOM"
+  }
 });
 
 var serverConfig = extend({}, true, config, {
