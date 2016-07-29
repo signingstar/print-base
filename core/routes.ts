@@ -46,7 +46,7 @@ module.exports = function (app:Application) {
 
 	app.get("/services", processRequest('our_services', 'main', processOptions));
 
-	app.get("/products", processRequest('products', 'main', processOptions));
+	app.get("/partner", processRequest('products', 'main', processOptions));
 
 	app.use('/assets', static('./public'));
 };
