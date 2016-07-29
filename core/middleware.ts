@@ -1,3 +1,5 @@
-module.exports = function(app:any, helper:any) {
+import {Request, Response, Application} from 'express';
+
+export function middleware(app:Application) {
 
 }

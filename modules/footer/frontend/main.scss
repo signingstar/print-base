@@ -1,46 +1,44 @@
-footer {
-  background-color: #96d3f7;
+#footer.footer {
+  background-color: #ccc;
   border-top: 1px solid #999;
   min-height: 100px;
 
-  .footer {
-    margin: 15px 30px;
+  margin: 15px 30px;
 
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-    }
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
 
-    .footer-link {
-      justify-content: space-between;
-       li {
-        display: inline-block;
-        margin: 0 auto;
-        width: 33%;
+  .footer-link {
+    justify-content: space-between;
+     li {
+      display: inline-block;
+      margin: 0 auto;
+      width: 33%;
 
-        &.internal-links, &.company-links, &.legal-info {
-          ul li {
-            display: block;
-          }
-        }
-
-        &.legal-info {
-          text-align: center;
-          vertical-align: top;
+      &.internal-links, &.company-links, &.legal-info {
+        ul li {
+          display: block;
         }
       }
-    }
 
-    .copyright {
-      padding: 10px 0;
-      text-align: center;
-      width: 100%;
-
-      &:before {
-        content:"\00a9";
-        padding-right: 5px;
+      &.legal-info {
+        text-align: center;
+        vertical-align: top;
       }
+    }
+  }
+
+  .copyright {
+    padding: 10px 0;
+    text-align: center;
+    width: 100%;
+
+    &:before {
+      content:"\00a9";
+      padding-right: 5px;
     }
   }
 }

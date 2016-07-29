@@ -86,6 +86,7 @@
             display: none;
             min-width: 150px;
             position: absolute;
+            z-index: 99;
 
             .submenu-options {
               border: 1px solid #bbb;
@@ -96,10 +97,13 @@
               text-align: left;
 
               li {
-                padding: 2px 0 2px 8px;
-
                 &:hover {
                   background-color: #ccc;
+                }
+
+                a {
+                  display: block;
+                  padding: 2px 0 2px 8px;
                 }
               }
             }

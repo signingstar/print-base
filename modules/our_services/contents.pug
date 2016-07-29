@@ -3,19 +3,23 @@
       h2 Header for services
 #service-body.body
   .left-panel
-    ul#service-item
-      li
-        a(
-          href='#'
-        ) Item description 1
-      li
-        a(
-          href='#'
-        ) Item description 2
-      li
-        a(
-          href='#'
-          ) Item description 3
+    nav#service-item
+      ul
+        li
+          a(
+            href='#visiting-cards'
+          ) Visiting Cards
+            span.menu-pointer
+        li
+          a(
+            href='#stationary'
+          ) Stationary Items
+            span.menu-pointer
+        li
+          a(
+            href='#brouchers'
+            ) Brouchers
+              span.menu-pointer
   .right-panel
     .panel-header
       h3 Item header
@@ -29,3 +33,7 @@
           #image-2.image-tile
         figure.panel-blocks
           #image-3.image-tile
+
+    include ./visiting_cards
+    include ./stationaries
+    include ./brouchers

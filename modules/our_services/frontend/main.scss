@@ -7,6 +7,7 @@
     padding: 0 10px;
 
     .header-content {
+      display: none;
       line-height: 40px;
       font-weight: 500;
 
@@ -18,21 +19,30 @@
     .body {
       display: flex;
       justify-content: space-between;
+      margin-top: 20px;
 
       .left-panel {
+        margin-top: 44px;
         min-width: 200px;
         width: 20%;
         font-size: 16px;
 
+        #service-item {
+          width: 100%;
+
+          &.fixed {
+            position: fixed;
+            top: 0;
+          }
+        }
+
         ul {
           border: 1px solid #aaa;
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
+          border-radius: 4px;
 
           li {
             border-bottom: 1px solid #aaa;
-            padding: 5px;
+            border-radius: 1px;
             height: 40px;
             vertical-align: middle;
             position: relative;
@@ -41,11 +51,22 @@
               border-bottom: none;
             }
 
+            &:hover {
+              background-color: #ccc;
+            }
+
             a {
               display: block;
+              line-height: 40px;
+              padding: 0 5px;
               position: absolute;
               top: 50%;
               transform: translateY(-50%);
+              width: 100%;
+
+              .menu-pointer {
+                // @extend .icon-right-arrow;
+              }
             }
           }
         }
@@ -70,10 +91,11 @@
           .panel-images {
             figure {
               display: inline-block;
-              margin: 20px 30px 0 0;
+              padding: 20px 30px 0 0;
+              margin: 0;
 
               &:last-child {
-                margin-right: 0;
+                padding-right: 0;
               }
 
               .image-tile {
@@ -91,6 +113,35 @@
               #image-3 {
                 background-image: url('/assets/panel3.jpg');
               }
+            }
+          }
+        }
+
+        .sub-section {
+          .heading {
+            margin-bottom: 15px;
+
+            h3 {
+              border-bottom: 1px solid #aaa;
+              margin-bottom: 5px;
+            }
+          }
+
+          .contents {
+            min-height: 300px;
+          }
+
+          .sub-footer {
+            display: flex;
+            justify-content: flex-end;
+
+            a {
+              display: block;
+              width: 150px;
+              background-color: #0a6689;
+              color: white;
+              line-height: 40px;
+              text-align: center;
             }
           }
         }
