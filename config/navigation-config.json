@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     "id": "our-services",
-    "displayText": "Services we offer",
+    "displayText": "Products & Services",
     "url": "/services",
     "anchorId": "l-2",
     "display": true,
@@ -35,33 +35,20 @@ module.exports = [
     ]
   },
   {
-    "id": "our-products",
-    "displayText": "Our Products",
-    "url": "/products",
-    "anchorId": "l-3",
-    "display": true,
-    "subElements": [
-      {
-        "id": "l-3-1",
-        "displayText": "Printed t-shirts",
-        "url": "",
-        "display": true
-      },
-      {
-        "id": "l-3-2",
-        "displayText": "Printed Mugs",
-        "url": "",
-        "display": true
-      }
-    ]
-  },
-  {
     "id": "place-order",
     "displayText": "Place an order",
     "url": "/order",
     "anchorId": "l-3",
     "subElements": [],
     "display": true
+  },
+  {
+    "id": "become-partner",
+    "displayText": "Become our Partner",
+    "url": "/partner",
+    "anchorId": "l-3",
+    "display": true,
+    "subElements": []
   },
   {
     "id": "contact-us",
