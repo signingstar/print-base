@@ -2,9 +2,12 @@ import * as express from "express";
 import {map,object} from "underscore";
 import * as http from 'http';
 import * as routes from "./routes";
+import {middleware} from "./middleware";
 
-var app = express();
-var server = http.createServer(app);
+let app = express();
+let server = http.createServer(app);
+
+middleware(app);
 
 let routingFunctions = function(app:express.Application) {
 	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method:string) {

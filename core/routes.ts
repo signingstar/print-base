@@ -1,4 +1,4 @@
-import {Request, Response, static} from "express";
+import {Request, Response, Application, static} from "express";
 
 let path = require('path');
 let pug = require('pug');
@@ -6,7 +6,7 @@ let pug = require('pug');
 import * as controller from './controller';
 import * as responder from './responder';
 
-module.exports = function (app:any) {
+module.exports = function (app:Application) {
 	// app.set("view engine", "pug");
 
 	let appControllers = {
