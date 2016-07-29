@@ -30,13 +30,16 @@ var config = {
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
-      'main.css': srcPath + '/home/frontend/main.scss',
-      'session.css': srcPath + '/session/frontend/session.scss',
-      'contact.css': srcPath + '/contact_us/frontend/contact.scss',
+      'main.css': './core/frontend/main.scss',
+      'session.css': './core/frontend/session.scss',
+      'contact.css': './core/frontend/contact.scss',
+      'services.css': './core/frontend/services.scss',
+      'products.css': './core/frontend/products.scss',
       'main.js': srcPath + '/home/frontend/main.ts',
       'order.js': srcPath + '/order/frontend/main.ts',
       'session.js': srcPath + '/session/frontend/session.ts',
-      'contact.js': srcPath + '/contact_us/frontend/contact.js'
+      'contact.js': srcPath + '/contact_us/frontend/contact.ts',
+      'services.js': srcPath + '/our_services/frontend/main.ts',
   },
   output: {
     filename: '[name]',
@@ -103,4 +106,4 @@ var serverConfig = extend({}, true, config, {
   externals: nodeModules
 });
 
-module.exports = [clientConfig, serverConfig];
+module.exports = [serverConfig, clientConfig];

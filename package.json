@@ -1,7 +1,7 @@
 {
-  "name": "kickoff",
+  "name": "my-printact",
   "version": "1.0.0",
-  "description": "",
+  "description": "Temporary print project",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,8 +9,8 @@
     "webpack": "webpack --progress --watch",
     "start": "npm run webpack & npm run server"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Anil Keshari",
+  "license": "MIT",
   "dependencies": {
     "async": "^2.0.0",
     "body-parser": "^1.15.2",

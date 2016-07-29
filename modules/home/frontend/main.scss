@@ -1,29 +1,33 @@
-@import '../../promotion_header/frontend/main';
-@import '../../header/frontend/main';
-@import './contents';
-@import '../../footer/frontend/main';
+.contents {
+  min-height: 600px;
 
-body {
-  margin: 0;
-
-  a {
-    text-decoration: none;
-    color: #126482
+  .main-content {
+    margin: 0 auto;
+    max-width: 1200px;
+    padding: 0 10px;
   }
 
-  .icon-down-arrow {
-    width: 0px;
-    height: 0px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-top: 8px solid #126482;
-  }
+  .slide-image {
+    background-image: url('/assets/slide_image3.jpg');
+    @include transition(background-image, 0.5s);
+    background-size: cover;
+    position: relative;
+    width: 100%;
+    height: 300px;
 
-  .icon-up-arrow {
-    width: 0px;
-    height: 0px;
-    border-left: 8px solid transparent;
-    border-right: 8px solid transparent;
-    border-bottom: 8px solid #126482;
+    .image-text {
+      color: white;
+      position: absolute;
+      top: 100%;
+      font-size: 20px;
+      transform: translateY(-100%);
+      text-align: right;
+      width: 100%;
+
+      h1 {
+        text-align: left;
+        padding-left: 760px;
+      }
+    }
   }
 }
