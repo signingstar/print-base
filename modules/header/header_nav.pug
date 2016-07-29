@@ -26,8 +26,9 @@ nav#top-nav(
               )
               ul.submenu-options
                 each child_option in sub_elements
-                  li
-                    a(
-                      href='#'
-                      id= child_option.id
-                      )= child_option.displayText
+                  if child_option.display
+                    li
+                      a(
+                        href='#'
+                        id= child_option.id
+                        )= child_option.displayText

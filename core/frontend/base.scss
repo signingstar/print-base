@@ -1,0 +1,44 @@
+body {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #126482
+}
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.icon-down-arrow {
+  width: 0px;
+  height: 0px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid #126482;
+}
+
+.icon-up-arrow {
+  width: 0px;
+  height: 0px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 8px solid #126482;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin transition($css, $delay) {
+  -webkit-transition: $css $delay;
+     -moz-transition: $css $delay;
+      -ms-transitions: $css $delay;
+          transition: $css $delay;
+}

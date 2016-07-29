@@ -15,6 +15,8 @@ module.exports = function (app:any) {
 		signup: require('../modules/signup/controller.ts'),
 		forgot_password: require('../modules/forgot_password/controller.ts'),
 		order: require('../modules/order/controller.ts'),
+		our_services: require('../modules/our_services/controller.ts'),
+		products: require('../modules/products/controller.ts'),
 		contact_us: require('../modules/contact_us/controller.ts')
 
 	};
@@ -41,6 +43,10 @@ module.exports = function (app:any) {
 	app.get("/contact", processRequest('contact_us', 'main', processOptions));
 
 	app.get("/order", processRequest('order', 'main', processOptions));
+
+	app.get("/services", processRequest('our_services', 'main', processOptions));
+
+	app.get("/products", processRequest('products', 'main', processOptions));
 
 	app.use('/assets', static('./public'));
 };

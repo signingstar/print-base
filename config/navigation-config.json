@@ -10,7 +10,7 @@ module.exports = [
   {
     "id": "our-services",
     "displayText": "Services we offer",
-    "url": "/",
+    "url": "/services",
     "anchorId": "l-2",
     "display": true,
     "subElements": [
@@ -29,6 +29,27 @@ module.exports = [
       {
         "id": "l-2-3",
         "displayText": "Brouchers",
+        "url": "",
+        "display": true
+      }
+    ]
+  },
+  {
+    "id": "our-products",
+    "displayText": "Our Products",
+    "url": "/products",
+    "anchorId": "l-3",
+    "display": true,
+    "subElements": [
+      {
+        "id": "l-3-1",
+        "displayText": "Printed t-shirts",
+        "url": "",
+        "display": true
+      },
+      {
+        "id": "l-3-2",
+        "displayText": "Printed Mugs",
         "url": "",
         "display": true
       }

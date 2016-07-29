@@ -1,0 +1,41 @@
+html
+  head
+    title= 'Keshari Printing Services'
+    link(
+      rel='icon'
+      href='/assets/header.png'
+      type='image/png'
+      )
+    link(
+      rel='stylesheet'
+      href='/assets/services.css'
+      type='text/css'
+    )
+    //- link(
+    //-   rel='prefetch'
+    //-   href='/assets/slide_image2.jpg'
+    //-   )
+    link(
+      rel='prefetch'
+      href='https://fb.me/react-15.2.1.js'
+      )
+    link(
+      rel='prefetch'
+      href='https://fb.me/react-dom-15.2.1.js'
+      )
+  body
+    .body-contents
+      .promotion-header
+        include ../promotion_header/main
+      .header
+        header
+          include ../header/main
+      .contents
+        section#main-content
+          include ./contents
+      footer
+        include ../footer/main
+
+  script(
+    src='/assets/services.js'
+  )
