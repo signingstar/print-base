@@ -35,11 +35,11 @@ var clientConfig = extend({}, true, config, {
       'contact.css': './core/frontend/contact.scss',
       'services.css': './core/frontend/services.scss',
       'products.css': './core/frontend/products.scss',
-      'main.js': srcPath + '/home/frontend/main.ts',
+      'main.js': './core/frontend/main.ts',
       'order.js': srcPath + '/order/frontend/main.ts',
       'session.js': srcPath + '/session/frontend/session.ts',
       'contact.js': srcPath + '/contact_us/frontend/contact.ts',
-      'services.js': srcPath + '/our_services/frontend/main.ts',
+      'services.js': './core/frontend/services.ts',
   },
   output: {
     filename: '[name]',

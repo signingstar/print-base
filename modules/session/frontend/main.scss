@@ -89,14 +89,13 @@
         .session-button {
           padding: 20px 0 0 100px;
 
-          a {
-            display: inline-block;
-            width: 90px;
-            text-align: center;
-            padding: 5px;
-            font-size: 16px;
+          input {
             background-color: #0a6689;
+            border: 1px solid #0a6689;
             color: white;
+            font-size: 15px;
+            height: 40px;
+            width: 150px;
           }
         }
       }
