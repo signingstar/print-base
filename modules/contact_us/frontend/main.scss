@@ -4,6 +4,7 @@
 
   .contact-header {
     border-bottom: 1px solid #aaa;
+    margin-top: 20px;
     padding-bottom: 5px;
 
     .contact-header-main {
@@ -60,12 +61,14 @@
           input, select {
             font-size: 15px;
             height: 28px;
-            width: 215px;
+            width: 250px;
           }
 
           textarea {
-            width: 400px;
+            border-color: #bbb;
             height: 150px;
+            vertical-align: middle;
+            width: 400px;
           }
         }
 
@@ -109,6 +112,16 @@
             display: block;
             font-size: 14px;
           }
+        }
+
+        h4 {
+          margin-bottom: 10px;
+        }
+
+        h5 {
+          font-weight: 500;
+          font-size: 14px;
+          margin-top: 0;
         }
       }
     }
