@@ -1,15 +1,9 @@
 import {slidePromotionalHeader} from '../../promotion_header/frontend/main';
-import {fixTabHeader, processShortcutSelection, updateShortcutSelection} from './parallex';
-import * as _ from "underscore";
-import * as $ from 'jquery';
+import {NavigateSections} from './parallex';
 
+let shortcutMap = {'visiting-cards-nav': '#visiting-cards', 'stationary-nav': '#stationary', 'brouchers-nav': '#brouchers'};
+
+let stickyNavigation = new NavigateSections('#service-item', shortcutMap);
+
+stickyNavigation.activate();
 slidePromotionalHeader();
-
-fixTabHeader();
-
-$('.left-panel li').on("click", function(ev) {
-  processShortcutSelection($(this), ev);
-});
-
-let processShortcutSelection1 = _.throttle(updateShortcutSelection, 10);
-$(window).on("resize scroll", processShortcutSelection1);
