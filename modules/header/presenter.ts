@@ -5,7 +5,6 @@ let origConfig = navigationConfig;
 let flatConfig = flattenConfig();
 
 function flattenConfig() {
-  console.log("flatten was called");
   let navHash = {};
   let flatten = function(nestedConfig:any) {
     each(nestedConfig, function(elem:any) {
