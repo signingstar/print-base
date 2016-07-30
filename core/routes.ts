@@ -24,7 +24,6 @@ module.exports = function (app:Application) {
 	let {processRequest} = controller(appControllers);
 	let processOptions = {
 		attributes: function (req:Request, res:Response, next:any) {
-			res.setHeader('X-Robots-Tag', 'noindex');
 			return {req, res}
 		},
 		responders: {
@@ -34,7 +33,9 @@ module.exports = function (app:Application) {
 
 	app.get("/", processRequest('home', 'main', processOptions));
 
-	app.get("/login", processRequest('login', 'main', processOptions));
+	app.get("/login", processRequest('login', 'login_form', processOptions));
+
+	app.post("/login", processRequest('login', 'login_action', processOptions));
 
 	app.get("/signup", processRequest('signup', 'main', processOptions));
 

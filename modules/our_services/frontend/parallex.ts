@@ -14,7 +14,7 @@ export class NavigateSections {
 
   init() {
     this.$stickyElement = $(this.stickyElementClass);
-    this.scrollDelay = 10;
+    this.scrollDelay = 20;
     this.topOffset = 20;
   }
 
@@ -56,10 +56,11 @@ export class NavigateSections {
       return;
     }
 
-    this.navigateTargetSection(targetSection, () => this.elemSelected = false);
-
-    this.$stickyElement.find('li').removeClass('selected');
-    $el.addClass('selected');
+    this.navigateTargetSection(targetSection, () => {
+      this.elemSelected = false;
+      this.$stickyElement.find('li').removeClass('selected');
+      $el.addClass('selected');
+    });
 
     ev.preventDefault();
   }
@@ -98,12 +99,14 @@ export class NavigateSections {
 
   updateNavSelection = () => {
     let navSelected = false;
+    let sectionInViewport = false;
 
     for(let navId in this.navSectionMap) {
       let contentId = this.navSectionMap[navId];
       let $el = $(contentId);
+      sectionInViewport = this.isSectionInViewport($el)
 
-      if(!this.elemSelected && $el.length == 1 && this.isSectionInViewport($el)) {
+      if(!this.elemSelected && $el.length == 1 && sectionInViewport) {
         this.$stickyElement.find('li').removeClass('selected');
         this.$stickyElement.find('.' + navId).addClass('selected');
         navSelected = true;
@@ -111,7 +114,7 @@ export class NavigateSections {
       }
     }
 
-    if(!navSelected) {
+    if(!sectionInViewport) {
       this.$stickyElement.find('li').removeClass('selected');
     }
   }
@@ -141,7 +144,7 @@ export class NavigateSections {
       _that.processNavSelection($(this), ev);
     });
 
-    let updateNavSelection = _.throttle(this.updateNavSelection, this.scrollDelay);
-    $(window).on("resize scroll", updateNavSelection);
+    let throttleUpdateNavSelection = _.throttle(this.updateNavSelection, this.scrollDelay);
+    $(window).on("resize scroll", throttleUpdateNavSelection);
   }
 }

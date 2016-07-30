@@ -2,7 +2,7 @@ nav#top-nav(
   role="navigation"
   )
   ul.menu-options
-    each top_option in navigationConfig
+    each top_option in navConfig
       if top_option.display
         - has_children = top_option.subElements.length > 0
         li(
@@ -28,7 +28,8 @@ nav#top-nav(
                 each child_option in sub_elements
                   if child_option.display
                     li
-                      a(
+                      a.sub-nav(
                         href=child_option.url
                         id= child_option.id
-                        )= child_option.displayText
+                        class=(child_option.id == navId ? 'selected' : '')
+                      )= child_option.displayText
