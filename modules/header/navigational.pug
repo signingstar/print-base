@@ -1,4 +1,4 @@
-nav#top-nav(
+nav#top-nav.top-nav(
   role="navigation"
   )
   ul.menu-options
@@ -9,18 +9,17 @@ nav#top-nav(
           li(
             id= top_option.id
             )
-            a(
+            a.top-nav-link(
               href=top_option.url
               id= top_option.anchorId
               role= 'menuitem'
-              if has_children
-                aria-owns= top_option.anchorId + '-nav'
+              aria-owns= (has_children ? top_option.anchorId + '-nav' : '')
             )= top_option.displayText
               if has_children
                 .icon-down-arrow.menu-pointer
             - sub_elements = top_option.subElements
             if has_children
-              nav(
+              nav.sub-nav(
                 id= top_option.anchorId + '-nav'
                 role="menu"
                 aria-labelledby= top_option.anchorId
@@ -29,8 +28,8 @@ nav#top-nav(
                   each child_option in sub_elements
                     if child_option.display
                       li
-                        a.sub-nav(
-                          href=child_option.url
+                        a.sub-nav-links(
+                          href='#'
                           id= child_option.id
                           class=(child_option.id == navId ? 'selected' : '')
                         )= child_option.displayText

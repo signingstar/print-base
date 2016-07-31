@@ -1,3 +1,8 @@
-include ./header_header
+header.top-header
+  if promotional_header
+    include ./promotional
 
-include ./header_nav
+  include ./main_header
+
+  if navigational_header
+    include ./navigational

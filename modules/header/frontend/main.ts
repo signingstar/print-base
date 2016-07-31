@@ -1,40 +1,77 @@
-import * as $ from "jquery";
+import * as $ from 'jquery';
+import {each} from 'underscore';
 
-export class Header {
+export class TopHeader {
   $rootElem:JQuery;
-  $topNav:JQuery;
-  $subNav:JQuery;
+  $topNavList:JQuery;
+  $subNavs:JQuery;
   rowCount:number;
+  $promotionalHeader: JQuery;
 
   constructor() {
-    this.$rootElem = $('.header header');
-    this.$topNav = this.$rootElem.find('#top-nav');
-    this.$subNav = this.$topNav.find('nav .submenu-options');
+    this.$rootElem = $('.c-header');
+    this.$promotionalHeader = this.$rootElem.find(".promotional-header");
+    this.$topNavList = this.$rootElem.find('.top-nav .menu-options li');
+    this.$subNavs = this.$topNavList.find('.sub-nav');
   }
 
-  attachNavEvent() {
-    this.$subNav.on('click', function(){
-      let id = $(this).attr('id');
-      if(window.location.pathname.indexOf('/services') === -1) {
-        window.location.href = `/services/${id}`;
-      }
+  attachNavEvent ($subNavItems:JQuery, $topNavLink:JQuery) {
+    let _this = this;
+    each($subNavItems, function(item) {
+      let linkUrl = $topNavLink.attr('href');
+      let $item = $(item);
+      $item.on('click', function(){
+        let id = $item.attr('id');
+        if(window.location.pathname.indexOf(linkUrl) === -1) {
+          window.location.href = `${linkUrl}/${id}`;
+        } else {
+          _this.triggerSubNavSelection($item);
+        }
+      });
     });
   }
 
-  identifyNavEvent() {
-    let $selectedNav = this.$subNav.find('.selected');
-    if($selectedNav.length > 0) {
-      let elemIndex = $selectedNav.attr('id').slice(-1);
-      $(`.left-panel nav li:nth-child(${elemIndex})`).trigger('click');
+  processSubNavSelection($subNav:JQuery) {
+    let $selectedElem = $subNav.find('.selected');
+    if($selectedElem.length) {
+      this.triggerSubNavSelection($selectedElem);
     }
+  }
+
+  triggerSubNavSelection($el:JQuery) {
+      let elemIndex = $el.attr('id').slice(-1);
+      $(`.left-panel nav li:nth-child(${elemIndex})`).trigger('click');
+  }
+
+
+ slidePromotionalHeader() {
+   let $closeIcon = this.$promotionalHeader.find('.close-icon');
+   if($closeIcon.length) {
+     $closeIcon.on("click", () => {
+       this.$promotionalHeader.slideUp();
+     });
+   }
   }
 }
 
 $(function() {
   console.log('document ready');
-  let header = new Header();
-  header.identifyNavEvent();
-  header.attachNavEvent();
+  let header = new TopHeader();
+
+  each(header.$topNavList, (listItem) => {
+    let $listItem = $(listItem);
+    let $subNav = $listItem.find('.sub-nav');
+
+    if($subNav.length) {
+      header.processSubNavSelection($subNav);
+
+      let $navAnchorElem = $listItem.find('.top-nav-link');
+      let $subListItem = $subNav.find('a');
+      header.attachNavEvent($subListItem, $navAnchorElem);
+    }
+  });
+
+  header.slidePromotionalHeader();
 });
 
 window.onload = function() {
