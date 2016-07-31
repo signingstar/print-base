@@ -21,6 +21,14 @@
       justify-content: space-between;
       margin-top: 20px;
 
+      &.reverse {
+        flex-direction: row-reverse;
+
+        .right-panel {
+          padding: 0 50px 0 0;
+        }
+      }
+
       .left-panel {
         font-size: 16px;
         width: 220px;
@@ -80,7 +88,7 @@
         min-width: 400px;
         padding-left: 50px;
         vertical-align: top;
-        width: 80%;
+        width: 75%;
 
         #main-heading {
           margin-top: 0;
@@ -96,7 +104,7 @@
             figure {
               display: inline-block;
               margin: 0;
-              padding: 20px 40px 0 0;
+              padding: 20px 35px 0 0;
 
               &:last-child {
                 padding-right: 0;
@@ -122,6 +130,7 @@
         }
 
         .sub-section {
+          margin-bottom: 15px;
           margin-top: 15px;
 
           .heading {
@@ -135,7 +144,7 @@
           }
 
           .contents {
-            min-height: 300px;
+            min-height: 500px;
           }
 
           footer {
