@@ -1,7 +1,5 @@
 var webpackConfig = require('./webpack.config');
 
-// console.log(webpackConfig);
-
 module.exports = function (config) {
   config.set({
     basePath: '',

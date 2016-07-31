@@ -1,4 +1,4 @@
-import {Request, Response, Application, static}  from "express";
+import {Request, Response, Application, static} from "express";
 
 let path = require('path');
 
