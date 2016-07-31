@@ -7,6 +7,7 @@
     padding: 0 10px;
 
     .header-content {
+      display: none;
       line-height: 40px;
       font-weight: 500;
 
@@ -18,21 +19,38 @@
     .body {
       display: flex;
       justify-content: space-between;
+      margin-top: 20px;
+
+      &.reverse {
+        flex-direction: row-reverse;
+
+        .right-panel {
+          padding: 0 50px 0 0;
+        }
+      }
 
       .left-panel {
-        min-width: 200px;
-        width: 20%;
         font-size: 16px;
+        width: 220px;
+        min-width: 200px;
+
+        #service-item {
+          width: 100%;
+
+          &.sticky {
+            position: fixed;
+            top: 20;
+            width: inherit;
+          }
+        }
 
         ul {
           border: 1px solid #aaa;
-          list-style-type: none;
-          padding: 0;
-          margin: 0;
+          border-radius: 4px;
 
           li {
             border-bottom: 1px solid #aaa;
-            padding: 5px;
+            border-radius: 1px;
             height: 40px;
             vertical-align: middle;
             position: relative;
@@ -41,39 +59,55 @@
               border-bottom: none;
             }
 
+            &:hover {
+              background-color: #ccc;
+            }
+
+            &.selected {
+              background-color: #aaa;
+            }
+
             a {
               display: block;
+              line-height: 40px;
+              padding: 0 5px;
               position: absolute;
               top: 50%;
               transform: translateY(-50%);
+              width: 100%;
+
+              .menu-pointer {
+                // @extend .icon-right-arrow;
+              }
             }
           }
         }
       }
 
       .right-panel {
+        min-width: 400px;
         padding-left: 50px;
         vertical-align: top;
-        width: 80%;
+        width: 75%;
 
-        .panel-header {
+        #main-heading {
+          margin-top: 0;
+          margin-bottom: 30px;
+
           h3 {
-            margin-top: 0;
-          }
-        }
-
-        .panel-body {
-          .panel-text {
-            margin-bottom: 20px;
+            font-size: 23px;
           }
 
           .panel-images {
+            text-align: left;
+
             figure {
               display: inline-block;
-              margin: 20px 30px 0 0;
+              margin: 0;
+              padding: 20px 35px 0 0;
 
               &:last-child {
-                margin-right: 0;
+                padding-right: 0;
               }
 
               .image-tile {
@@ -90,6 +124,43 @@
               }
               #image-3 {
                 background-image: url('/assets/panel3.jpg');
+              }
+            }
+          }
+        }
+
+        .sub-section {
+          margin-bottom: 15px;
+          margin-top: 15px;
+
+          .heading {
+            margin-bottom: 15px;
+
+            h3 {
+              border-bottom: 1px solid #aaa;
+              margin-bottom: 5px;
+              margin-top: 0;
+            }
+          }
+
+          .contents {
+            min-height: 500px;
+          }
+
+          footer {
+            margin-top: 10px;
+
+            .sub-footer {
+              display: flex;
+              justify-content: flex-end;
+
+              a {
+                background-color: #0a6689;
+                color: white;
+                display: block;
+                line-height: 40px;
+                text-align: center;
+                width: 250px;
               }
             }
           }

@@ -40,6 +40,7 @@ var clientConfig = extend({}, true, config, {
       'session.js': srcPath + '/session/frontend/session.ts',
       'contact.js': srcPath + '/contact_us/frontend/contact.ts',
       'services.js': './core/frontend/services.ts',
+      'products.js': './core/frontend/products.ts',
   },
   output: {
     filename: '[name]',
