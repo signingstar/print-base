@@ -4,18 +4,15 @@ import {each} from 'underscore';
 export class TopHeader {
   $rootElem:JQuery;
   $topNavList:JQuery;
-  $subNavs:JQuery;
-  rowCount:number;
   $promotionalHeader: JQuery;
 
   constructor() {
     this.$rootElem = $('.c-header');
     this.$promotionalHeader = this.$rootElem.find(".promotional-header");
     this.$topNavList = this.$rootElem.find('.top-nav .menu-options li');
-    this.$subNavs = this.$topNavList.find('.sub-nav');
   }
 
-  attachNavEvent ($subNavItems:JQuery, $topNavLink:JQuery) {
+  attachSubNavEvent ($subNavItems:JQuery, $topNavLink:JQuery) {
     let _this = this;
     each($subNavItems, function(item) {
       let linkUrl = $topNavLink.attr('href');
@@ -43,7 +40,6 @@ export class TopHeader {
       $(`.left-panel nav li:nth-child(${elemIndex})`).trigger('click');
   }
 
-
  slidePromotionalHeader() {
    let $closeIcon = this.$promotionalHeader.find('.close-icon');
    if($closeIcon.length) {
@@ -67,7 +63,7 @@ $(function() {
 
       let $navAnchorElem = $listItem.find('.top-nav-link');
       let $subListItem = $subNav.find('a');
-      header.attachNavEvent($subListItem, $navAnchorElem);
+      header.attachSubNavEvent($subListItem, $navAnchorElem);
     }
   });
 
