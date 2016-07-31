@@ -1,4 +1,4 @@
-let navigationConfig = require('../../config/navigation-config.json');
+let navigationConfig = require('../../config/top_nav_config.json');
 import {each, pick, omit} from 'underscore';
 
 let origConfig = navigationConfig;

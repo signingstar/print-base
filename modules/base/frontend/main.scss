@@ -1,0 +1,85 @@
+$theme-color: #0A6689;
+$white: #FFFFFF;
+$light-gray: #AAAAAA;
+$lighter-gray: #CCCCCC;
+$link-color-normal: #0A6689;
+$link-color-bg: #FFFFFF;
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit;
+}
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@mixin transition($css, $delay) {
+  -webkit-transition: $css $delay;
+     -moz-transition: $css $delay;
+      -ms-transitions: $css $delay;
+          transition: $css $delay;
+}
+
+body {
+  margin: 0;
+
+  a {
+    text-decoration: none;
+    color: $link-color-normal;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .icon-down-arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #126482;
+  }
+
+  .icon-up-arrow {
+    width: 0px;
+    height: 0px;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #126482;
+  }
+
+  .icon-left-arrow {
+    width: 0px;
+    height: 0px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 8px solid #126482;
+  }
+
+  .icon-right-arrow {
+    width: 0px;
+    height: 0px;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #126482;
+  }
+
+  section.main-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 10px;
+  }
+}

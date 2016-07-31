@@ -1,4 +1,4 @@
-#session-content {
+body #main-contents .main-section{
   max-width: 800px;
   margin: 25px auto;
 
@@ -64,16 +64,16 @@
           }
 
           textarea {
-            width: 215px;
             height: 100px;
+            width: 215px;
           }
         }
 
         .forgot-password {
-          text-align: right;
-          text-transform: capitalize;
           font-size: 14px;
           padding-top: 0;
+          text-align: right;
+          text-transform: capitalize;
         }
 
         .remember-me {
@@ -92,7 +92,7 @@
           input {
             background-color: $theme-color;
             border: 1px solid $theme-color;
-            color: $white;
+            color: $link-color-bg;
             font-size: 15px;
             height: 40px;
             width: 150px;
@@ -104,6 +104,7 @@
     .session-optional {
       align-items: center;
       display: flex;
+
       #session-optional {
         font-size: 15px;
 
