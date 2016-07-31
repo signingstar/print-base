@@ -7,8 +7,9 @@
         href="/"
       ) Super Digital Printing
     div.contact-info
-      span.call-text Call:
-      span.call-info +91 987 654 3210
+      a(
+        href='/contact'
+        ) Contact Us (24x7)
     - logged = true
     nav.user-info(
       class=(logged?'signed':'unsigned')

@@ -1,5 +1,4 @@
 let pug = require('pug');
-let path = require('path');
 
 module.exports = function(){
   return {

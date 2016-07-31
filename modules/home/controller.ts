@@ -1,5 +1,4 @@
 let pug = require('pug');
-let path = require('path');
 import {navConfig} from '../header/presenter';
 
 module.exports = function(){

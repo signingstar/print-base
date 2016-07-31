@@ -22,12 +22,10 @@ function flattenConfig() {
   return navHash;
 };
 
-module.exports = {
-  customConfig: function(id:string, ...fields:string[]) {
+export let customConfig = function(id:string, ...fields:string[]) {
     if(fields.length === 0) {
       return flatConfig[id];
     }
     return pick(flatConfig[id], ...fields);
-  },
-  navConfig: origConfig
-}
+};
+export let navConfig = origConfig;

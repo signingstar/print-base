@@ -1,7 +1,6 @@
-import {Request, Response, Application, static} from "express";
+import {Request, Response, Application, static}  from "express";
 
 let path = require('path');
-let pug = require('pug');
 
 import * as controller from './controller';
 import * as responder from './responder';
@@ -46,6 +45,8 @@ module.exports = function (app:Application) {
 	app.get("/order", processRequest('order', 'main', processOptions));
 
 	app.get("/services", processRequest('our_services', 'main', processOptions));
+
+	app.get("/products", processRequest('products', 'main', processOptions));
 
 	app.get("/partner", processRequest('products', 'main', processOptions));
 

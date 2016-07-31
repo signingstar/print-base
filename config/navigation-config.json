@@ -38,6 +38,36 @@ module.exports = [
     ]
   },
   {
+    "id": "our-products",
+    "displayText": "Out Products",
+    "url": "/products",
+    "anchorId": "l-3",
+    "display": true,
+    "subElements": [
+      {
+        "id": "l-3-1",
+        "displayText": "Printed T-shirts",
+        "url": "/products/l-3-1",
+        "display": true,
+        "internal_url": "t_shirts"
+      },
+      {
+        "id": "l-3-2",
+        "displayText": "Printed Coffee mugs",
+        "url": "/products/l-3-2",
+        "display": true,
+        "internal_url": "mugs"
+      },
+      {
+        "id": "l-3-3",
+        "displayText": "Fancy Posters",
+        "url": "/products/l-3-3",
+        "display": true,
+        "internal_url": "posters"
+      }
+    ]
+  },
+  {
     "id": "place-order",
     "displayText": "Place an order",
     "url": "/order",
@@ -59,6 +89,6 @@ module.exports = [
     "url": "/contact",
     "anchorId": "l-4",
     "subElements": [],
-    "display": true
+    "display": false
   }
 ]
