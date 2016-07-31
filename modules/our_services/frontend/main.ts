@@ -1,4 +1,3 @@
-import {slidePromotionalHeader} from '../../promotion_header/frontend/main';
 import {NavigateSections} from './parallex';
 
 let shortcutMap = {'visiting-cards-nav': '#visiting-cards', 'stationary-nav': '#stationary', 'brouchers-nav': '#brouchers'};
@@ -6,4 +5,3 @@ let shortcutMap = {'visiting-cards-nav': '#visiting-cards', 'stationary-nav': '#
 let stickyNavigation = new NavigateSections('#service-item', shortcutMap);
 
 stickyNavigation.activate();
-slidePromotionalHeader();
