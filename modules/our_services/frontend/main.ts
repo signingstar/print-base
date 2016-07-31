@@ -1,4 +1,4 @@
-import {NavigateSections} from './parallex';
+import {NavigateSections} from '../../floater/frontend/parallex';
 
 let shortcutMap = {'visiting-cards-nav': '#visiting-cards', 'stationary-nav': '#stationary', 'brouchers-nav': '#brouchers'};
 
