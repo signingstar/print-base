@@ -8,8 +8,9 @@ module.exports = function(){
       let navId = customConfig(req.query.service_type, ['id']).id;
     	let srcPath:string = './modules/products/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let html = fn({navConfig, navId, promotional_header: true, navigational_header: true});
 
-      responders.html(fn({navConfig, navId}));
+      responders.html(html);
     }
   }
 }

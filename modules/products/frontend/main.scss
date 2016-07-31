@@ -45,11 +45,11 @@
         }
 
         ul {
-          border: 1px solid #aaa;
+          border: 1px solid $light-gray;
           border-radius: 4px;
 
           li {
-            border-bottom: 1px solid #aaa;
+            border-bottom: 1px solid $light-gray;
             border-radius: 1px;
             height: 40px;
             vertical-align: middle;
@@ -60,11 +60,11 @@
             }
 
             &:hover {
-              background-color: #ccc;
+              background-color: $lighter-gray;
             }
 
             &.selected {
-              background-color: #aaa;
+              background-color: $light-gray;
             }
 
             a {
@@ -137,7 +137,7 @@
             margin-bottom: 15px;
 
             h3 {
-              border-bottom: 1px solid #aaa;
+              border-bottom: 1px solid $light-gray;
               margin-bottom: 5px;
               margin-top: 0;
             }
@@ -155,8 +155,8 @@
               justify-content: flex-end;
 
               a {
-                background-color: #0a6689;
-                color: white;
+                background-color: $theme-color;
+                color: $white;
                 display: block;
                 line-height: 40px;
                 text-align: center;

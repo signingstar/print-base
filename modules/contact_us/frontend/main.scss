@@ -3,7 +3,7 @@
   margin: 0 auto;
 
   .contact-header {
-    border-bottom: 1px solid #aaa;
+    border-bottom: 1px solid $light-gray;
     margin-top: 20px;
     padding-bottom: 5px;
 
@@ -38,7 +38,7 @@
     }
 
     .separator {
-      border-left: 1px solid #aaa;
+      border-left: 1px solid $light-gray;
     }
 
     .contact-form {
@@ -65,7 +65,7 @@
           }
 
           textarea {
-            border-color: #bbb;
+            border-color: $light-gray;
             height: 150px;
             vertical-align: middle;
             width: 400px;
@@ -82,8 +82,8 @@
             text-align: center;
             padding: 5px;
             font-size: 16px;
-            background-color: #0a6689;
-            color: white;
+            background-color: $theme-color;
+            color: $white;
           }
         }
       }

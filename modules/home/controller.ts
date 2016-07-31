@@ -8,7 +8,9 @@ module.exports = function(){
     	let srcPath:string = './modules/home/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      responders.html(fn({navConfig}));
+      let html = fn({navConfig, promotional_header: true, navigational_header: true});
+
+      responders.html(html);
     }
   }
 }
