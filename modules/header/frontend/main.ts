@@ -20,7 +20,8 @@ export class TopHeader {
       $item.on('click', function($ev){
         $ev.preventDefault();
         let id = $item.attr('id');
-        if(window.location.pathname.indexOf(linkUrl) === -1) {
+        let urlPathName = window.location.pathname;
+        if(urlPathName.indexOf(linkUrl) === -1) {
           window.location.href = `${linkUrl}/${id}`;
         } else {
           _this.triggerSubNavSelection($item);

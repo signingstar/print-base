@@ -15,7 +15,7 @@ export class NavigateSections {
   init() {
     this.$stickyElement = $(this.stickyElementClass);
     this.scrollDelay = 20;
-    this.topOffset = 20;
+    this.topOffset = 50;
   }
 
   stickyLeftNavigation() {

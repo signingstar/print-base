@@ -37,12 +37,11 @@ header.top-header {
     border-bottom: 1px solid $light-gray;
 
     a {
-      color: $white;
+      color: $link-color-bg;
     }
 
     .main-header-content {
       align-items: center;
-      color: $white;
       display: flex;
       height: 60px;
       justify-content: space-between;
@@ -96,7 +95,7 @@ header.top-header {
           &:hover {
             .menu-pointer {
               border-top: none;
-              border-bottom: 8px solid $theme-color;
+              border-bottom: 8px solid $link-color-normal;
             }
 
             .sub-nav {
@@ -140,7 +139,7 @@ header.top-header {
                 }
 
                 .sub-nav-links {
-                  color: $theme-color;
+                  color: $link-color-normal;
                   display: block;
                   padding: 2px 0 2px 8px;
                 }
@@ -177,7 +176,7 @@ header.top-header {
             background-color: $theme-color;
 
             a {
-              color: $white;
+              color: $link-color-bg;
             }
 
             nav {

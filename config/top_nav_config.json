@@ -39,7 +39,7 @@ module.exports = [
   },
   {
     "id": "our-products",
-    "displayText": "Out Products",
+    "displayText": "Our Products",
     "url": "/products",
     "anchorId": "l-3",
     "display": true,
@@ -69,7 +69,7 @@ module.exports = [
   },
   {
     "id": "place-order",
-    "displayText": "Place an order",
+    "displayText": "Place an Order",
     "url": "/order",
     "anchorId": "l-3",
     "subElements": [],
@@ -77,7 +77,7 @@ module.exports = [
   },
   {
     "id": "become-partner",
-    "displayText": "Become our Partner",
+    "displayText": "Be Our Partner",
     "url": "/partner",
     "anchorId": "l-3",
     "display": true,

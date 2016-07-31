@@ -15,9 +15,9 @@ html
     .body-contents
       .c-header#c-header
         include ../header/main
-      .contents
-        section
-          include ./signup_contents.pug
+      .contents#main-contents
+        section.main-section
+          include ./contents
 
   script(
     src='/assets/session.js'
