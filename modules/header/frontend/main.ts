@@ -17,7 +17,8 @@ export class TopHeader {
     each($subNavItems, function(item) {
       let linkUrl = $topNavLink.attr('href');
       let $item = $(item);
-      $item.on('click', function(){
+      $item.on('click', function($ev){
+        $ev.preventDefault();
         let id = $item.attr('id');
         if(window.location.pathname.indexOf(linkUrl) === -1) {
           window.location.href = `${linkUrl}/${id}`;
