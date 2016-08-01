@@ -3,7 +3,7 @@ import {Request, Response, Application, static} from "express";
 let path = require('path');
 
 import * as controller from './controller';
-import * as responder from './responder';
+import {responders} from './responder';
 
 module.exports = function (app:Application) {
 	// app.set("view engine", "pug");
@@ -16,27 +16,61 @@ module.exports = function (app:Application) {
 		order: require('../modules/order/controller.ts'),
 		our_services: require('../modules/our_services/controller.ts'),
 		products: require('../modules/products/controller.ts'),
-		contact_us: require('../modules/contact_us/controller.ts')
+		contact_us: require('../modules/contact_us/controller.ts'),
+		account: require('../modules/account/controller.ts'),
+		signout: require('../modules/signout/controller.ts')
 
 	};
 
 	let {processRequest} = controller(appControllers);
+	let redirectWithLogging = function (res:Response, url:string, reasonCode:string, statusCode = 302) {
+		console.log(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
+
+		res.redirect(statusCode, url);
+	};
+
+	let setCookiesForResponse = function(res:Response, cookies:any = []) {
+		for(let cookie in cookies) {
+			let {key, value} = cookie;
+			res.cookie(key, value, cookie);
+		}
+	};
+
+	let redirectWithCookies = function(res: Response) {
+		return function(url:string, cookies:any) {
+			setCookiesForResponse(res, cookies);
+			res.redirect(encodeURI(url));
+		}
+	}
+
 	let processOptions = {
 		attributes: function (req:Request, res:Response, next:any) {
 			return {req, res}
 		},
 		responders: {
-			html: responder.html
+			html: responders.html
 		}
 	};
 
 	app.get("/", processRequest('home', 'main', processOptions));
 
-	app.get("/login", processRequest('login', 'login_form', processOptions));
+	app.get("/login", processRequest('login', 'get', processOptions));
 
-	app.post("/login", processRequest('login', 'login_action', processOptions));
+	app.post("/login", processRequest('login', 'post',
+		{
+			attributes: processOptions.attributes,
+			responders: { redirectWithCookies }
+		}
+	));
 
-	app.get("/signup", processRequest('signup', 'main', processOptions));
+	app.get("/signup", processRequest('signup', 'get', processOptions));
+
+	app.post("/signup", processRequest('signup', 'post',
+		{
+			attributes: processOptions.attributes,
+			responders: { redirectWithCookies }
+		}
+	));
 
 	app.get("/forgot_password", processRequest('forgot_password', 'main', processOptions));
 
@@ -49,6 +83,10 @@ module.exports = function (app:Application) {
 	app.get("/products", processRequest('products', 'main', processOptions));
 
 	app.get("/partner", processRequest('products', 'main', processOptions));
+
+	app.get("/account", processRequest('account', 'main', processOptions));
+
+	app.get("/signout", processRequest('signout', 'main', processOptions));
 
 	app.use('/assets', static('./public'));
 };

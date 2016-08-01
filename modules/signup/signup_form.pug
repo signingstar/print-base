@@ -1,4 +1,7 @@
-form
+form(
+  method='post'
+  action= retUrl
+  )
   fieldset
     #name-input.field
       label(
@@ -56,6 +59,7 @@ form
       span Remember Me
     .session-button
       input(
-        type='button'
-        value='Submit'
+        type='submit'
+        name='submit'
+        value='Register'
         )

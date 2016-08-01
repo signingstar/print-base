@@ -76,6 +76,31 @@ body .main-section{
           }
         }
       }
+
+      nav#move-to-top {
+        bottom: 100px;
+        position: fixed;
+        width: 220px;
+
+        .up-arrow {
+          background-image: url('/assets/move_to_top.svg');
+          background-position: center;
+          @include background-size(cover);
+          cursor: pointer;
+          display: none;
+          height: 50px;
+          margin: 0 auto;
+          width: 50;
+
+          .arrow-text {
+            color: $link-color-normal;
+            font-size: 18px;
+            height: 100%;
+            padding-top: 48px;
+            text-align: center;
+          }
+        }
+      }
     }
 
     .right-panel {

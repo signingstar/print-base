@@ -3,19 +3,9 @@ import * as _ from "underscore";
 
 export class NavigateSections {
   private elemSelected:boolean;
-  private $stickyElement:JQuery;
-  private scrollDelay:number;
-  private topOffset:number;
 
-  constructor(private stickyElementClass:string, private navSectionMap:any ) {
+  constructor(private $stickyElement:JQuery, private navSectionMap:any, private scrollDelay:number = 10,  private topOffset:number = 50) {
     this.elemSelected = false;
-    this.init();
-  }
-
-  init() {
-    this.$stickyElement = $(this.stickyElementClass);
-    this.scrollDelay = 20;
-    this.topOffset = 50;
   }
 
   stickyLeftNavigation() {
@@ -34,12 +24,11 @@ export class NavigateSections {
       shouldBeFixed = scrollTop > offsetTop - this.topOffset;
 
       if (shouldBeFixed && !isFixed) {
-        this.$stickyElement.addClass('sticky');
-        this.$stickyElement.css('width', width);
-        return isFixed = true;
+        this.$stickyElement.trigger("stickElement", {width: width});
+        isFixed = true;
       } else if (!shouldBeFixed && isFixed) {
-        this.$stickyElement.removeClass('sticky');
-        return isFixed = false;
+        this.$stickyElement.trigger("unstickElement");
+        isFixed = false;
       }
     };
 
@@ -66,8 +55,12 @@ export class NavigateSections {
   }
 
   navigateTargetSection($target:JQuery, callback:any) {
-    let initial = $(window).scrollTop();
     let final = $target.offset().top - this.topOffset;
+    this.navigateTargetPosition(final, callback);
+  }
+
+  navigateTargetPosition(final:number, callback?: any) {
+    let initial = $(window).scrollTop();
     let difference = Math.abs(final - initial);
     let duration = difference / 10 + 100;
     let tickInterval = 15;
@@ -86,10 +79,8 @@ export class NavigateSections {
       window.scrollTo(0, current);
 
       if(current !== final) {
-        final = $target.offset().top - this.topOffset || final;
-
         setTimeout(() => stepAnimator.call(this), tickInterval);
-      } else {
+      } else if(callback) {
         callback();
       }
     };

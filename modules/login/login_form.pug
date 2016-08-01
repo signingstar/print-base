@@ -1,6 +1,6 @@
 form(
   method='post'
-  action='/login'
+  action= retUrl
   )
   fieldset
     #email-input.field
@@ -37,6 +37,7 @@ form(
       span Remember Me
     .session-button
       input(
-        type='button'
-        value='Submit'
+        type='submit'
+        name='submit'
+        value='Login'
         )

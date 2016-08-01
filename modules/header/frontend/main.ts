@@ -1,7 +1,8 @@
 import * as $ from 'jquery';
 import {each} from 'underscore';
+import {addReferrer} from './session_navigation';
 
-export class TopHeader {
+export class MainHeader {
   $rootElem:JQuery;
   $topNavList:JQuery;
   $promotionalHeader: JQuery;
@@ -50,26 +51,37 @@ export class TopHeader {
      });
    }
   }
+
+  attachSubNavEvenToEntireList() {
+    each(this.$topNavList, (listItem) => {
+      let $listItem = $(listItem);
+      let $subNav = $listItem.find('.sub-nav');
+
+      if($subNav.length) {
+        this.processSubNavSelection($subNav);
+
+        let $navAnchorElem = $listItem.find('.top-nav-link');
+        let $subListItem = $subNav.find('a');
+        this.attachSubNavEvent($subListItem, $navAnchorElem);
+      }
+    });
+  }
+
 }
 
 $(function() {
   console.log('document ready');
-  let header = new TopHeader();
+  let header = new MainHeader();
 
-  each(header.$topNavList, (listItem) => {
-    let $listItem = $(listItem);
-    let $subNav = $listItem.find('.sub-nav');
+  if($('header .top-nav').length) {
+    header.attachSubNavEvenToEntireList();
+  }
 
-    if($subNav.length) {
-      header.processSubNavSelection($subNav);
+  addReferrer();
 
-      let $navAnchorElem = $listItem.find('.top-nav-link');
-      let $subListItem = $subNav.find('a');
-      header.attachSubNavEvent($subListItem, $navAnchorElem);
-    }
-  });
-
-  header.slidePromotionalHeader();
+  if($('header .promotional-header').length) {
+    header.slidePromotionalHeader();
+  }
 });
 
 window.onload = function() {

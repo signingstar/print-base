@@ -5,23 +5,36 @@
     )
       a(
         href="/"
-      ) Super Digital Printing
+      ) Tisko Digital Printing
     div.contact-info
       a(
         href='/contact'
         ) Contact Us
-    - logged = true
+    - logged = false
     nav.user-info(
       class=(logged?'signed':'unsigned')
     )
-      span#user-cart.user-info-item
-        a#cart-nav(
-          href='#'
-          )
-          span Cart
-      a#user-signin.user-info-item(
-        href='/login'
-        ) Login
-      a#user-signup.user-info-item(
-        href='/signup'
-        ) Register
+      if logged
+        span#user-cart.user-info-item
+          a#cart-nav(
+            href='#'
+            )
+            span Cart
+        a#user-account.user-info-item(
+          href='/account'
+          ) My Account
+        a#user-signout.user-info-item(
+          href='/signout'
+          ) Logout
+      else
+        span#user-cart.user-info-item
+          a#cart-nav(
+            href='#'
+            )
+            span Cart
+        a#user-signin.user-info-item(
+          href='/login'
+          ) Login
+        a#user-signup.user-info-item(
+          href='/signup'
+          ) Register
