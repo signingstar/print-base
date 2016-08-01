@@ -1,18 +1,13 @@
 import {extend} from 'underscore';
 
 export class Page {
-  templateName: string;
-  constructor(templateName:string, attrs={}) {
-    this.templateName = templateName;
-    for(name in attrs) {
-      this[name] = attrs[name];
-    }
+  constructor(private templateName:string, attrs={}) {
+    this.set(attrs);
   }
 
   set(attrs:any) {
-    for(let name of attrs) {
-      console.log(attrs);
-      this[name] = attrs[name];
+    for(let key in attrs) {
+      this[key] = attrs[key];
     }
   }
 }

@@ -1,12 +1,12 @@
 let format = require('url').format;
 
-export function getUri(action:string, ret_url:string) : string {
+export function getUri(action:string, refUrl:string) : string {
   let pathname = "/" + action;
-  if (!ret_url) {
+  if (!refUrl) {
     return pathname;
   }
   return format({
     pathname: pathname,
-    query: {ret_url}
+    query: {ref_url:refUrl}
   });
 };
