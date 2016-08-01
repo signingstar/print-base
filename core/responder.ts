@@ -1,6 +1,6 @@
 import {Response} from 'express';
 
-let responders = {
+export let responders = {
   html: function(res: Response, next:any) {
     return function(html:string, err:any) {
       if(err) {
@@ -15,5 +15,3 @@ let responders = {
     }
   }
 };
-
-module.exports =  responders;

@@ -1,34 +1,12 @@
-$theme-color: #0A6689;
-$white: #FFFFFF;
-$light-gray: #AAAAAA;
-$lighter-gray: #CCCCCC;
-$link-color-normal: #0A6689;
-$link-color-bg: #FFFFFF;
+@import './mixins';
+@import './variables';
 
 html {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+  @include box-sizing(border-box);
 }
 
 *, *:before, *:after {
-  -webkit-box-sizing: inherit;
-  -moz-box-sizing: inherit;
-  box-sizing: inherit;
-}
-
-@mixin border-radius($radius) {
-  -webkit-border-radius: $radius;
-     -moz-border-radius: $radius;
-      -ms-border-radius: $radius;
-          border-radius: $radius;
-}
-
-@mixin transition($css, $delay) {
-  -webkit-transition: $css $delay;
-     -moz-transition: $css $delay;
-      -ms-transitions: $css $delay;
-          transition: $css $delay;
+  @include box-sizing(inherit);
 }
 
 body {
