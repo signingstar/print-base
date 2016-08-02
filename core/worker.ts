@@ -1,18 +1,21 @@
 import * as express from "express";
-import {map,object} from "underscore";
-import * as http from 'http';
-import * as routes from "./routes";
-import {middleware} from "./middleware";
+import * as http from "http";
+import { map,object } from "underscore";
+
+import { globalModules } from "./modules";
+import { routes } from "./routes";
+import { middleware } from "./middleware";
 
 let app = express();
 let server = http.createServer(app);
+let { logger } = globalModules;
 
-middleware(app);
+middleware(app, globalModules);
 
 let routingFunctions = function(app:express.Application) {
 	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method:string) {
 		let func = function(route:string) {
-			console.log(`Adding routes ${route}`);
+			logger.info(`Adding routes ${route}`);
 			return app[method].apply(app, arguments);
 		};
 		return [method, func];
@@ -21,8 +24,8 @@ let routingFunctions = function(app:express.Application) {
 
 let wrapperApp:any = routingFunctions(app);
 
-routes(wrapperApp);
+routes(wrapperApp, globalModules);
 
 server.listen(8000, function() {
-	console.log("listening on part 8000");
+	logger.info("server started on part 8000");
 });

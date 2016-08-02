@@ -1,10 +1,10 @@
-let pug = require('pug');
-let path = require('path');
 import {navConfig} from '../header/presenter';
 
-module.exports = function(){
+export let contactUsController = function({modules}:{modules:any}) {
+  let {pug, logger} = modules;
+
   return {
-    main: function({attributes, responders, page}) {
+    main: function({attributes, responders, page}:{attributes:any, responders:any, page:any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/contact_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});

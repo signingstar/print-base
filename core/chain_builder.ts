@@ -1,29 +1,29 @@
-import {clone, extend, reduce, object} from 'underscore';
+import { clone, extend, object, reduce } from 'underscore';
+import { Request, Response } from "express";
 
-module.exports = function() {
-  let slice = [].slice;
+export function ChainBuilder () {
   let chainObject = {
     chain: new Array(),
-    execute: function() {
-      let defaultCtx = arguments[0], args = 2 <= arguments.length ? slice.call(arguments, 1) : [];
-      if (defaultCtx == null) {
-        defaultCtx = {};
-      }
 
+    register: function(name:string, fn:(ctx:any, req:Request, res:Response)=>any) {
+      return chainObject.chain.push([name, fn]);
+    },
+
+    execute: function(defaultCtx = {}, ...args:any[]) {
       let ctx = clone(defaultCtx);
-      let iterator = function(ctx, handler) {
-        let out;
+      let iterator = function(ctx:{}, handler:any) {
+        let out:{};
+
         try {
-          out = handler[1].apply(handler, [ctx].concat(slice.call(args)));
+          out = handler[1](ctx, ...args);
         } catch (e) {
           throw e;
         }
+
         return extend(ctx, object([[handler[0], out]]));
       };
+
       return reduce(chainObject.chain, iterator, ctx);
-    },
-    register: function(name, fn) {
-      return chainObject.chain.push([name, fn]);
     }
   }
 

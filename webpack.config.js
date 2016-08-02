@@ -106,6 +106,12 @@ var serverConfig = extend({}, true, config, {
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
   },
+  plugins:[
+    new webpack.BannerPlugin('require("source-map-support").install();',
+      { raw: true, entryOnly: false }),
+
+  ],
+  devtool: 'source-map',
   externals: nodeModules
 });
 

@@ -1,42 +1,34 @@
-import {Request, Response, Application, static} from "express";
+import * as express from "express";
 
 let path = require('path');
 
-import * as controller from './controller';
-import {responders} from './responder';
+import {coatControllers} from "./appControllers";
+import { responders } from './responder';
 
-module.exports = function (app:Application) {
+export function routes(app:express.Application, globalModules:any) {
+	let {logger} = globalModules;
+
 	// app.set("view engine", "pug");
-
-	let appControllers = {
-		login: require('../modules/login/controller.ts'),
-		home: require('../modules/home/controller.ts'),
-		signup: require('../modules/signup/controller.ts'),
-		forgot_password: require('../modules/forgot_password/controller.ts'),
-		order: require('../modules/order/controller.ts'),
-		our_services: require('../modules/our_services/controller.ts'),
-		products: require('../modules/products/controller.ts'),
-		contact_us: require('../modules/contact_us/controller.ts'),
-		account: require('../modules/account/controller.ts'),
-		signout: require('../modules/signout/controller.ts')
-
-	};
-
-	let {processRequest} = controller(appControllers);
-	let redirectWithLogging = function (res:Response, url:string, reasonCode:string, statusCode = 302) {
-		console.log(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
+	let processRequest = coatControllers(globalModules);
+	let redirectWithLogging = function (res:express.Response, url:string, reasonCode:string, statusCode = 302) {
+		logger.info(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
 
 		res.redirect(statusCode, url);
 	};
 
-	let setCookiesForResponse = function(res:Response, cookies:any = []) {
-		for(let cookie in cookies) {
+	interface Cookie {
+		key: string,
+		value:string
+	}
+
+	let setCookiesForResponse = function(res:express.Response, cookies:Cookie[]) {
+		for(let cookie of cookies) {
 			let {key, value} = cookie;
 			res.cookie(key, value, cookie);
 		}
 	};
 
-	let redirectWithCookies = function(res: Response) {
+	let redirectWithCookies = function(res: express.Response) {
 		return function(url:string, cookies:any) {
 			setCookiesForResponse(res, cookies);
 			res.redirect(encodeURI(url));
@@ -44,7 +36,7 @@ module.exports = function (app:Application) {
 	}
 
 	let processOptions = {
-		attributes: function (req:Request, res:Response, next:any) {
+		attributes: function (req:express.Request, res:express.Response, next:any) {
 			return {req, res}
 		},
 		responders: {
@@ -52,41 +44,41 @@ module.exports = function (app:Application) {
 		}
 	};
 
-	app.get("/", processRequest('home', 'main', processOptions));
+	app.get("/", processRequest('homeController', 'main', processOptions));
 
-	app.get("/login", processRequest('login', 'get', processOptions));
+	app.get("/login", processRequest('loginController', 'get', processOptions));
 
-	app.post("/login", processRequest('login', 'post',
+	app.post("/login", processRequest('loginController', 'post',
 		{
 			attributes: processOptions.attributes,
 			responders: { redirectWithCookies }
 		}
 	));
 
-	app.get("/signup", processRequest('signup', 'get', processOptions));
+	app.get("/signup", processRequest('signUpController', 'get', processOptions));
 
-	app.post("/signup", processRequest('signup', 'post',
+	app.post("/signup", processRequest('signUpController', 'post',
 		{
 			attributes: processOptions.attributes,
 			responders: { redirectWithCookies }
 		}
 	));
 
-	app.get("/forgot_password", processRequest('forgot_password', 'main', processOptions));
+	app.get("/forgot_password", processRequest('forgotPasswordController', 'main', processOptions));
 
-	app.get("/contact", processRequest('contact_us', 'main', processOptions));
+	app.get("/contact", processRequest('contactUsController', 'main', processOptions));
 
-	app.get("/order", processRequest('order', 'main', processOptions));
+	app.get("/order", processRequest('orderController', 'main', processOptions));
 
-	app.get("/services", processRequest('our_services', 'main', processOptions));
+	app.get("/services", processRequest('ourServicesController', 'main', processOptions));
 
-	app.get("/products", processRequest('products', 'main', processOptions));
+	app.get("/products", processRequest('productsController', 'main', processOptions));
 
 	app.get("/partner", processRequest('products', 'main', processOptions));
 
-	app.get("/account", processRequest('account', 'main', processOptions));
+	app.get("/account", processRequest('accountController', 'main', processOptions));
 
-	app.get("/signout", processRequest('signout', 'main', processOptions));
+	app.get("/signout", processRequest('signOutController', 'main', processOptions));
 
-	app.use('/assets', static('./public'));
+	app.use('/assets', express.static('./public'));
 };
