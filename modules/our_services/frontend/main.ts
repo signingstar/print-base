@@ -1,5 +1,5 @@
-import * as $ from 'jquery';
-import {NavigateSections} from '../../floater/frontend/parallex';
+import * as $ from "jquery";
+import { NavigateSections } from "../../floater/frontend/parallex";
 
 class OurServices {
   shortcutMap: any;

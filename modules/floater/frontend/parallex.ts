@@ -2,9 +2,9 @@ import * as $ from "jquery";
 import * as _ from "underscore";
 
 export class NavigateSections {
-  private elemSelected:boolean;
+  private elemSelected: boolean;
 
-  constructor(private $stickyElement:JQuery, private navSectionMap:any, private scrollDelay:number = 10,  private topOffset:number = 50) {
+  constructor(private $stickyElement: JQuery, private navSectionMap: any, private scrollDelay: number = 10,  private topOffset: number = 50) {
     this.elemSelected = false;
   }
 
@@ -14,7 +14,7 @@ export class NavigateSections {
     let isFixed = false;
 
     let stickyFunction = () => {
-      let scrollTop:number, shouldBeFixed:boolean;
+      let scrollTop: number, shouldBeFixed: boolean;
 
       if (!isFixed) {
         offsetTop = this.$stickyElement.offset().top;
@@ -36,7 +36,7 @@ export class NavigateSections {
     $(window).on("scroll", throttled);
   }
 
-  processNavSelection = ($el:JQuery, ev:Event) => {
+  processNavSelection = ($el: JQuery, ev: Event) => {
     this.elemSelected = true;
 
     let targetSection:JQuery = $('#' + $el.attr('id').slice(0,-4));
@@ -54,12 +54,12 @@ export class NavigateSections {
     ev.preventDefault();
   }
 
-  navigateTargetSection($target:JQuery, callback:any) {
+  navigateTargetSection($target: JQuery, callback: any) {
     let final = $target.offset().top - this.topOffset;
     this.navigateTargetPosition(final, callback);
   }
 
-  navigateTargetPosition(final:number, callback?: any) {
+  navigateTargetPosition(final: number, callback?: any) {
     let initial = $(window).scrollTop();
     let difference = Math.abs(final - initial);
     let duration = difference / 10 + 100;
@@ -120,7 +120,7 @@ export class NavigateSections {
     return height;
   }
 
-  private isSectionInViewport($el:JQuery) {
+  private isSectionInViewport($el: JQuery) {
     let rect = $el[0].getBoundingClientRect();
     let offset = this.offsetHeight();
 
@@ -131,7 +131,7 @@ export class NavigateSections {
     this.stickyLeftNavigation();
 
     let _that = this;
-    this.$stickyElement.find('li').on("click", function(ev:Event) {
+    this.$stickyElement.find('li').on("click", function(ev: Event) {
       _that.processNavSelection($(this), ev);
     });
 

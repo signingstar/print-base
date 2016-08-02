@@ -1,10 +1,10 @@
-import * as $ from 'jquery';
-import {each} from 'underscore';
-import {addReferrer} from './session_navigation';
+import * as $ from "jquery";
+import { each } from "underscore";
+import { addReferrer } from "./session_navigation";
 
 export class MainHeader {
-  $rootElem:JQuery;
-  $topNavList:JQuery;
+  $rootElem: JQuery;
+  $topNavList: JQuery;
   $promotionalHeader: JQuery;
 
   constructor() {
@@ -13,7 +13,7 @@ export class MainHeader {
     this.$topNavList = this.$rootElem.find('.top-nav .menu-options li');
   }
 
-  attachSubNavEvent ($subNavItems:JQuery, $topNavLink:JQuery) {
+  attachSubNavEvent ($subNavItems: JQuery, $topNavLink: JQuery) {
     let _this = this;
     each($subNavItems, function(item) {
       let linkUrl = $topNavLink.attr('href');
@@ -31,14 +31,14 @@ export class MainHeader {
     });
   }
 
-  processSubNavSelection($subNav:JQuery) {
+  processSubNavSelection($subNav: JQuery) {
     let $selectedElem = $subNav.find('.selected');
     if($selectedElem.length) {
       this.triggerSubNavSelection($selectedElem);
     }
   }
 
-  triggerSubNavSelection($el:JQuery) {
+  triggerSubNavSelection($el: JQuery) {
       let elemIndex = $el.attr('id').slice(-1);
       $(`.left-panel nav li:nth-child(${elemIndex})`).trigger('click');
   }

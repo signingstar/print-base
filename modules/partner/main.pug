@@ -1,0 +1,20 @@
+html
+  head
+    title= 'Partner Page'
+    link(
+      rel='icon'
+      href='/assets/header.png'
+      type='image/png'
+      )
+    link(
+      rel='stylesheet'
+      href='/assets/session.css'
+      type='text/css'
+    )
+  body
+    .body-contents
+      .c-header#c-header
+        include ../header/main
+      .contents#main-contents
+        section.main-section
+          include ./contents

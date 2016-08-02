@@ -1,9 +1,10 @@
-let pug = require('pug');
-import {presenter} from './presenter';
+import {presenter} from "./presenter";
 
-module.exports = function(){
+export let signUpController = function({modules} : {modules: any}) {
+  let {pug, logger} = modules;
+
   return {
-    get: function({attributes, responders, page}) {
+    get: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/signup/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -13,7 +14,7 @@ module.exports = function(){
       responders.html(html);
     },
 
-    post: function({attributes, responders, page}) {
+    post: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
       let refUrl = decodeURI(req.query.ref_url);
 

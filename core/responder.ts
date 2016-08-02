@@ -1,8 +1,8 @@
-import {Response} from 'express';
+import { Response } from 'express';
 
 export let responders = {
-  html: function(res: Response, next:any) {
-    return function(html:string, err:any) {
+  html: function(res: Response, next: any) {
+    return function(html: string, err: any) {
       if(err) {
         return next(err);
       }
