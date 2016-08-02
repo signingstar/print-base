@@ -1,4 +1,4 @@
-import * as $ from 'jquery';
+import * as $ from "jquery";
 
 export function addReferrer() {
   let selectors = '#user-signin, #user-signup, #user-signout';

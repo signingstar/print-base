@@ -1,6 +1,6 @@
 import * as express from "express";
 import * as http from "http";
-import { map,object } from "underscore";
+import { map, object } from "underscore";
 
 import { globalModules } from "./modules";
 import { routes } from "./routes";
@@ -12,9 +12,9 @@ let { logger } = globalModules;
 
 middleware(app, globalModules);
 
-let routingFunctions = function(app:express.Application) {
-	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method:string) {
-		let func = function(route:string) {
+let routingFunctions = function(app: express.Application) {
+	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method: string) {
+		let func = function(route: string) {
 			logger.info(`Adding routes ${route}`);
 			return app[method].apply(app, arguments);
 		};

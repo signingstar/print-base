@@ -1,11 +1,11 @@
-import * as $ from 'jquery';
-import {NavigateSections} from '../../floater/frontend/parallex';
+import * as $ from "jquery";
+import { NavigateSections } from "../../floater/frontend/parallex";
 
 class OurServices {
-  shortcutMap:any;
-  $mainStickyElement:JQuery;
+  shortcutMap: any;
+  $mainStickyElement: JQuery;
 
-  constructor(...stickyElements:JQuery[]) {
+  constructor(...stickyElements: JQuery[]) {
     this.shortcutMap = {'printed-tshirts-nav': '#printed-tshirts', 'printed-mugs-nav': '#printed-mugs', 'posters-nav': '#posters'};
     this.$mainStickyElement = stickyElements[0];
   }

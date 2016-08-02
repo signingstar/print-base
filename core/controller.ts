@@ -6,7 +6,7 @@ import { Page } from "./page";
 
 let debug = require("debug")('Core:controllers');
 
-export function coreController(controllers:any, globalModules:any) {
+export function coreController(controllers: any, globalModules: any) {
   let contextizer = function() {
     let chain = ChainBuilder();
 
@@ -18,26 +18,26 @@ export function coreController(controllers:any, globalModules:any) {
     }
   };
 
-  let { logger } = globalModules;
+  let {logger} = globalModules;
 
   let preController = {
     controllers: controllers,
-    defaultAttributes: (req:Request) => req.params,
+    defaultAttributes: (req: Request) => req.params,
     moduleBuilder: contextizer(),
 
-    getPageForAction: (controllerName:string, action: string) => {
+    getPageForAction: (controllerName: string, action: string) => {
       let template:string = action === 'main' ? controllerName : controllerName + '_' + action;
       return new Page(template);
     },
 
-    getControllerWithContext: (controller:string, req: Request, res: Response) => {
+    getControllerWithContext: (controller: string, req: Request, res: Response) => {
       let modules = preController.moduleBuilder.execute(req, res, {controller: controller});
 
       extend(modules, globalModules);
       let bootedController = controllers[controller]({modules});
 
-      each(bootedController, function(handler:(args:any)=>any, action:string) {
-        bootedController[action] = function(args:any) {
+      each(bootedController, function(handler: (args: any)=>any, action: string) {
+        bootedController[action] = function(args: any) {
           logger.info('[CONTROLLER] %s: %s', controller, action);
           if(args.page == null) {
             args.page = preController.getPageForAction(controller, action);
@@ -49,15 +49,15 @@ export function coreController(controllers:any, globalModules:any) {
       return {controller: bootedController};
     },
 
-    processRequest: (controllerName:string, action:string, options:{attributes:any, responders:{}}) => {
+    processRequest: (controllerName: string, action: string, options: {attributes: any, responders: {}}) => {
       if(options.attributes == null) {
         options.attributes = preController.defaultAttributes;
       }
 
-      return function(req:Request, res:Response, next:()=>any) {
+      return function(req: Request, res: Response, next: ()=>any) {
         let {controller} = preController.getControllerWithContext(controllerName, req, res);
-        let responders = object(map(options.responders, function(responder:any, responderName:string) {
-          let responderWithLogging = function(res:Response, next:()=>any) {
+        let responders = object(map(options.responders, function(responder: any, responderName: string) {
+          let responderWithLogging = function(res: Response, next: ()=>any) {
             let generatedResponder = responder(res, next);
 
             return function() {
@@ -76,13 +76,13 @@ export function coreController(controllers:any, globalModules:any) {
     }
   };
 
-  preController.moduleBuilder.register('controllers', (ctx:any, req:Request, res: Response) => {
+  preController.moduleBuilder.register('controllers', (ctx: any, req: Request, res: Response) => {
     return {
       controllers: controllers,
-      controllerWithContext: function(controller:string) {
+      controllerWithContext: function(controller: string) {
         preController.getControllerWithContext(controller, req, res).controller;
       },
-      pageForAction: function(controller:string, action:string) {
+      pageForAction: function(controller: string, action: string) {
         preController.getPageForAction(controller, action);
       }
     };

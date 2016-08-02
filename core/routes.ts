@@ -2,15 +2,15 @@ import * as express from "express";
 
 let path = require('path');
 
-import {coatControllers} from "./appControllers";
-import { responders } from './responder';
+import { appControllers } from "./appControllers";
+import { responders } from "./responder";
 
-export function routes(app:express.Application, globalModules:any) {
+export function routes(app: express.Application, globalModules: any) {
 	let {logger} = globalModules;
 
 	// app.set("view engine", "pug");
-	let processRequest = coatControllers(globalModules);
-	let redirectWithLogging = function (res:express.Response, url:string, reasonCode:string, statusCode = 302) {
+	let processRequest = appControllers(globalModules);
+	let redirectWithLogging = function (res: express.Response, url: string, reasonCode: string, statusCode = 302) {
 		logger.info(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
 
 		res.redirect(statusCode, url);
@@ -18,10 +18,10 @@ export function routes(app:express.Application, globalModules:any) {
 
 	interface Cookie {
 		key: string,
-		value:string
+		value: string
 	}
 
-	let setCookiesForResponse = function(res:express.Response, cookies:Cookie[]) {
+	let setCookiesForResponse = function(res: express.Response, cookies: Cookie[]) {
 		for(let cookie of cookies) {
 			let {key, value} = cookie;
 			res.cookie(key, value, cookie);
@@ -29,14 +29,14 @@ export function routes(app:express.Application, globalModules:any) {
 	};
 
 	let redirectWithCookies = function(res: express.Response) {
-		return function(url:string, cookies:any) {
+		return function(url: string, cookies: Cookie[]) {
 			setCookiesForResponse(res, cookies);
 			res.redirect(encodeURI(url));
 		}
 	}
 
 	let processOptions = {
-		attributes: function (req:express.Request, res:express.Response, next:any) {
+		attributes: function (req: express.Request, res: express.Response, next: any) {
 			return {req, res}
 		},
 		responders: {
@@ -74,7 +74,7 @@ export function routes(app:express.Application, globalModules:any) {
 
 	app.get("/products", processRequest('productsController', 'main', processOptions));
 
-	app.get("/partner", processRequest('products', 'main', processOptions));
+	app.get("/partner", processRequest('partnerController', 'main', processOptions));
 
 	app.get("/account", processRequest('accountController', 'main', processOptions));
 

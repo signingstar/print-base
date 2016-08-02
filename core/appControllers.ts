@@ -10,8 +10,9 @@ import { productsController } from "../modules/products/controller";
 import { contactUsController } from "../modules/contact_us/controller";
 import { accountController } from "../modules/account/controller";
 import { signOutController } from "../modules/signout/controller";
+import { partnerController } from "../modules/partner/controller";
 
-let appControllers = {
+let controllersList = {
   loginController,
   homeController,
   signUpController,
@@ -21,10 +22,11 @@ let appControllers = {
   productsController,
   contactUsController,
   accountController,
-  signOutController
+  signOutController,
+  partnerController
 };
 
-export let coatControllers = function(globalModules:{}) {
-  let {processRequest} = coreController(appControllers, globalModules);
+export let appControllers = function(globalModules: {}) {
+  let {processRequest} = coreController(controllersList, globalModules);
   return processRequest;
 }

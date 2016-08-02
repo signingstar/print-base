@@ -5,13 +5,13 @@ export function ChainBuilder () {
   let chainObject = {
     chain: new Array(),
 
-    register: function(name:string, fn:(ctx:any, req:Request, res:Response)=>any) {
+    register: function(name: string, fn: (ctx: any, req: Request, res: Response)=>any) {
       return chainObject.chain.push([name, fn]);
     },
 
-    execute: function(defaultCtx = {}, ...args:any[]) {
+    execute: function(defaultCtx = {}, ...args: any[]) {
       let ctx = clone(defaultCtx);
-      let iterator = function(ctx:{}, handler:any) {
+      let iterator = function(ctx: {}, handler: any) {
         let out:{};
 
         try {

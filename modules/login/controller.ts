@@ -1,10 +1,10 @@
-import {presenter} from './presenter';
+import { presenter } from "./presenter";
 
-export let loginController = function({modules}:{modules:any}) {
+export let loginController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
-    get: function({attributes, responders, page}:{attributes:any, responders:any, page:any}) {
+    get: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -14,7 +14,7 @@ export let loginController = function({modules}:{modules:any}) {
       responders.html(html);
     },
 
-    post: function({attributes, responders, page}:{attributes:any, responders:any, page:any}) {
+    post: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
       let refUrl = req.query.ref_url;
 
