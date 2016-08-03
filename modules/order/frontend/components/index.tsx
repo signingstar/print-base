@@ -7,4 +7,4 @@ class App extends React.Component<{}, {}> {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('order-header'));
+ReactDOM.render(<App />, document.getElementById('main-section-content'));

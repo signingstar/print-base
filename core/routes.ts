@@ -1,16 +1,19 @@
-import * as express from "express";
+import { Application, Request, Response } from "express";
 
 let path = require('path');
+let debug = require("debug")('Core:AppControllers');
 
 import { appControllers } from "./appControllers";
 import { responders } from "./responder";
 
-export function routes(app: express.Application, globalModules: any) {
+export function routes(app: Application, globalModules: any) {
+	debug('export routes');
 	let {logger} = globalModules;
 
 	// app.set("view engine", "pug");
 	let processRequest = appControllers(globalModules);
-	let redirectWithLogging = function (res: express.Response, url: string, reasonCode: string, statusCode = 302) {
+
+	let redirectWithLogging = function (res: Response, url: string, reasonCode: string, statusCode = 302) {
 		logger.info(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
 
 		res.redirect(statusCode, url);
@@ -21,14 +24,16 @@ export function routes(app: express.Application, globalModules: any) {
 		value: string
 	}
 
-	let setCookiesForResponse = function(res: express.Response, cookies: Cookie[]) {
+	let setCookiesForResponse = function(res: Response, cookies: Cookie[]) {
+		debug('setCookiesForResponse');
 		for(let cookie of cookies) {
 			let {key, value} = cookie;
 			res.cookie(key, value, cookie);
 		}
 	};
 
-	let redirectWithCookies = function(res: express.Response) {
+	let redirectWithCookies = function(res: Response) {
+		debug('redirectWithCookies');
 		return function(url: string, cookies: Cookie[]) {
 			setCookiesForResponse(res, cookies);
 			res.redirect(encodeURI(url));
@@ -36,7 +41,7 @@ export function routes(app: express.Application, globalModules: any) {
 	}
 
 	let processOptions = {
-		attributes: function (req: express.Request, res: express.Response, next: any) {
+		attributes: function (req: Request, res: Response, next: any) {
 			return {req, res}
 		},
 		responders: {
@@ -79,6 +84,4 @@ export function routes(app: express.Application, globalModules: any) {
 	app.get("/account", processRequest('accountController', 'main', processOptions));
 
 	app.get("/signout", processRequest('signOutController', 'main', processOptions));
-
-	app.use('/assets', express.static('./public'));
 };

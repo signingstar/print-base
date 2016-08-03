@@ -7,6 +7,8 @@ import { Page } from "./page";
 let debug = require("debug")('Core:controllers');
 
 export function coreController(controllers: any, globalModules: any) {
+  debug('coreController');
+
   let contextizer = function() {
     let chain = ChainBuilder();
 
@@ -26,22 +28,27 @@ export function coreController(controllers: any, globalModules: any) {
     moduleBuilder: contextizer(),
 
     getPageForAction: (controllerName: string, action: string) => {
+      debug('getPageForAction');
+
       let template:string = action === 'main' ? controllerName : controllerName + '_' + action;
       return new Page(template);
     },
 
     getControllerWithContext: (controller: string, req: Request, res: Response) => {
+      debug('getControllerWithContext');
+
       let modules = preController.moduleBuilder.execute(req, res, {controller: controller});
 
       extend(modules, globalModules);
       let bootedController = controllers[controller]({modules});
 
       each(bootedController, function(handler: (args: any)=>any, action: string) {
+        debug('getControllerWithContext iterator');
+
         bootedController[action] = function(args: any) {
           logger.info('[CONTROLLER] %s: %s', controller, action);
-          if(args.page == null) {
-            args.page = preController.getPageForAction(controller, action);
-          }
+          args.page = preController.getPageForAction(controller, action);
+
           return handler(args);
         }
       });
@@ -50,6 +57,8 @@ export function coreController(controllers: any, globalModules: any) {
     },
 
     processRequest: (controllerName: string, action: string, options: {attributes: any, responders: {}}) => {
+      debug('processRequest');
+
       if(options.attributes == null) {
         options.attributes = preController.defaultAttributes;
       }
@@ -77,6 +86,8 @@ export function coreController(controllers: any, globalModules: any) {
   };
 
   preController.moduleBuilder.register('controllers', (ctx: any, req: Request, res: Response) => {
+    debug('moduleBuilder.register');
+
     return {
       controllers: controllers,
       controllerWithContext: function(controller: string) {
