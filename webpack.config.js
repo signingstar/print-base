@@ -3,12 +3,14 @@ var path = require('path');
 var webpack = require('webpack');
 var fs = require('fs');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+var CopyWebpackPlugin = require('copy-webpack-plugin');
 var sass = require('node-sass');
 
 var DEBUG = !process.argv.includes('--release');
 
 var srcPath = path.join(__dirname, "./modules");
 var destPath = path.join(__dirname, "./public");
+var nodeModulesPath = path.join(__dirname, "./node_modules");
 
 var GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
@@ -35,8 +37,9 @@ var clientConfig = extend({}, true, config, {
       'contact.css': './core/frontend/contact.scss',
       'services.css': './core/frontend/services.scss',
       'products.css': './core/frontend/products.scss',
+      'order.css': './core/frontend/order.scss',
       'main.js': './core/frontend/main.ts',
-      'order.js': './core/frontend/main.ts',
+      'order.js': './core/frontend/order.ts',
       'account.js': './core/frontend/account.ts',
       'partner.js': './core/frontend/partner_us.ts',
       'session.js': './core/frontend/session.ts',
@@ -68,6 +71,10 @@ var clientConfig = extend({}, true, config, {
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
       new ExtractTextPlugin("[name]"),
+      new CopyWebpackPlugin([
+        { from: nodeModulesPath + '/react/dist/react.js', to: destPath },
+        { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
+      ])
       // new webpack.optimize.UglifyJsPlugin( {
       //   compress: {
       //     warnings: false
@@ -111,6 +118,7 @@ var serverConfig = extend({}, true, config, {
       { raw: true, entryOnly: false }),
 
   ],
+  debug: DEBUG,
   devtool: 'source-map',
   externals: nodeModules
 });

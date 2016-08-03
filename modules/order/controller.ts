@@ -1,4 +1,5 @@
 import { navConfig } from "../header/presenter";
+let debug = require("debug")('Modules:Order:Controller');
 
 export let orderController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -8,7 +9,15 @@ export let orderController = function({modules} : {modules: any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/order/main.pug';
   		let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-      let html = fn({navConfig, promotional_header: true});
+      page.set( {
+        navConfig,
+        promotional_header: true,
+        navigational_header: true
+      });
+
+      debug('Page params:%s', JSON.stringify(page));
+
+      let html = fn(page);
 
       responders.html(html);
     }

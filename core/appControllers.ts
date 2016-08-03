@@ -1,5 +1,7 @@
 import { coreController } from "./controller";
 
+let debug = require("debug")('Core:AppControllers');
+
 import { loginController } from "../modules/login/controller";
 import { homeController } from "../modules/home/controller";
 import { signUpController } from "../modules/signup/controller";
@@ -26,7 +28,8 @@ let controllersList = {
   partnerController
 };
 
-export let appControllers = function(globalModules: {}) {
+export let appControllers = function(globalModules: any) {
+  debug('export method appControllers');
   let {processRequest} = coreController(controllersList, globalModules);
   return processRequest;
 }

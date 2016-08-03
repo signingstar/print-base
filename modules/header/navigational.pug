@@ -29,7 +29,7 @@ nav#top-nav.top-nav(
                     if child_option.display
                       li
                         a.sub-nav-links(
-                          href='#'
+                          href= child_option.url
                           id= child_option.id
                           class=(child_option.id == navId ? 'selected' : '')
                         )= child_option.displayText

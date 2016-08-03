@@ -8,7 +8,7 @@ html
       )
     link(
       rel='stylesheet'
-      href='/assets/main.css'
+      href='/assets/order.css'
       type='text/css'
     )
   body
@@ -16,17 +16,17 @@ html
       .header
         header
           include ../header/main
-      .contents
-        section
+      .contents#main-contents
+        section.main-section
           include ./contents
       .c-footer#c-footer
         include ../footer/main
 
   script(
-    src='https://fb.me/react-15.2.1.js'
+    src='/assets/react.js'
   )
   script(
-    src='https://fb.me/react-dom-15.2.1.js'
+    src='/assets/react-dom.js'
   )
   script(
     src='/assets/order.js'
