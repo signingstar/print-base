@@ -1,15 +1,16 @@
-var extend = require('extend');
-var path = require('path');
-var webpack = require('webpack');
-var fs = require('fs');
+var extend = require("extend");
+var path = require("path");
+var webpack = require("webpack");
+var fs = require("fs");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var CopyWebpackPlugin = require('copy-webpack-plugin');
-var sass = require('node-sass');
+var CopyWebpackPlugin = require("copy-webpack-plugin");
+var sass = require("node-sass");
 
 var DEBUG = !process.argv.includes('--release');
 
 var srcPath = path.join(__dirname, "./modules");
 var destPath = path.join(__dirname, "./public");
+var corePath = path.join(__dirname, "./core");
 var nodeModulesPath = path.join(__dirname, "./node_modules");
 
 var GLOBALS = {
@@ -32,20 +33,20 @@ var config = {
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
-      'main.css': './core/frontend/main.scss',
-      'session.css': './core/frontend/session.scss',
-      'contact.css': './core/frontend/contact.scss',
-      'services.css': './core/frontend/services.scss',
-      'products.css': './core/frontend/products.scss',
-      'order.css': './core/frontend/order.scss',
-      'main.js': './core/frontend/main.ts',
-      'order.js': './core/frontend/order.ts',
-      'account.js': './core/frontend/account.ts',
-      'partner.js': './core/frontend/partner_us.ts',
-      'session.js': './core/frontend/session.ts',
-      'contact.js': srcPath + '/contact_us/frontend/contact.ts',
-      'services.js': './core/frontend/services.ts',
-      'products.js': './core/frontend/products.ts',
+      'main.css':     corePath + '/frontend/main.scss',
+      'session.css':  corePath + '/frontend/session.scss',
+      'contact.css':  corePath + '/frontend/contact.scss',
+      'services.css': corePath + '/frontend/services.scss',
+      'products.css': corePath + '/frontend/products.scss',
+      'order.css':    corePath + '/frontend/order.scss',
+      'main.js':      corePath + '/frontend/main.ts',
+      'order.js':     corePath + '/frontend/order.ts',
+      'account.js':   corePath + '/frontend/account.ts',
+      'partner.js':   corePath + '/frontend/partner_us.ts',
+      'session.js':   corePath + '/frontend/session.ts',
+      'contact.js':   srcPath + '/contact_us/frontend/contact.ts',
+      'services.js':  corePath + '/frontend/services.ts',
+      'products.js':  corePath + '/frontend/products.ts',
   },
   output: {
     filename: '[name]',
@@ -74,6 +75,7 @@ var clientConfig = extend({}, true, config, {
       new CopyWebpackPlugin([
         { from: nodeModulesPath + '/react/dist/react.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
+        { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
       ])
       // new webpack.optimize.UglifyJsPlugin( {
       //   compress: {
@@ -98,7 +100,7 @@ var serverConfig = extend({}, true, config, {
   name: 'server',
   target: 'node',
   entry: {
-    worker: './core/worker.ts'
+    worker: corePath + '/worker.ts'
   },
   output: {
     path: path.join(__dirname, "build"),
