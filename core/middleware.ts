@@ -1,7 +1,6 @@
 import { Application, Response } from 'express';
 import * as serveStatic from "serve-static";
 let debug = require("debug")('Core:Middleware');
-
 let rewrite = require("express-urlrewrite");
 
 export function middleware(app: Application, globalModules: any) {

@@ -1,10 +1,5 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
+import { MainContents } from "./main_contents";
 
-class App extends React.Component<{}, {}> {
-  render () {
-    return <h2>Place an Order</h2>;
-  }
-}
-
-ReactDOM.render(<App />, document.getElementById('main-section-content'));
+ReactDOM.render(<MainContents />, document.getElementById('main-contents'));
