@@ -23,6 +23,10 @@ export class OptionButton extends React.Component<PrintTypeProps, any> {
     this.props.onClick({id:e.target.id});
   }
 
+  componentWillMount() {
+    this.setState({selected: this.props.selected});
+  }
+
   componentWillReceiveProps(nextProps: PrintTypeProps) {
     this.setState({selected: nextProps.selected});
   }

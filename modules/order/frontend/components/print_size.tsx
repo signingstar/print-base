@@ -1,41 +1,42 @@
 import * as React from "react";
 import { OptionButton } from "./option_button";
-import { PrintTypeState } from "./basic_option_state";
+import { PrintItem } from "./print_item";
 
-export class PrintSize extends React.Component<{}, PrintTypeState> {
-  data: {};
+export class PrintSize extends PrintItem {
   constructor() {
     super();
-    this.state = {
-      selectedItem: ''
-    };
-    this.data = {
-      's-1': "2' x 3'",
-      'm-1': "4' x 7'",
-      'l-1': "10' x 17'",
-      'xl-1': "30' x 50'"
+
+    this.data = [
+      {id: 's-1', value: "2' x 3'"},
+      {id: 'm-1', value: "4' x 7'"},
+      {id: 'l-1', value: "10' x 17'"},
+      {id: 'xl-1', value: "30' x 50'"},
+    ];
+
+    this.update = this.update.bind(this);
+  }
+
+  displayCondition(id: string) {
+    if(this.props.states['type'] === 't_shirts' && id === 'xl-1') {
+      return false;
     }
+
+    return true;
   }
 
-  update(e:any) {
-    this.setState({
-      selectedItem: e.id
-    });
-    e.selected=true;
-  }
-
-  shouldComponentUpdate(nextProps:any, nextState:any) {
-    return nextState.selectedItem != this.state.selectedItem;
-  }
   render () {
+    let optionButtonNodes = this.data.map((entry) => {
+      let selected = this.state.selectedItem === entry.id ?  true : false;
+      if(this.displayCondition(entry.id)) {
+        return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
+      }
+    });
+
     return (
-      <div className='inner-section' id='print-sizes'>
-        <h2>Print Size</h2>
+      <div className='inner-section' id={this.props.id}>
+        <h2>Print Size: <span>{this.getItemLabel(this.state.selectedItem)}</span></h2>
         <div>
-          <OptionButton id='s-1' label={this.data['s-1']} selected={this.state.selectedItem === 's-1'?  true : false} onClick={this.update.bind(this)} />
-          <OptionButton id='m-1' label={this.data['m-1']} selected={this.state.selectedItem === 'm-1'?  true : false} onClick={this.update.bind(this)} />
-          <OptionButton id='l-1' label={this.data['l-1']} selected={this.state.selectedItem === 'l-1'?  true : false} onClick={this.update.bind(this)} />
-          <OptionButton id='xl-1' label={this.data['xl-1']} selected={this.state.selectedItem === 'xl-1'?  true : false} onClick={this.update.bind(this)} />
+          {optionButtonNodes}
         </div>
       </div>
     )

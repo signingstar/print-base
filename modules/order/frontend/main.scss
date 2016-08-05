@@ -10,6 +10,10 @@
     h2 {
       font-size: 18px;
       margin: 5px 0 10px 0;
+
+      span {
+        font-weight: 500;
+      }
     }
 
     button.select-elem {
@@ -31,6 +35,20 @@
 
       &.selected {
         background-color: $button-hover-color;
+      }
+    }
+  }
+
+  .main-section-footer {
+    .inner-section#checkout {
+      margin-top: 50px;
+      text-align: center;
+
+      button {
+        font-size: 20px;
+        height: 50px;
+        outline: 0;
+        width: 250px;
       }
     }
   }
