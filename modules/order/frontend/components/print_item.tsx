@@ -1,10 +1,9 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { find } from "underscore";
-import { DataFormat, PrintItemState, PrintItemProps } from "./data_format";
+import { PrintItemState, PrintItemProps } from "./data_format";
 
 export class PrintItem extends React.Component<PrintItemProps, PrintItemState> {
-  data: DataFormat[];
   constructor() {
     super();
     this.state = {
@@ -30,16 +29,5 @@ export class PrintItem extends React.Component<PrintItemProps, PrintItemState> {
 
   componentWillReceiveProps(nextProps: any) {
     this.setState({selectedItem: nextProps.selectedItem});
-  }
-
-  getItemLabel(id: string) {
-    let label = '';
-
-    find(this.data, function(item) {
-      if(item.id === id) {
-        return label = item.value;
-      }
-    });
-    return label;
   }
 }

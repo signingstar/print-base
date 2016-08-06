@@ -4,64 +4,49 @@ import { PrintSize} from "./print_size";
 import { SelectMaterials } from "./select_materials";
 import { PrintQuantity } from "./print_quantity";
 import { PrintData } from "../presenter";
+import { StoreType } from "../store_type";
 
-export class SectionBody extends React.Component<any, any> {
+interface PropTypes {
+  store: StoreType;
+}
+
+export class SectionBody extends React.Component<PropTypes, any> {
+  store: StoreType;
+
   constructor() {
     super();
-    this.state = {
-      type: 'brouchers',
-      size: 'm-1',
-      material: 'p-3',
-      quantity: 'q-1',
-    };
 
     this.clearState = this.clearState.bind(this);
     this.updateState = this.updateState.bind(this);
   }
 
   clearState() {
-    this.setState({
-      type: '',
-      size: '',
-      material: '',
-      quantity: ''
-    });
+    this.store.dispatch({type: 'clear'});
   }
 
   updateState(id: string, value: string) {
-    let stateMap: {[name: string]: string} = {};
-    if(id === 'print-types') {
-      stateMap['type'] = value;
-      stateMap['size'] = '';
-      stateMap['material'] = '';
-      stateMap['quantity'] = '';
-    } else if(id === 'print-sizes') {
-      stateMap['size'] = value;
-    } else if(id === 'print-materials') {
-      stateMap['material'] = value;
-    } else if(id === 'print-quantity') {
-      stateMap['quantity'] = value;
-    }
-
-    this.setState(stateMap);
+    this.store.dispatch({type: 'set', key: id.slice(6), val: value});
   }
 
 
   render () {
+    this.store = this.props.store;
+    const value = this.store.getState();
+
     let stateLabelsMap = {
-      type: this.state.type ? PrintData['type'][this.state.type].label : undefined,
-      size: this.state.size ? PrintData['size'][this.state.size].label : undefined,
-      material: this.state.material ? PrintData['material'][this.state.material].label : undefined,
-      quantity: this.state.quantity ? PrintData['quantity'][this.state.quantity].label : undefined
+      type: value.type ? PrintData['type'][value.type].label : undefined,
+      size: value.size ? PrintData['size'][value.size].label : undefined,
+      material: value.material ? PrintData['material'][value.material].label : undefined,
+      quantity: value.quantity ? PrintData['quantity'][value.quantity].label : undefined
     };
 
     return (
       <div className='main-section-body'>
         <div className='left-panel'>
-          <PrintType selectedItem={this.state.type} id='print-types' onChange={this.updateState} states={this.state}/>
-          <PrintSize selectedItem={this.state.size}  id='print-sizes' onChange={this.updateState} states={this.state} />
-          <SelectMaterials selectedItem={this.state.material}  id='print-materials' onChange={this.updateState} states={this.state} />
-          <PrintQuantity selectedItem={this.state.quantity}  id='print-quantity' onChange={this.updateState} states={this.state} />
+          <PrintType selectedItem={value.type} id='print-type' onChange={this.updateState} states={value}/>
+          <PrintSize selectedItem={value.size}  id='print-size' onChange={this.updateState} states={value} />
+          <SelectMaterials selectedItem={value.material}  id='print-material' onChange={this.updateState} states={value} />
+          <PrintQuantity selectedItem={value.quantity}  id='print-quantity' onChange={this.updateState} states={value} />
         </div>
         <div className='right-panel'>
           <div className='right-panel-content'>

@@ -1,23 +1,19 @@
 import * as React from "react";
 import { PrintItem } from "./print_item";
 import { OptionButton } from "./option_button";
+import { printableData } from "../presenter";
 
 export class PrintType extends PrintItem {
   constructor() {
     super();
-    this.data = [
-      {id: 'visiting_card', value: 'Visiting Cards'},
-      {id: 'stationary', value: 'Stationary'},
-      {id: 'brouchers', value: 'Brouchers'},
-      {id: 'mugs', value: 'Coffee Mugs'},
-      {id: 't_shirts', value: 'T-Shirts'},
-    ];
 
     this.update = this.update.bind(this);
   }
 
   render () {
-    let optionButtonNodes = this.data.map((entry) => {
+    const data = printableData('type');
+
+    let optionButtonNodes = data.map((entry) => {
       let selected = this.state.selectedItem === entry.id ?  true : false;
       return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
     });

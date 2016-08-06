@@ -16,6 +16,8 @@ export class OptionButton extends React.Component<PrintTypeProps, any> {
     this.state = {
       selected: false
     }
+
+    this.updateState = this.updateState.bind(this)
   }
 
   updateState(e:any) {
@@ -33,7 +35,7 @@ export class OptionButton extends React.Component<PrintTypeProps, any> {
 
   render() {
     return (
-      <button id={this.props.id} className={'select-elem' + (this.state.selected ? ' selected' : '')} onClick={this.updateState.bind(this)}>
+      <button id={this.props.id} className={'select-elem' + (this.state.selected ? ' selected' : '')} onClick={this.updateState}>
         {this.props.label}
       </button>
     );
