@@ -1,56 +1,120 @@
 .contents {
-  h2 {
-    font-size: 20px;
-    margin: 5px 0 10px 0;
-  }
+  .main-section-content {
 
-  .inner-section {
-    min-height: 100px;
+    .main-section-body {
+      display: flex;
+      justify-content: space-between;
 
-    h2 {
-      font-size: 18px;
-      margin: 5px 0 10px 0;
+      .left-panel {
+        h2 {
+          font-size: 20px;
+          margin: 5px 0 10px 0;
+        }
 
-      span {
-        font-weight: 500;
+        .inner-section {
+          min-height: 100px;
+
+
+            h2 {
+              border-bottom: 1px solid $select-options;
+              font-size: 18px;
+              margin: 5px 0 10px 0;
+              max-width: 855px;
+              padding-bottom: 4px;
+
+              &:after {
+                background-image: url('/assets/down_arrow.png');
+                background-size: cover;
+                content: '';
+                float: right;
+                height: 30px;
+                width: 30px;
+              }
+
+              span {
+                font-weight: 500;
+              }
+            }
+
+
+
+          button.select-elem {
+            background-color: $select-options;
+            border-radius: 6px;
+            border: 1px solid $select-options;
+            color: $white;
+            cursor: pointer;
+            height: 40px;
+            font-size: 14px;
+            margin-right: 15px;
+            min-width: 130px;
+            outline: 0;
+            width: 100px;
+
+            &:hover {
+              background-color: $button-orig-color;
+            }
+
+            &.selected {
+              background-color: $button-hover-color;
+            }
+          }
+        }
+
+      }
+
+      .right-panel {
+        font-size: 16px;
+        width: 220px;
+        min-width: 300px;
+
+        .right-panel-content {
+          border: 1px solid $light-gray;
+          border-radius: 10px;
+          padding: 10px;
+          width: 100%;
+
+          &.sticky {
+            position: fixed;
+            top: 50;
+            width: inherit;
+          }
+
+          ul {
+
+            li {
+              border-radius: 1px;
+              height: 40px;
+              vertical-align: middle;
+              position: relative;
+            }
+          }
+
+          .header {
+            text-align: center;
+          }
+
+          .clear {
+            text-align: center;
+          }
+        }
       }
     }
 
-    button.select-elem {
-      background-color: $select-options;
-      border-radius: 6px;
-      border: 1px solid $select-options;
-      color: $white;
-      cursor: pointer;
-      height: 40px;
-      font-size: 14px;
-      margin-right: 15px;
-      min-width: 130px;
-      outline: 0;
-      width: 100px;
+    .main-section-footer {
+      .inner-section#checkout {
+        margin-top: 50px;
+        text-align: center;
 
-      &:hover {
-        background-color: $button-orig-color;
-      }
-
-      &.selected {
-        background-color: $button-hover-color;
+        button {
+          border: 1px solid $light-gray;
+          border-radius: 2px;
+          font-size: 20px;
+          height: 50px;
+          outline: 0;
+          width: 250px;
+        }
       }
     }
   }
-
-  .main-section-footer {
-    .inner-section#checkout {
-      margin-top: 50px;
-      text-align: center;
-
-      button {
-        font-size: 20px;
-        height: 50px;
-        outline: 0;
-        width: 250px;
-      }
-    }
-  }
-
 }

@@ -8,7 +8,7 @@ export class PrintItem extends React.Component<PrintItemProps, PrintItemState> {
   constructor() {
     super();
     this.state = {
-      selectedItem: ''
+      selectedItem: undefined
     };
   }
 

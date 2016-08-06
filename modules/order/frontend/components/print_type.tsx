@@ -11,7 +11,6 @@ export class PrintType extends PrintItem {
       {id: 'brouchers', value: 'Brouchers'},
       {id: 'mugs', value: 'Coffee Mugs'},
       {id: 't_shirts', value: 'T-Shirts'},
-      {id: 'posters', value: 'Posters'}
     ];
 
     this.update = this.update.bind(this);
@@ -22,9 +21,13 @@ export class PrintType extends PrintItem {
       let selected = this.state.selectedItem === entry.id ?  true : false;
       return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
     });
+
     return (
       <div className='inner-section' id={this.props.id}>
-        <h2>Print Type: <span>{this.getItemLabel(this.state.selectedItem)}</span></h2>
+        {
+          this.state.selectedItem ? <h2>Print Type</h2> :
+          <h2>Select Print Type</h2>
+        }
         <div>
           {optionButtonNodes}
         </div>
