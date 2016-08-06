@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { OptionButton } from "./option_button";
 import { PrintItem } from "./print_item";
 import { printableData } from "../presenter";
@@ -28,10 +29,10 @@ export class PrintSize extends PrintItem {
     });
 
     return (
-      <div className='inner-section' id={this.props.id}>
-        <h2>{ this.state.selectedItem ? 'Select Print Size' : 'Print Size' }</h2>
+      <div className='inner-section' id={'print-' + this.props.id}>
+        <h2>{ this.state.selectedItem ? 'Print Size' : 'Select Print Size' }</h2>
         <div>
-          {this.props.states.type !== '' ? optionButtonNodes : null}
+          { optionButtonNodes }
         </div>
       </div>
     )

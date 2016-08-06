@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { find } from "underscore";
+
 import { PrintItemState, PrintItemProps } from "./data_format";
 
 export class PrintItem extends React.Component<PrintItemProps, PrintItemState> {
