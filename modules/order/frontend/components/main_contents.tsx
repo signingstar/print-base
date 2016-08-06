@@ -8,9 +8,11 @@ export class MainContents extends React.Component<{}, {}> {
     return (
       <section className='main-section'>
         <div className='main-section-content' id='main-section-content'>
-          <SectionHeader />
-          <SectionBody />
-          <SectionFooter />
+          <div className='left-panel'>
+            <SectionHeader />
+            <SectionBody />
+            <SectionFooter />
+          </div>
         </div>
       </section>
     )
