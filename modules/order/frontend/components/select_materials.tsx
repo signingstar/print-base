@@ -1,17 +1,11 @@
 import * as React from "react";
 import { OptionButton } from "./option_button";
 import { PrintItem } from "./print_item";
+import { printableData } from "../presenter";
 
 export class SelectMaterials extends PrintItem {
   constructor() {
     super();
-
-    this.data = [
-      {id: 'p-1', value: 'Glossy paper'},
-      {id: 'p-2', value: 'Plain Cloth'},
-      {id: 'p-3', value: 'Shiny Cardboard'},
-      {id: 'p-4', value: 'Thick wood'},
-    ];
 
     this.update = this.update.bind(this);
   }
@@ -25,7 +19,9 @@ export class SelectMaterials extends PrintItem {
   }
 
   render () {
-    let optionButtonNodes = this.data.map((entry) => {
+    const data = printableData('material');
+
+    let optionButtonNodes = data.map((entry) => {
       let selected = this.state.selectedItem === entry.id ?  true : false;
       if(this.displayCondition(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
