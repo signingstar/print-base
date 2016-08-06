@@ -24,10 +24,7 @@ export class PrintType extends PrintItem {
 
     return (
       <div className='inner-section' id={this.props.id}>
-        {
-          this.state.selectedItem ? <h2>Print Type</h2> :
-          <h2>Select Print Type</h2>
-        }
+        <h2>{ this.state.selectedItem ? 'Print Type' : 'Select Print Type' }</h2>
         <div>
           {optionButtonNodes}
         </div>

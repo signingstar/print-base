@@ -34,10 +34,7 @@ export class PrintSize extends PrintItem {
 
     return (
       <div className='inner-section' id={this.props.id}>
-      {
-        this.state.selectedItem ? <h2>Print Size</h2> :
-        <h2>Select Print Size</h2>
-      }
+        <h2>{ this.state.selectedItem ? 'Select Print Size' : 'Print Size' }</h2>
         <div>
           {this.props.states.type !== '' ? optionButtonNodes : null}
         </div>

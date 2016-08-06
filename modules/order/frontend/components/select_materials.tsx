@@ -34,10 +34,7 @@ export class SelectMaterials extends PrintItem {
 
     return (
       <div className='inner-section' id={this.props.id}>
-      {
-        this.state.selectedItem ? <h2>Print Material</h2> :
-        <h2>Select Print Material</h2>
-      }
+        <h2>{ this.state.selectedItem ? 'Print Material' : 'Select Print Material' }</h2>
         <div>
           {this.props.states.type !== '' ? optionButtonNodes : null}
         </div>
