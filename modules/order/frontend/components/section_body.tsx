@@ -1,9 +1,10 @@
 import * as React from "react";
+import { Store } from "redux";
+
 import { PrintType } from "./print_type";
 import { PrintSize} from "./print_size";
 import { SelectMaterials } from "./select_materials";
 import { PrintQuantity } from "./print_quantity";
-import { Store } from "redux";
 import { FloatingPanel } from "./floating_panel";
 
 interface PropTypes {

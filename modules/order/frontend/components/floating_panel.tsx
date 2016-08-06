@@ -1,4 +1,5 @@
 import * as React from "react";
+
 import { PrintData } from "../presenter";
 
 export class FloatingPanel extends React.Component<any, any> {

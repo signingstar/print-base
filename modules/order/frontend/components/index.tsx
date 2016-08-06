@@ -1,7 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { MainContents } from "./main_contents";
 import { createStore } from "redux";
+
+import { MainContents } from "./main_contents";
 import printState from "../reducers";
 
 const store = createStore(printState);
