@@ -13,6 +13,7 @@ interface PropTypes {
 
 export class SectionBody extends React.Component<PropTypes, any> {
   store: Store<any>;
+  values: any;
 
   constructor() {
     super();
@@ -24,18 +25,27 @@ export class SectionBody extends React.Component<PropTypes, any> {
     this.store.dispatch({type: 'set', key: id, val: value});
   }
 
+  componentWillMount() {
+    this.store = this.props.store;
+    this.values = this.store.getState();
+  }
+
+  componentWillReceiveProps(nextProps: any) {
+    this.store = nextProps.store;
+    this.values = nextProps.store.getState();
+  }
 
   render () {
-    this.store = this.props.store;
-    const value = this.store.getState();
-
+    let printOptionClass = this.values.type !== '' ? 'show' : 'hide';
     return (
       <div className='main-section-body'>
         <div className='left-panel'>
-          <PrintType selectedItem={value.type} id='type' onChange={this.updateState} states={value}/>
-          <PrintSize selectedItem={value.size}  id='size'  onChange={this.updateState} states={value} />
-          <SelectMaterials selectedItem={value.material}  id='material'  onChange={this.updateState} states={value} />
-          <PrintQuantity selectedItem={value.quantity}  id='quantity'  onChange={this.updateState} states={value} />
+          <PrintType selectedItem={this.values.type} id='type' onChange={this.updateState} states={this.values}/>
+          <div className={'print-options ' + printOptionClass}>
+            <PrintSize selectedItem={this.values.size}  id='size'  onChange={this.updateState} states={this.values} />
+            <SelectMaterials selectedItem={this.values.material}  id='material'  onChange={this.updateState} states={this.values} />
+            <PrintQuantity selectedItem={this.values.quantity}  id='quantity'  onChange={this.updateState} states={this.values} />
+          </div>
         </div>
         <div className='right-panel'>
           <FloatingPanel store={this.store} />
