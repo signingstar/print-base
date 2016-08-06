@@ -3,15 +3,15 @@ import { PrintType } from "./print_type";
 import { PrintSize} from "./print_size";
 import { SelectMaterials } from "./select_materials";
 import { PrintQuantity } from "./print_quantity";
-import { StoreType } from "../store_type";
+import { Store } from "redux";
 import { FloatingPanel } from "./floating_panel";
 
 interface PropTypes {
-  store: StoreType;
+  store: Store<any>;
 }
 
 export class SectionBody extends React.Component<PropTypes, any> {
-  store: StoreType;
+  store: Store<any>;
 
   constructor() {
     super();

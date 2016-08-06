@@ -1,4 +1,9 @@
-import { StateObject } from "../store_type";
+export interface StateObject {
+  type: string;
+  size: string;
+  material: string;
+  quantity: string;
+}
 
 export default function printState(state: any, action:{type: string, key: string, val: string}) : StateObject {
   switch (action.type) {
