@@ -36,7 +36,7 @@ export class SectionBody extends React.Component<PropTypes, any> {
   }
 
   render () {
-    let printOptionClass = this.values.type !== '' ? 'show' : 'hide';
+    let printOptionClass = this.values.type ? 'show' : 'hide';
     return (
       <div className='main-section-body'>
         <div className='left-panel'>

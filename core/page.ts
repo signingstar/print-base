@@ -3,7 +3,8 @@ interface PageObject {
 }
 
 export class Page {
-  constructor(private templateName: string, attrs={}) {
+  [name: string]: any;
+  constructor(private templateName: string, attrs: PageObject ={}) {
     this.set(attrs);
   }
 
