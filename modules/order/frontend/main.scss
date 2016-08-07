@@ -1,16 +1,32 @@
 .contents {
   .main-section-content {
 
+    .main-section-header {
+      h2 {
+        font-size: 18px;
+        margin: 5px 0 10px 0;
+
+        span {
+          display: inline-block;
+          padding: 0 20px;
+        }
+
+        a {
+          font-weight: 500;
+
+          &.active {
+            font-weight: 600;
+          }
+        }
+      }
+
+    }
+
     .main-section-body {
       display: flex;
       justify-content: space-between;
 
       .left-panel {
-        h2 {
-          font-size: 20px;
-          margin: 5px 0 10px 0;
-        }
-
         .inner-section {
           min-height: 100px;
 

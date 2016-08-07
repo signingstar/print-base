@@ -13,29 +13,16 @@ export class OptionButton extends React.Component<PrintTypeProps, any> {
   constructor() {
     super();
 
-    this.state = {
-      selected: false
-    }
-
     this.updateState = this.updateState.bind(this)
   }
 
   updateState(e:any) {
-    this.setState({selected : !this.state.selected});
     this.props.onClick({id:e.target.id});
-  }
-
-  componentWillMount() {
-    this.setState({selected: this.props.selected});
-  }
-
-  componentWillReceiveProps(nextProps: PrintTypeProps) {
-    this.setState({selected: nextProps.selected});
   }
 
   render() {
     return (
-      <button id={this.props.id} className={'select-elem' + (this.state.selected ? ' selected' : '')} onClick={this.updateState}>
+      <button id={this.props.id} className={'select-elem' + (this.props.selected ? ' selected' : '')} onClick={this.updateState}>
         {this.props.label}
       </button>
     );

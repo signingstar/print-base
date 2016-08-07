@@ -19,11 +19,15 @@ export class PrintQuantity extends PrintItem {
     return true;
   }
 
+  shouldComponentUpdate(nextProps:any, nextState:any) {
+    return nextProps.states.quantity !== this.props.states.quantity || nextProps.states.type !== this.props.states.type;
+  }
+
   render () {
     const data = printableData('quantity');
 
     let optionButtonNodes = data.map((entry) => {
-      let selected = this.state.selectedItem === entry.id ?  true : false;
+      let selected = this.states.quantity === entry.id ?  true : false;
       if(this.displayCondition(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
       }
@@ -31,7 +35,7 @@ export class PrintQuantity extends PrintItem {
 
     return (
       <div className='inner-section' id={'print-' + this.props.id}>
-        <h2>{ this.state.selectedItem ? 'Print Quantity' : 'Select Print Quantity' }</h2>
+        <h2>{ this.states.quantity ? 'Print Quantity' : 'Select Print Quantity' }</h2>
         <div>
           { optionButtonNodes }
         </div>

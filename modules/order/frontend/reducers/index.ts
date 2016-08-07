@@ -1,19 +1,14 @@
 export interface StateObject {
-  type: string;
-  size: string;
-  material: string;
-  quantity: string;
+  type?: string;
+  size?: string;
+  material?: string;
+  quantity?: string;
 }
 
-export default function printState(state: any, action:{type: string, key: string, val: string}) : StateObject {
+export default function printState(state: StateObject = {}, action:{type: string, key: string, val: string}) {
   switch (action.type) {
     case 'clear':
-      return {
-        type: '',
-        size: '',
-        material: '',
-        quantity: ''
-      }
+      return {};
     case 'set':
       switch(action.key) {
         case 'type':
@@ -46,11 +41,6 @@ export default function printState(state: any, action:{type: string, key: string
           }
       }
     default:
-      return {
-        type: 'brouchers',
-        size: 'm-1',
-        material: 'p-3',
-        quantity: 'q-1'
-      }
+      return state;
   }
 }
