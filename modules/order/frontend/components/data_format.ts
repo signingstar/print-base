@@ -10,8 +10,11 @@ export interface States {
   material: string;
 }
 
-export interface PrintItemState {
-  selectedItem: string;
+export interface StateObject {
+  type?: string;
+  size?: string;
+  material?: string;
+  quantity?: string;
 }
 
 export interface PrintItemProps {

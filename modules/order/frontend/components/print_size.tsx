@@ -19,10 +19,14 @@ export class PrintSize extends PrintItem {
     return true;
   }
 
+  shouldComponentUpdate(nextProps:any, nextState:any) {
+    return nextProps.states.size !== this.props.states.size || nextProps.states.type !== this.props.states.type;
+  }
+
   render () {
     const data = printableData('size');
     let optionButtonNodes = data.map((entry) => {
-      let selected = this.state.selectedItem === entry.id ?  true : false;
+      let selected = this.states.size === entry.id ?  true : false;
       if(this.displayCondition(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
       }
@@ -30,7 +34,7 @@ export class PrintSize extends PrintItem {
 
     return (
       <div className='inner-section' id={'print-' + this.props.id}>
-        <h2>{ this.state.selectedItem ? 'Print Size' : 'Select Print Size' }</h2>
+        <h2>{ this.states.size ? 'Print Size' : 'Select Print Size' }</h2>
         <div>
           { optionButtonNodes }
         </div>
