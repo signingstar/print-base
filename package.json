@@ -1,7 +1,7 @@
 {
   "name": "my-printact",
   "version": "1.0.0",
-  "description": "Temporary print project",
+  "description": "Temporary project",
   "main": "index.js",
   "scripts": {
     "server": "nodemon build/worker.js",
