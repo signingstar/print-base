@@ -5,7 +5,7 @@ export interface StateObject {
   quantity?: string;
 }
 
-export default function printState(state: StateObject = {}, action:{type: string, key: string, val: string}) {
+export default function printState(state: StateObject = {}, action:{type: string, key?: string, val?: string}) {
   switch (action.type) {
     case 'clear':
       return {};

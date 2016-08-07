@@ -3,7 +3,7 @@ import { Store } from "redux";
 
 import { PrintType } from "./print_type";
 import { PrintSize} from "./print_size";
-import { SelectMaterials } from "./select_materials";
+import { SelectMaterials } from "./print_materials";
 import { PrintQuantity } from "./print_quantity";
 import { FloatingPanel } from "./floating_panel";
 

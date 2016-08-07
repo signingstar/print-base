@@ -3,6 +3,8 @@ import { OptionButton } from "./option_button";
 import { PrintItem } from "./print_item";
 import { printableData } from "../presenter";
 
+const data = printableData('material');
+
 export class SelectMaterials extends PrintItem {
   constructor() {
     super();
@@ -10,7 +12,7 @@ export class SelectMaterials extends PrintItem {
     this.update = this.update.bind(this);
   }
 
-  displayCondition(id: string) {
+  shouldDisplayInnerComponent(id: string) {
     if(this.props.states['type'] === 'mugs' && id === 'p-4') {
       return false;
     }
@@ -23,11 +25,9 @@ export class SelectMaterials extends PrintItem {
   }
 
   render () {
-    const data = printableData('material');
-
     let optionButtonNodes = data.map((entry) => {
       let selected = this.states.material === entry.id ?  true : false;
-      if(this.displayCondition(entry.id)) {
+      if(this.shouldDisplayInnerComponent(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
       }
     });
