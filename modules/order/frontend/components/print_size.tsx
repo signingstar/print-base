@@ -4,6 +4,8 @@ import { OptionButton } from "./option_button";
 import { PrintItem } from "./print_item";
 import { printableData } from "../presenter";
 
+const data = printableData('size');
+
 export class PrintSize extends PrintItem {
   constructor() {
     super();
@@ -11,7 +13,7 @@ export class PrintSize extends PrintItem {
     this.update = this.update.bind(this);
   }
 
-  displayCondition(id: string) {
+  shouldDisplayInnerComponent(id: string) {
     if(this.props.states['type'] === 't_shirts' && id === 'xl-1') {
       return false;
     }
@@ -24,10 +26,9 @@ export class PrintSize extends PrintItem {
   }
 
   render () {
-    const data = printableData('size');
     let optionButtonNodes = data.map((entry) => {
       let selected = this.states.size === entry.id ?  true : false;
-      if(this.displayCondition(entry.id)) {
+      if(this.shouldDisplayInnerComponent(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
       }
     });

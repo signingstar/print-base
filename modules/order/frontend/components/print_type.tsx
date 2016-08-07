@@ -4,6 +4,8 @@ import { PrintItem } from "./print_item";
 import { OptionButton } from "./option_button";
 import { printableData } from "../presenter";
 
+const data = printableData('type');
+
 export class PrintType extends PrintItem {
   constructor() {
     super();
@@ -16,8 +18,6 @@ export class PrintType extends PrintItem {
   }
 
   render () {
-    const data = printableData('type');
-
     let optionButtonNodes = data.map((entry) => {
       let selected = this.states.type === entry.id ?  true : false;
       return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;

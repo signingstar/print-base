@@ -4,6 +4,8 @@ import { PrintItem } from "./print_item";
 import { OptionButton } from "./option_button";
 import { printableData } from "../presenter";
 
+const data = printableData('quantity');
+
 export class PrintQuantity extends PrintItem {
   constructor() {
     super();
@@ -11,7 +13,7 @@ export class PrintQuantity extends PrintItem {
     this.update = this.update.bind(this);
   }
 
-  displayCondition(id: string) {
+  shouldDisplayInnerComponent(id: string) {
     if(this.props.states['type'] === 'visiting_card' && id === 'q-1') {
       return false;
     }
@@ -24,11 +26,9 @@ export class PrintQuantity extends PrintItem {
   }
 
   render () {
-    const data = printableData('quantity');
-
     let optionButtonNodes = data.map((entry) => {
       let selected = this.states.quantity === entry.id ?  true : false;
-      if(this.displayCondition(entry.id)) {
+      if(this.shouldDisplayInnerComponent(entry.id)) {
         return <OptionButton id={entry.id} label={entry.value} selected={selected} onClick={this.update} key={entry.id}/>;
       }
     });
