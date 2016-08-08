@@ -1,48 +1,10 @@
-import 'core-js/shim';
+import { combineReducers } from 'redux'
+import selectionState from './selection_state';
+import visibleStates from './visible_states';
 
-export interface StateObject {
-  type?: string;
-  size?: string;
-  material?: string;
-  quantity?: string;
-}
+const printApp = combineReducers({
+  selectionState,
+  visibleStates
+})
 
-export default function printState(state: StateObject = {}, action:{type: string, key?: string, val?: string}) {
-  switch (action.type) {
-    case 'clear':
-      return {};
-    case 'set':
-      switch(action.key) {
-        case 'type':
-          return Object.assign({}, state, {
-            type: action.val,
-            size: '',
-            material: '',
-            quantity: ''
-          });
-        case 'size':
-          return {
-            type: state.type,
-            size: action.val,
-            material: state.material,
-            quantity: state.quantity
-          }
-        case 'quantity':
-          return {
-            type: state.type,
-            size: state.size,
-            material: state.material,
-            quantity: action.val
-          }
-        case 'material':
-          return {
-            type: state.type,
-            size: state.size,
-            material: action.val,
-            quantity: state.quantity
-          }
-      }
-    default:
-      return state;
-  }
-}
+export default printApp

@@ -1,5 +1,6 @@
 import { DataFormat } from "./components/data_format";
-export let PrintData = require("../../../config/print_combination.json");
+import PrintData from "../../../config/print_combination";
+export default PrintData;
 
 export let printableData = function(type: string) {
   const innerSet = PrintData[type];

@@ -1,30 +1,26 @@
 import * as React from "react";
+import { PropTypes } from "react";
 
-interface PrintTypeProps {
-  selected: boolean;
+interface ButtonState {
   id: string;
   label: string;
-  onClick: (e: any)=>void;
+  selected: boolean;
 }
 
-export class OptionButton extends React.Component<PrintTypeProps, any> {
-  data: {};
-
-  constructor() {
-    super();
-
-    this.updateState = this.updateState.bind(this)
-  }
-
-  updateState(e:any) {
-    this.props.onClick({id:e.target.id});
-  }
-
-  render() {
-    return (
-      <button id={this.props.id} className={'select-elem' + (this.props.selected ? ' selected' : '')} onClick={this.updateState}>
-        {this.props.label}
-      </button>
-    );
-  }
+const OptionButton = ({onClick, state}: {onClick: ()=> void, state: ButtonState}) => {
+  let {id, label, selected} = state;
+  return (
+    <button id={id} className={'select-elem' + (selected ? ' selected' : '')} onClick={onClick}>
+      {label}
+    </button>
+  );
 }
+
+OptionButton.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  id: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired,
+  selected: PropTypes.bool.isRequired
+}
+
+export default OptionButton;

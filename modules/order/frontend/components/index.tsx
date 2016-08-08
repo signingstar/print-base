@@ -1,16 +1,17 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { createStore } from "redux";
+import { Provider } from "react-redux";
 
 import { MainContents } from "./main_contents";
-import printState from "../reducers";
+import printApp from "../reducers";
 
-const store = createStore(printState);
+const store = createStore(printApp);
 const rootElem = document.getElementById('main-contents');
 
 function render() {
   ReactDOM.render(
-    <MainContents store={store} />, rootElem
+    <Provider store={store} ><MainContents /></Provider>, rootElem
   );
 }
 
