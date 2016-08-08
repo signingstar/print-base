@@ -1,3 +1,5 @@
+import 'core-js/shim';
+
 export interface StateObject {
   type?: string;
   size?: string;
@@ -12,12 +14,12 @@ export default function printState(state: StateObject = {}, action:{type: string
     case 'set':
       switch(action.key) {
         case 'type':
-          return {
+          return Object.assign({}, state, {
             type: action.val,
             size: '',
             material: '',
             quantity: ''
-          }
+          });
         case 'size':
           return {
             type: state.type,
