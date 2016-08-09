@@ -1,4 +1,6 @@
 import { navConfig } from "../header/presenter";
+import ReactComponent from "./react_server";
+
 let debug = require("debug")('Modules:Order:Controller');
 
 export let orderController = function({modules} : {modules: any}) {
@@ -7,12 +9,17 @@ export let orderController = function({modules} : {modules: any}) {
   return {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/order/main.pug';
-  		let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath:string = './modules/order/main.pug';
+      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+
+      let {reactHTML, preloadedState} = ReactComponent();
+
       page.set( {
         navConfig,
         promotional_header: true,
-        navigational_header: true
+        navigational_header: true,
+        reactHTML,
+        preloadedState
       });
 
       debug('Page params:%s', JSON.stringify(page));
