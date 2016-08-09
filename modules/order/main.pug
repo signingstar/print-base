@@ -17,9 +17,11 @@ html
         header
           include ../header/main
       .contents#main-contents
+        | !{reactHTML}
       .c-footer#c-footer
         include ../footer/main
-
+  script.
+    window.__PRELOADED_STATE__= !{JSON.stringify(preloadedState)};
   script(
     src='/assets/react.js'
   )

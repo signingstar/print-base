@@ -2,7 +2,6 @@ import { connect } from "react-redux";
 
 import OptionButton from "../components/option_button";
 import { selectType } from "../actions";
-import PrintData from "../../../../config/print_combination";
 
 interface OwnProps {
   id: string;

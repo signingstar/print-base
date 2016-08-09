@@ -39,4 +39,5 @@ export let customConfig = function(id:string, ...fields:string[]) {
     }
     return pick(flatConfig[id], ...fields);
 };
+
 export let navConfig = origConfig;

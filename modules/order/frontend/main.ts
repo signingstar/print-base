@@ -1,1 +1,1 @@
-require ("./components/index");
+require ("./components");

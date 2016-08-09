@@ -5,8 +5,13 @@ import { Provider } from "react-redux";
 
 import { MainContents } from "./main_contents";
 import printApp from "../reducers";
+import MyWindow from "../data_types/my_window";
 
-const store = createStore(printApp);
+declare var window: MyWindow;
+
+const preloadedState = window.__PRELOADED_STATE__;
+
+const store = createStore(printApp, preloadedState);
 const rootElem = document.getElementById('main-contents');
 
 function render() {
