@@ -21,7 +21,13 @@ const defaultStatesForType = {
 
 const visibleStatesForType = (state: any, filter: string) => {
   let visibleState:StateObject = Object.assign({}, defaultStatesForType);
-  visibleState.sizes.filter(size => size === 'm-1');
+
+  switch(filter) {
+      case 'visiting_card':
+          visibleState.sizes.filter(size => size === 'm-1');
+          return visibleState;
+  }
+  console.log(JSON.stringify(visibleState));
   return visibleState;
 }
 
