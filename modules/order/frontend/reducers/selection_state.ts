@@ -1,4 +1,3 @@
-import 'core-js/shim';
 import { RESET, SET_TYPE, SET_SIZE, SET_MATERIAL, SET_QUANTITY} from "../actions";
 
 interface StateObject {
@@ -8,7 +7,7 @@ interface StateObject {
   quantity?: string;
 }
 
-const selectionState = (state: StateObject = {}, action:{type: string, value?: string}) => {
+const selectionState = (state: StateObject = {}, action:{type: string, value?: string}): StateObject => {
   switch (action.type) {
     case RESET:
       return {};
