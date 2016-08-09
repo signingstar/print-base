@@ -1,11 +1,10 @@
-import 'core-js/shim';
 import { SET_VISIBILITY_FILTER } from "../actions";
 import PrintData from "../../../../config/print_combination";
 
 interface StateObject {
-  size: string[];
-  material: string[];
-  quantity: string[];
+  sizes: string[];
+  materials: string[];
+  quantities: string[];
 }
 
 interface ActionObject {
@@ -15,14 +14,14 @@ interface ActionObject {
 }
 
 const defaultStatesForType = {
-  size: Object.keys(PrintData['size']),
-  material:Object.keys(PrintData['material']),
-  quantity: Object.keys(PrintData['quantity'])
+  sizes: Object.keys(PrintData['size']),
+  materials:Object.keys(PrintData['material']),
+  quantities: Object.keys(PrintData['quantity'])
 }
 
 const visibleStatesForType = (state: any, filter: string) => {
-  let visibleState = Object.assign({}, defaultStatesForType);
-  visibleState.size.filter(size => size === 'm-1');
+  let visibleState:StateObject = Object.assign({}, defaultStatesForType);
+  visibleState.sizes.filter(size => size === 'm-1');
   return visibleState;
 }
 

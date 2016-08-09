@@ -2,18 +2,21 @@ import { connect } from "react-redux";
 
 import ConfirmationItems from "../components/confirmation_items";
 import { resetAll } from "../actions";
-import PrintData from "../presenter";
+import { fetchLabelForCategoryAndId } from "../presenter";
+import { StateObject } from "../data_types/data_format";
 
 const mapStateToProps = (printApp: any, ownProps: any) => {
-  let state = printApp.selectionState;
+  let state: StateObject = printApp.selectionState;
 
-  let type =  state.type ? PrintData['type'][state.type].label : undefined;
-  let size = state.size ? PrintData['size'][state.size].label : undefined;
-  let material =  state.material ? PrintData['material'][state.material].label : undefined;
-  let quantity =  state.quantity ? PrintData['quantity'][state.quantity].label : undefined;
+  let {type, size, material, quantity} = state;
+
+  let typeVal =  type ? fetchLabelForCategoryAndId('type', type) : undefined;
+  let sizeVal = size ? fetchLabelForCategoryAndId('size', size) : undefined;
+  let materialVal =  material ? fetchLabelForCategoryAndId('material', material) : undefined;
+  let quantityVal =  quantity ? fetchLabelForCategoryAndId('quantity', quantity) : undefined;
 
   return {
-    state: {type, size, material, quantity}
+    state: {typeVal, sizeVal, materialVal, quantityVal}
   }
 }
 
