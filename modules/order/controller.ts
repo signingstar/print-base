@@ -9,8 +9,8 @@ export let orderController = function({modules} : {modules: any}) {
   return {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/order/main.pug';
-  		let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath:string = './modules/order/main.pug';
+      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {reactHTML, preloadedState} = ReactComponent();
 
