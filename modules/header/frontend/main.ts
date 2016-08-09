@@ -15,13 +15,17 @@ export class MainHeader {
 
   attachSubNavEvent ($subNavItems: JQuery, $topNavLink: JQuery) {
     let _this = this;
+
     each($subNavItems, function(item) {
       let linkUrl = $topNavLink.attr('href');
       let $item = $(item);
+
       $item.on('click', function($ev){
         $ev.preventDefault();
+
         let id = $item.attr('id');
         let urlPathName = window.location.pathname;
+
         if(urlPathName.indexOf(linkUrl) === -1) {
           window.location.href = `${linkUrl}/${id}`;
         } else {
@@ -33,6 +37,7 @@ export class MainHeader {
 
   processSubNavSelection($subNav: JQuery) {
     let $selectedElem = $subNav.find('.selected');
+
     if($selectedElem.length) {
       this.triggerSubNavSelection($selectedElem);
     }
@@ -45,6 +50,7 @@ export class MainHeader {
 
  slidePromotionalHeader() {
    let $closeIcon = this.$promotionalHeader.find('.close-icon');
+
    if($closeIcon.length) {
      $closeIcon.on("click", () => {
        this.$promotionalHeader.slideUp();
@@ -62,6 +68,7 @@ export class MainHeader {
 
         let $navAnchorElem = $listItem.find('.top-nav-link');
         let $subListItem = $subNav.find('a');
+
         this.attachSubNavEvent($subListItem, $navAnchorElem);
       }
     });

@@ -13,13 +13,15 @@ export let orderController = function({modules} : {modules: any}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {reactHTML, preloadedState} = ReactComponent();
-
       page.set( {
         navConfig,
         promotional_header: true,
         navigational_header: true,
         reactHTML,
-        preloadedState
+        preloadedState,
+        javascript: 'order',
+        stylesheet: 'order',
+        title: 'Tisko Digital Printing'
       });
 
       debug('Page params:%s', JSON.stringify(page));

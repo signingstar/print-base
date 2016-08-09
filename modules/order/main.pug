@@ -1,25 +1,13 @@
-html
-  head
-    title= 'Keshari Printing Services'
-    link(
-      rel='icon'
-      href='/assets/header.png'
-      type='image/png'
-      )
-    link(
-      rel='stylesheet'
-      href='/assets/order.css'
-      type='text/css'
-    )
-  body
-    .body-contents
-      .header
-        header
-          include ../header/main
-      .contents#main-contents
-        | !{reactHTML}
-      .c-footer#c-footer
-        include ../footer/main
+extends ../base/main.pug
+
+block contents
+  | !{reactHTML}
+
+block footer
+  .c-footer#c-footer
+    include ../footer/main
+
+block scripts
   script.
     window.__PRELOADED_STATE__= !{JSON.stringify(preloadedState)};
   script(
@@ -27,7 +15,4 @@ html
   )
   script(
     src='/assets/react-dom.js'
-  )
-  script(
-    src='/assets/order.js'
   )

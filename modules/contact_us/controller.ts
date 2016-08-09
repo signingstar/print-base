@@ -9,7 +9,16 @@ export let contactUsController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/contact_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      responders.html(fn({navConfig}));
+      page.set( {
+        javascript: 'contact',
+        stylesheet: 'contact',
+        title: 'Tisko - Register',
+        navConfig
+      })
+
+      let html = fn(page);
+
+      responders.html(html);
     }
   }
 }

@@ -7,7 +7,15 @@ export let forgotPasswordController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/forgot_password/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      responders.html(fn());
+      page.set( {
+        javascript: 'session',
+        stylesheet: 'session',
+        title: 'Tisko - password reset'
+      })
+
+      let html = fn(page);
+
+      responders.html(html);
     }
   }
 }

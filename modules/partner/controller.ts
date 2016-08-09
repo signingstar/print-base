@@ -7,7 +7,15 @@ export let partnerController = function({modules} : {modules: any}) {
       let srcPath:string = './modules/partner/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      responders.html(fn());
+      page.set( {
+        javascript: 'session',
+        stylesheet: 'session',
+        title: 'Tisko - Be Our Partner',
+      })
+
+      let html = fn(page);
+
+      responders.html(html);
     }
   }
 }

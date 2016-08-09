@@ -7,7 +7,15 @@ export let accountController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      responders.html(fn());
+      page.set( {
+        javascript: 'session',
+        stylesheet: 'session',
+        title: 'Tisko - My Account'
+      })
+
+      let html = fn(page);
+
+      responders.html(html);
     }
   }
 }
