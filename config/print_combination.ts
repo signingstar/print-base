@@ -1,4 +1,4 @@
-module.exports = {
+const PrintData = {
   "type":{
     "visiting_card": {
       "label": "Visiting Cards",
@@ -64,3 +64,5 @@ module.exports = {
     }
   }
 }
+
+export default PrintData;
