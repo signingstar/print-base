@@ -1,3 +1,4 @@
+import 'core-js/shim';
 import selectionState from '../../modules/order/frontend/reducers/selection_state';
 import { expect } from 'chai';
 
