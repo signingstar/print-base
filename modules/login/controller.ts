@@ -8,8 +8,15 @@ export let loginController = function({modules} : {modules: any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-      let refUrl = presenter(req.query.ref_url);
-      let html = fn({refUrl});
+
+      page.set( {
+        javascript: 'session',
+        stylesheet: 'session',
+        title: 'Tisko - Login',
+        refUrl: presenter(req.query.ref_url)
+      })
+
+      let html = fn(page);
 
       responders.html(html);
     },

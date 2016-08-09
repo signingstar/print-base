@@ -1,24 +1,5 @@
-html
-  head
-    title= 'Forgot Password'
-    link(
-      rel='icon'
-      href='/assets/header.png'
-      type='image/png'
-      )
-    link(
-      rel='stylesheet'
-      href='/assets/session.css'
-      type='text/css'
-    )
-  body
-    .body-contents
-      .c-header#c-header
-        include ../header/main
-      .contents#main-contents
-        section.main-section
-          include ./contents
+extends ../base/main.pug
 
-  script(
-    src='/assets/session.js'
-  )
+block contents
+  section.main-section
+    include ./contents

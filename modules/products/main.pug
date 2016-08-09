@@ -1,26 +1,9 @@
-html
-  head
-    title= 'Keshari Printing Services'
-    link(
-      rel='icon'
-      href='/assets/header.png'
-      type='image/png'
-      )
-    link(
-      rel='stylesheet'
-      href='/assets/services.css'
-      type='text/css'
-    )
-  body
-    .body-contents
-      .c-header#c-header
-        include ../header/main
-      .contents#main-contents
-        section.main-section
-          include ./contents
-      .c-footer#c-footer
-        include ../footer/main
+extends ../base/main.pug
 
-  script(
-    src='/assets/products.js'
-  )
+block header
+  .c-header#c-header
+    include ../header/main
+
+block contents
+  section.main-section
+    include ./contents

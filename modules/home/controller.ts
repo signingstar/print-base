@@ -9,7 +9,14 @@ export let homeController = function({modules} : {modules:any}) {
     	let srcPath:string = './modules/home/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      page.set({navConfig, promotional_header: true, navigational_header: true});
+      page.set({
+        navConfig,
+        promotional_header: true,
+        navigational_header: true,
+        javascript: 'main',
+        stylesheet: 'main',
+        title: 'Tisko Digital Printing'
+      });
 
       let html = fn(page);
 

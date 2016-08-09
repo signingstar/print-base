@@ -9,7 +9,15 @@ export let signUpController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/signup/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let refUrl = presenter(req.query.ref_url);
-      let html = fn({refUrl});
+
+      page.set( {
+        javascript: 'session',
+        stylesheet: 'session',
+        title: 'Tisko - Register',
+        refUrl
+      })
+
+      let html = fn(page);
 
       responders.html(html);
     },

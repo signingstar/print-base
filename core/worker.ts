@@ -10,6 +10,7 @@ import { middleware } from "./middleware";
 debug('Middleware loaded');
 
 let app = express();
+
 let server = http.createServer(app);
 debug("Created server. Setting Up");
 let { logger } = globalModules;

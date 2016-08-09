@@ -1,44 +1,19 @@
-html
-  head
-    title= 'Tisko Printing Services'
-    link(
-      rel='icon'
-      href='/assets/header.png'
-      type='image/png'
-      )
-    link(
-      rel='stylesheet'
-      href='/assets/main.css'
-      type='text/css'
-    )
-    script().
-      window.payload={"title": 'My Title'};
-    link(
-      rel='prefetch'
-      href='/assets/slide_image1.jpg'
-      )
-    link(
-      rel='prefetch'
-      href='/assets/slide_image2.jpg'
-      )
-    link(
-      rel='prefetch'
-      href='/assets/react.js'
-      )
-    link(
-      rel='prefetch'
-      href='/assets/react-dom.js'
-      )
-  body
-    .body-contents
-      .c-header#c-header
-        include ../header/main
-      .contents#main-contents
-        section.main-section
-          include ./contents
-      .c-footer#c-footer
-        include ../footer/main
+extends ../base/main.pug
 
-  script(
-    src='/assets/main.js'
-  )
+block links
+  link(
+    rel='prefetch'
+    href='/assets/slide_image1.jpg'
+    )
+  link(
+    rel='prefetch'
+    href='/assets/slide_image2.jpg'
+    )
+
+block contents
+  section.main-section
+    include ./contents
+
+block footer
+  .c-footer#c-footer
+    include ../footer/main

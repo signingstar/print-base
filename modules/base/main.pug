@@ -1,0 +1,27 @@
+doctype html
+html
+  head
+    title= title
+    link(
+      rel='icon'
+      href='/assets/header.png'
+      type='image/png'
+      )
+    link(
+      rel='stylesheet'
+      href='/assets/' + stylesheet + '.css'
+      type='text/css'
+    )
+    block links
+  body
+    .body-contents
+      block header
+        header.header
+          include ../header/main
+      .contents#main-contents
+        block contents
+      block footer
+  block scripts
+  script(
+    src='/assets/' + javascript + '.js'
+  )

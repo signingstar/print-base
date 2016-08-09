@@ -10,7 +10,6 @@ export function routes(app: Application, globalModules: any) {
 	debug('export routes');
 	let {logger} = globalModules;
 
-	// app.set("view engine", "pug");
 	let processRequest = appControllers(globalModules);
 
 	let redirectWithLogging = function (res: Response, url: string, reasonCode: string, statusCode = 302) {
