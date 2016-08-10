@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export class SectionHeader extends React.Component<{}, {}> {
+class SectionHeader extends React.Component<{}, {}> {
   render () {
     return (
       <div className='main-section-header'>
@@ -9,3 +9,5 @@ export class SectionHeader extends React.Component<{}, {}> {
     )
   }
 }
+
+export default SectionHeader;

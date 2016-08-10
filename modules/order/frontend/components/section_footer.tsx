@@ -1,6 +1,6 @@
 import * as React from "react";
 
-export class SectionFooter extends React.Component<{}, {}> {
+class SectionFooter extends React.Component<{}, {}> {
   render () {
     return (
       <div className='main-section-footer'>
@@ -11,3 +11,5 @@ export class SectionFooter extends React.Component<{}, {}> {
     )
   }
 }
+
+export default SectionFooter;

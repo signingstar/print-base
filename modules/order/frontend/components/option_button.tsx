@@ -5,6 +5,7 @@ interface ButtonState {
   id: string;
   label: string;
   selected: boolean;
+  display: boolean;
 }
 
 interface PropTypes {
@@ -13,10 +14,10 @@ interface PropTypes {
 }
 
 const OptionButton = ({onClick, state}: PropTypes) => {
-  let {id, label, selected} = state;
+  let {id, label, selected, display} = state;
 
   return (
-    <button id={id} className={'select-elem' + (selected ? ' selected' : '')} onClick={onClick}>
+    <button id={id} className={'select-elem' + (selected ? ' selected' : '')} display={display ? 'none' : 'inline'} onClick={onClick}>
       {label}
     </button>
   );
