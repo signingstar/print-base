@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
 
 import OptionButton from "../components/option_button";
-import { selectType } from "../actions";
-import { updateCategories } from "../actions";
 
 interface OwnProps {
   id: string;

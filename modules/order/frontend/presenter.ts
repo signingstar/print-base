@@ -66,8 +66,6 @@ export let printableDataWithFilter = function(category: string, filterTypes: Pro
   let listForCategory: string[];
   let {type, size, material} = filterTypes;
 
-  console.log(`category:${category} | filterTypes:${JSON.stringify(filterTypes)}`);
-
   if(type) {
     listForCategory = fetchAndDuplicateSpecificFilterByCategory(CATEGORY_TYPE, type, category);
   }
@@ -81,8 +79,6 @@ export let printableDataWithFilter = function(category: string, filterTypes: Pro
     let localList: string[] = fetchSpecificFilterByCategory(CATEGORY_MATERIAL, material, category);
     listForCategory = consolidateList(listForCategory, localList);
   }
-
-  console.log(`listForCategory:${listForCategory}`);
 
   let innerList: DataFormat[] = [];
 

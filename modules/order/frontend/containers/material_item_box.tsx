@@ -16,24 +16,22 @@ class MaterialItemBox extends React.Component<any, any> {
     this.itemList = printableData(CATEGORY_MATERIAL);
   }
 
-  visibleOptions(selectedType: string, selectedSize: string) {
-    if(!selectedType) {
+  visibleOptions(type: string, size: string) {
+    if(!type) {
       return this.itemList;
     }
 
-    let paramHash = {type: selectedType, size: selectedSize};
-
-    return printableDataWithFilter(CATEGORY_MATERIAL, paramHash);
+    return printableDataWithFilter(CATEGORY_MATERIAL, {type, size});
   }
 
   render() {
-    let { selectedType, selectedSize, selectedItem } = this.props;
-    let selectedLabel = selectedItem && selectedItem !== '' ? 'Print Material' : 'Select Print Material';
+    let { type, size, material } = this.props;
+    let selectedLabel = material && material !== '' ? 'Print Material' : 'Select Print Material';
 
-    let filteredList = this.visibleOptions(selectedType, selectedSize);
+    let filteredList = this.visibleOptions(type, size);
 
     let optionButtonNodes = filteredList.map((entry) => {
-      let selected = selectedItem === entry.id ? true : false;
+      let selected = material === entry.id ? true : false;
       return <OptionBox category={CATEGORY_MATERIAL} id={entry.id} label={entry.value} selected={selected}  onClick={selectMaterial} key={entry.id}/>;
     });
 
@@ -43,9 +41,9 @@ class MaterialItemBox extends React.Component<any, any> {
 
 const mapStateToProps = (printApp: any, ownProps: any) => {
   return {
-    selectedType: printApp.selectionState.type,
-    selectedSize: printApp.selectionState.size,
-    selectedItem: printApp.selectionState.material,
+    type: printApp.selectionState.type,
+    size: printApp.selectionState.size,
+    material: printApp.selectionState.material,
     shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_MATERIAL) > -1
   }
 }

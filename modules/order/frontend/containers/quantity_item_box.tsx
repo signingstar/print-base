@@ -6,8 +6,6 @@ import OptionBox from "../containers/option_button_box";
 import OptionItems from "../components/option_items";
 import { selectQuantity, CATEGORY_QUANTITY } from "../actions";
 
-const itemsData = printableData(CATEGORY_QUANTITY);
-
 class QuantityItemBox extends React.Component<any, any> {
   itemList: {id: string, value: string}[];
 

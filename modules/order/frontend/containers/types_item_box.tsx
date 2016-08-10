@@ -6,8 +6,6 @@ import OptionBox from "../containers/option_button_box";
 import OptionItems from "../components/option_items";
 import { selectType, CATEGORY_TYPE } from "../actions";
 
-const itemsData = printableData('type');
-
 class TypesItemBox extends React.Component<any, any> {
   itemList: {id: string, value: string}[];
 
@@ -20,11 +18,11 @@ class TypesItemBox extends React.Component<any, any> {
   }
 
   render() {
-    let { selectedItem } = this.props;
-    let selectedLabel = selectedItem && selectedItem !== '' ? 'Print Type' : 'Select Print Type';
+    let { type } = this.props;
+    let selectedLabel = type && type !== '' ? 'Print Type' : 'Select Print Type';
 
-    let optionButtonNodes = itemsData.map((entry) => {
-      let selected = selectedItem === entry.id ? true : false;
+    let optionButtonNodes = this.itemList.map((entry) => {
+      let selected = type === entry.id ? true : false;
       return <OptionBox category={CATEGORY_TYPE} id={entry.id} label={entry.value} selected={selected} onClick={selectType} key={entry.id}/>;
     });
 
@@ -34,7 +32,7 @@ class TypesItemBox extends React.Component<any, any> {
 
 const mapStateToProps = (printApp: any, ownProps: any) => {
   return {
-    selectedItem: printApp.selectionState.type,
+    type: printApp.selectionState.type,
     shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_TYPE) > -1
   }
 }

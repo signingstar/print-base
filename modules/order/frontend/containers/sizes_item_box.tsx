@@ -16,18 +16,18 @@ class SizesItemBox extends React.Component<any, any> {
     this.itemList = printableData(CATEGORY_SIZE);
   }
 
-  visibleOptions(selectedType: string) {
-    return selectedType ? printableDataWithFilter(CATEGORY_SIZE, {type: selectedType}) : this.itemList;
+  visibleOptions(type: string) {
+    return type ? printableDataWithFilter(CATEGORY_SIZE, {type}) : this.itemList;
   }
 
   render() {
-    let { selectedType, selectedItem } = this.props;
-    let selectedLabel = selectedItem && selectedItem !== '' ? 'Print Size' : 'Select Print Size';
+    let { type, size } = this.props;
+    let selectedLabel = size && size !== '' ? 'Print Size' : 'Select Print Size';
 
-    let filteredList = this.visibleOptions(selectedType);
+    let filteredList = this.visibleOptions(type);
 
     let optionButtonNodes = filteredList.map((entry) => {
-      let selected = selectedItem === entry.id ? true : false;
+      let selected = size === entry.id ? true : false;
       return <OptionBox category={CATEGORY_SIZE} id={entry.id} label={entry.value} selected={selected}  onClick={selectSize} key={entry.id}/>;
     });
 
@@ -37,8 +37,8 @@ class SizesItemBox extends React.Component<any, any> {
 
 const mapStateToProps = (printApp: any, ownProps: any) => {
   return {
-    selectedType: printApp.selectionState.type,
-    selectedItem: printApp.selectionState.size,
+    type: printApp.selectionState.type,
+    size: printApp.selectionState.size,
     shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_SIZE) > -1
   }
 }
