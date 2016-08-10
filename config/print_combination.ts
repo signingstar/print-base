@@ -2,26 +2,45 @@ const PrintData = {
   "type":{
     "visiting_card": {
       "label": "Visiting Cards",
+      "size": ["s-1", "m-1"],
+      "material": ["p-1", "p-2"],
+      "quantity": ["q-2", "q-3"]
     },
     "stationary": {
       "label": "Stationary",
+      "size": ["m-1", "l-1"],
+      "material": ["p-1", "p-3"],
+      "quantity": ["q-1", "q-2", "q-3", "q-4"]
     },
     "brouchers": {
       "label": "Brouchers",
+      "size": ["m-1"],
+      "material": ["p-1", "p-2"],
+      "quantity": ["q-2", "q-3"]
     },
     "mugs": {
       "label": "Coffee Mugs",
+      "size": ["s-1"],
+      "material": ["p-1", "p-3"],
+      "quantity": ["q-1"]
     },
     "t_shirts": {
       "label": "T-Shirts",
+      "size": ["s-1", "l-1"],
+      "material": ["p-1", "p-2"],
+      "quantity": ["q-3"]
     },
     "posters": {
       "label": "Posters",
+      "size": ["m-1", "l-1", "xl-1"],
+      "material": ["p-1", "p-2", "p-3", "p-4"],
+      "quantity": ["q-3", "q-4"]
     }
   },
   "size": {
     "s-1": {
-      "label": "2' x 3'"
+      "label": "2' x 3'",
+      "material": ["p-1"]
     },
     "m-1": {
       "label": "4' x 7'"

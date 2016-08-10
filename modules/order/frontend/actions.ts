@@ -4,7 +4,12 @@ export const SET_TYPE = 'SET_TYPE';
 export const SET_SIZE = 'SET_SIZE';
 export const SET_MATERIAL = 'SET_MATERIAL';
 export const SET_QUANTITY = 'SET_QUANTITY';
-export const SET_VISIBILITY_FILTER = 'SET_VISIBILITY_FILTER';
+export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
+export const CATEGORY_TYPE = 'type';
+export const CATEGORY_SIZE = 'size';
+export const CATEGORY_MATERIAL = 'material';
+export const CATEGORY_QUANTITY = 'quantity';
+
 
 export const resetAll = () => {
   return {
@@ -40,10 +45,9 @@ export const selectQuantity = (id: string) => {
   };
 }
 
-export const setVisibilityFilter = (filter: string, category:string) => {
+export const updateCategories = (category:string) => {
   return {
-    type: SET_VISIBILITY_FILTER,
-    category,
-    filter
+    type: UPDATE_CATEGORIES,
+    category
   }
 }

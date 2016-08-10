@@ -1,9 +1,9 @@
 import * as React from "react";
 
-const OptionItems = ({selected, optionButtonNodes}: {selected: boolean, optionButtonNodes: any}) => {
+const OptionItems = ({label, optionButtonNodes}: {label: string, optionButtonNodes: any}) => {
   return (
     <div className='inner-section' id='print-type'>
-      <h2>{ selected ? 'Print Type' : 'Select Print Type' }</h2>
+      <h2>{ label }</h2>
       <div>
         {optionButtonNodes}
       </div>

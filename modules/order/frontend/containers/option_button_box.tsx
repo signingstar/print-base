@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 
 import OptionButton from "../components/option_button";
-import { selectType } from "../actions";
 
 interface OwnProps {
   id: string;
@@ -11,6 +10,7 @@ interface OwnProps {
 
 const mapStateToProps = (state: any, ownProps: OwnProps) => {
   let {id, label, selected} = ownProps;
+
   return {
     state: {id, label, selected}
   }
