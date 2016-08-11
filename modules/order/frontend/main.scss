@@ -19,7 +19,6 @@
           }
         }
       }
-
     }
 
     .main-section-body {
@@ -81,7 +80,6 @@
             visibility: hidden;
           }
         }
-
       }
 
       .right-panel {
@@ -136,7 +134,6 @@
           button {
             background-color: $button-orig-color;
             border: 1px solid $button-orig-color;
-            border-radius: 2px;
             border-bottom-left-radius: 5px;
             border-bottom-right-radius: 5px;
             color: white;
@@ -153,8 +150,6 @@
         }
       }
     }
-
-
   }
   .Dropdown-root {
     display: inline-block;
