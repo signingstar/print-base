@@ -19,7 +19,7 @@ class TypesItemBox extends React.Component<any, any> {
 
   render() {
     let { type } = this.props;
-    let selectedLabel = type && type !== '' ? 'Print Type' : 'Select Print Type';
+    let selectedLabel = type && type !== '' ? 'Print Type' : 'What would you like to print';
 
     let optionButtonNodes = this.itemList.map((entry) => {
       let selected = type === entry.id ? true : false;

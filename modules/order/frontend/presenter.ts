@@ -57,10 +57,6 @@ let consolidateList = function(sourceList: string[], lookupList: string[]) {
   return sourceList;
 }
 
-export let dataWithFilter = function(category: string, filterTypes: PropList) {
-
-}
-
 export let printableDataWithFilter = function(category: string, filterTypes: PropList) {
   const innerSet = fetchSpecificCategory(category);
   let listForCategory: string[];

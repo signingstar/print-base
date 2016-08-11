@@ -1,8 +1,8 @@
 import 'core-js/shim';
-import selectionState, { StateObject } from '../../../modules/order/frontend/reducers/selection_state';
+import selectionState, { SelectionStateObject } from '../../../modules/order/frontend/reducers/selection_state';
 import { expect } from 'chai';
 
-const defaultState:StateObject = {
+const defaultState: SelectionStateObject = {
   updateComponents: []
 }
 

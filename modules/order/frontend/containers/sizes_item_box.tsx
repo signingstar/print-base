@@ -1,6 +1,5 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { printableData, printableDataWithFilter } from "../presenter";
 import OptionBox from "../containers/option_button_box";
@@ -20,10 +19,6 @@ class SizesItemBox extends React.Component<any, any> {
 
   visibleOptions(type: string) {
     return type ? printableDataWithFilter(CATEGORY_SIZE, {type}) : this.itemList;
-  }
-
-  componentWillAppear() {
-
   }
 
   render() {

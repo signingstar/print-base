@@ -2,9 +2,9 @@
   .main-section-content {
 
     .main-section-header {
-      h2 {
-        font-size: 18px;
-        margin: 5px 0 10px 0;
+      h3 {
+        font-size: 15px;
+        margin: 5px 0 30px 0;
 
         span {
           display: inline-block;
@@ -43,7 +43,6 @@
           }
 
           h2 {
-            border-bottom: 1px solid $select-options;
             font-size: 18px;
             margin: 5px 0 10px 0;
             max-width: 855px;
@@ -124,8 +123,9 @@
 
               .label {
                 display: inline-block;
+                font-size: 14px;
                 font-weight: 600;
-                width: 115px;
+                width: 110px;
               }
             }
           }
@@ -137,27 +137,36 @@
           .clear {
             color: $link-color-normal;
             cursor: pointer;
+            float: right;
             text-align: center;
+          }
+        }
+        .checkout-button {
+          margin-top: 25px;
+          text-align: center;
+
+          button {
+            background-color: $button-orig-color;
+            border: 1px solid $button-orig-color;
+            border-radius: 2px;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            color: white;
+            cursor: pointer;
+            font-size: 20px;
+            height: 50px;
+            outline: 0;
+            width: 100%;
+
+            &:hover {
+              background-color: $button-hover-color;
+            }
           }
         }
       }
     }
 
-    .main-section-footer {
-      .inner-section#checkout {
-        margin-top: 50px;
-        text-align: center;
 
-        button {
-          border: 1px solid $light-gray;
-          border-radius: 2px;
-          font-size: 20px;
-          height: 50px;
-          outline: 0;
-          width: 250px;
-        }
-      }
-    }
   }
   .Dropdown-root {
     display: inline-block;
