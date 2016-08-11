@@ -1,6 +1,6 @@
 import { RESET, SET_TYPE, SET_SIZE, SET_MATERIAL, SET_QUANTITY, CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY } from "../actions";
 
-export interface StateObject {
+export interface SelectionStateObject {
   type?: string;
   size?: string;
   material?: string;
@@ -8,42 +8,54 @@ export interface StateObject {
   updateComponents: string[];
 }
 
-const defaultState:StateObject = {
+const defaultState:SelectionStateObject = {
   updateComponents: []
 }
 
-const selectionState = (state = defaultState, action:{type: string, value?: string}): StateObject => {
+const selectionState = (state = defaultState, action:{type: string, value?: string}): SelectionStateObject => {
   let {type, value} = action;
+
+  console.log(`type:${type} | value:${value} | Old state: ${JSON.stringify(state)}`);
+  let newState: SelectionStateObject = state;
 
   switch (action.type) {
     case RESET:
-      return {updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]};
+      newState = {updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]};
+      break;
     case SET_TYPE:
-      return {
+      newState = {
         type: action.value,
         size: undefined,
         material: undefined,
         quantity: undefined,
         updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]
-      }
+      };
+      break;
     case SET_SIZE:
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         size: action.value,
+        material: undefined,
+        quantity: undefined,
         updateComponents: [CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]
-      })
+      });
+      break;
     case SET_MATERIAL:
-      return Object.assign({}, state, {
+      newState = Object.assign({}, state, {
         material: action.value,
+        quantity: undefined,
         updateComponents: [CATEGORY_MATERIAL, CATEGORY_QUANTITY]
-      })
+      });
+      break;
     case SET_QUANTITY:
-      return  Object.assign({}, state, {
+      newState =  Object.assign({}, state, {
         quantity: action.value,
         updateComponents: [CATEGORY_QUANTITY]
-      })
-    default:
-      return state;
+      });
+      break;
   }
+
+  console.log(`New state: ${JSON.stringify(newState)}`);
+  return newState;
 }
 
 export default selectionState;

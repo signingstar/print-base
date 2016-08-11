@@ -1,5 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import DropdownBox from "./dropdown_box";
 
 import { printableData, printableDataWithFilter } from "../presenter";
 import OptionBox from "../containers/option_button_box";
@@ -29,15 +30,17 @@ class QuantityItemBox extends React.Component<any, any> {
     let { storeState } = this.props;
     let { type, size, material, quantity } = storeState;
 
-    let selectedLabel = quantity && quantity !== '' ? 'Print Quantity' : 'Select Print Quantity';
+    if(!type) return null;
+
     let filteredList = this.visibleOptions(type, size, material);
+    let placeholder = "Select Quantity ..."
 
     let optionButtonNodes = filteredList.map((entry) => {
       let selected = quantity === entry.id ? true : false;
-      return <OptionBox category={CATEGORY_QUANTITY} id={entry.id} label={entry.value} selected={selected}  onClick={selectQuantity} key={entry.id}/>;
+      return {value: entry.id, label: entry.value};
     });
 
-    return <OptionItems optionButtonNodes={optionButtonNodes} label={selectedLabel} />
+    return <DropdownBox category={CATEGORY_QUANTITY} optionButtonNodes={optionButtonNodes} label='Print Quantity' selected={quantity} onClick={selectQuantity} placeholder={placeholder}/>
   }
 }
 

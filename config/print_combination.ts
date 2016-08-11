@@ -9,7 +9,7 @@ const PrintData = {
     "stationary": {
       "label": "Stationary",
       "size": ["m-1", "l-1"],
-      "material": ["p-1", "p-3"],
+      "material": ["p-3", "p-4"],
       "quantity": ["q-1", "q-2", "q-3", "q-4"]
     },
     "brouchers": {
@@ -33,7 +33,7 @@ const PrintData = {
     "posters": {
       "label": "Posters",
       "size": ["m-1", "l-1", "xl-1"],
-      "material": ["p-1", "p-2", "p-3", "p-4"],
+      "material": ["p-2", "p-3", "p-4"],
       "quantity": ["q-3", "q-4"]
     }
   },

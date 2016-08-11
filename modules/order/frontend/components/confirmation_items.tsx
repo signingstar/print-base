@@ -13,7 +13,7 @@ const ConfirmationItems = ({state, onReset}: {state: any, onReset: ()=>void}) =>
         {quantityVal ? <li><span className='label'>Print Quantity: </span><span>{quantityVal}</span></li> : null}
       </ul>
       <div className='estimates'><h5>Estimated Price:</h5></div>
-      <div className='clear'><a href='#' onClick={onReset}>clear </a></div>
+      <div className='clear'><span onClick={onReset}>clear </span></div>
     </div>
   );
 }

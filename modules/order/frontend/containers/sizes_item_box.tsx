@@ -1,10 +1,12 @@
 import * as React from "react";
 import { connect } from "react-redux";
+import * as ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import { printableData, printableDataWithFilter } from "../presenter";
 import OptionBox from "../containers/option_button_box";
 import OptionItems from "../components/option_items";
 import { selectSize, CATEGORY_SIZE } from "../actions";
+import DropdownBox from "./dropdown_box";
 
 class SizesItemBox extends React.Component<any, any> {
   itemList: {id: string, value: string}[];
@@ -20,18 +22,24 @@ class SizesItemBox extends React.Component<any, any> {
     return type ? printableDataWithFilter(CATEGORY_SIZE, {type}) : this.itemList;
   }
 
+  componentWillAppear() {
+
+  }
+
   render() {
     let { type, size } = this.props;
-    let selectedLabel = size && size !== '' ? 'Print Size' : 'Select Print Size';
+
+    if(!type) return null;
 
     let filteredList = this.visibleOptions(type);
+    let placeholder = "Select Size..."
 
     let optionButtonNodes = filteredList.map((entry) => {
       let selected = size === entry.id ? true : false;
-      return <OptionBox category={CATEGORY_SIZE} id={entry.id} label={entry.value} selected={selected}  onClick={selectSize} key={entry.id}/>;
+      return {value: entry.id, label: entry.value};
     });
 
-    return <OptionItems optionButtonNodes={optionButtonNodes} label={selectedLabel} />
+    return <DropdownBox category={CATEGORY_SIZE} optionButtonNodes={optionButtonNodes} label='Print Size' selected={size} onClick={selectSize} placeholder={placeholder} />
   }
 }
 
