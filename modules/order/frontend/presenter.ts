@@ -6,6 +6,13 @@ interface NestedMap {
   [name: string]: any;
 }
 
+interface PropList {
+  type?: string;
+  size?: string;
+  material?: string;
+  quantity?: string;
+}
+
 let fetchSpecificCategory = function(type: string) {
   const innerSet: NestedMap = PrintData[type];
 
@@ -14,10 +21,6 @@ let fetchSpecificCategory = function(type: string) {
 
 let fetchSpecificFilterByCategory = function(filtercategory: string, filterValue: string, category: string) {
   return fetchSpecificCategory(filtercategory)[filterValue][category];
-}
-
-let fetchAndDuplicateSpecificFilterByCategory = function(filtercategory: string, filterValue: string, category: string) {
-  return fetchSpecificFilterByCategory(filtercategory, filterValue, category).slice();
 }
 
 export let fetchSpecificCategoryAndId = function(type: string, id: string) {
@@ -42,13 +45,6 @@ export let printableData = function(type: string) {
   return innerList;
 }
 
-interface PropList {
-  type?: string;
-  size?: string;
-  material?: string;
-  quantity?: string;
-}
-
 let consolidateList = function(sourceList: string[], lookupList: string[]) {
   if(sourceList && lookupList){
     sourceList.forEach((item, index) => {
@@ -67,7 +63,7 @@ export let printableDataWithFilter = function(category: string, filterTypes: Pro
   let {type, size, material} = filterTypes;
 
   if(type) {
-    listForCategory = fetchAndDuplicateSpecificFilterByCategory(CATEGORY_TYPE, type, category);
+    listForCategory = fetchSpecificFilterByCategory(CATEGORY_TYPE, type, category).slice();
   }
 
   if(size) {

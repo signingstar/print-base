@@ -5,9 +5,11 @@ import { printableData, printableDataWithFilter } from "../presenter";
 import OptionBox from "../containers/option_button_box";
 import OptionItems from "../components/option_items";
 import { selectMaterial, CATEGORY_MATERIAL } from "../actions";
+import DropdownBox from "./dropdown_box";
 
 class MaterialItemBox extends React.Component<any, any> {
   itemList: {id: string, value: string}[];
+
   shouldComponentUpdate(nextProps:any, nextState:any) {
     return nextProps.shouldUpdate;
   }
@@ -26,16 +28,18 @@ class MaterialItemBox extends React.Component<any, any> {
 
   render() {
     let { type, size, material } = this.props;
-    let selectedLabel = material && material !== '' ? 'Print Material' : 'Select Print Material';
+
+    if(!type) return null;
 
     let filteredList = this.visibleOptions(type, size);
+    let placeholder = "Select Material ...";
 
     let optionButtonNodes = filteredList.map((entry) => {
       let selected = material === entry.id ? true : false;
-      return <OptionBox category={CATEGORY_MATERIAL} id={entry.id} label={entry.value} selected={selected}  onClick={selectMaterial} key={entry.id}/>;
+      return {value: entry.id, label: entry.value};
     });
 
-    return <OptionItems optionButtonNodes={optionButtonNodes} label={selectedLabel} />
+    return <DropdownBox category={CATEGORY_MATERIAL} optionButtonNodes={optionButtonNodes} label='Print Material' selected={material} onClick={selectMaterial} placeholder={placeholder}/>
   }
 }
 

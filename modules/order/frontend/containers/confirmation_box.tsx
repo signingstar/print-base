@@ -16,9 +16,7 @@ const mapStateToProps = (printApp: any, ownProps: any) => {
   let materialVal =  material ? fetchLabelForCategoryAndId(CATEGORY_MATERIAL, material) : undefined;
   let quantityVal =  quantity ? fetchLabelForCategoryAndId(CATEGORY_QUANTITY, quantity) : undefined;
 
-  return {
-    state: {typeVal, sizeVal, materialVal, quantityVal}
-  }
+  return {typeVal, sizeVal, materialVal, quantityVal}
 }
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {
