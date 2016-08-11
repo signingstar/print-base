@@ -73,7 +73,7 @@ var clientConfig = extend({}, true, config, {
   plugins: [
       new ExtractTextPlugin("[name]"),
       new CopyWebpackPlugin([
-        { from: nodeModulesPath + '/react/dist/react.js', to: destPath },
+        { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
       ])
@@ -101,7 +101,7 @@ var clientConfig = extend({}, true, config, {
     //   amd: 'react-addons-css-transition-group',
     //   root: ['React','addons','CSSTransitionGroup']
     // },
-    'react-addons-css-transition-group': 'var React.addons.TransitionGroup'
+    'react-addons-css-transition-group': 'React.addons.TransitionGroup'
   }
 });
 
