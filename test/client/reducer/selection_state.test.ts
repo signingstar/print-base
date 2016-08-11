@@ -7,7 +7,7 @@ const defaultState: SelectionStateObject = {
 }
 
 describe('Reducer', function() {
-  describe('#printState', () => {
+  describe('#selectionState', () => {
       it('should return empty category objects', () => {
         let state = selectionState(defaultState, {type: 'RESET'});
         expect(state).to.have.property('updateComponents');
@@ -35,8 +35,8 @@ describe('Reducer', function() {
         let state = selectionState({type: 'mugs', updateComponents:[]}, {type: 'SET_SIZE', value: 'axb'});
         expect(state).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
-        expect(state).to.not.have.property('quantity');
-        expect(state).to.not.have.property('material');
+        expect(state).to.have.property('quantity').to.be.undefined;
+        expect(state).to.have.property('material').to.be.undefined;
       });
 
       it('should set quantity when state is not empty', () => {
@@ -48,8 +48,8 @@ describe('Reducer', function() {
       });
 
       it('should deep comparison pass', () => {
-        let state = selectionState({type: 'mugs', size: 'axb', quantity: '100', updateComponents:[]}, {type: 'SET_MATERIAL', value: 'latex'});
-        expect(state).to.deep.equal({type: 'mugs', size: 'axb', quantity: '100', material: 'latex', updateComponents: ['material', 'quantity']});
+        let state = selectionState({type: 'mugs', size: 'axb', material: 'latex', updateComponents:[]}, {type: 'SET_QUANTITY', value: '100'});
+        expect(state).to.deep.equal({type: 'mugs', size: 'axb', quantity: '100', material: 'latex', updateComponents: ['quantity']});
       });
   });
 });
