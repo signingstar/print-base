@@ -33,7 +33,7 @@ body .main-section{
 
         &.sticky {
           position: fixed;
-          top: 50;
+          top: 50px;
           width: inherit;
         }
       }
@@ -78,7 +78,7 @@ body .main-section{
       }
 
       nav#move-to-top {
-        bottom: 100px;
+        bottom: 200px;
         position: fixed;
         width: 220px;
 
