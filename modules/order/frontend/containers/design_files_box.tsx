@@ -15,9 +15,10 @@ class DesignFilesBox extends React.Component<any, any> {
     let { type, files, onDrop } = this.props;
     if(!type) return null;
 
-    let placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
+    const placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
+    const acceptFiles = 'image/jpeg, image/*, .ai';
 
-    return <DesignFiles label='Print Design' placeholder={placeholder} onDrop={onDrop} files={files}/>
+    return <DesignFiles label='Print Design' placeholder={placeholder} onDrop={onDrop} files={files} accept={acceptFiles} />
   }
 }
 

@@ -88,13 +88,11 @@
     border-radius: 5px;
 
     &.active {
-      border-style: solid;
-      background-color: #eee;
+      border: 2px solid green;
     }
 
     &.reject {
-      border-style: solid;
-      background-color: #ffdddd;
+      border: 2px solid red;
     }
 
     .upload-content {

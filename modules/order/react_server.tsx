@@ -3,7 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { createStore } from "redux";
 import { Provider } from "react-redux";
 
-import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY } from "./frontend/actions";
+import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_QUANTITY } from "./frontend/actions";
 import MainContents from "./frontend//components/main_contents";
 import printApp from "./frontend/reducers";
 
@@ -12,7 +12,7 @@ const ReactComponent = (item: string) => {
   let initialPayload = {
     selectionState: {
       type: item,
-      updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]
+      updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_QUANTITY]
     }
   }
   // Create a new Redux store instance

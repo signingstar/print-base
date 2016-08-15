@@ -23,13 +23,31 @@ describe('Reducer', function() {
 
       it('should have all keys present when type is set', () => {
         let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        expect(state).to.have.all.keys('type', 'size', 'quantity', 'material', 'updateComponents', 'files');
+        expect(state).to.have.all.keys('type', 'size', 'quantity', 'material', 'coat', 'updateComponents', 'files');
       });
 
       it('should set size when state is empty', () => {
         let state = selectionState(defaultState, {type: 'SET_SIZE', value: 'axb'});
         expect(state).to.not.have.property('type');
         expect(state).to.have.property('size').and.equal('axb');
+      });
+
+      it('should set surface when state is not empty', () => {
+        let state = selectionState({type: 'mugs', size: 'axb', files:[], updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
+        expect(state).to.have.property('type').and.equal('mugs');
+        expect(state).to.have.property('size').and.equal('axb');
+        expect(state).to.have.property('material').and.equal('paper');
+        expect(state).to.have.property('coat').to.be.undefined;
+        expect(state).to.have.property('quantity').to.be.undefined;
+      });
+
+      it('should set coating when state is not empty', () => {
+        let state = selectionState({type: 'mugs', size: 'axb', material: 'paper', files:[], updateComponents:[]}, {type: 'SET_COAT', value: 'gloss'});
+        expect(state).to.have.property('type').and.equal('mugs');
+        expect(state).to.have.property('size').and.equal('axb');
+        expect(state).to.have.property('material').and.equal('paper');
+        expect(state).to.have.property('coat').and.equal('gloss');
+        expect(state).to.have.property('quantity').to.be.undefined;
       });
 
       it('should set size when state is not empty', () => {

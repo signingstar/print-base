@@ -42,16 +42,16 @@
 
     .card-box {
       display: inline-block;
-      margin: 20px;
+      margin: 10px;
 
       img {
         display: block;
-        height: 250px;
-        margin-bottom: 8px;
+        max-height: 250px;
         max-width: 250px;
       }
 
       .file-caption {
+        padding: 10px 0;
         text-align: center;
       }
     }

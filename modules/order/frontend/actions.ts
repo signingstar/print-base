@@ -2,13 +2,15 @@
 export const RESET = 'RESET';
 export const SET_TYPE = 'SET_TYPE';
 export const SET_SIZE = 'SET_SIZE';
-export const SET_MATERIAL = 'SET_MATERIAL';
+export const SET_SURFACE = 'SET_SURFACE';
 export const SET_QUANTITY = 'SET_QUANTITY';
 export const SET_FILES = 'SET_FILES';
+export const SET_COAT = 'SET_COAT';
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
 export const CATEGORY_TYPE = 'type';
 export const CATEGORY_SIZE = 'size';
-export const CATEGORY_MATERIAL = 'material';
+export const CATEGORY_SURFACE = 'material';
+export const CATEGORY_COAT = 'coat';
 export const CATEGORY_QUANTITY = 'quantity';
 export const CATEGORY_FILES = 'files';
 
@@ -33,9 +35,16 @@ export const selectSize = (id: string) => {
   };
 }
 
-export const selectMaterial = (id: string) => {
+export const selectSurface = (id: string) => {
   return {
-    type: SET_MATERIAL,
+    type: SET_SURFACE,
+    value: id
+  };
+}
+
+export const selectCoat = (id: string) => {
+  return {
+    type: SET_COAT,
     value: id
   };
 }
