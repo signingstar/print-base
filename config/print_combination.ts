@@ -4,36 +4,42 @@ const PrintData = {
       "label": "Visiting Cards",
       "size": ["s-1", "m-1"],
       "material": ["p-1", "p-2"],
+      "coat": ["c-1", "c-2", "c-3", "c-4", "c-5"],
       "quantity": ["q-2", "q-3"]
     },
     "stationary": {
       "label": "Stationary",
       "size": ["m-1", "l-1"],
       "material": ["p-3", "p-4"],
+      "coat": ["c-1", "c-2", "c-4"],
       "quantity": ["q-1", "q-2", "q-3", "q-4"]
     },
     "brouchers": {
       "label": "Brouchers",
       "size": ["m-1"],
       "material": ["p-1", "p-2"],
+      "coat": ["c-1", "c-4"],
       "quantity": ["q-2", "q-3"]
     },
     "mugs": {
       "label": "Coffee Mugs",
       "size": ["s-1"],
       "material": ["p-1", "p-3"],
+      "coat": ["c-5"],
       "quantity": ["q-1"]
     },
     "t_shirts": {
       "label": "T-Shirts",
       "size": ["s-1", "l-1"],
       "material": ["p-1", "p-2"],
+      "coat": ["c-3", "c-4"],
       "quantity": ["q-3"]
     },
     "posters": {
       "label": "Posters",
       "size": ["m-1", "l-1", "xl-1"],
       "material": ["p-2", "p-3", "p-4"],
+      "coat": ["c-1", "c-4"],
       "quantity": ["q-3", "q-4"]
     }
   },
@@ -65,6 +71,24 @@ const PrintData = {
     },
     "p-4": {
       "label": "Thick wood"
+    }
+  },
+
+  "coat": {
+    "c-1": {
+      "label": "Gloss"
+    },
+    "c-2": {
+      "label": "UV coating"
+    },
+    "c-3": {
+      "label": "Velvet"
+    },
+    "c-4": {
+      "label": "Matt"
+    },
+    "c-5": {
+      "label": "3D"
     }
   },
 

@@ -1,6 +1,6 @@
 import { DataFormat } from "./data_types/data_format";
 import PrintData from "../../../config/print_combination";
-import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL } from "./actions";
+import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE } from "./actions";
 
 interface NestedMap {
   [name: string]: any;
@@ -29,8 +29,10 @@ export let fetchSpecificCategoryAndId = function(type: string, id: string) {
   return innerSet[id];
 }
 
-export let fetchLabelForCategoryAndId = function(type: string, id: string) {
-  return fetchSpecificCategoryAndId(type, id).label;
+export let fetchLabelForCategoryAndId = function(type: string, id: string): string {
+  if(id) {
+    return fetchSpecificCategoryAndId(type, id).label;
+  }
 }
 
 export let printableData = function(type: string) {
@@ -72,7 +74,7 @@ export let printableDataWithFilter = function(category: string, filterTypes: Pro
   }
 
   if(material) {
-    let localList: string[] = fetchSpecificFilterByCategory(CATEGORY_MATERIAL, material, category);
+    let localList: string[] = fetchSpecificFilterByCategory(CATEGORY_SURFACE, material, category);
     listForCategory = consolidateList(listForCategory, localList);
   }
 

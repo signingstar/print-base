@@ -4,10 +4,10 @@ import { connect } from "react-redux";
 import { printableData, printableDataWithFilter } from "../presenter";
 import OptionBox from "../containers/option_button_box";
 import OptionItems from "../components/option_items";
-import { selectSurface, CATEGORY_SURFACE } from "../actions";
+import { selectCoat, CATEGORY_COAT } from "../actions";
 import DropdownBox from "./dropdown_box";
 
-class MaterialItemBox extends React.Component<any, any> {
+class CoatingBox extends React.Component<any, any> {
   itemList: {id: string, value: string}[];
 
   shouldComponentUpdate(nextProps:any, nextState:any) {
@@ -15,7 +15,7 @@ class MaterialItemBox extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    this.itemList = printableData(CATEGORY_SURFACE);
+    this.itemList = printableData(CATEGORY_COAT);
   }
 
   visibleOptions(type: string, size: string) {
@@ -23,23 +23,23 @@ class MaterialItemBox extends React.Component<any, any> {
       return this.itemList;
     }
 
-    return printableDataWithFilter(CATEGORY_SURFACE, {type, size});
+    return printableDataWithFilter(CATEGORY_COAT, {type, size});
   }
 
   render() {
-    let { type, size, material } = this.props;
+    let { type, size, material, coat } = this.props;
 
     if(!type) return null;
 
     let filteredList = this.visibleOptions(type, size);
-    let placeholder = "Select Material ...";
+    let placeholder = "Select Coating ...";
 
     let optionButtonNodes = filteredList.map((entry) => {
-      let selected = material === entry.id ? true : false;
+      let selected = coat === entry.id ? true : false;
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={CATEGORY_SURFACE} optionButtonNodes={optionButtonNodes} label='Print Material' selected={material} onClick={selectSurface} placeholder={placeholder}/>
+    return <DropdownBox category={CATEGORY_COAT} optionButtonNodes={optionButtonNodes} label='Print Coating' selected={coat} onClick={selectCoat} placeholder={placeholder}/>
   }
 }
 
@@ -48,10 +48,11 @@ const mapStateToProps = (printApp: any, ownProps: any) => {
     type: printApp.selectionState.type,
     size: printApp.selectionState.size,
     material: printApp.selectionState.material,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_SURFACE) > -1
+    coat: printApp.selectionState.coat,
+    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_COAT) > -1
   }
 }
 
 export default connect(
   mapStateToProps
-)(MaterialItemBox);
+)(CoatingBox);

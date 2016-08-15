@@ -15,6 +15,7 @@ export interface StateObject {
   size?: string;
   material?: string;
   quantity?: string;
+  files: File[];
 }
 
 export interface PrintItemProps {
