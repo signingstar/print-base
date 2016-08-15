@@ -30,7 +30,9 @@ export let fetchSpecificCategoryAndId = function(type: string, id: string) {
 }
 
 export let fetchLabelForCategoryAndId = function(type: string, id: string) {
-  return fetchSpecificCategoryAndId(type, id).label;
+  if(id) {
+    return fetchSpecificCategoryAndId(type, id).label;
+  }
 }
 
 export let printableData = function(type: string) {

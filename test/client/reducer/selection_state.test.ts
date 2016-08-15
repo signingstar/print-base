@@ -3,6 +3,7 @@ import selectionState, { SelectionStateObject } from '../../../modules/order/fro
 import { expect } from 'chai';
 
 const defaultState: SelectionStateObject = {
+  files: [],
   updateComponents: []
 }
 
@@ -22,7 +23,7 @@ describe('Reducer', function() {
 
       it('should have all keys present when type is set', () => {
         let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        expect(state).to.have.all.keys('type', 'size', 'quantity', 'material', 'updateComponents');
+        expect(state).to.have.all.keys('type', 'size', 'quantity', 'material', 'updateComponents', 'files');
       });
 
       it('should set size when state is empty', () => {
@@ -32,7 +33,7 @@ describe('Reducer', function() {
       });
 
       it('should set size when state is not empty', () => {
-        let state = selectionState({type: 'mugs', updateComponents:[]}, {type: 'SET_SIZE', value: 'axb'});
+        let state = selectionState({type: 'mugs', files:[], updateComponents:[]}, {type: 'SET_SIZE', value: 'axb'});
         expect(state).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
         expect(state).to.have.property('quantity').to.be.undefined;
@@ -40,7 +41,7 @@ describe('Reducer', function() {
       });
 
       it('should set quantity when state is not empty', () => {
-        let state = selectionState({type: 'mugs', size: 'axb', updateComponents:[]}, {type: 'SET_QUANTITY', value: '100'});
+        let state = selectionState({type: 'mugs', size: 'axb', files:[], updateComponents:[]}, {type: 'SET_QUANTITY', value: '100'});
         expect(state).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
         expect(state).to.have.property('quantity').and.equal('100');
@@ -48,8 +49,8 @@ describe('Reducer', function() {
       });
 
       it('should deep comparison pass', () => {
-        let state = selectionState({type: 'mugs', size: 'axb', material: 'latex', updateComponents:[]}, {type: 'SET_QUANTITY', value: '100'});
-        expect(state).to.deep.equal({type: 'mugs', size: 'axb', quantity: '100', material: 'latex', updateComponents: ['quantity']});
+        let state = selectionState({type: 'mugs', size: 'axb', material: 'latex', files:[], updateComponents:[]}, {type: 'SET_QUANTITY', value: '100'});
+        expect(state).to.deep.equal({type: 'mugs', size: 'axb', quantity: '100', material: 'latex', files: [], updateComponents: ['quantity']});
       });
   });
 });

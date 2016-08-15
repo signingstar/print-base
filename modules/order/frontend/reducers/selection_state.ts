@@ -1,14 +1,18 @@
-import { RESET, SET_TYPE, SET_SIZE, SET_MATERIAL, SET_QUANTITY, CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY } from "../actions";
+import * as Action_Items from "../actions";
+let { RESET, SET_TYPE, SET_SIZE, SET_MATERIAL, SET_QUANTITY, SET_FILES} = Action_Items;
+let {CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY, CATEGORY_FILES } = Action_Items;
 
 export interface SelectionStateObject {
   type?: string;
   size?: string;
   material?: string;
   quantity?: string;
+  files: File[];
   updateComponents: string[];
 }
 
 const defaultState:SelectionStateObject = {
+  files: [],
   updateComponents: []
 }
 
@@ -20,7 +24,7 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
 
   switch (action.type) {
     case RESET:
-      newState = {updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]};
+      newState = {files: [], updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY, CATEGORY_FILES]};
       break;
     case SET_TYPE:
       newState = {
@@ -28,7 +32,8 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
         size: undefined,
         material: undefined,
         quantity: undefined,
-        updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY]
+        files: [],
+        updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_MATERIAL, CATEGORY_QUANTITY, CATEGORY_FILES]
       };
       break;
     case SET_SIZE:
@@ -52,6 +57,14 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
         updateComponents: [CATEGORY_QUANTITY]
       });
       break;
+    case SET_FILES:
+      newState =  Object.assign({}, state, {
+        files: action.value,
+        updateComponents: [CATEGORY_FILES]
+      });
+      break;
+    default:
+      return state;
   }
 
   // console.log(`New state: ${JSON.stringify(newState)}`);

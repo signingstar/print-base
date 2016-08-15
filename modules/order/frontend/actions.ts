@@ -4,11 +4,13 @@ export const SET_TYPE = 'SET_TYPE';
 export const SET_SIZE = 'SET_SIZE';
 export const SET_MATERIAL = 'SET_MATERIAL';
 export const SET_QUANTITY = 'SET_QUANTITY';
+export const SET_FILES = 'SET_FILES';
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
 export const CATEGORY_TYPE = 'type';
 export const CATEGORY_SIZE = 'size';
 export const CATEGORY_MATERIAL = 'material';
 export const CATEGORY_QUANTITY = 'quantity';
+export const CATEGORY_FILES = 'files';
 
 
 export const resetAll = () => {
@@ -42,6 +44,13 @@ export const selectQuantity = (id: string) => {
   return {
     type: SET_QUANTITY,
     value: id
+  };
+}
+
+export const setFiles = (files: File[]) => {
+  return {
+    type: SET_FILES,
+    value: files
   };
 }
 
