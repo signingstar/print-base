@@ -1,4 +1,4 @@
-export let partnerController = function({modules} : {modules: any}) {
+const partnerController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -11,6 +11,7 @@ export let partnerController = function({modules} : {modules: any}) {
         javascript: 'session',
         stylesheet: 'session',
         title: 'Tisko - Be Our Partner',
+        body_class: 'partner'
       })
 
       let html = fn(page);
@@ -19,3 +20,5 @@ export let partnerController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default partnerController;

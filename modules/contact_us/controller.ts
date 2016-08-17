@@ -1,6 +1,6 @@
 import { origConfig } from "../header/presenter";
 
-export let contactUsController = function({modules} : {modules: any}) {
+const contactUsController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -13,7 +13,8 @@ export let contactUsController = function({modules} : {modules: any}) {
         javascript: 'contact',
         stylesheet: 'contact',
         title: 'Tisko - Register',
-        origConfig
+        origConfig,
+        body_class: 'contact-us'
       })
 
       let html = fn(page);
@@ -22,3 +23,5 @@ export let contactUsController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default contactUsController;

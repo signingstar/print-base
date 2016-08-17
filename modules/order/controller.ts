@@ -3,7 +3,7 @@ import ReactComponent from "./react_server";
 
 let debug = require("debug")('Modules:Order:Controller');
 
-export let orderController = function({modules} : {modules: any}) {
+const orderController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
   let srcPath:string = './modules/order/main.pug';
 
@@ -22,7 +22,8 @@ export let orderController = function({modules} : {modules: any}) {
         preloadedState,
         javascript: 'order',
         stylesheet: 'order',
-        title: 'Tisko Digital Printing'
+        title: 'Tisko Digital Printing',
+        body_class: 'order'
       });
 
       debug('Page params:%s', JSON.stringify(page));
@@ -33,3 +34,5 @@ export let orderController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default orderController;

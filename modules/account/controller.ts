@@ -1,4 +1,4 @@
-export let accountController = function({modules} : {modules: any}) {
+const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -10,7 +10,8 @@ export let accountController = function({modules} : {modules: any}) {
       page.set( {
         javascript: 'session',
         stylesheet: 'session',
-        title: 'Tisko - My Account'
+        title: 'Tisko - My Account',
+        body_class: 'account'
       })
 
       let html = fn(page);
@@ -19,3 +20,5 @@ export let accountController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default accountController;
