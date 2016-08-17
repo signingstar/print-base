@@ -20,7 +20,6 @@ const SectionBody = () => {
         <PrintQuantity />
         <div className='inner-section file-upload-preview'>
           <DesignFilesBox />
-          <FilesPreviewBox />
         </div>
       </div>
       <div className='right-panel'>

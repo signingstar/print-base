@@ -2,6 +2,7 @@ import * as React from "react";
 
 import CheckoutButton from "./checkout_button";
 import { StateObject } from "../data_types/data_format";
+import FilesPreviewBox from "../containers/files_preview_box";
 
 class ConfirmationItems extends React.Component<any, {}> {
   hasDisplayed: boolean = false;
@@ -28,7 +29,8 @@ class ConfirmationItems extends React.Component<any, {}> {
             <li><span className='label'>Print Material: </span><span>{material}</span></li>
             <li><span className='label'>Coating Type: </span><span>{coat}</span></li>
             <li><span className='label'>Print Quantity: </span><span>{quantity}</span></li>
-            <li className='upload-list'><span className='label'>Uploaded Design: </span><ul>{fileNodes}</ul></li>
+
+            <li className='upload-list'><span className='label'>Uploaded Design: </span><span> <FilesPreviewBox /></span></li>
           </ul>
           <div className='estimates'><h5>Estimated Price:</h5></div>
         </div>

@@ -1,5 +1,5 @@
 import * as $ from "jquery";
-import * as _ from "underscore";
+import { throttle, find } from "underscore";
 
 export class NavigateSections {
   private elemSelected: boolean;
@@ -32,34 +32,70 @@ export class NavigateSections {
       }
     };
 
-    let throttled = _.throttle(stickyFunction, this.scrollDelay);
+    let throttled = throttle(stickyFunction, this.scrollDelay);
     $(window).on("scroll", throttled);
   }
 
-  processNavSelection = ($el: JQuery, ev: Event) => {
-    this.elemSelected = true;
-
-    let targetSection:JQuery = $('#' + $el.attr('id').slice(0,-4));
-
-    if(targetSection.length === 0) {
-      return;
+  processNavSelection = ($el: JQuery, ev: Event, pushState: boolean) => {
+    if(ev) {
+      ev.preventDefault();
     }
 
-    this.navigateTargetSection(targetSection, () => {
+    this.elemSelected = true;
+
+    this.displayTargetSection($el, pushState, () => {
       this.elemSelected = false;
       this.$stickyElement.find('li').removeClass('selected');
       $el.addClass('selected');
     });
-
-    ev.preventDefault();
   }
 
-  navigateTargetSection($target: JQuery, callback: any) {
+  displayTargetSection($el: JQuery, pushState: boolean, callback: () => void) {
+    const targetSectionName = this.navSectionMap[$el.attr('id')];
+    const $targetSection = $(targetSectionName);
+
+    if($targetSection.length === 0) {
+      return;
+    }
+
+    $('.sub-section').addClass('hide');
+    $targetSection.removeClass('hide').addClass('show');
+
+    if(pushState) {
+      this.pushToHistory($el.attr('data-link'));
+    }
+
+    callback();
+  }
+
+  pushToHistory(linkedCategory: string) {
+    const {hostname, pathname, search} = location;
+    const pushUrl = pathname + `?category=${linkedCategory}`;
+    history.pushState({category: linkedCategory, url: pushUrl}, 'title1', pushUrl);
+  }
+
+  popFromHistory(e: any) {
+    let state = e.state;
+    if(state != null ) {
+      let category = state.category;
+      let $el = this.$stickyElement.find(`li[data-link=${category}]`);
+
+      if($el.length === 0) {
+        let url = state.url;
+        location = url;
+      } else {
+        this.processNavSelection($el, undefined, false);
+      }
+    }
+    console.log(`state:${JSON.stringify(e.state)} | ${location.pathname}`);
+  }
+
+  navigateTargetSection($target: JQuery, callback: () => void) {
     let final = $target.offset().top - this.topOffset;
     this.navigateTargetPosition(final, callback);
   }
 
-  navigateTargetPosition(final: number, callback?: any) {
+  navigateTargetPosition(final: number, callback: () => void) {
     let initial = $(window).scrollTop();
     let difference = Math.abs(final - initial);
     let duration = difference / 10 + 100;
@@ -88,54 +124,33 @@ export class NavigateSections {
     stepAnimator.call(this);
   }
 
-  updateNavSelection = () => {
-    let navSelected = false;
-    let sectionInViewport = false;
 
-    for(let navId in this.navSectionMap) {
-      let contentId = this.navSectionMap[navId];
-      let $el = $(contentId);
-      sectionInViewport = this.isSectionInViewport($el)
+  setDefaultSelected(visibleElement: string) {
+    var navId: string;
 
-      if(!this.elemSelected && $el.length == 1 && sectionInViewport) {
-        this.$stickyElement.find('li').removeClass('selected');
-        this.$stickyElement.find('.' + navId).addClass('selected');
-        navSelected = true;
-        break;
-      }
-    }
+    find(this.navSectionMap, (value, key)=> {
+      if(value === `#${visibleElement}`) { navId = `#${key}`};
+    });
 
-    if(!sectionInViewport) {
-      this.$stickyElement.find('li').removeClass('selected');
-    }
+    this.$stickyElement.find(navId).addClass('selected');
   }
 
-  private offsetHeight() {
-    let height = 0;
-
-    if(this.$stickyElement.hasClass('sticky')) {
-      height = this.$stickyElement[0].getBoundingClientRect().bottom;
-    }
-
-    return height;
-  }
-
-  private isSectionInViewport($el: JQuery) {
-    let rect = $el[0].getBoundingClientRect();
-    let offset = this.offsetHeight();
-
-    return rect.bottom >= offset && rect.top < offset + 100;
-  }
-
-  activate() {
+  activate(visibleElement: string) {
+    this.setDefaultSelected(visibleElement);
     this.stickyLeftNavigation();
 
     let _that = this;
     this.$stickyElement.find('li').on("click", function(ev: Event) {
-      _that.processNavSelection($(this), ev);
+      _that.processNavSelection($(this), ev, true);
     });
 
-    let throttleUpdateNavSelection = _.throttle(this.updateNavSelection, this.scrollDelay);
-    $(window).on("resize scroll", throttleUpdateNavSelection);
+    // let throttleUpdateNavSelection = throttle(this.updateNavSelection, this.scrollDelay);
+    // $(window).on("resize scroll", throttleUpdateNavSelection);
+
+    history.pushState({url: location.href}, '', location.href);
+
+    window.onpopstate = (e) => {
+      this.popFromHistory(e);
+    };
   }
 }

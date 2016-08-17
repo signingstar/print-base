@@ -10,6 +10,9 @@ class FilesPreviewBox extends React.Component<any, any>  {
     this.state = {
       isShowingModal: false
     }
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleClick() {
@@ -22,9 +25,16 @@ class FilesPreviewBox extends React.Component<any, any>  {
 
   render() {
     const {files} = this.props;
+    const label = 'See Preview';
+    const modalHeader = 'Selected ' + (files.length === 1 ? '1 file' : files.length + ' files') + ' to upload';
 
     return (
-      <FilesPreview onClick={this.handleClick.bind(this)} onClose={this.handleClose.bind(this)} isShowing={this.state.isShowingModal} files={files}/>
+      <FilesPreview
+        onClick={this.handleClick}
+        onClose={this.handleClose}
+        isShowing={this.state.isShowingModal}
+        label={label} files={files}
+        modalHeader={modalHeader}/>
     )
   }
 }

@@ -2,8 +2,8 @@ nav#top-nav.top-nav(
   role="navigation"
   )
   ul.menu-options
-    if navConfig
-      each top_option in navConfig
+    if origConfig
+      each top_option in origConfig
         if top_option.display
           - has_children = top_option.subElements.length > 0
           li(

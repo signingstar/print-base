@@ -5,11 +5,13 @@ class OurServices {
   shortcutMap: any;
   $mainStickyElement: JQuery;
   $moveToTopElement: JQuery;
+  $contentElement: JQuery;
 
   constructor(...stickyElements: string[]) {
-    this.shortcutMap = {'visiting-cards-nav': '#visiting-cards', 'stationary-nav': '#stationary', 'brouchers-nav': '#brouchers'};
+    this.shortcutMap = {'visiting-cards-nav': '#visiting-card', 'stationary-nav': '#stationary', 'brouchers-nav': '#broucher'};
     this.$mainStickyElement = $(stickyElements[0]);
     this.$moveToTopElement = $(stickyElements[1]);
+    this.$contentElement = $('.right-panel');
   }
 
   processStickyEvents() {
@@ -35,13 +37,14 @@ class OurServices {
 
   addPostStickEvents(stickyNavigation: NavigateSections) {
     this.$moveToTopElement.on('click', '.up-arrow', function() {
-      stickyNavigation.navigateTargetPosition(0);
+      stickyNavigation.navigateTargetPosition(0, ()=>{});
     });
   }
 
   activate() {
     let stickyNavigation = new NavigateSections(this.$mainStickyElement, this.shortcutMap);
-    stickyNavigation.activate();
+    let visibleElementId = this.$contentElement.find('.sub-section.show').attr('id');
+    stickyNavigation.activate(visibleElementId);
 
     this.processStickyEvents();
     this.addPostStickEvents(stickyNavigation);

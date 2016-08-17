@@ -1,4 +1,4 @@
-import { navConfig } from "../header/presenter";
+import { origConfig } from "../header/presenter";
 import ReactComponent from "./react_server";
 
 let debug = require("debug")('Modules:Order:Controller');
@@ -15,7 +15,7 @@ export let orderController = function({modules} : {modules: any}) {
 
       let {reactHTML, preloadedState} = ReactComponent(item);
       page.set( {
-        navConfig,
+        origConfig,
         promotional_header: true,
         navigational_header: true,
         reactHTML,

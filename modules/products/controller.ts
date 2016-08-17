@@ -1,4 +1,4 @@
-import { navConfig, customConfig } from "../header/presenter";
+import { origConfig, customConfig } from "../header/presenter";
 
 export let productsController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -11,7 +11,7 @@ export let productsController = function({modules} : {modules: any}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        navConfig,
+        origConfig,
         navId,
         promotional_header: true,
         navigational_header: true,
