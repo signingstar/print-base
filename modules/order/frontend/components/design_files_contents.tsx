@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as Dropzone from "react-dropzone";
 
-// import FilesPreview from "./file_preview";
 interface PropTypes {
   accept: string;
   onDrop: (files: File[]) => void;

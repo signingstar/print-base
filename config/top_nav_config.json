@@ -14,24 +14,24 @@ module.exports = [
     "anchorId": "l-2",
     "display": true,
     "subElements": [
-      {
+    {
         "id": "l-2-1",
         "displayText": "Business Cards",
-        "url": "/services/l-2-1",
+        "url": "/services?category=l-2-1",
         "display": true,
         "internal_url": "visiting_cards"
       },
       {
         "id": "l-2-2",
         "displayText": "Stationary",
-        "url": "/services/l-2-2",
+        "url": "/services?category=l-2-2",
         "display": true,
         "internal_url": "stationaries"
       },
       {
         "id": "l-2-3",
         "displayText": "Brouchers",
-        "url": "/services/l-2-3",
+        "url": "/services?category=l-2-3",
         "display": true,
         "internal_url": "brouchers"
       }
@@ -47,21 +47,21 @@ module.exports = [
       {
         "id": "l-3-1",
         "displayText": "Printed T-shirts",
-        "url": "/products/l-3-1",
+        "url": "/products?category=l-3-1",
         "display": true,
         "internal_url": "t_shirts"
       },
       {
         "id": "l-3-2",
         "displayText": "Printed Coffee mugs",
-        "url": "/products/l-3-2",
+        "url": "/products?category=l-3-2",
         "display": true,
         "internal_url": "mugs"
       },
       {
         "id": "l-3-3",
         "displayText": "Fancy Posters",
-        "url": "/products/l-3-3",
+        "url": "/products?category=l-3-3",
         "display": true,
         "internal_url": "posters"
       }

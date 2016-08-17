@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const FilesPreviewContent = ({files}: {files: File[]}) => {
+const FilesPreviewContent = ({files, modalHeader}: {files: File[], modalHeader: string}) => {
   const fileNodes = files.map(file => {
     return (
       <div key={file.name} className='card-box'>
@@ -12,7 +12,7 @@ const FilesPreviewContent = ({files}: {files: File[]}) => {
 
   return (
     <div className='files-preview-modal'>
-      <h3>Uploading {files.length} files...</h3>
+      <h3>{modalHeader}</h3>
       <div className='files-preview-content'>
         { fileNodes }
       </div>

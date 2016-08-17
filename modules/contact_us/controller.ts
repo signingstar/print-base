@@ -1,4 +1,4 @@
-import { navConfig } from "../header/presenter";
+import { origConfig } from "../header/presenter";
 
 export let contactUsController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -13,7 +13,7 @@ export let contactUsController = function({modules} : {modules: any}) {
         javascript: 'contact',
         stylesheet: 'contact',
         title: 'Tisko - Register',
-        navConfig
+        origConfig
       })
 
       let html = fn(page);

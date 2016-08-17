@@ -5,6 +5,8 @@ interface ModalObject {
   onClick: () => void;
   onClose: () => void;
   isShowing: boolean;
+  modalHeader: string;
+  label: string;
   files: File[];
 }
 
@@ -20,19 +22,19 @@ const customStyles = {
 };
 import FilesPreviewContent from "./files_preview_contents";
 
-const FilesPreview = ({onClick, onClose, isShowing, files}: ModalObject) => {
+const FilesPreview = ({onClick, onClose, isShowing, files, modalHeader, label}: ModalObject) => {
   if(files.length === 0) {
     return null;
   }
 
   return (
     <div className='file-preview'>
-      <button onClick={onClick}>Preview</button>
+      <a href='javascript:void(0)' onClick={onClick}>{label}</a>
       <Modal
         isOpen={isShowing}
         onRequestClose={onClose}
         style={customStyles}>
-        <FilesPreviewContent files={files}/>
+        <FilesPreviewContent files={files} modalHeader={modalHeader}/>
       </Modal>
     </div>
   );

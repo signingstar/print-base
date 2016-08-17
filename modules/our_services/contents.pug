@@ -1,24 +1,26 @@
-#service-header.header
-    .header-content
-      h2 Header for services
 #service-body.body.reverse
   .left-panel
     nav#service-item
       ul
-        li.visiting-cards-nav#visiting-cards-nav
+        li.visiting-cards-nav#visiting-cards-nav(
+          data-link='l-2-1'
+          )
           a(
-            href='#visiting-cards'
-
+            href='#'
           ) Visiting Cards
             span.menu-pointer
-        li.stationary-nav#stationary-nav
+        li.stationary-nav#stationary-nav(
+          data-link='l-2-2'
+          )
           a(
-            href='#stationary'
+            href='#'
           ) Stationary Items
             span.menu-pointer
-        li.brouchers-nav#brouchers-nav
+        li.brouchers-nav#brouchers-nav(
+          data-link='l-2-3'
+          )
           a(
-            href='#brouchers'
+            href='#'
             ) Brouchers
               span.menu-pointer
     nav#move-to-top
@@ -27,7 +29,19 @@
         )
         .arrow-text Top
   .right-panel
-    include ./heading
-    include ./visiting_cards
-    include ./stationaries
-    include ./brouchers
+    #main-heading.sub-section(
+      class=visible_section=='heading' ? 'show' : 'hide'
+      )
+      include ./heading
+    #visiting-card.sub-section(
+      class=visible_section=='l-2-1' ? 'show' : 'hide'
+      )
+      include ./visiting_cards
+    #stationary.sub-section(
+      class=visible_section=='l-2-2' ? 'show' : 'hide'
+      )
+      include ./stationaries
+    #broucher.sub-section(
+      class=visible_section=='l-2-3' ? 'show' : 'hide'
+      )
+      include ./brouchers

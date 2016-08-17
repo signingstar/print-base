@@ -1,15 +1,21 @@
 import { each, pick, omit } from "underscore";
 
-let navigationConfig = require("../../config/top_nav_config.json");
+export const origConfig = require("../../config/top_nav_config.json");
 
 interface MenuElement {
-  "id": string,
-  "displayText": string,
-  "url": string,
-  "anchorId": string,
-  "subElements": [MenuElement],
-  "display": boolean
+  id: string,
+  displayText: string,
+  url: string,
+  anchorId: string,
+  subElements: [MenuElement],
+  display: boolean
 };
+
+interface SubMenuElement {
+  id: string;
+  anchorId: string;
+  displayText: string;
+}
 
 let flattenConfig = () => {
   let navHash:any = {};
@@ -26,18 +32,28 @@ let flattenConfig = () => {
     });
   };
 
-  flatten(navigationConfig);
+  flatten(origConfig);
   return navHash;
 };
 
-let origConfig = navigationConfig;
-let flatConfig = flattenConfig();
+const flatConfig = flattenConfig();
 
-export let customConfig = function(id:string, ...fields:string[]) {
-    if(fields.length === 0) {
-      return flatConfig[id];
-    }
-    return pick(flatConfig[id], ...fields);
+export const customConfig = function(id:string, ...fields:string[]) {
+  if(fields.length === 0) {
+    return flatConfig[id];
+  }
+  return pick(flatConfig[id], ...fields);
 };
 
-export let navConfig = origConfig;
+export const isInInnerConfig = (category: string, id: string) => {
+  return origConfig.find((config: MenuElement) => {
+    if(category === config.id) {
+      const subElements = config.subElements;
+      const actualId = config.subElements.find((config) => {
+        return config.id === id;
+      });
+
+      return actualId ? actualId : undefined;
+    }
+  });
+}

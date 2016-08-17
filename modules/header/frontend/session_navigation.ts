@@ -1,6 +1,6 @@
 import * as $ from "jquery";
 
-export function addReferrer() {
+const addReferrer = () => {
   let selectors = '#user-signin, #user-signup, #user-signout';
   let currentHref = location.href;
 
@@ -14,3 +14,5 @@ export function addReferrer() {
     this.href += refUrlString;
   });
 }
+
+export default addReferrer;

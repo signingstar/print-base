@@ -1,4 +1,5 @@
-import { navConfig, customConfig } from "../header/presenter";
+import { origConfig, customConfig } from "../header/presenter";
+import mapUrlToSection from "./helper.ts";
 
 export let ourServicesController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -6,13 +7,13 @@ export let ourServicesController = function({modules} : {modules: any}) {
   return {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-      let navId = customConfig(req.query.service_type, 'id').id;
+      let visible_section = mapUrlToSection('our-services', req.query.category);
       let srcPath:string = './modules/our_services/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        navConfig,
-        navId,
+        origConfig,
+        visible_section,
         promotional_header: true,
         navigational_header: true,
         javascript: 'services',
