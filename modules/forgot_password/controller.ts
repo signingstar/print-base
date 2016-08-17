@@ -1,4 +1,4 @@
-export let forgotPasswordController = function({modules} : {modules: any}) {
+const forgotPasswordController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -10,7 +10,8 @@ export let forgotPasswordController = function({modules} : {modules: any}) {
       page.set( {
         javascript: 'session',
         stylesheet: 'session',
-        title: 'Tisko - password reset'
+        title: 'Tisko - password reset',
+        body_class: 'forgot-password'
       })
 
       let html = fn(page);
@@ -19,3 +20,5 @@ export let forgotPasswordController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default forgotPasswordController;

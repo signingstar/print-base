@@ -1,6 +1,6 @@
 import { origConfig, customConfig } from "../header/presenter";
 
-export let productsController = function({modules} : {modules: any}) {
+const productsController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -26,3 +26,5 @@ export let productsController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default productsController;

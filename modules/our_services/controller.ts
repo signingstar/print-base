@@ -1,7 +1,7 @@
 import { origConfig, customConfig } from "../header/presenter";
 import mapUrlToSection from "./helper.ts";
 
-export let ourServicesController = function({modules} : {modules: any}) {
+const ourServicesController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -18,7 +18,8 @@ export let ourServicesController = function({modules} : {modules: any}) {
         navigational_header: true,
         javascript: 'services',
         stylesheet: 'services',
-        title: 'Tisko - Our Services'
+        title: 'Tisko - Our Services',
+        body_class: 'our-services'
       });
 
       let html = fn(page);
@@ -27,3 +28,5 @@ export let ourServicesController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default ourServicesController;

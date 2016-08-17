@@ -50,6 +50,12 @@ export function routes(app: Application, globalModules: any) {
 
 	app.get("/", processRequest('homeController', 'main', processOptions));
 
+	app.get("/account", processRequest('accountController', 'main', processOptions));
+
+	app.get("/contact", processRequest('contactUsController', 'main', processOptions));
+
+	app.get("/forgot_password", processRequest('forgotPasswordController', 'main', processOptions));
+
 	app.get("/login", processRequest('loginController', 'get', processOptions));
 
 	app.post("/login", processRequest('loginController', 'post',
@@ -58,6 +64,16 @@ export function routes(app: Application, globalModules: any) {
 			responders: { redirectWithCookies }
 		}
 	));
+
+	app.get("/order", processRequest('orderController', 'main', processOptions));
+
+	app.get("/partner", processRequest('partnerController', 'main', processOptions));
+
+	app.get("/services", processRequest('ourServicesController', 'main', processOptions));
+
+	app.get("/products", processRequest('productsController', 'main', processOptions));
+
+	app.get("/signout", processRequest('signOutController', 'main', processOptions));
 
 	app.get("/signup", processRequest('signUpController', 'get', processOptions));
 
@@ -68,19 +84,5 @@ export function routes(app: Application, globalModules: any) {
 		}
 	));
 
-	app.get("/forgot_password", processRequest('forgotPasswordController', 'main', processOptions));
-
-	app.get("/contact", processRequest('contactUsController', 'main', processOptions));
-
-	app.get("/order", processRequest('orderController', 'main', processOptions));
-
-	app.get("/services", processRequest('ourServicesController', 'main', processOptions));
-
-	app.get("/products", processRequest('productsController', 'main', processOptions));
-
-	app.get("/partner", processRequest('partnerController', 'main', processOptions));
-
-	app.get("/account", processRequest('accountController', 'main', processOptions));
-
-	app.get("/signout", processRequest('signOutController', 'main', processOptions));
+	app.get("/why_us", processRequest('whyUsController', 'main', processOptions));
 };

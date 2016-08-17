@@ -1,12 +1,12 @@
 import { origConfig } from "../header/presenter";
 
-const homeController = function({modules} : {modules:any}) {
+const whyUsController = function({modules} : {modules:any}) {
   let {pug, logger} = modules;
 
   return {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/home/main.pug';
+    	let srcPath:string = './modules/why_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set({
@@ -16,7 +16,7 @@ const homeController = function({modules} : {modules:any}) {
         javascript: 'main',
         stylesheet: 'main',
         title: 'Tisko Digital Printing',
-        body_class: 'home'
+        body_class: 'why-us'
       });
 
       let html = fn(page);
@@ -26,4 +26,4 @@ const homeController = function({modules} : {modules:any}) {
   }
 }
 
-export default homeController;
+export default whyUsController;

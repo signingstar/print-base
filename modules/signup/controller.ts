@@ -1,6 +1,6 @@
 import {presenter} from "./presenter";
 
-export let signUpController = function({modules} : {modules: any}) {
+const signUpController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
@@ -14,7 +14,8 @@ export let signUpController = function({modules} : {modules: any}) {
         javascript: 'session',
         stylesheet: 'session',
         title: 'Tisko - Register',
-        refUrl
+        refUrl,
+        body_class: 'signup'
       })
 
       let html = fn(page);
@@ -30,3 +31,5 @@ export let signUpController = function({modules} : {modules: any}) {
     }
   }
 }
+
+export default signUpController;
