@@ -1,14 +1,14 @@
-import {navConfig, customConfig} from '../../modules/header/presenter';
+import {origConfig, customConfig} from '../../modules/header/presenter';
 import { expect } from 'chai';
 
-describe('Calculator', function() {
-  describe('#navConfig', () => {
+describe('Header Presenter', function() {
+  describe('#origConfig', () => {
       it('should return all configs', () => {
-          var result : number = navConfig.length;
+          var result : number = origConfig.length;
           expect(result).to.be.equal(6);
       });
       it('should return proper subElements', () => {
-          var result : number = navConfig[1].subElements.length;
+          var result : number = origConfig[1].subElements.length;
           expect(result).to.be.equal(3);
       });
   });
