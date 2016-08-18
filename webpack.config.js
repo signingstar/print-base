@@ -33,6 +33,7 @@ var config = {
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
+      'account.css':  corePath + '/frontend/account.scss',
       'main.css':     corePath + '/frontend/main.scss',
       'session.css':  corePath + '/frontend/session.scss',
       'contact.css':  corePath + '/frontend/contact.scss',

@@ -8,8 +8,8 @@ const accountController = function({modules} : {modules: any}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        javascript: 'session',
-        stylesheet: 'session',
+        javascript: 'account',
+        stylesheet: 'account',
         title: 'Tisko - My Account',
         body_class: 'account'
       })

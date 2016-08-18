@@ -43,12 +43,12 @@ class MaterialItemBox extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
+const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: printApp.selectionState.type,
-    size: printApp.selectionState.size,
-    material: printApp.selectionState.material,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_SURFACE) > -1
+    type: orderApp.selectionState.type,
+    size: orderApp.selectionState.size,
+    material: orderApp.selectionState.material,
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_SURFACE) > -1
   }
 }
 

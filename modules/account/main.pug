@@ -2,5 +2,14 @@ extends ../base/main.pug
 
 block contents
   .contents#main-contents
-    section.main-section
-      include ./contents
+
+block scripts
+  script.
+    window.__PRELOADED_STATE__= {};
+    /*window.__PRELOADED_STATE__= !{JSON.stringify(preloadedState)};*/
+  script(
+    src='/assets/react-with-addons.js'
+  )
+  script(
+    src='/assets/react-dom.js'
+  )

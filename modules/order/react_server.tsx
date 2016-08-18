@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 
 import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_QUANTITY } from "./frontend/actions";
 import MainContents from "./frontend//components/main_contents";
-import printApp from "./frontend/reducers";
+import orderApp from "./frontend/reducers";
 
 const ReactComponent = (item: string) => {
 
@@ -16,7 +16,7 @@ const ReactComponent = (item: string) => {
     }
   }
   // Create a new Redux store instance
-  const store = createStore(printApp, initialPayload);
+  const store = createStore(orderApp, initialPayload);
 
   // Render the component to a string
   const reactHTML = renderToString(

@@ -4,13 +4,13 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 
 import MainContents from "./main_contents";
-import orderApp from "../reducers";
+import accountApp from "../reducers";
 import MyWindow from "../data_types/my_window";
 
 declare var window: MyWindow;
 
 let preloadedState = window.__PRELOADED_STATE__;
-const store = createStore(orderApp, preloadedState);
+const store = createStore(accountApp, preloadedState);
 const rootElem = document.getElementById('main-contents');
 
 function render() {
