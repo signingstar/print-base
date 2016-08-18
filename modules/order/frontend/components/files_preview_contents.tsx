@@ -1,6 +1,10 @@
 import * as React from "react";
 
-const FilesPreviewContent = ({files, modalHeader}: {files: File[], modalHeader: string}) => {
+interface EnhancedFile extends File {
+  preview: string;
+}
+
+const FilesPreviewContent = ({files, modalHeader}: {files: EnhancedFile[], modalHeader: string}) => {
   const fileNodes = files.map(file => {
     return (
       <div key={file.name} className='card-box'>

@@ -1,13 +1,19 @@
 import * as React from "react";
 import * as Modal from "react-modal";
 
+import FilesPreviewContent from "./files_preview_contents";
+
 interface ModalObject {
   onClick: () => void;
   onClose: () => void;
   isShowing: boolean;
   modalHeader: string;
   label: string;
-  files: File[];
+  files: EnhancedFile[];
+}
+
+interface EnhancedFile extends File {
+  preview: string;
 }
 
 const customStyles = {
@@ -20,7 +26,6 @@ const customStyles = {
     transform             : 'translate(-50%, -50%)'
   }
 };
-import FilesPreviewContent from "./files_preview_contents";
 
 const FilesPreview = ({onClick, onClose, isShowing, files, modalHeader, label}: ModalObject) => {
   if(files.length === 0) {

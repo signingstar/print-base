@@ -1,28 +1,42 @@
-#service-header.header
-    .header-content
-      h2 Header for Products
 #service-body.body.reverse
   .left-panel
     nav#service-item
       ul
-        li.printed-tshirts-nav#printed-tshirts-nav
+        li.printed-tshirts-nav#printed-tshirts-nav(
+          data-link='l-3-1'
+          )
           a(
             href='#printed-tshirts'
-
           ) Printed T-shirts
             span.menu-pointer
-        li.printed-mugs-nav#printed-mugs-nav
+        li.printed-mugs-nav#printed-mugs-nav(
+          data-link='l-3-2'
+          )
           a(
             href='#printed-mugs'
           ) Printed Mugs
             span.menu-pointer
-        li.posters-nav#posters-nav
+        li.posters-nav#posters-nav(
+          data-link='l-3-3'
+          )
           a(
             href='#posters'
             ) Fancy Posters
               span.menu-pointer
   .right-panel
-    include ./heading
-    include ./printed_tshirts
-    include ./printed_mugs
-    include ./posters
+    #main-heading.sub-section(
+      class=visible_section=='heading' ? 'show' : 'hide'
+      )
+      include ./heading
+    #printed-tshirts.sub-section(
+      class=visible_section=='l-3-1' ? 'show' : 'hide'
+      )
+      include ./printed_tshirts
+    #printed-mugs.sub-section(
+      class=visible_section=='l-3-2' ? 'show' : 'hide'
+      )
+      include ./printed_mugs
+    #posters.sub-section(
+      class=visible_section=='l-3-3' ? 'show' : 'hide'
+      )
+      include ./posters

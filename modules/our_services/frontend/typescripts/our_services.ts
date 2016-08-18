@@ -1,14 +1,12 @@
 import * as $ from "jquery";
-import { NavigateSections } from "../../floater/frontend/parallex";
+import { NavigateSections } from "../../../floater/frontend/parallex";
 
-class OurServices {
-  shortcutMap: any;
+class ServicesAndProducts {
   $mainStickyElement: JQuery;
   $moveToTopElement: JQuery;
   $contentElement: JQuery;
 
-  constructor(...stickyElements: string[]) {
-    this.shortcutMap = {'visiting-cards-nav': '#visiting-card', 'stationary-nav': '#stationary', 'brouchers-nav': '#broucher'};
+  constructor(private shortcutMap: any, ...stickyElements: string[]) {
     this.$mainStickyElement = $(stickyElements[0]);
     this.$moveToTopElement = $(stickyElements[1]);
     this.$contentElement = $('.right-panel');
@@ -51,5 +49,4 @@ class OurServices {
   }
 }
 
-let ourServices = new OurServices('#service-item', 'nav#move-to-top');
-ourServices.activate();
+export default ServicesAndProducts;
