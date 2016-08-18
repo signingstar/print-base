@@ -1,4 +1,3 @@
-import "core-js/shim";
 import { combineReducers } from "redux";
 
 import profileState from "./profile";
