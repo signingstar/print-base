@@ -1,17 +1,17 @@
 import * as React from "react";
 
-import Profile from "./profile";
-import Orders from "./orders";
-import Subscriptions from "./subscriptions";
-import SavedItems from "./saved_items";
+import ProfileSetup from "../containers/profile";
+import OrdersSetup from "../containers/orders";
+import SubscriptionsSetup from "../containers/subscriptions";
+import SavedItemsSetup from "../containers/saved_items";
 
 const SectionBody = () => {
   return (
     <div className='main-section-body'>
-      <Profile />
-      <Orders />
-      <Subscriptions />
-      <SavedItems />
+      <ProfileSetup />
+      <OrdersSetup />
+      <SubscriptionsSetup />
+      <SavedItemsSetup />
     </div>
   );
 }

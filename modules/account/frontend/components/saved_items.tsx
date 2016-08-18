@@ -1,8 +1,12 @@
 import * as React from "react";
 
-const SavedItems = () => {
+const SavedItems = ({visible}: {visible: boolean}) => {
+  if(!visible) {
+    return null;
+  }
+
   return (
-    <h3>My Profile</h3>
+    <h3>My Saved Items</h3>
   );
 }
 
