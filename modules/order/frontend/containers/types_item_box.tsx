@@ -30,10 +30,10 @@ class TypesItemBox extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
+const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: printApp.selectionState.type,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_TYPE) > -1
+    type: orderApp.selectionState.type,
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_TYPE) > -1
   }
 }
 

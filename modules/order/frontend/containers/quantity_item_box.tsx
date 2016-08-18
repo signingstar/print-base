@@ -44,10 +44,10 @@ class QuantityItemBox extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
+const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    storeState: printApp.selectionState,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_QUANTITY) > -1
+    storeState: orderApp.selectionState,
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_QUANTITY) > -1
   }
 }
 

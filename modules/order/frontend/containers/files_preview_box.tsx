@@ -39,9 +39,9 @@ class FilesPreviewBox extends React.Component<any, any>  {
   }
 }
 
-const mapStateToProps = (printApp: any) => {
+const mapStateToProps = (orderApp: any) => {
   return {
-    files: printApp.selectionState.files || []
+    files: orderApp.selectionState.files || []
   }
 }
 

@@ -43,13 +43,13 @@ class CoatingBox extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
+const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: printApp.selectionState.type,
-    size: printApp.selectionState.size,
-    material: printApp.selectionState.material,
-    coat: printApp.selectionState.coat,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_COAT) > -1
+    type: orderApp.selectionState.type,
+    size: orderApp.selectionState.size,
+    material: orderApp.selectionState.material,
+    coat: orderApp.selectionState.coat,
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_COAT) > -1
   }
 }
 

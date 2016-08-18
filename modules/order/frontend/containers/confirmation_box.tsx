@@ -4,8 +4,8 @@ import ConfirmationItems from "../components/confirmation_items";
 import { resetAll, CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY } from "../actions";
 import { fetchLabelForCategoryAndId } from "../presenter";
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
-  let { type, size, material, coat, quantity, files } = printApp.selectionState;
+const mapStateToProps = (orderApp: any, ownProps: any) => {
+  let { type, size, material, coat, quantity, files } = orderApp.selectionState;
 
   type =  fetchLabelForCategoryAndId(CATEGORY_TYPE, type);
   size = fetchLabelForCategoryAndId(CATEGORY_SIZE, size);

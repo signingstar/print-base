@@ -1,1 +1,42 @@
-My Account Page
+nav.account-nav(
+  role="navigation"
+  )
+  ul.menu-options
+    li#my-profile.nav-item
+      a.top-nav-link(
+        href='#'
+        id= ''
+        role= 'menuitem'
+      ) My Profile
+    li#my-orders.nav-item
+      a.top-nav-link(
+        href='#'
+        id= ''
+        role= 'menuitem'
+      ) My Orders
+    li#my-subscriptions.nav-item
+      a.top-nav-link(
+        href='#'
+        id= ''
+        role= 'menuitem'
+      ) My Subscriptions
+    li#saved-items.nav-item
+      a.top-nav-link(
+        href='#'
+        id= ''
+        role= 'menuitem'
+      ) My Saved Items
+
+.separator
+#account-items
+  .sub-section
+    include ./profile
+
+  .sub-section
+    include ./orders
+
+  .sub-section
+    include ./subscriptions
+
+  .sub-section
+    include ./saved_items

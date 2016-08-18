@@ -38,11 +38,11 @@ class SizesItemBox extends React.Component<any, any> {
   }
 }
 
-const mapStateToProps = (printApp: any, ownProps: any) => {
+const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: printApp.selectionState.type,
-    size: printApp.selectionState.size,
-    shouldUpdate: printApp.selectionState.updateComponents.indexOf(CATEGORY_SIZE) > -1
+    type: orderApp.selectionState.type,
+    size: orderApp.selectionState.size,
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_SIZE) > -1
   }
 }
 

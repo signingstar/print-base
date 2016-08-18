@@ -91,8 +91,11 @@ header.top-header {
         > li {
           cursor: pointer;
           display: inline-block;
+          height: 40px;
 
           &:hover {
+            border-bottom: 2px solid $link-color-normal;
+
             .menu-pointer {
               border-top: none;
               border-bottom: 8px solid $link-color-normal;

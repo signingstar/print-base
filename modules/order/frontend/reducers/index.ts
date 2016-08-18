@@ -3,8 +3,8 @@ import { combineReducers } from "redux";
 
 import selectionState from "./selection_state";
 
-const printApp = combineReducers({
+const orderApp = combineReducers({
   selectionState
 })
 
-export default printApp
+export default orderApp
