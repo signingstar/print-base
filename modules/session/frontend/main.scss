@@ -40,7 +40,7 @@ body #main-contents .main-section{
       border-left: 1px solid $light-gray;
     }
 
-    .session-form {
+    form, .session-form {
 
       fieldset {
         border: 0;
