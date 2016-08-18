@@ -13,6 +13,10 @@
     padding: 0 10px;
   }
 
+  .sub-section {
+    margin: 10px 0;
+  }
+
   .slide-image {
     background-image: url('/assets/slide_image3.jpg');
     @include transition(background-image, 0.5s);
