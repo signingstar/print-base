@@ -2,11 +2,11 @@ extends ../base/main.pug
 
 block contents
   .contents#main-contents
+    | !{reactHTML}
 
 block scripts
   script.
-    window.__PRELOADED_STATE__= {};
-    /*window.__PRELOADED_STATE__= !{JSON.stringify(preloadedState)};*/
+    window.__PRELOADED_STATE__= !{JSON.stringify(preloadedState)};
   script(
     src='/assets/react-with-addons.js'
   )

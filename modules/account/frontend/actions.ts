@@ -1,9 +1,9 @@
 //Action Types
-export const SET_PROFILE = 'SET_PROFILE';
+export const SET_TOP_NAV = 'SET_TOP_NAV';
 
-export const setProfile = (id: string) => {
+export const selectTopNav = (id: string) => {
   return {
-    type: SET_PROFILE,
+    type: SET_TOP_NAV,
     value: id
   };
 }
