@@ -38,7 +38,7 @@ module.exports = [
     ]
   },
   {
-    "id": "our-products",
+    "id": "products",
     "displayText": "Our Products",
     "url": "/products",
     "anchorId": "l-3",

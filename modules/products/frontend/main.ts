@@ -1,32 +1,6 @@
-import * as $ from "jquery";
-import { NavigateSections } from "../../floater/frontend/parallex";
+import ServicesAndProducts from "../../our_services/frontend/typescripts/our_services";
 
-class OurServices {
-  shortcutMap: any;
-  $mainStickyElement: JQuery;
+const shortcutMap = {'printed-tshirts-nav': '#printed-tshirts', 'printed-mugs-nav': '#printed-mugs', 'posters-nav': '#posters'};
 
-  constructor(...stickyElements: JQuery[]) {
-    this.shortcutMap = {'printed-tshirts-nav': '#printed-tshirts', 'printed-mugs-nav': '#printed-mugs', 'posters-nav': '#posters'};
-    this.$mainStickyElement = stickyElements[0];
-  }
-
-  processStickEvents() {
-    this.$mainStickyElement.on('stickElement', (ev, data) => {
-      this.$mainStickyElement.addClass('sticky');
-      this.$mainStickyElement.css('width', data.width);
-    });
-    this.$mainStickyElement.on('unstickElement', () => {
-      this.$mainStickyElement.removeClass('sticky');
-    });
-  }
-
-  activate() {
-    let stickyNavigation = new NavigateSections(this.$mainStickyElement, this.shortcutMap);
-    stickyNavigation.activate();
-
-    this.processStickEvents();
-  }
-}
-
-let ourServices = new OurServices($('#service-item'));
+let ourServices = new ServicesAndProducts(shortcutMap, '#service-item');
 ourServices.activate();

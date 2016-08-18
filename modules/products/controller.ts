@@ -1,4 +1,5 @@
 import { origConfig, customConfig } from "../header/presenter";
+import mapUrlToSection from "./helper.ts";
 
 const productsController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -6,18 +7,19 @@ const productsController = function({modules} : {modules: any}) {
   return {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-      let navId = customConfig(req.query.product_type, 'id').id;
+      let visible_section = mapUrlToSection('products', req.query.category);
     	let srcPath:string = './modules/products/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
         origConfig,
-        navId,
+        visible_section,
         promotional_header: true,
         navigational_header: true,
         javascript: 'products',
         stylesheet: 'services',
-        title: 'Tisko - Our Products'
+        title: 'Tisko - Our Products',
+        body_class: 'products'
       });
 
       let html = fn(page);

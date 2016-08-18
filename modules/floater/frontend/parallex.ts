@@ -75,7 +75,8 @@ export class NavigateSections {
   }
 
   popFromHistory(e: any) {
-    let state = e.state;
+    let {state} = e;
+
     if(state != null ) {
       let category = state.category;
       let $el = this.$stickyElement.find(`li[data-link=${category}]`);
@@ -87,7 +88,6 @@ export class NavigateSections {
         this.processNavSelection($el, undefined, false);
       }
     }
-    console.log(`state:${JSON.stringify(e.state)} | ${location.pathname}`);
   }
 
   navigateTargetSection($target: JQuery, callback: () => void) {
