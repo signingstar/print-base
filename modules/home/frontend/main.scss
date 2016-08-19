@@ -17,27 +17,42 @@
     margin: 10px 0;
   }
 
-  .slide-image {
-    background-image: url('/assets/slide_image3.jpg');
-    @include transition(background-image, 0.5s);
-    background-size: cover;
+  .container {
+    align-items: center;
+    display: flex;
+    margin: 0 auto;
+    text-align: center;
     position: relative;
-    width: 100%;
-    height: 300px;
 
-    .image-text {
-      color: $white;
+    .nav-item {
       position: absolute;
-      top: 100%;
-      font-size: 20px;
-      transform: translateY(-100%);
-      text-align: right;
+      display: flex;
+      justify-content: space-between;
       width: 100%;
 
-      h1 {
-        text-align: left;
-        padding-left: 760px;
+      .next {
+        background-image: url('/assets/plainicon_right.png');
+        background-size: cover;
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
       }
+
+      .prev {
+        background-image: url('/assets/plainicon_left.png');
+        background-size: cover;
+        cursor: pointer;
+        height: 60px;
+        width: 60px;
+      }
+
+    }
+    .slider-item {
+      @include transition(background-image, 0.5s);
+      background-size: cover;
+      display: none;
+      height: 300px;
+      width: 100%;
     }
   }
 }

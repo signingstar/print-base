@@ -94,7 +94,7 @@ header.top-header {
           height: 40px;
 
           &:hover {
-            border-bottom: 2px solid $link-color-normal;
+            border-bottom: 2px solid $button-hover-color;
 
             .menu-pointer {
               border-top: none;
