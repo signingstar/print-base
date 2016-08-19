@@ -1,15 +1,61 @@
 import * as $ from "jquery";
 
-function slideShow() {
-  var regex = /^url\([0-9\:a-z\.\'\"\/]+\/assets\/slide_image([0-9]?)\.jpg[\'\"]\)$/;
-  setInterval(function() {
-    let imageUrl = $('.slide-image').css('background-image');
-    regex.test(imageUrl);
-    let count:number = +RegExp.$1;
-    count = (count + 1) %3 + 1;
-    imageUrl = `url('/assets/slide_image${count}.jpg')`;
-    $('.slide-image').css('background-image', imageUrl);
-  }, 3000);
+class SlideShow {
+  $container: JQuery;
+  $navItems: JQuery;
+  $sliderItem: JQuery;
+  currentIndex: number;
+  itemCount: number;
+
+  constructor() {
+    this.$container = $('.container');
+    this.$navItems = this.$container.find('.nav-item');
+    this.$sliderItem = this.$container.find('.slider-item');
+    this.currentIndex = 0;
+    this.itemCount = this.$sliderItem.length;
+  }
+
+  cycleItems() {
+    let $item = this.$sliderItem.eq(this.currentIndex);
+    this.$sliderItem.hide();
+    $item.show();
+  }
+
+  startCycle () {
+    this.currentIndex += 1;
+    if (this.currentIndex > this.itemCount - 1) {
+      this.currentIndex = 0;
+    }
+    this.cycleItems();
+  }
+
+  activate() {
+    var autoSlide = setInterval(()=>this.startCycle.apply(this), 3000);
+
+    $('.next').click(function() {
+      this.currentIndex += 1;
+      if (this.currentIndex > this.itemCount - 1) {
+        this.currentIndex = 0;
+      }
+      this.cycleItems();
+    });
+
+    $('.prev').click(() => {
+      this.currentIndex -= 1;
+      if (this.currentIndex < 0) {
+        this.currentIndex = this.itemCount - 1;
+      }
+      this.cycleItems();
+    });
+
+    $('.next, .prev').mouseover(() => {
+      clearInterval(autoSlide);
+    }).mouseout(() => {
+      autoSlide = setInterval(()=>this.startCycle.apply(this), 3000);
+    });
+  }
 }
 
-slideShow();
+let slideShow = new SlideShow();
+
+slideShow.activate();
