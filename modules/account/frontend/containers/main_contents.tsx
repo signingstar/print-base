@@ -1,10 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import { Router, hashHistory } from "react-router";
 import { ajax } from "jquery";
 
-import SectionLinkContainer from "../containers/section_links";
-import routes from "../routes";
 import MainContents from "../components/main_contents";
 import { mapInternalCategoryToUrlPath } from "../../helper";
 import { updateAllStates } from "../actions";

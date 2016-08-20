@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Subscriptions from "../components/subscriptions";
 import GlobalState from "../data_types/global_state";
 
-class SubscriptionsSetup extends React.Component<any, any>{
+class SubscriptionsContainer extends React.Component<any, any>{
   constructor() {
     super();
   }
@@ -24,4 +24,4 @@ const mapStateToProps = (state: GlobalState, ownProps: any) => {
 
 export default connect(
   mapStateToProps
-)(SubscriptionsSetup);
+)(SubscriptionsContainer);

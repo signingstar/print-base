@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import Orders from "../components/orders";
 import GlobalState from "../data_types/global_state";
 
-class OrdersSetup extends React.Component<any, any>{
+class OrdersContainer extends React.Component<any, any>{
   constructor() {
     super();
   }
@@ -24,4 +24,4 @@ const mapStateToProps = (state: GlobalState, ownProps: any) => {
 
 export default connect(
   mapStateToProps
-)(OrdersSetup);
+)(OrdersContainer);

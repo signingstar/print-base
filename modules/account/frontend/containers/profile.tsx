@@ -4,14 +4,11 @@ import {connect} from "react-redux";
 import MyProfile from "../components/profile";
 import GlobalState from "../data_types/global_state";
 
-class ProfileSetup extends React.Component<any, any>{
+class ProfileContainer extends React.Component<any, any>{
   constructor() {
     super();
   }
 
-  componentDidMount() {
-    console.log('profile component');
-  }
   render() {
     let { state } = this.props;
 
@@ -27,4 +24,4 @@ const mapStateToProps = (state: GlobalState, ownProps: any) => {
 
 export default connect(
   mapStateToProps
-)(ProfileSetup);
+)(ProfileContainer);

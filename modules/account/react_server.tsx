@@ -19,7 +19,6 @@ const mapUrlToState = (category: string = '') => {
   let activeState: string = mapUrlPathToInternalCategory(category);
   let loadedState: {key: string, value: any} = undefined;
 
-  console.log(`activeState:${activeState}`);
   switch(category) {
     case '':
     case 'profile':
