@@ -1,12 +1,13 @@
-import { SET_TOP_NAV, LOCATION_CHANGE } from "../actions";
+import { LOCATION_CHANGE } from "../actions";
+import { mapUrlPathToInternalCategory } from "../../helper"
 
 const defaultMenuState = {
   active: 'profile'
 }
 
 const getActiveUrl = (path: string) => {
-  let relativePath = path.lastIndexOf('/') > 0 ? path.slice(path.lastIndexOf('/') + 1) : 'profile';
-  return relativePath;
+  let relativePath = path.lastIndexOf('/') > 0 ? path.slice(path.lastIndexOf('/') + 1) : '';
+  return mapUrlPathToInternalCategory(relativePath);
 };
 
 const menuState = (state: any = defaultMenuState, {type, payload={}}: {type: string, payload?: any}) => {

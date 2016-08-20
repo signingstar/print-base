@@ -45,13 +45,16 @@ export function routes(app: Application, globalModules: any) {
 		},
 		responders: {
 			html: responders.html,
-			error: responders.error
+			error: responders.error,
+			json: responders.json
 		}
 	};
 
 	app.get("/", processRequest('homeController', 'main', processOptions));
 
 	app.get("/account", processRequest('accountController', 'main', processOptions));
+
+	app.get("/account/details", processRequest('accountController', 'details', processOptions));
 
 	app.get("/account/:category", processRequest('accountController', 'main', processOptions));
 

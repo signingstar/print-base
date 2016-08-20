@@ -5,14 +5,14 @@ import menuState from "./menu";
 import profileState from "./profile";
 import ordersState from "./orders";
 import savedItemsState from "./saved_items";
-import subscriptionState from "./subscriptions";
+import subscriptionsState from "./subscriptions";
 
 const accountApp = combineReducers({
   menuState,
   profileState,
   ordersState,
   savedItemsState,
-  subscriptionState,
+  subscriptionsState,
   routing: routerReducer
 })
 

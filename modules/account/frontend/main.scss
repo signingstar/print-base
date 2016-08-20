@@ -12,21 +12,23 @@ nav.account-nav {
     .nav-item {
       cursor: pointer;
       display: inline-block;
-      height: 40px;
 
       &.selected {
         border-bottom: 2px solid $nav-active-bottom;
       }
 
-      &:hover {
-        border-top: none;
-        border-bottom: 2px solid $button-hover-color;
-      }
-
-      > a {
+      a {
         display: block;
         font-weight: 300;
         line-height: 40px;
+
+        &.selected {
+            border-bottom: 2px solid $nav-active-bottom;
+          }
+        
+        &:hover {
+          border-bottom: 2px solid $button-hover-color;
+        }
       }
     }
   }
