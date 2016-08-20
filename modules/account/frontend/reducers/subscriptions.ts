@@ -7,7 +7,7 @@ const defaultSubscriptionState = {
 const subscriptionsState = (state: any = defaultSubscriptionState, {type, details}: {type: string, details?: any}) => {
   switch (type) {
     case UPDATE_ALL:
-      return Object.assign({}, state, details.subscriptions);
+      return Object.assign({}, state, details['subscriptions']);
     default:
       return state;
   }

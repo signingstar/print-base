@@ -7,7 +7,7 @@ const defaultSavedItemState = {
 const savedItemsState = (state: any = defaultSavedItemState, {type, details}: {type: string, details?: any}) => {
   switch (type) {
     case UPDATE_ALL:
-      return Object.assign({}, state, details.savedItems);
+      return Object.assign({}, state, details['saved-items']);
     default:
       return state;
   }

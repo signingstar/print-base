@@ -7,7 +7,7 @@ const defaultProfileState = {
 const profileState = (state: any = defaultProfileState, {type, details}: {type: string, details?: any}) => {
   switch (type) {
     case UPDATE_ALL:
-      return Object.assign({}, state, details.profile);
+      return Object.assign({}, state, details['profile']);
     default:
       return state;
   }
