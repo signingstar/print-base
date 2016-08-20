@@ -7,6 +7,8 @@ import { ReactRouterReduxHistory } from "react-router-redux";
 
 import MainContents from "./frontend/components/main_contents";
 import createStore from "./frontend/store";
+import AccountDetails from "./mock_data/details";
+import { mapUrlPathToInternalCategory } from "./helper";
 
 interface RenderProps extends RouterState {
   router: any,
@@ -14,26 +16,22 @@ interface RenderProps extends RouterState {
 }
 
 const mapUrlToState = (category: string = '') => {
-  let activeState: string = undefined;
+  let activeState: string = mapUrlPathToInternalCategory(category);
   let loadedState: {key: string, value: any} = undefined;
 
   switch(category) {
     case '':
     case 'profile':
-      activeState = 'profile';
-      loadedState = { key: 'profileState', value: {loaded: true}};
+      loadedState = { key: 'profileState', value: {loaded: true, name: AccountDetails.profile.name}};
       break;
     case 'subscriptions':
-      activeState = 'subscriptions';
-      loadedState = { key: 'subscriptionState', value: {loaded: true}};
+      loadedState = { key: 'subscriptionsState', value: {loaded: true, subscription: AccountDetails.subscriptions.subscription}};
       break;
     case 'orders':
-      activeState = 'orders';
-      loadedState = { key: 'ordersState', value: {loaded: true}};
+      loadedState = { key: 'ordersState', value: {loaded: true, count: AccountDetails.orders.count}};
       break;
-    case 'saved_items':
-      activeState = 'savedItems';
-      loadedState = { key: 'savedItemsState', value: {loaded: true}};
+    case 'saved-items':
+      loadedState = { key: 'savedItemsState', value: {loaded: true, savedItem: AccountDetails.savedItems.savedItem}};
       break;
   }
 

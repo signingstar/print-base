@@ -1,17 +1,17 @@
-import * as Action_Items from "../actions";
+import { UPDATE_ALL} from "../actions";
 
 const defaultSubscriptionState = {
   loaded: false
 }
 
-const subscriptionState = (state: any = defaultSubscriptionState, action: {type: string, value?: string}) => {
-  let {type, value} = action;
-
-  switch (action.type) {
+const subscriptionsState = (state: any = defaultSubscriptionState, {type, details}: {type: string, details?: any}) => {
+  switch (type) {
+    case UPDATE_ALL:
+      return Object.assign({}, state, details.subscriptions);
     default:
       return state;
   }
 
 }
 
-export default subscriptionState;
+export default subscriptionsState;

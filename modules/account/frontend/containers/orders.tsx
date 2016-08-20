@@ -2,29 +2,26 @@ import * as React from "react";
 import {connect} from "react-redux";
 
 import Orders from "../components/orders";
-import { selectTopNav } from "../actions";
 import GlobalState from "../data_types/global_state";
 
-class OrdersSetup extends React.Component<any, any>{
+class OrdersContainer extends React.Component<any, any>{
   constructor() {
     super();
   }
 
   render() {
-    let { visible } = this.props;
+    let { state } = this.props;
 
-    return <Orders visible={visible} />
+    return <Orders state={state} />
   }
 }
 
 const mapStateToProps = (state: GlobalState, ownProps: any) => {
-  let visible = state.menuState.active === 'orders';
-
   return {
-    visible
+    state: state.ordersState
   }
 }
 
 export default connect(
   mapStateToProps
-)(OrdersSetup);
+)(OrdersContainer);

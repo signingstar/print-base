@@ -1,10 +1,10 @@
 //Action Types
-export const SET_TOP_NAV = 'SET_TOP_NAV';
+export const UPDATE_ALL = 'UPDATE_ALL';
 export const LOCATION_CHANGE = '@@router/LOCATION_CHANGE';
 
-export const selectTopNav = (id: string) => {
+export const updateAllStates = (details: any) => {
   return {
-    type: SET_TOP_NAV,
-    value: id
+    type: UPDATE_ALL,
+    details
   };
 }

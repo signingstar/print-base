@@ -1,8 +1,8 @@
 import * as React from "react";
 
-const Orders = ({visible}: {visible: boolean}) => {
+const Orders = ({state}: {state: any}) => {
   return (
-    <h3>My Orders</h3>
+    <h3>My Orders: {state.count}</h3>
   );
 }
 

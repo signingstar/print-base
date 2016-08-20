@@ -1,8 +1,8 @@
 import * as React from "react";
 
-const SavedItems = ({visible}: {visible: boolean}) => {
+const SavedItems = ({state}: {state: any}) => {
   return (
-    <h3>My Saved Items</h3>
+    <h3>My Saved Items - {state.savedItem}</h3>
   );
 }
 

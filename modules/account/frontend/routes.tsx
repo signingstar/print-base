@@ -5,9 +5,9 @@ import ProfileContainer from "./containers/profile";
 import OrdersContainer from "./containers/orders";
 import SubscriptionsContainer from "./containers/subscriptions";
 import SavedItemsContainer from "./containers/saved_items";
-import MainContents from "./components/main_contents";
+import MainContentsContainer from "./containers/main_contents";
 
-const routes = <Route path="/account" component={MainContents}>
+const routes = <Route path="/account" component={MainContentsContainer}>
       <IndexRoute component={ProfileContainer} />
       <Route path="profile" component={ProfileContainer} />
       <Route path="orders" component={OrdersContainer} />

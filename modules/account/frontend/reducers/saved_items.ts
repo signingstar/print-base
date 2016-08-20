@@ -1,13 +1,13 @@
-import * as Action_Items from "../actions";
+import { UPDATE_ALL} from "../actions";
 
 const defaultSavedItemState = {
   loaded: false
 }
 
-const savedItemsState = (state: any = defaultSavedItemState, action: {type: string, value?: string}) => {
-  let {type, value} = action;
-
-  switch (action.type) {
+const savedItemsState = (state: any = defaultSavedItemState, {type, details}: {type: string, details?: any}) => {
+  switch (type) {
+    case UPDATE_ALL:
+      return Object.assign({}, state, details.savedItems);
     default:
       return state;
   }

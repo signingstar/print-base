@@ -1,8 +1,8 @@
 import * as React from "react";
 
-const MyProfile = ({visible}: {visible: boolean}) => {
+const MyProfile = ({state}: {state: any}) => {
   return (
-    <h3>My Profile</h3>
+    <h3>{state.name} Profile</h3>
   );
 }
 

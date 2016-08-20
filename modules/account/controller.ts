@@ -1,15 +1,18 @@
 import ReactComponent from "./react_server";
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import { omit } from "underscore";
 
 import configureStore from "./frontend/store";
-import routes from "./frontend/routes"
+import routes from "./frontend/routes";
+import AccountDetails from "./mock_data/details";
+import { mapUrlPathToInternalCategory } from "./helper";
 
 const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
-    main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
+    main: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
       let {req, res} = attributes;
     	let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -47,6 +50,19 @@ const accountController = function({modules} : {modules: any}) {
           responders.error();
         }
       });
+    },
+
+    details: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
+      let {req, res} = attributes;
+      let { active } = req.query;
+      let internalCategory = mapUrlPathToInternalCategory(active);
+      console.log(`active:${JSON.stringify(active)} | internalCategory:${internalCategory}`);
+
+
+      let json = omit(AccountDetails, (value: any, key: string)=> {
+        return key === internalCategory;
+      });
+      responders.json(json);
     }
   }
 }

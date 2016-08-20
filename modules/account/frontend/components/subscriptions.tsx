@@ -1,8 +1,8 @@
 import * as React from "react";
 
-const Subscriptions = ({visible}: {visible: boolean}) => {
+const Subscriptions = ({state}: {state: any}) => {
   return (
-    <h3>My Subscriptions</h3>
+    <h3>Subscriptions - {state.subscription}</h3>
   );
 }
 
