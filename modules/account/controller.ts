@@ -20,23 +20,33 @@ const accountController = function({modules} : {modules: any}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      match({history, routes, location}, (error, redirectLocation, renderProps) => {
-        let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
+      match({routes, location, history}, (error, redirectLocation, renderProps) => {
+        if(renderProps) {
+          console.log(`error:${error} | renderProps:${renderProps}`);
+          let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
-        page.set( {
-          javascript: 'account',
-          stylesheet: 'account',
-          title: 'Tisko - My Account',
-          body_class: 'account',
-          reactHTML,
-          preloadedState
-        });
+          page.set( {
+            javascript: 'account',
+            stylesheet: 'account',
+            title: 'Tisko - My Account',
+            body_class: 'account',
+            reactHTML,
+            preloadedState
+          });
 
-        let html = fn(page);
+          let html = fn(page);
 
-        responders.html(html);
+          responders.html(html);
+        } else if (redirectLocation) {
+          let redirectionPath = redirectLocation.pathname + redirectLocation.search;
+          logger.info(`Redirecting to: ${redirectionPath}`);
+          res.redirect(302, redirectionPath);
+        }
+        else {
+          logger.info(`renderProps is not passed`);
+          responders.error();
+        }
       });
-
     }
   }
 }

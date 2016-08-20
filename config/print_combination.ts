@@ -1,4 +1,4 @@
-const PrintData = {
+const PrintData:{[key: string]: any} = {
   "type":{
     "visiting_card": {
       "label": "Visiting Cards",
