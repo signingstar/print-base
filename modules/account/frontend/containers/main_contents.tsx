@@ -3,19 +3,18 @@ import { connect } from "react-redux";
 import { ajax } from "jquery";
 
 import MainContents from "../components/main_contents";
-import { mapInternalCategoryToUrlPath } from "../../helper";
 import { updateAllStates } from "../actions";
 
 class MainContentsContainer extends React.Component<any, any> {
   componentDidMount() {
     let {state, onDetailsLoad} = this.props;
     let url = '/account/details';
-    let active = mapInternalCategoryToUrlPath(state.menuState.active);
+    let { pathname } = this.props.location;
 
     ajax({
       url,
       cache: false,
-      data: {active},
+      data: {pathname},
       dataType: 'json',
       success: function(data: any) {
         onDetailsLoad(data);

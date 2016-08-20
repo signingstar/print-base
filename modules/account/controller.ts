@@ -54,14 +54,11 @@ const accountController = function({modules} : {modules: any}) {
 
     details: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
       let {req, res} = attributes;
-      let { active } = req.query;
-      let internalCategory = mapUrlPathToInternalCategory(active);
-      console.log(`active:${JSON.stringify(active)} | internalCategory:${internalCategory}`);
+      let { pathname } = req.query;
 
+      pathname = pathname.replace('/account/', '');
+      let json = omit(AccountDetails, (value: any, key: string) => key === pathname);
 
-      let json = omit(AccountDetails, (value: any, key: string)=> {
-        return key === internalCategory;
-      });
       responders.json(json);
     }
   }

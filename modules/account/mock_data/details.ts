@@ -1,22 +1,19 @@
 interface AccountData {
-  profile: any;
-  orders: any;
-  subscriptions: any,
-  savedItems: any
+  [key: string]: any
 }
 
 const AccountDetails: AccountData = {
-  profile: {
-    name: 'Amul'
+  "profile": {
+    name: "Amul"
   },
-  orders: {
+  "orders": {
     count: 5
   },
-  subscriptions: {
-    subscription: 'Daily Newsletter'
+ "subscriptions": {
+    subscription: "Daily Newsletter"
   },
-  savedItems: {
-    savedItem: 'Orange'
+  "saved-items": {
+    savedItem: "Orange"
   }
 }
 
