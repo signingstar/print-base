@@ -7,8 +7,12 @@ import routes from "../routes";
 const MainContents = ({children}: {children: any}) => {
   return (
     <section className='main-section'>
-      <SectionLinkContainer />
-      {children}
+      <section className='main-section-content'>
+        <SectionLinkContainer />
+        <div className='account-items'>
+          {children}
+        </div>
+      </section>
     </section>
   );
 }
