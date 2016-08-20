@@ -16,7 +16,7 @@ class SubscriptionsSetup extends React.Component<any, any>{
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: GlobalState, ownProps: any) => {
   let visible = state.menuState.active === 'subscriptions';
 
   return {
