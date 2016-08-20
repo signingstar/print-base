@@ -32,7 +32,7 @@ class SlideShow {
   activate() {
     var autoSlide = setInterval(()=>this.startCycle.apply(this), 3000);
 
-    $('.next').click(function() {
+    $('.next').click(() => {
       this.currentIndex += 1;
       if (this.currentIndex > this.itemCount - 1) {
         this.currentIndex = 0;

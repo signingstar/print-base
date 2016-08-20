@@ -52,6 +52,8 @@ export function routes(app: Application, globalModules: any) {
 
 	app.get("/account", processRequest('accountController', 'main', processOptions));
 
+	app.get("/account/:category", processRequest('accountController', 'main', processOptions));
+
 	app.get("/contact", processRequest('contactUsController', 'main', processOptions));
 
 	app.get("/forgot_password", processRequest('forgotPasswordController', 'main', processOptions));

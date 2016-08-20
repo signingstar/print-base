@@ -1,29 +1,29 @@
 import * as React from "react";
 import {connect} from "react-redux";
 
-import SavedItems from "../components/saved_items";
+import SectionLinks from "../components/section_links";
 import { selectTopNav } from "../actions";
 import GlobalState from "../data_types/global_state";
 
-class SubscriptionsSetup extends React.Component<any, any>{
+class SectionLinkContainer extends React.Component<any, any>{
   constructor() {
     super();
   }
 
   render() {
-    let { visible } = this.props;
-    return <SavedItems visible={visible} />
+    let {active, children} = this.props;
+    return <SectionLinks active={active} children={children}/>
   }
 }
 
 const mapStateToProps = (state: GlobalState, ownProps: any) => {
-  let visible = state.menuState.active === 'savedItems';
+  let {active} = state.menuState;
 
   return {
-    visible
+    active
   }
 }
 
 export default connect(
   mapStateToProps
-)(SubscriptionsSetup);
+)(SectionLinkContainer);

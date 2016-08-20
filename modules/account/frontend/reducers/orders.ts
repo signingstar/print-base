@@ -1,6 +1,7 @@
 import * as Action_Items from "../actions";
 
 const defaultOrderState = {
+  loaded: false
 }
 
 const ordersState = (state: any = defaultOrderState, action: {type: string, value?: string}) => {

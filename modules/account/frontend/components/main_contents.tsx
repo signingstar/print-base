@@ -1,13 +1,14 @@
 import * as React from "react";
+import { Router, hashHistory } from 'react-router';
 
-import MenuStates from "../containers/menu_states";
-import SectionBody from "./section_body";
+import SectionLinkContainer from "../containers/section_links";
+import routes from "../routes";
 
-const MainContents = () => {
+const MainContents = ({children}: {children: any}) => {
   return (
     <section className='main-section'>
-      <MenuStates />
-      <SectionBody />
+      <SectionLinkContainer />
+      {children}
     </section>
   );
 }
