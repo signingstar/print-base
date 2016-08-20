@@ -13,11 +13,12 @@ interface RenderProps extends RouterState {
   createElement: any
 }
 
-const mapUrlToState = (category: string) => {
+const mapUrlToState = (category: string = '') => {
   let activeState: string = undefined;
   let loadedState: {key: string, value: any} = undefined;
 
   switch(category) {
+    case '':
     case 'profile':
       activeState = 'profile';
       loadedState = { key: 'profileState', value: {loaded: true}};
@@ -51,6 +52,7 @@ const mapUrlToState = (category: string) => {
 
 const ReactComponent = (renderProps: RenderProps, category: string, history: ReactRouterReduxHistory) => {
   let initialPayload = mapUrlToState(category)
+
   // Create a new Redux store instance
   const store = createStore(history, initialPayload);
 
