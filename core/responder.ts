@@ -13,5 +13,18 @@ export let responders = {
       });
       res.end(html);
     }
+  },
+
+  error: function(res: Response, next: any) {
+    return function(html: string, err: any) {
+      if(err) {
+        return next(err);
+      }
+
+      res.writeHead(500, {
+        "Content-Type": "text/html"
+      });
+      res.end('Internal Server Error');
+    }
   }
 };

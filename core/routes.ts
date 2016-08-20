@@ -44,7 +44,8 @@ export function routes(app: Application, globalModules: any) {
 			return {req, res}
 		},
 		responders: {
-			html: responders.html
+			html: responders.html,
+			error: responders.error
 		}
 	};
 

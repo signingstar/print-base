@@ -17,7 +17,11 @@ let { logger } = globalModules;
 
 middleware(app, globalModules);
 
-let routingFunctions = function(app: express.Application) {
+interface CustomApp extends express.Application {
+	[key: string]: any;
+}
+
+let routingFunctions = function(app: CustomApp) {
 	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method: string) {
 		let func = function(route: string) {
 			logger.info(`[ROUTER] Mounting routes: ${route}`);

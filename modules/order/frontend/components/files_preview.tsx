@@ -17,7 +17,7 @@ interface EnhancedFile extends File {
 }
 
 const customStyles = {
-  content : {
+  content: {
     top          : '50%',
     left         : '50%',
     right        : 'auto',

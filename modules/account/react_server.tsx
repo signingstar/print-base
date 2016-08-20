@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from "react-redux";
 import { RouterContext, RouterState } from "react-router";
 import { ReactRouterReduxHistory } from "react-router-redux";
+(React as any).__spread = Object.assign;
 
 import MainContents from "./frontend/components/main_contents";
 import createStore from "./frontend/store";
@@ -36,7 +37,7 @@ const mapUrlToState = (category: string) => {
   }
 
 
-  let retValue = {
+  let retValue:{[key: string]: any} = {
     menuState: {active: activeState},
   };
 
