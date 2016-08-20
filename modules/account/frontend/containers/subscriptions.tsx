@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 
 import Subscriptions from "../components/subscriptions";
 import { selectTopNav } from "../actions";
+import GlobalState from "../data_types/global_state";
 
 class SubscriptionsSetup extends React.Component<any, any>{
   constructor() {
@@ -10,12 +11,12 @@ class SubscriptionsSetup extends React.Component<any, any>{
   }
 
   render() {
-    let {visible, onClick} = this.props;
+    let { visible } = this.props;
     return <Subscriptions visible={visible} />
   }
 }
 
-const mapStateToProps = (state: any, ownProps: any) => {
+const mapStateToProps = (state: GlobalState, ownProps: any) => {
   let visible = state.menuState.active === 'subscriptions';
 
   return {
@@ -23,15 +24,6 @@ const mapStateToProps = (state: any, ownProps: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: (e:any)=>()=>void, ownProps: any) => {
-  return {
-    onClick: (val: any) => {
-      dispatch(selectTopNav(val))
-    }
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(SubscriptionsSetup);

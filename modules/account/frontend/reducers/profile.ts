@@ -1,6 +1,7 @@
 import * as Action_Items from "../actions";
 
 const defaultProfileState = {
+  loaded: false
 }
 
 const profileState = (state: any = defaultProfileState, action: {type: string, value?: string}) => {

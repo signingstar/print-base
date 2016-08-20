@@ -30,20 +30,25 @@
       justify-content: space-between;
       width: 100%;
 
-      .next {
-        background-image: url('/assets/plainicon_right.png');
+      .arrow {
+        background-color: white;
         background-size: cover;
         cursor: pointer;
         height: 60px;
-        width: 60px;
+        opacity: 0.6;
+        width: 48px;
+      }
+
+      .next {
+        @extend .arrow;
+        background-image: url('/assets/plainicon_right.png');
+        background-position: -3px;
       }
 
       .prev {
+        @extend .arrow;
         background-image: url('/assets/plainicon_left.png');
-        background-size: cover;
-        cursor: pointer;
-        height: 60px;
-        width: 60px;
+        background-position: -7px;
       }
 
     }

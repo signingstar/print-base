@@ -1,16 +1,22 @@
-import { SET_TOP_NAV } from "../actions";
+import { SET_TOP_NAV, LOCATION_CHANGE } from "../actions";
 
 const defaultMenuState = {
   active: 'profile'
 }
 
-const menuState = (state: any = defaultMenuState, {type, value}: {type: string, value?: string}) => {
-  console.log(`type: ${type} | value: ${value}`);
+const getActiveUrl = (path: string) => {
+  let relativePath = path.lastIndexOf('/') > 0 ? path.slice(path.lastIndexOf('/') + 1) : 'profile';
+  return relativePath;
+};
+
+const menuState = (state: any = defaultMenuState, {type, payload={}}: {type: string, payload?: any}) => {
+  let {pathname} = payload;
+  console.log(`type: ${type} | pathname: ${JSON.stringify(pathname)}`);
 
   switch (type) {
-    case SET_TOP_NAV:
+    case LOCATION_CHANGE:
       return {
-        active: value
+        active: getActiveUrl(pathname)
       }
     default:
       return state;

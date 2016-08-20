@@ -1,4 +1,9 @@
 import ReactComponent from "./react_server";
+import { createMemoryHistory, match } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+
+import configureStore from "./frontend/store";
+import routes from "./frontend/routes"
 
 const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -9,20 +14,29 @@ const accountController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
-      let {reactHTML, preloadedState} = ReactComponent();
+      let location = req.url;
+      let {category} = req.params;
+      const memoryHistory = createMemoryHistory(req.url);
+      const store = configureStore(memoryHistory);
+      const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set( {
-        javascript: 'account',
-        stylesheet: 'account',
-        title: 'Tisko - My Account',
-        body_class: 'account',
-        reactHTML,
-        preloadedState
-      })
+      match({history, routes, location}, (error, redirectLocation, renderProps) => {
+        let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
-      let html = fn(page);
+        page.set( {
+          javascript: 'account',
+          stylesheet: 'account',
+          title: 'Tisko - My Account',
+          body_class: 'account',
+          reactHTML,
+          preloadedState
+        });
 
-      responders.html(html);
+        let html = fn(page);
+
+        responders.html(html);
+      });
+
     }
   }
 }

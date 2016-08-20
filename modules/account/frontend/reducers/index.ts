@@ -1,4 +1,5 @@
 import { combineReducers } from "redux";
+import { routerReducer } from 'react-router-redux'
 
 import menuState from "./menu";
 import profileState from "./profile";
@@ -11,7 +12,8 @@ const accountApp = combineReducers({
   profileState,
   ordersState,
   savedItemsState,
-  subscriptionState
+  subscriptionState,
+  routing: routerReducer
 })
 
 export default accountApp
