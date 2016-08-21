@@ -9,10 +9,11 @@ import homeController from "../modules/home/controller";
 import loginController from "../modules/login/controller";
 import orderController from "../modules/order/controller";
 import ourServicesController from "../modules/our_services/controller";
+import passwordResetController from "../modules/password_reset/controller";
+import partnerController from "../modules/partner/controller";
 import productsController from "../modules/products/controller";
 import signOutController from "../modules/signout/controller";
 import signUpController from "../modules/signup/controller";
-import partnerController from "../modules/partner/controller";
 import whyUsController from "../modules/why_us/controller";
 
 let controllersList = {
@@ -24,6 +25,7 @@ let controllersList = {
   orderController,
   ourServicesController,
   partnerController,
+  passwordResetController,
   productsController,
   signOutController,
   signUpController,

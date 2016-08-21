@@ -11,7 +11,7 @@ const contactUsController = function({modules} : {modules: any}) {
 
       page.set( {
         javascript: 'contact',
-        stylesheet: 'contact',
+        stylesheet: 'session',
         title: 'Tisko - Register',
         origConfig,
         body_class: 'contact-us'

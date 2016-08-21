@@ -1,68 +1,7 @@
-.session-header
-  span.session-header-main
+.session-content
+  .title-header
     h3 Be Our Partner
 
-.session-body
-  form
-    fieldset
-      #name-input.field
-        label(
-          for='username'
-          ) Full Name
-        input#username-value(
-          name='username'
-          placeholder=''
-          required
-          type='text'
-          )
-      #email-input.field
-        label(
-          for='userid'
-          ) Email Id
-        input#userid-value(
-          name='userid'
-          placeholder='youremail@gmail.com'
-          required
-          type='email'
-          )
-      #phone-input.field
-        label(
-          for='telephone'
-          ) Mobile Number
-        input#telephone-value(
-          name='telephone'
-          placeholder=''
-          required
-          type='tel'
-          )
-      #location.field
-        label(
-          for='location'
-          ) Location
-        input#location-value(
-          name='location'
-          placeholder=''
-          required
-          type='text'
-          )
-      #message-type.field
-        label(
-          for='machine-type'
-          ) Machines Owned
-        select(
-          name='machine-type'
-          )
-          option Digital Press
-          option Screen Printer
-      #message.field
-        label(
-          for='query'
-          ) Your Message
-        textarea(
-          name='query'
-          )
-      .session-button
-        input(
-          type='button'
-          value='Submit'
-          )
+  .session-body
+    .form-elements.signup
+      include ./form

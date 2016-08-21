@@ -1,6 +1,6 @@
 form
   fieldset
-    #name-input.field
+    .name-input.field
       label(
         for='username'
         ) Full Name
@@ -10,7 +10,7 @@ form
         required
         type='text'
         )
-    #email-input.field
+    .email-input.field
       label(
         for='userid'
         ) Email Id
@@ -20,7 +20,7 @@ form
         required
         type='email'
         )
-    #phone-input.field
+    .phone-input.field
       label(
         for='telephone'
         ) Mobile Number
@@ -30,7 +30,7 @@ form
         required
         type='tel'
         )
-    #message-type.field
+    .message-type.field
       label(
         for='query-type'
         ) Query Type
@@ -39,15 +39,16 @@ form
         )
         option General Enquiry
         option Related to your order
-    #message.field
+    .contact-message.field
       label(
         for='query'
         ) Your Message
       textarea(
         name='query'
         )
-    .contact-button
-      a(
-        role='button'
-        href='#'
-        ) Submit
+    .button
+      input(
+        type='submit'
+        name='submit'
+        value='Submit'
+        )

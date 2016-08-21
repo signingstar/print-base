@@ -23,7 +23,7 @@ export function routes(app: Application, globalModules: any) {
 		value: string
 	}
 
-	let setCookiesForResponse = function(res: Response, cookies: Cookie[]) {
+	let setCookiesForResponse = function(res: Response, cookies: Cookie[] = []) {
 		debug('setCookiesForResponse');
 		for(let cookie of cookies) {
 			let {key, value} = cookie;
@@ -60,7 +60,7 @@ export function routes(app: Application, globalModules: any) {
 
 	app.get("/contact", processRequest('contactUsController', 'main', processOptions));
 
-	app.get("/forgot_password", processRequest('forgotPasswordController', 'main', processOptions));
+	app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions));
 
 	app.get("/login", processRequest('loginController', 'get', processOptions));
 
@@ -77,6 +77,14 @@ export function routes(app: Application, globalModules: any) {
 
 	app.get("/services", processRequest('ourServicesController', 'main', processOptions));
 
+	app.get("/password-reset", processRequest('passwordResetController', 'main', processOptions));
+
+	app.post("/password-reset", processRequest('passwordResetController', 'reset_password', {
+			attributes: processOptions.attributes,
+			responders: { redirectWithCookies }
+		}
+	));
+
 	app.get("/products", processRequest('productsController', 'main', processOptions));
 
 	app.get("/signout", processRequest('signOutController', 'main', processOptions));
@@ -90,5 +98,5 @@ export function routes(app: Application, globalModules: any) {
 		}
 	));
 
-	app.get("/why_us", processRequest('whyUsController', 'main', processOptions));
+	app.get("/why-us", processRequest('whyUsController', 'main', processOptions));
 };

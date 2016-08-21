@@ -1,6 +1,9 @@
-form
+form(
+  method='post'
+  action= refUrl
+  )
   fieldset
-    #email-input.field
+    .email-input.field
       label(
         for='userid'
         ) Email Id
@@ -10,8 +13,8 @@ form
         required
         type='email'
         )
-    .session-button
+    .button
       input(
         type='button'
-        value='Submit'
+        value='Send Email'
         )

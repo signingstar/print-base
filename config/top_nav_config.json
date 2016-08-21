@@ -2,7 +2,7 @@ module.exports = [
   {
     "id": "why-us",
     "displayText": "Why Us",
-    "url": "/why_us",
+    "url": "/why-us",
     "anchorId": "l-1",
     "subElements": [],
     "display": true

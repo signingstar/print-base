@@ -3,7 +3,7 @@ form(
   action= refUrl
   )
   fieldset
-    #email-input.field
+    .email-input.field
       label(
         for='userid'
         ) Email Id
@@ -13,7 +13,7 @@ form(
         required
         type='email'
         )
-    #password-input.field
+    .password-input.field
       label(
         for='userpassword'
         ) Password
@@ -22,12 +22,9 @@ form(
         required
         type='password'
         )
-    .forgot-password.field
-      label(
-        for='forgot-link'
-        )
+    .forgot-password
       a(
-        href='/forgot_password'
+        href='/forgot-password'
         name='forgot-link'
         ) Forgot password?
     .remember-me
@@ -35,7 +32,7 @@ form(
         type='checkbox'
         )
       span Remember Me
-    .session-button
+    .button
       input(
         type='submit'
         name='submit'
