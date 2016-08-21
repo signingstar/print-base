@@ -5,7 +5,7 @@
     )
       a(
         href="/"
-      ) Tisko Digital Printing
+      ) Tisko Printing
     div.contact-info
       a(
         href='/contact'
@@ -15,26 +15,30 @@
       class=(logged?'signed':'unsigned')
     )
       if logged
-        span#user-cart.user-info-item
-          a#cart-nav(
+        #user-cart.user-info-item
+          a.cart-nav(
             href='#'
             )
             span Cart
-        a#user-account.user-info-item(
-          href='/account'
-          ) My Account
-        a#user-signout.user-info-item(
-          href='/signout'
-          ) Logout
+        #user-account.user-info-item
+          a.account-nav(
+            href='/account'
+            ) My Account
+        #user-signout.user-info-item
+          a.signgout-nav(
+            href='/signout'
+            ) Logout
       else
-        span#user-cart.user-info-item
-          a#cart-nav(
+        div#user-cart.user-info-item
+          a.cart-nav(
             href='#'
             )
             span Cart
-        a#user-signin.user-info-item(
-          href='/login'
-          ) Login
-        a#user-signup.user-info-item(
-          href='/signup'
-          ) Register
+        #user-signin.user-info-item
+          a.login-nav(
+            href='/login'
+            ) Login
+        #user-signup.user-info-item
+          a.signup-nav(
+            href='/signup'
+            ) Register

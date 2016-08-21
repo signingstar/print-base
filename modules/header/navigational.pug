@@ -15,8 +15,8 @@ nav#top-nav.top-nav(
               role= 'menuitem'
               aria-owns= (has_children ? top_option.anchorId + '-nav' : '')
             )= top_option.displayText
-              if has_children
-                .icon-down-arrow.menu-pointer
+            if has_children
+              .icon-down-arrow.menu-pointer
             - sub_elements = top_option.subElements
             if has_children
               nav.sub-nav(
