@@ -1,7 +1,5 @@
 header .top-header {
   .promotional-header {
-    border-bottom: 1px solid $light-gray;
-
     div {
       display: inline-block;
 
@@ -34,11 +32,6 @@ header .top-header {
 
   .main-header {
     background-color: $theme-color;
-    border-bottom: 1px solid $light-gray;
-
-    a {
-      color: $link-color-bg;
-    }
 
     .main-header-content {
       align-items: center;
@@ -49,17 +42,22 @@ header .top-header {
       max-width: 1200px;
       padding: 0 10px;
 
+      a {
+        color: $link-color-bg;
+      }
+
       .company-info {
-        font-size: 19px;
+        font-size: 22px;
         font-weight: bolder;
       }
 
       .user-info {
         .user-info-item {
+          display: inline-block;
           padding: 0 10px;
 
           &:last-child {
-            padding: 0 0 0 10px;
+            padding-right: 0;
           }
         }
 
@@ -108,10 +106,10 @@ header .top-header {
 
           .menu-pointer {
             display: inline-block;
+            margin-left: 5px;
           }
 
           > a {
-            display: block;
             font-weight: 300;
             line-height: 40px;
           }
