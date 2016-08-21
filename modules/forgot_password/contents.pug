@@ -1,13 +1,11 @@
-#session-content
-  .session-header
-    span.session-header-main
-      h3 Forgot your password?
+.session-content
+  .title-header
+    h3 Forgot password?
+
+  #message.message
+    | Don't worry! It happens with most of us.
+    | Enter email-id below and follow instructions received in your email
 
   .session-body
-    .session-form
-      include ./forgot_password_form
-
-    .separator
-
-    .session-optional
-      include ./forgot_password_optional
+    .form-elements.forgot-password
+      include ./form

@@ -3,7 +3,7 @@ form(
   action= refUrl
   )
   fieldset
-    #name-input.field
+    .name-input.field
       label(
         for='username'
         ) Full Name
@@ -13,7 +13,7 @@ form(
         required
         type='text'
         )
-    #email-input.field
+    .email-input.field
       label(
         for='userid'
         ) Email Id
@@ -23,7 +23,7 @@ form(
         required
         type='email'
         )
-    #password-input.field
+    .password-input.field
       label(
         for='userpassword'
         ) Password
@@ -33,7 +33,7 @@ form(
         required
         type='password'
         )
-    #password-confirm.field
+    .password-confirm.field
       label(
         for='confirmpassword'
         ) Confirm Password
@@ -42,7 +42,7 @@ form(
         required
         type='password'
         )
-    #phone-input.field
+    .phone-input.field
       label(
         for='telephone'
         ) Mobile Number
@@ -57,7 +57,7 @@ form(
         type='checkbox'
         )
       span Remember Me
-    .session-button
+    .button
       input(
         type='submit'
         name='submit'

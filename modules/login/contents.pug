@@ -1,17 +1,17 @@
-#session-content
-  .session-header
-    span.session-header-main
-      h3 Login
-    span.session-header-optional
-      | or
-      a.session-header-session(
-        href='/signup'
-        ) Register
+.session-content
+  .title-header
+    h2 Login
+    | Or
+    a.other-option(
+      href='/signup'
+      ) Register
+
+  #error-message.message
+
   .session-body
-    .session-form
-      include ./login_form
+    .form-elements.login
+      include ./form
 
     .separator
 
-    .session-optional
-      include ./login_optional
+    include ./session_option
