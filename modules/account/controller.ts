@@ -32,7 +32,6 @@ const accountController = function({modules} : {modules: any}) {
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
-          console.log(`renderProps:${JSON.stringify(renderProps)}`);
           debug(`error:${error} | renderProps:${renderProps}`);
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 

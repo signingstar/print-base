@@ -18,7 +18,6 @@ const store = configureStore(browserHistory, preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 function renderDom() {
-  console.log(`inside renderDom`);
   render(
     <Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem
   );
