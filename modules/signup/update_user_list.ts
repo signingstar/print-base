@@ -7,14 +7,14 @@ import UserData from "./data_type";
 let pathString = './config/user_info.json';
 
 var readFileAsync = function(path: string, cb: (data:any) => void) {
-	fs.readFile(path, function(err: Error, data: any) {
-		if(err) {
-			console.log(err);
-			return;
-		}
+  fs.readFile(path, function(err: Error, data: any) {
+    if(err) {
+      console.log(err);
+      return;
+    }
 
     cb(JSON.parse(data));
-	});
+  });
 }
 
 
@@ -32,11 +32,11 @@ const updateUserList = ({userid, userName, password, telephone}: UserData, callb
       fullName: userName
     }
 
-		fs.writeFile(pathString, JSON.stringify(data, null, 2), () => {
+    fs.writeFile(pathString, JSON.stringify(data, null, 2), () => {
       callback(true);
     });
 
-	});
+  });
 
   return !userExists;
 }

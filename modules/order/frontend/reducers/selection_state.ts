@@ -20,7 +20,6 @@ const defaultState:SelectionStateObject = {
 const selectionState = (state = defaultState, action:{type: string, value?: string}): SelectionStateObject => {
   let {type, value} = action;
 
-  // console.log(`type:${type} | value:${value} | Old state: ${JSON.stringify(state)}`);
   let newState: SelectionStateObject = state;
 
   switch (action.type) {
@@ -78,7 +77,6 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
       return state;
   }
 
-  // console.log(`New state: ${JSON.stringify(newState)}`);
   return newState;
 }
 

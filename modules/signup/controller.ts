@@ -9,7 +9,7 @@ const signUpController = function({modules} : {modules: any}) {
   return {
     get: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/signup/main.pug';
+      let srcPath:string = './modules/signup/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let refUrl = presenter(req.query.ref_url).uriWithRef;
 

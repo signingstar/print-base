@@ -9,7 +9,7 @@ const loginController = function({modules} : {modules: any}) {
   return {
     get: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/login/main.pug';
+      let srcPath:string = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
@@ -56,9 +56,6 @@ const loginController = function({modules} : {modules: any}) {
           responders.html(html);
         }
       });
-
-
-
     }
   }
 }

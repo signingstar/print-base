@@ -5,14 +5,14 @@ var path = require('path');
 let pathString = './config/user_info.json';
 
 var readFileAsync = function(path: string, cb: (data: any) => void) {
-	fs.readFile(path, function(err: Error, data: any) {
-		if(err) {
-			console.log(err);
-			return;
-		}
-    console.log(`data:${data}`);
-		cb(JSON.parse(data));
-	});
+  fs.readFile(path, function(err: Error, data: any) {
+    if(err) {
+      console.log(err);
+      return;
+    }
+
+    cb(JSON.parse(data));
+  });
 }
 
 const verifyUser = (userId: string, password: string, cb: (state: boolean) => void) => {

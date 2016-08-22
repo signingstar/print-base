@@ -8,13 +8,16 @@ import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
 
+let debug = require("debug")('Account:controllers');
+
+
 const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
     main: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/account/main.pug';
+      let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {cookies} = req;
@@ -29,7 +32,7 @@ const accountController = function({modules} : {modules: any}) {
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
-          console.log(`error:${error} | renderProps:${renderProps}`);
+          debug(`error:${error} | renderProps:${renderProps}`);
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
           page.set( {

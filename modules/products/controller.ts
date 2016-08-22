@@ -8,7 +8,7 @@ const productsController = function({modules} : {modules: any}) {
     main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
       let visible_section = mapUrlToSection('products', req.query.category);
-    	let srcPath:string = './modules/products/main.pug';
+      let srcPath:string = './modules/products/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
       let headerPresenter = presenter({cookies});
