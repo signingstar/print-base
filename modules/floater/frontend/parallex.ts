@@ -126,7 +126,7 @@ export class NavigateSections {
 
 
   setDefaultSelected(visibleElement: string) {
-    var navId: string;
+    let navId: string;
 
     find(this.navSectionMap, (value, key)=> {
       if(value === `#${visibleElement}`) { navId = `#${key}`};

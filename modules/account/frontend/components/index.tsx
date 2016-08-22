@@ -10,7 +10,7 @@ import configureStore from "../store";
 import MyWindow from "../data_types/my_window";
 import routes from "../routes";
 
-declare var window: MyWindow;
+declare const window: MyWindow;
 
 let preloadedState = window.__PRELOADED_STATE__;
 

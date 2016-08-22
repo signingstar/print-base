@@ -1,5 +1,5 @@
 import * as React from "react";
-var Dropdown = require("react-dropdown").default;
+const Dropdown = require("react-dropdown").default;
 
 interface ButtonState {
   id: string;
