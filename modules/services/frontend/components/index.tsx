@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import MainContents from "./main_contents";
 import configureStore from "../store";
-import MyWindow from "../data_types/my_window";
+import MyWindow from "../data_types";
 import routes from "../routes";
 
 declare const window: MyWindow;

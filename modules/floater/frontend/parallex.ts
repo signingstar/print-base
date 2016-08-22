@@ -136,21 +136,21 @@ export class NavigateSections {
   }
 
   activate(visibleElement: string) {
-    this.setDefaultSelected(visibleElement);
+    // this.setDefaultSelected(visibleElement);
     this.stickyLeftNavigation();
 
-    let _that = this;
-    this.$stickyElement.find('li').on("click", function(ev: Event) {
-      _that.processNavSelection($(this), ev, true);
-    });
+    // let _that = this;
+    // this.$stickyElement.find('li').on("click", function(ev: Event) {
+    //   _that.processNavSelection($(this), ev, true);
+    // });
 
     // let throttleUpdateNavSelection = throttle(this.updateNavSelection, this.scrollDelay);
     // $(window).on("resize scroll", throttleUpdateNavSelection);
 
-    history.pushState({url: location.href}, '', location.href);
+    // history.pushState({url: location.href}, '', location.href);
 
-    window.onpopstate = (e) => {
-      this.popFromHistory(e);
-    };
+    // window.onpopstate = (e) => {
+    //   this.popFromHistory(e);
+    // };
   }
 }

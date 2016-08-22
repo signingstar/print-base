@@ -77,6 +77,8 @@ export function routes(app: Application, globalModules: any) {
 
   app.get("/services", processRequest('ourServicesController', 'main', processOptions));
 
+  app.get("/services/:category", processRequest('ourServicesController', 'main', processOptions));
+
   app.get("/password-reset", processRequest('passwordResetController', 'main', processOptions));
 
   app.post("/password-reset", processRequest('passwordResetController', 'reset_password', {

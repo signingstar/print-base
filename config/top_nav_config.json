@@ -9,7 +9,7 @@ module.exports = [
   },
   {
     "id": "our-services",
-    "displayText": "Printing Services",
+    "displayText": "Cards & Stationary",
     "url": "/services",
     "anchorId": "l-2",
     "display": true,
@@ -17,21 +17,21 @@ module.exports = [
     {
         "id": "l-2-1",
         "displayText": "Business Cards",
-        "url": "/services?category=l-2-1",
+        "url": "/services/visiting-card",
         "display": true,
         "internal_url": "visiting_cards"
       },
       {
         "id": "l-2-2",
         "displayText": "Stationary",
-        "url": "/services?category=l-2-2",
+        "url": "/services/stationary",
         "display": true,
         "internal_url": "stationaries"
       },
       {
         "id": "l-2-3",
-        "displayText": "Brouchers",
-        "url": "/services?category=l-2-3",
+        "displayText": "Invitation Card",
+        "url": "/services/invitation-card",
         "display": true,
         "internal_url": "brouchers"
       }
