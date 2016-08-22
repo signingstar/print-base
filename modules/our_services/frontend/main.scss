@@ -1,3 +1,5 @@
+@import '../../item_tile/frontend/main';
+
 body .main-section{
   .header-content {
     display: none;
@@ -18,7 +20,7 @@ body .main-section{
       flex-direction: row-reverse;
 
       .right-panel {
-        padding: 0 50px 0 0;
+        padding: 0 20px 0 0;
       }
     }
 
@@ -39,9 +41,6 @@ body .main-section{
       }
 
       ul {
-        border: 1px solid $light-gray;
-        border-radius: 4px;
-
         li {
           border-bottom: 1px solid $light-gray;
           border-radius: 1px;
@@ -53,11 +52,11 @@ body .main-section{
             border-bottom: none;
           }
 
-          &:hover {
+          &.selected {
             background-color: $lighter-gray;
           }
 
-          &.selected {
+          &:hover {
             background-color: $light-gray;
           }
 
@@ -105,9 +104,9 @@ body .main-section{
 
     .right-panel {
       min-width: 400px;
-      padding-left: 50px;
+      padding-left: 20px;
       vertical-align: top;
-      width: 75%;
+      width: 78%;
 
       #main-heading {
         margin-top: 0;
@@ -171,6 +170,7 @@ body .main-section{
 
         .contents {
           min-height: 500px;
+
         }
 
         footer {

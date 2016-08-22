@@ -58,6 +58,19 @@
       display: none;
       height: 300px;
       width: 100%;
+
+      &.image-1 {
+        background-image: url("/assets/slide_image1.jpg");
+        display: inline-block;
+      }
+
+      &.image-2 {
+        background-image: url("/assets/slide_image2.jpg");
+      }
+
+      &.image-3 {
+        background-image: url("/assets/slide_image3.jpg");
+      }
     }
   }
 }

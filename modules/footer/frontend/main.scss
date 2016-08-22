@@ -1,5 +1,5 @@
 .c-footer {
-  background-color: $lighter-gray;
+  background-color: $lightest-gray;
   border-top: 1px solid $light-gray;
   margin-top: 30px;
   min-height: 150px;
@@ -16,6 +16,7 @@
         width: 33%;
 
         &.internal-links, &.company-links, &.legal-info {
+          vertical-align: top;
           ul li {
             display: block;
           }

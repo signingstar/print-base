@@ -1,13 +1,19 @@
 extends ../base/main.pug
 
-block links
+block top-links
   link(
-    rel='prefetch'
+    rel='preload'
     href='/assets/slide_image1.jpg'
     )
+
+block bottom-links
   link(
     rel='prefetch'
     href='/assets/slide_image2.jpg'
+    )
+  link(
+    rel='prefetch'
+    href='/assets/slide_image3.jpg'
     )
 
 block contents
