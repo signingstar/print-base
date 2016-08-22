@@ -40,7 +40,7 @@ const FilesPreview = ({onClick, onClose, isShowing, files, modalHeader, label}: 
         isOpen={isShowing}
         onRequestClose={onClose}
         style={customStyles}>
-        <FilesPreviewContent files={files} modalHeader={modalHeader}/>
+        <FilesPreviewContent files={files} onClose={onClose} modalHeader={modalHeader}/>
       </Modal>
     </div>
   );

@@ -4,7 +4,7 @@ interface EnhancedFile extends File {
   preview: string;
 }
 
-const FilesPreviewContent = ({files, modalHeader}: {files: EnhancedFile[], modalHeader: string}) => {
+const FilesPreviewContent = ({files, modalHeader, onClose}: {files: EnhancedFile[], modalHeader: string, onClose: ()=> void}) => {
   const fileNodes = files.map(file => {
     return (
       <div key={file.name} className='card-box'>
@@ -16,7 +16,10 @@ const FilesPreviewContent = ({files, modalHeader}: {files: EnhancedFile[], modal
 
   return (
     <div className='files-preview-modal'>
-      <h3>{modalHeader}</h3>
+      <div>
+        <h3>{modalHeader}</h3>
+        <div className='close-icon' onClick={onClose}></div>
+      </div>
       <div className='files-preview-content'>
         { fileNodes }
       </div>
