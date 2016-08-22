@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 
 import MainContents from "./main_contents";
 import configureStore from "../store";
-import MyWindow from "../data_types/my_window";
+import MyWindow from "../data_types";
 import routes from "../routes";
 
 declare const window: MyWindow;
@@ -18,6 +18,7 @@ const store = configureStore(browserHistory, preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
 
 function renderDom() {
+  console.log(`inside renderDom`);
   render(
     <Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem
   );

@@ -1,46 +1,45 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { omit } from "underscore";
 
 import ReactComponent from "./react_server";
-import { presenter } from "../header/presenter";
+import { presenter, origConfig } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
-import AccountDetails from "./mock_data/details";
 
-let debug = require("debug")('Account:controllers');
+let debug = require("debug")('Services:controllers');
 
-
-const accountController = function({modules} : {modules: any}) {
+const ourServicesController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
-    main: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
+    main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/account/main.pug';
+      let srcPath:string = './modules/services/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
-
       let {cookies} = req;
+      let headerPresenter = presenter({cookies});
+
       let location = req.url;
       let {category} = req.params;
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
-      let headerPresenter = presenter({cookies});
 
       page.set(headerPresenter);
-
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           console.log(`renderProps:${JSON.stringify(renderProps)}`);
           debug(`error:${error} | renderProps:${renderProps}`);
-          let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
+          let {reactHTML, preloadedState} = ReactComponent(renderProps, history);
 
           page.set( {
-            javascript: 'account',
-            stylesheet: 'account',
-            title: 'Tisko - My Account',
-            body_class: 'account',
+            origConfig,
+            promotional_header: true,
+            navigational_header: true,
+            javascript: 'services',
+            stylesheet: 'services',
+            title: 'Tisko - Our Services',
+            body_class: 'our-services',
             reactHTML,
             preloadedState
           });
@@ -58,18 +57,8 @@ const accountController = function({modules} : {modules: any}) {
           responders.error();
         }
       });
-    },
-
-    details: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
-      let {req, res} = attributes;
-      let { pathname } = req.query;
-
-      pathname = pathname.replace('/account/', '');
-      let json = omit(AccountDetails, (value: any, key: string) => key === pathname);
-
-      responders.json(json);
     }
   }
 }
 
-export default accountController;
+export default ourServicesController;

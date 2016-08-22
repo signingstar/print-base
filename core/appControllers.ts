@@ -8,7 +8,7 @@ import forgotPasswordController from "../modules/forgot_password/controller";
 import homeController from "../modules/home/controller";
 import loginController from "../modules/login/controller";
 import orderController from "../modules/order/controller";
-import ourServicesController from "../modules/our_services/controller";
+import ourServicesController from "../modules/services/controller";
 import passwordResetController from "../modules/password_reset/controller";
 import partnerController from "../modules/partner/controller";
 import productsController from "../modules/products/controller";

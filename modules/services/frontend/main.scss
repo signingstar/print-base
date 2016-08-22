@@ -52,14 +52,6 @@ body .main-section{
             border-bottom: none;
           }
 
-          &.selected {
-            background-color: $lighter-gray;
-          }
-
-          &:hover {
-            background-color: $light-gray;
-          }
-
           a {
             display: block;
             line-height: 40px;
@@ -69,8 +61,12 @@ body .main-section{
             transform: translateY(-50%);
             width: 100%;
 
-            .menu-pointer {
-              // @extend .icon-right-arrow;
+            &.selected {
+              background-color: $lighter-gray;
+            }
+
+            &:hover {
+              background-color: $light-gray;
             }
           }
         }
