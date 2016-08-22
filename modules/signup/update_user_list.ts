@@ -25,6 +25,7 @@ const updateUserList = ({userid, userName, password, telephone}: UserData, callb
     if(data[userid]) {
       callback(false);
     }
+
     data[userid] = {
       id: userid,
       password: password,
@@ -35,10 +36,7 @@ const updateUserList = ({userid, userName, password, telephone}: UserData, callb
     fs.writeFile(pathString, JSON.stringify(data, null, 2), () => {
       callback(true);
     });
-
   });
-
-  return !userExists;
 }
 
 export default updateUserList;

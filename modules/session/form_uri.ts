@@ -1,4 +1,4 @@
-let { format, parse, search } = require("url");
+let { format, parse } = require("url");
 import { find } from "underscore";
 
 let sessionPaths = ['login', 'signup', 'forgot-password', 'password-reset', 'signout'];
@@ -17,6 +17,7 @@ export const getUriWithRefUrl = (action: string, refUrl: string) : string => {
 
 export const getUriWithCheck = (isLogged: boolean, refUrl: string) => {
   let homePageUri = format({pathname: '/'});
+
   if(!refUrl) {
     return homePageUri;
   }
@@ -25,6 +26,7 @@ export const getUriWithCheck = (isLogged: boolean, refUrl: string) => {
   let pathname = refUrlPath.pathname.replace('/', '');
 
   let isUrlInvalid = find(sessionPaths, (val) => val === pathname);
+
   if(isUrlInvalid) {
     return homePageUri;
   } else {
