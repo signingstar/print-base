@@ -1,5 +1,7 @@
 import { Application, Response } from 'express';
 import * as serveStatic from "serve-static";
+import * as bodyParser from "body-parser";
+import * as cookieParser from "cookie-parser";
 let debug = require("debug")('Core:Middleware');
 let rewrite = require("express-urlrewrite");
 
@@ -13,6 +15,19 @@ export function middleware(app: Application, globalModules: any) {
     maxAge: '1d',
     setHeaders: setCustomCacheControl
   }));
+
+  app.use(bodyParser.json({
+    limit: '1mb',
+    type: ['application/json']
+  }));
+
+  app.use(bodyParser.urlencoded({
+    extended: true,
+    limit: '1mb',
+    parameterLimit: 10000
+  }));
+
+  app.use(cookieParser());
 
   function setCustomCacheControl (res: Response, path: string) {
     let lookupPath = serveStatic.mime.lookup(path);

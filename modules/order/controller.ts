@@ -1,4 +1,4 @@
-import { origConfig } from "../header/presenter";
+import { origConfig, presenter } from "../header/presenter";
 import ReactComponent from "./react_server";
 
 let debug = require("debug")('Modules:Order:Controller');
@@ -12,6 +12,10 @@ const orderController = function({modules} : {modules: any}) {
       let {req, res} = attributes;
       let { mode, item } = req.query;
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let {cookies} = req;
+      let headerPresenter = presenter({cookies});
+
+      page.set(headerPresenter);
 
       let {reactHTML, preloadedState} = ReactComponent(item);
       page.set( {

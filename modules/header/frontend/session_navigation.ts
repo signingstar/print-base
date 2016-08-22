@@ -1,7 +1,7 @@
 import * as $ from "jquery";
 
 const addReferrer = () => {
-  let selectors = '#user-signin, #user-signup, #user-signout';
+  let selectors = '#user-signin a, #user-signup a, #user-signout a';
   let currentHref = location.href;
 
   currentHref = currentHref.replace(/[?&]ref_url=([^&]*)?/, '');

@@ -3,10 +3,13 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
+import { presenter } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
-import { mapUrlPathToInternalCategory } from "./helper";
+
+let debug = require("debug")('Account:controllers');
+
 
 const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -14,18 +17,22 @@ const accountController = function({modules} : {modules: any}) {
   return {
     main: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
       let {req, res} = attributes;
-    	let srcPath:string = './modules/account/main.pug';
+      let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
+      let {cookies} = req;
       let location = req.url;
       let {category} = req.params;
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
+      let headerPresenter = presenter({cookies});
+
+      page.set(headerPresenter);
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
-          console.log(`error:${error} | renderProps:${renderProps}`);
+          debug(`error:${error} | renderProps:${renderProps}`);
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
           page.set( {

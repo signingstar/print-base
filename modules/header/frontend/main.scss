@@ -44,6 +44,10 @@ header .top-header {
 
       a {
         color: $link-color-bg;
+
+        &:hover {
+          color: $link-color-bg-hover;
+        }
       }
 
       .company-info {
@@ -110,6 +114,7 @@ header .top-header {
           }
 
           > a {
+            display: inline-block;
             font-weight: 300;
             line-height: 40px;
           }

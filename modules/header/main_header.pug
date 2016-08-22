@@ -10,7 +10,7 @@
       a(
         href='/contact'
         ) Contact Us
-    - logged = false
+    - logged = isLogged
     nav.user-info(
       class=(logged?'signed':'unsigned')
     )
