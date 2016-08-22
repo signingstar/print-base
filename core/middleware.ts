@@ -1,7 +1,8 @@
-import { Application, Response } from 'express';
+import { Application, Request, Response } from 'express';
 import * as serveStatic from "serve-static";
 import * as bodyParser from "body-parser";
 import * as cookieParser from "cookie-parser";
+import * as compression from "compression";
 let debug = require("debug")('Core:Middleware');
 let rewrite = require("express-urlrewrite");
 
@@ -10,6 +11,18 @@ export function middleware(app: Application, globalModules: any) {
   app.use(rewrite('/services/:id', '/services?service_type=:id'));
 
   app.use(rewrite('/products/:id', '/products?product_type=:id'));
+
+  app.use(compression({filter: shouldCompress}))
+
+  function shouldCompress(req: Request, res: Response) {
+    if (req.headers['x-no-compression']) {
+      // don't compress responses with this request header
+      return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res)
+  }
 
   app.use('/assets', serveStatic('./public', {
     maxAge: '1d',
