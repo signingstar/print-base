@@ -35,6 +35,7 @@
   max-width: 700px;
 
   h3 {
+    display: inline-block;
     margin: 10px;
   }
 
@@ -56,4 +57,19 @@
       }
     }
   }
+
+  .close-icon {
+    cursor: pointer;
+    float: right;
+    font-size: 28px;
+    padding-right: 20px;
+    text-align: right;
+    width: 9%;
+
+    &:after {
+      content: "\00d7";
+      display: inline-block;
+    }
+  }
+
 }
