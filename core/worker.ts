@@ -24,7 +24,7 @@ interface CustomApp extends express.Application {
 let routingFunctions = function(app: CustomApp) {
 	return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method: string) {
 		let func = function(route: string) {
-			logger.info(`[ROUTER] Mounting routes: ${route}`);
+			logger.info(`[ROUTER] Mounting routes: ${route} | ${method}`);
 			return app[method].apply(app, arguments);
 		};
 		return [method, func];

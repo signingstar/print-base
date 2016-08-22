@@ -14,6 +14,7 @@ export function coreController(controllers: any, globalModules: any) {
 
     return {
       register: chain.register,
+
       execute: function(req:Request, res: Response, defaultContext={}) {
         return chain.execute(defaultContext, req, res);
       }
@@ -65,6 +66,7 @@ export function coreController(controllers: any, globalModules: any) {
 
       return function(req: Request, res: Response, next: ()=>any) {
         let {controller} = preController.getControllerWithContext(controllerName, req, res);
+
         let responders = object(map(options.responders, function(responder: any, responderName: string) {
           let responderWithLogging = function(res: Response, next: ()=>any) {
             let generatedResponder = responder(res, next);
@@ -93,6 +95,7 @@ export function coreController(controllers: any, globalModules: any) {
       controllerWithContext: function(controller: string) {
         preController.getControllerWithContext(controller, req, res).controller;
       },
+
       pageForAction: function(controller: string, action: string) {
         preController.getPageForAction(controller, action);
       }
