@@ -30,7 +30,7 @@ class SlideShow {
   }
 
   activate() {
-    var autoSlide = setInterval(()=>this.startCycle.apply(this), 3000);
+    let autoSlide = setInterval(()=>this.startCycle.apply(this), 3000);
 
     $('.next').click(() => {
       this.currentIndex += 1;

@@ -1,4 +1,4 @@
-import { getUri, getUriWithCheck } from '../../../modules/session/form_uri';
+import { getUriWithRefUrl, getUriWithCheck } from '../../../modules/session/form_uri';
 import { expect } from 'chai';
 
 describe('Session Helper', function() {
