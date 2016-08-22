@@ -38,32 +38,62 @@ module.exports = [
     ]
   },
   {
-    "id": "products",
-    "displayText": "Our Products",
-    "url": "/products",
+    "id": "marketing",
+    "displayText": "Marketing Materials",
+    "url": "/marketing",
     "anchorId": "l-3",
     "display": true,
     "subElements": [
       {
         "id": "l-3-1",
-        "displayText": "Printed T-shirts",
-        "url": "/products?category=l-3-1",
+        "displayText": "Banners",
+        "url": "/marketing/banner",
         "display": true,
         "internal_url": "t_shirts"
       },
       {
         "id": "l-3-2",
-        "displayText": "Printed Coffee mugs",
-        "url": "/products?category=l-3-2",
+        "displayText": "Flyers",
+        "url": "/marketing/flyer",
         "display": true,
         "internal_url": "mugs"
       },
       {
         "id": "l-3-3",
-        "displayText": "Fancy Posters",
-        "url": "/products?category=l-3-3",
+        "displayText": "Brouchers",
+        "url": "/marketing/broucher",
         "display": true,
         "internal_url": "posters"
+      }
+    ]
+  },
+  {
+    "id": "personal",
+    "displayText": "Fancy & Occasions Printing",
+    "url": "/personal",
+    "anchorId": "l-3",
+    "display": false,
+    "subElements": [
+      {
+        "id": "l-4-1",
+        "displayText": "Mugs",
+        "url": "/personal/mugs",
+        "display": true,
+        "internal_url": "mugs"
+      },
+      {
+        "id": "l-4-2",
+        "displayText": "T-shirts",
+        "url": "/personal/t-shirts",
+        "display": true,
+        "internal_url": "t-shirts"
+      },
+      {
+        "id": "l-4-3",
+        "displayText": "Wedding photos",
+        "url": "/personal/weedding",
+        "display": true,
+        "internal_url": "wedding"
       }
     ]
   },
@@ -71,7 +101,7 @@ module.exports = [
     "id": "place-order",
     "displayText": "Place an Order",
     "url": "/order",
-    "anchorId": "l-3",
+    "anchorId": "l-5",
     "subElements": [],
     "display": true
   },
@@ -79,7 +109,7 @@ module.exports = [
     "id": "become-partner",
     "displayText": "Be Our Partner",
     "url": "/partner",
-    "anchorId": "l-3",
+    "anchorId": "l-6",
     "display": true,
     "subElements": []
   },
@@ -87,7 +117,7 @@ module.exports = [
     "id": "contact-us",
     "displayText": "Contact Us",
     "url": "/contact",
-    "anchorId": "l-4",
+    "anchorId": "l-7",
     "subElements": [],
     "display": false
   }

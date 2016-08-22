@@ -87,7 +87,9 @@ export function routes(app: Application, globalModules: any) {
     }
   ));
 
-  app.get("/products", processRequest('productsController', 'main', processOptions));
+  app.get("/marketing", processRequest('marketingController', 'main', processOptions));
+
+  app.get("/marketing/:category", processRequest('marketingController', 'main', processOptions));
 
   app.get("/signout", processRequest('signOutController', 'main', processOptions));
 
