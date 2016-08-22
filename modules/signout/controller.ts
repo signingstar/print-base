@@ -6,6 +6,7 @@ const signOutController = function({modules} : {modules: any}) {
       let {req, res} = attributes;
     	let srcPath:string = './modules/signout/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      res.clearCookie('isLogged');
 
       page.set( {
         javascript: 'session',

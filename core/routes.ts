@@ -67,7 +67,7 @@ export function routes(app: Application, globalModules: any) {
 	app.post("/login", processRequest('loginController', 'post',
 		{
 			attributes: processOptions.attributes,
-			responders: { redirectWithCookies }
+			responders: { redirectWithCookies, html: responders.html }
 		}
 	));
 

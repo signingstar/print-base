@@ -1,4 +1,4 @@
-import { origConfig, customConfig } from "../header/presenter";
+import { presenter, origConfig } from "../header/presenter";
 import mapUrlToSection from "./helper.ts";
 
 const ourServicesController = function({modules} : {modules: any}) {
@@ -10,6 +10,8 @@ const ourServicesController = function({modules} : {modules: any}) {
       let visible_section = mapUrlToSection('our-services', req.query.category);
       let srcPath:string = './modules/our_services/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let {cookies} = req;
+      let headerPresenter = presenter({cookies});
 
       page.set( {
         origConfig,
@@ -21,6 +23,8 @@ const ourServicesController = function({modules} : {modules: any}) {
         title: 'Tisko - Our Services',
         body_class: 'our-services'
       });
+
+      page.set(headerPresenter);
 
       let html = fn(page);
 

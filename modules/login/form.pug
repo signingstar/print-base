@@ -15,26 +15,25 @@ form(
         )
     .password-input.field
       label(
-        for='userpassword'
+        for='password'
         ) Password
       input#userpassword-value(
-        name='userpassword'
+        name='password'
         required
         type='password'
         )
     .forgot-password
       a(
         href='/forgot-password'
-        name='forgot-link'
         ) Forgot password?
     .remember-me
       input(
         type='checkbox'
+        name='rememberMe'
         )
       span Remember Me
     .button
       input(
         type='submit'
-        name='submit'
         value='Login'
         )

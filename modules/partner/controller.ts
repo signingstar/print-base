@@ -1,3 +1,5 @@
+import { presenter } from "../header/presenter";
+
 const partnerController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
@@ -6,6 +8,10 @@ const partnerController = function({modules} : {modules: any}) {
       let {req, res} = attributes;
       let srcPath:string = './modules/partner/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let {cookies} = req;
+      let headerPresenter = presenter({cookies});
+
+      page.set(headerPresenter);
 
       page.set( {
         javascript: 'session',

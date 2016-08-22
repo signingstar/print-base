@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link } from "react-router";
+import { Link, IndexLink } from "react-router";
 
 const SectionLinks = () => {
   return (
@@ -7,7 +7,7 @@ const SectionLinks = () => {
       <nav className='account-nav' role='navigation'>
         <ul className='menu-options'>
           <li id='my-profile' className='nav-item' >
-            <Link className='top-nav-link' activeClassName='selected' to='/account/profile' role='menuitem'> My Profile </Link>
+            <IndexLink className='top-nav-link' activeClassName='selected' to='/account' role='menuitem'> My Profile </IndexLink>
           </li>
           <li id='my-orders' className='nav-item' >
             <Link className='top-nav-link' activeClassName='selected' to='/account/orders' role='menuitem'> My Orders </Link>

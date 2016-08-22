@@ -1,4 +1,4 @@
-import { origConfig, customConfig } from "../header/presenter";
+import { origConfig, presenter } from "../header/presenter";
 import mapUrlToSection from "./helper.ts";
 
 const productsController = function({modules} : {modules: any}) {
@@ -10,6 +10,10 @@ const productsController = function({modules} : {modules: any}) {
       let visible_section = mapUrlToSection('products', req.query.category);
     	let srcPath:string = './modules/products/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let {cookies} = req;
+      let headerPresenter = presenter({cookies});
+
+      page.set(headerPresenter);
 
       page.set( {
         origConfig,

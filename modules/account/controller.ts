@@ -3,10 +3,10 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
+import { presenter } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
-import { mapUrlPathToInternalCategory } from "./helper";
 
 const accountController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
@@ -17,11 +17,15 @@ const accountController = function({modules} : {modules: any}) {
     	let srcPath:string = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
+      let {cookies} = req;
       let location = req.url;
       let {category} = req.params;
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
+      let headerPresenter = presenter({cookies});
+
+      page.set(headerPresenter);
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
