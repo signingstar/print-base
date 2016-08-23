@@ -4,7 +4,7 @@ import SectionLinks from "./section_links";
 
 const MainContents = ({children}: {children: any}) => {
   return (
-    <section className='main-section'>
+    <section>
       <div className='body reverse'>
         <SectionLinks />
         <div className='right-panel'>

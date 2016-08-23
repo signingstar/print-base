@@ -1,189 +1,179 @@
 @import '../../item_tile/frontend/main';
 
-body .main-section{
-  .header-content {
-    display: none;
-    line-height: 40px;
-    font-weight: 500;
+.body {
+  display: flex;
+  justify-content: space-between;
 
-    h2 {
-      margin-top: 5px;
+  &.reverse {
+    flex-direction: row-reverse;
+
+    .right-panel {
+      padding: 0 20px 0 0;
     }
   }
 
-  .body {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  .left-panel {
+    font-size: 16px;
+    width: 220px;
+    margin-top: 31px;
+    min-width: 200px;
 
-    &.reverse {
-      flex-direction: row-reverse;
+    #service-item {
+      width: 100%;
 
-      .right-panel {
-        padding: 0 20px 0 0;
+      &.sticky {
+        position: fixed;
+        top: 50px;
+        width: inherit;
       }
     }
 
-    .left-panel {
-      font-size: 16px;
-      width: 220px;
-      margin-top: 31px;
-      min-width: 200px;
+    ul {
+      li {
+        border-bottom: 1px solid $light-gray;
+        border-radius: 1px;
+        height: 40px;
+        vertical-align: middle;
+        position: relative;
 
-      #service-item {
-        width: 100%;
+        &:last-child {
+          border-bottom: none;
+        }
 
-        &.sticky {
-          position: fixed;
-          top: 50px;
-          width: inherit;
+        a {
+          display: block;
+          line-height: 40px;
+          padding: 0 5px;
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          width: 100%;
+
+          &.selected {
+            background-color: $lighter-gray;
+          }
+
+          &:hover {
+            background-color: $light-gray;
+          }
         }
       }
+    }
 
-      ul {
-        li {
-          border-bottom: 1px solid $light-gray;
-          border-radius: 1px;
-          height: 40px;
-          vertical-align: middle;
-          position: relative;
+    nav#move-to-top {
+      bottom: 200px;
+      position: fixed;
+      width: 220px;
+
+      .up-arrow {
+        background-image: url('/assets/move_to_top.svg');
+        background-position: center;
+        @include background-size(cover);
+        cursor: pointer;
+        display: none;
+        height: 35px;
+        margin: 0 auto;
+        width: 35px;
+
+        .arrow-text {
+          color: $link-color-normal;
+          font-size: 17px;
+          height: 100%;
+          padding-top: 38px;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .right-panel {
+    min-width: 400px;
+    padding-left: 20px;
+    vertical-align: top;
+    width: 78%;
+
+    .heading {
+      border-bottom: 1px dotted #aaa;
+      padding: 5px;
+      margin-top: 0;
+      margin-bottom: 10px;
+
+      h1 {
+        font-size: 23px;
+        margin: 0;
+      }
+
+      .panel-images {
+        text-align: left;
+
+        figure {
+          display: inline-block;
+          margin: 0;
+          padding: 20px 35px 0 0;
 
           &:last-child {
-            border-bottom: none;
+            padding-right: 0;
           }
 
-          a {
+          .image-tile {
             display: block;
-            line-height: 40px;
-            padding: 0 5px;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-
-            &.selected {
-              background-color: $lighter-gray;
-            }
-
-            &:hover {
-              background-color: $light-gray;
-            }
+            height: 250px;
+            width: 250px;
           }
-        }
-      }
 
-      nav#move-to-top {
-        bottom: 200px;
-        position: fixed;
-        width: 220px;
-
-        .up-arrow {
-          background-image: url('/assets/move_to_top.svg');
-          background-position: center;
-          @include background-size(cover);
-          cursor: pointer;
-          display: none;
-          height: 35px;
-          margin: 0 auto;
-          width: 35px;
-
-          .arrow-text {
-            color: $link-color-normal;
-            font-size: 17px;
-            height: 100%;
-            padding-top: 38px;
-            text-align: center;
+          #image-1 {
+            background-image: url('/assets/panel1.jpg');
+          }
+          #image-2 {
+            background-image: url('/assets/panel2.jpg');
+          }
+          #image-3 {
+            background-image: url('/assets/panel3.jpg');
           }
         }
       }
     }
 
-    .right-panel {
-      min-width: 400px;
-      padding-left: 20px;
-      vertical-align: top;
-      width: 78%;
+    .sub-section {
+      margin-bottom: 15px;
 
-      #main-heading {
-        margin-top: 0;
-        margin-bottom: 30px;
+      &.show {
+        display: block;
+      }
+
+      &.hide {
+        display: none;
+      }
+
+      .heading {
+        margin-bottom: 15px;
 
         h3 {
-          font-size: 23px;
-        }
-
-        .panel-images {
-          text-align: left;
-
-          figure {
-            display: inline-block;
-            margin: 0;
-            padding: 20px 35px 0 0;
-
-            &:last-child {
-              padding-right: 0;
-            }
-
-            .image-tile {
-              display: block;
-              height: 250px;
-              width: 250px;
-            }
-
-            #image-1 {
-              background-image: url('/assets/panel1.jpg');
-            }
-            #image-2 {
-              background-image: url('/assets/panel2.jpg');
-            }
-            #image-3 {
-              background-image: url('/assets/panel3.jpg');
-            }
-          }
+          border-bottom: 1px solid $light-gray;
+          padding-bottom: 5px;
+          margin-top: 0;
         }
       }
 
-      .sub-section {
-        margin-bottom: 15px;
+      .contents {
+        min-height: 500px;
 
-        &.show {
-          display: block;
-        }
+      }
 
-        &.hide {
-          display: none;
-        }
+      footer {
+        margin-top: 10px;
 
-        .heading {
-          margin-bottom: 15px;
+        .sub-footer {
+          display: flex;
+          justify-content: flex-end;
 
-          h3 {
-            border-bottom: 1px solid $light-gray;
-            padding-bottom: 5px;
-            margin-top: 0;
-          }
-        }
-
-        .contents {
-          min-height: 500px;
-
-        }
-
-        footer {
-          margin-top: 10px;
-
-          .sub-footer {
-            display: flex;
-            justify-content: flex-end;
-
-            a {
-              background-color: $theme-color;
-              color: $link-color-bg;
-              display: block;
-              line-height: 40px;
-              text-align: center;
-              width: 250px;
-            }
+          a {
+            background-color: $theme-color;
+            color: $link-color-bg;
+            display: block;
+            line-height: 40px;
+            text-align: center;
+            width: 250px;
           }
         }
       }

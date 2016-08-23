@@ -6,8 +6,8 @@ import SectionBody from "./section_body";
 class MainContents extends React.Component<{}, {}> {
   render () {
     return (
-      <section className='main-section'>
-        <div className='main-section-content' id='main-section-content'>
+      <section>
+        <div className='main-section-content'>
           <SectionHeader />
           <SectionBody />
         </div>

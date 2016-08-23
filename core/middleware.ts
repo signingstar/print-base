@@ -18,7 +18,7 @@ export function middleware(app: Application, globalModules: any) {
     }
 
     // fallback to standard filter function
-    return compression.filter(req, res)
+    return compression.filter(req, res);
   }
 
   app.use('/assets', serveStatic('./public', {

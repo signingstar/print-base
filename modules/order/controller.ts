@@ -20,7 +20,7 @@ const orderController = function({modules} : {modules: any}) {
       let {reactHTML, preloadedState} = ReactComponent(item);
       page.set( {
         origConfig,
-        promotional_header: true,
+        promotional_header: false,
         navigational_header: true,
         reactHTML,
         preloadedState,

@@ -4,8 +4,8 @@ const InvitationCard = () => {
   return (
     <div>
       <header>
-        <div id="visiting-cards-heading" className="heading">
-          <h3>Invitation Card heading</h3>
+        <div className="heading">
+          <h1>Invitation Card heading</h1>
         </div>
       </header>
       <section>

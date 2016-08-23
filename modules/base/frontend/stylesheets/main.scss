@@ -13,11 +13,17 @@ body {
   margin: 0;
 
   a {
-    text-decoration: none;
     color: $link-color-normal;
+    text-decoration: none;
+    outline: 0;
 
     &:hover {
       color: $link-color-hover;
+    }
+
+    &:focus {
+      color: $link-color-hover;
+      outline: thin dotted;
     }
   }
 
@@ -59,9 +65,9 @@ body {
     border-left: 8px solid #126482;
   }
 
-  section.main-section {
-    max-width: 1200px;
-    margin: 0 auto;
+  .main-contents {
+    margin: 15px auto;
+    max-width: $max-width;
     min-height: 600px;
     padding: 0 10px;
   }

@@ -33,7 +33,7 @@ const maraketingController = function({modules} : {modules: any}) {
 
           page.set( {
             origConfig,
-            promotional_header: true,
+            promotional_header: false,
             navigational_header: true,
             javascript: 'marketing',
             stylesheet: 'services',
