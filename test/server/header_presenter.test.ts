@@ -5,7 +5,7 @@ describe('Header Presenter', function() {
   describe('#origConfig', () => {
       it('should return all configs', () => {
           var result : number = origConfig.length;
-          expect(result).to.be.equal(6);
+          expect(result).to.be.equal(7);
       });
       it('should return proper subElements', () => {
           var result : number = origConfig[1].subElements.length;

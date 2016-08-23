@@ -1,6 +1,6 @@
 import * as React from "react";
 
-const Services = () => {
+const Marketing = () => {
   return (
     <div>
       <header>
@@ -28,7 +28,7 @@ const Services = () => {
               business model, choose to make more money on printers and less on the ink,
               promoting the latter through their advertising campaigns.
               Finally, this generates two clearly different proposals:
-              "cheap printer - expensive ink" or "expensive printer - 1cheap ink".
+              "cheap printer expensive ink" or "expensive printer cheap ink".
             </p>
           </div>
           <div className="panel-images">
@@ -58,4 +58,4 @@ const Services = () => {
   );
 }
 
-export default Services;
+export default Marketing;
