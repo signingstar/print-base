@@ -5,7 +5,7 @@ const Stationary = () => {
     <div>
       <header>
         <div id="stationary-heading" className="heading">
-          <h3>Stationaries</h3>
+          <h1>Stationaries</h1>
         </div>
       </header>
       <section>

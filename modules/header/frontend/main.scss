@@ -30,6 +30,11 @@ header .top-header {
     }
   }
 
+  nav {
+    margin: 0;
+    padding: 0;
+  }
+
   .main-header {
     background-color: $theme-color;
 
@@ -39,7 +44,7 @@ header .top-header {
       height: 60px;
       justify-content: space-between;
       margin: 0 auto;
-      max-width: 1200px;
+      max-width: $max-width;
       padding: 0 10px;
 
       a {
@@ -50,9 +55,13 @@ header .top-header {
         }
       }
 
-      .company-info {
+      .company-logo {
         font-size: 22px;
         font-weight: bolder;
+
+        a {
+          outline: 0;
+        }
       }
 
       .user-info {
@@ -78,8 +87,8 @@ header .top-header {
   }
 
   @media only screen and (min-width: 600px) {
-    nav.top-nav {
-      border-bottom: 1px solid $light-gray;
+    .top-nav {
+      border-bottom: 1px solid $lighter-gray;
 
       .menu-options {
         align-items: center;
@@ -87,59 +96,62 @@ header .top-header {
         justify-content: space-around;
         list-style-type: none;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: $max-width;
         padding: 0 10px;
 
         > li {
-          cursor: pointer;
-          display: inline-block;
-          height: 40px;
+          // height: 40px;
 
           &:hover {
-            border-bottom: 2px solid $button-hover-color;
-
-            .menu-pointer {
-              border-top: none;
-              border-bottom: 8px solid $link-color-normal;
-            }
-
-            .sub-nav {
-              display: block;
-            }
-          }
-
-          .menu-pointer {
-            display: inline-block;
-            margin-left: 5px;
           }
 
           > a {
+            cursor: pointer;
             display: inline-block;
             font-weight: 300;
             line-height: 40px;
-          }
+            height: 40px;
 
-          nav.sub-nav {
+            &:focus, &:hover {
+              border-bottom: 2px solid $button-hover-color;
+
+              + .inner-menu .sub-nav {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+
+      .inner-menu {
+        left: 0;
+        position: absolute;
+        width: 100%;
+
+        .sub-nav {
+          display: none;
+          margin: 0 auto;
+          max-width: $max-width;
+          position: relative;
+          width: 100%;
+          z-index: 99;
+
+          .inner-menu-content {
             background-color: $white;
-            display: none;
-            min-width: 150px;
-            position: absolute;
-            z-index: 99;
+            border: 1px solid $lighter-gray;
+            display: flex;
+            justify-content: space-between;
+            margin: 0 10px;
 
             .submenu-options {
-              border: 1px solid $light-gray;
-              border-top: none;
+              border-right: 1px dotted $lighter-gray;
               line-height: 2em;
               list-style-type: none;
-              padding: 0;
+              margin: 10px 30px 10px 10px;
+              padding: 20px;
               text-align: left;
 
               li {
-                border-bottom: 1px solid $light-gray;
-
-                &:last-child {
-                  border-bottom: 0;
-                }
                 &:hover {
                   background-color: $light-gray;
                 }
@@ -148,9 +160,37 @@ header .top-header {
                   color: $link-color-normal;
                   display: block;
                   padding: 2px 0 2px 8px;
+
+                  &:hover {
+                    color: $link-color-bg;
+                    background-color: $button-hover-color;
+                  }
                 }
               }
+
+              &.col-1 {
+                width: 35%;
+              }
+
+              &.col-2 {
+                width: 25%;
+              }
             }
+
+            .submenu-picture {
+              padding: 15px;
+
+              img {
+                height: 275px;
+                width: 450px;
+              }
+            }
+          }
+        }
+
+        &:hover {
+          .sub-nav {
+            display: block;
           }
         }
       }
@@ -162,13 +202,11 @@ header .top-header {
       display: none;
     }
 
-    nav#top-nav {
-      border-bottom: 1px solid #light-gray;
-
-      #menu-options {
+    nav.top-nav {
+      .menu-options {
         list-style-type: none;
         margin: 0 auto;
-        max-width: 1200px;
+        max-width: $max-width;
         padding: 0;
 
         li {

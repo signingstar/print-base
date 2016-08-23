@@ -4,8 +4,8 @@ const Flyers = () => {
   return (
     <div>
       <header>
-        <div id="stationary-heading" className="heading">
-          <h3>Stationaries</h3>
+        <div className="heading">
+          <h1>Stationaries</h1>
         </div>
       </header>
       <section>

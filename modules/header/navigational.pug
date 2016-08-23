@@ -3,33 +3,41 @@ nav#top-nav.top-nav(
   )
   ul.menu-options
     if origConfig
+      - tabIndex = 0
       each top_option in origConfig
         if top_option.display
           - has_children = top_option.subElements.length > 0
-          li(
-            id= top_option.id
-            )
+          li
             a.top-nav-link(
               href=top_option.url
               id= top_option.anchorId
               role= 'menuitem'
-              aria-owns= (has_children ? top_option.anchorId + '-nav' : '')
+              aria-owns= (has_children ? top_option.anchorId + '-nav' : false)
+              aria-haspopup= (has_children ? 'true' : false)
+              tabindex = 0
             )= top_option.displayText
-            if has_children
-              .icon-down-arrow.menu-pointer
+            - tabIndex = tabIndex + 1
             - sub_elements = top_option.subElements
-            if has_children
-              nav.sub-nav(
-                id= top_option.anchorId + '-nav'
-                role="menu"
-                aria-labelledby= top_option.anchorId
-                )
-                ul.submenu-options
-                  each child_option in sub_elements
-                    if child_option.display
-                      li
-                        a.sub-nav-links(
-                          href= child_option.url
-                          id= child_option.id
-                          class=(child_option.id == navId ? 'selected' : '')
-                        )= child_option.displayText
+            if sub_elements.length > 0
+              .inner-menu
+                nav.sub-nav(
+                  id= top_option.anchorId + '-nav'
+                  role="menu"
+                  aria-labelledby= top_option.anchorId
+                  )
+                  .inner-menu-content
+                    ul.submenu-options.col-2
+                      li Some story
+                    ul.submenu-options.col-1
+                      each child_option in sub_elements
+                        if child_option.display
+                          li
+                            a.sub-nav-links(
+                              href= child_option.url
+                              id= child_option.id
+                              class=(child_option.id == navId ? 'selected' : false)
+                            )= child_option.displayText
+                    .submenu-picture
+                      img(
+                        src='/assets/menu_picture.jpg'
+                        )
