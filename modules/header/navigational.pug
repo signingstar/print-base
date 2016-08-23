@@ -35,7 +35,7 @@ nav#top-nav.top-nav(
                             a.sub-nav-links(
                               href= child_option.url
                               id= child_option.id
-                              class=(child_option.id == navId ? 'selected' : '')
+                              class=(child_option.id == navId ? 'selected' : false)
                             )= child_option.displayText
                     .submenu-picture
                       img(
