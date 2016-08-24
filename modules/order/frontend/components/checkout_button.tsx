@@ -1,11 +1,11 @@
 import * as React from "react";
 
-const CheckoutButton = () => {
+const ConfirmationButton = ({isComplete}: {isComplete: boolean}) => {
   return (
     <div className='checkout-button' id='checkout'>
-      <button>Checkout</button>
+      <button type='submit' className={isComplete ? 'active' : 'inactive'}>Confirm Order</button>
     </div>
   );
 }
 
-export default CheckoutButton;
+export default ConfirmationButton;

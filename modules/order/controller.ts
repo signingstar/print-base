@@ -35,6 +35,10 @@ const orderController = function({modules} : {modules: any}) {
       let html = fn(page);
 
       responders.html(html);
+    },
+
+    post: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
+
     }
   }
 }

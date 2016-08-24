@@ -58,6 +58,12 @@ export function routes(app: Application, globalModules: any) {
 
   app.get("/account/:category", processRequest('accountController', 'main', processOptions));
 
+  app.get("/checkout", processRequest('checkoutController', 'main', processOptions));
+
+  app.get("/checkout/:category", processRequest('checkoutController', 'details', processOptions));
+
+  app.post("/checkout", processRequest('checkoutController', 'post', processOptions));
+
   app.get("/contact", processRequest('contactUsController', 'main', processOptions));
 
   app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions));
@@ -73,7 +79,13 @@ export function routes(app: Application, globalModules: any) {
 
   app.get("/order", processRequest('orderController', 'main', processOptions));
 
-  app.get("/partner", processRequest('partnerController', 'main', processOptions));
+  app.get("/partner", processRequest('partnerController', 'get', processOptions));
+
+  app.post("/partner", processRequest('partnerController', 'post', {
+      attributes: processOptions.attributes,
+      responders: { redirectWithCookies }
+    }
+  ));
 
   app.get("/services", processRequest('ourServicesController', 'main', processOptions));
 

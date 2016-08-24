@@ -99,25 +99,18 @@ header .top-header {
         max-width: $max-width;
         padding: 0 10px;
 
-        > li {
-          // height: 40px;
+        > li > a {
+          cursor: pointer;
+          display: inline-block;
+          font-weight: 300;
+          line-height: 40px;
+          height: 40px;
 
-          &:hover {
-          }
+          &:focus, &:hover {
+            border-bottom: 2px solid $button-hover-color;
 
-          > a {
-            cursor: pointer;
-            display: inline-block;
-            font-weight: 300;
-            line-height: 40px;
-            height: 40px;
-
-            &:focus, &:hover {
-              border-bottom: 2px solid $button-hover-color;
-
-              + .inner-menu .sub-nav {
-                display: block;
-              }
+            + .inner-menu .sub-nav {
+              display: block;
             }
           }
         }
@@ -186,10 +179,8 @@ header .top-header {
               }
             }
           }
-        }
 
-        &:hover {
-          .sub-nav {
+          &:hover {
             display: block;
           }
         }

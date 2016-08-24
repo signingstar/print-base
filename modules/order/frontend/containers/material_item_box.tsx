@@ -39,7 +39,14 @@ class MaterialItemBox extends React.Component<any, any> {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={CATEGORY_SURFACE} optionButtonNodes={optionButtonNodes} label='Print Material' selected={material} onClick={selectSurface} placeholder={placeholder}/>
+    return <DropdownBox
+      category={CATEGORY_SURFACE}
+      optionButtonNodes={optionButtonNodes}
+      label='Print Material'
+      selected={material}
+      onClick={selectSurface}
+      placeholder={placeholder}
+    />
   }
 }
 

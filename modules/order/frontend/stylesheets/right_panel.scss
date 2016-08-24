@@ -59,6 +59,15 @@
       text-align: center;
     }
   }
+
+  .form-field {
+    outline: 0;
+    border: 0;
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: 300;
+  }
+
   .checkout-button {
     margin-top: 25px;
     text-align: center;
@@ -75,8 +84,16 @@
       outline: 0;
       width: 100%;
 
-      &:hover {
-        background-color: $button-hover-color;
+      &.inactive {
+        color: $light-gray;
+      }
+
+      &.active {
+        color: $white;
+
+        &:hover {
+          background-color: $button-hover-color;
+        }
       }
     }
   }

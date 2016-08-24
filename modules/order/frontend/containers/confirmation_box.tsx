@@ -13,8 +13,9 @@ const mapStateToProps = (orderApp: any, ownProps: any) => {
   coat =  fetchLabelForCategoryAndId(CATEGORY_COAT, coat);
   quantity =  fetchLabelForCategoryAndId(CATEGORY_QUANTITY, quantity);
   files = files || [];
+  let isComplete = type && size && material && coat && quantity && files;
 
-  return { type, size, material, coat, quantity, files }
+  return { type, size, material, coat, quantity, files, isComplete }
 }
 
 const mapDispatchToProps = (dispatch: any, ownProps: any) => {

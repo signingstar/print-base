@@ -40,7 +40,13 @@ class QuantityItemBox extends React.Component<any, any> {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={CATEGORY_QUANTITY} optionButtonNodes={optionButtonNodes} label='Print Quantity' selected={quantity} onClick={selectQuantity} placeholder={placeholder}/>
+    return <DropdownBox
+      category={CATEGORY_QUANTITY}
+      optionButtonNodes={optionButtonNodes}
+      label='Print Quantity'
+      selected={quantity}
+      onClick={selectQuantity}
+      placeholder={placeholder}/>
   }
 }
 
