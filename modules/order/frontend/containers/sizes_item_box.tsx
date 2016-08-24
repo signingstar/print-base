@@ -46,7 +46,7 @@ class SizesItemBox extends React.Component<any, any> {
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: orderApp.selectionState.type,
+    type: orderApp.typeState.type,
     size: orderApp.selectionState.size,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_SIZE) > -1
   }

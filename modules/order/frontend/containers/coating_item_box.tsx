@@ -45,7 +45,7 @@ class CoatingBox extends React.Component<any, any> {
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: orderApp.selectionState.type,
+    type: orderApp.typeState.type,
     size: orderApp.selectionState.size,
     material: orderApp.selectionState.material,
     coat: orderApp.selectionState.coat,

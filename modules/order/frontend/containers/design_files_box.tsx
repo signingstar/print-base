@@ -23,7 +23,8 @@ class DesignFilesBox extends React.Component<any, any> {
 }
 
 const mapStateToProps = (orderApp: any) => {
-  let { type, files, updateComponents } = orderApp.selectionState;
+  let { files, updateComponents } = orderApp.selectionState;
+  let { type } = orderApp.typeState;
 
   return {
     type,

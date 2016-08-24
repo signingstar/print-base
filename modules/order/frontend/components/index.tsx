@@ -1,23 +1,27 @@
 import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { createStore } from "redux";
+import { render } from "react-dom";
 import { Provider } from "react-redux";
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import MainContents from "./main_contents";
-import orderApp from "../reducers";
+import configureStore from "../store";
 import MyWindow from "../data_types/my_window";
+import routes from "../routes";
 
 declare var window: MyWindow;
 
 let preloadedState = window.__PRELOADED_STATE__;
-const store = createStore(orderApp, preloadedState);
-const rootElem = document.getElementById('main-contents');
 
-function render() {
-  ReactDOM.render(
-    <Provider store={store} ><MainContents /></Provider>, rootElem
+const rootElem = document.getElementById('main-contents');
+const store = configureStore(browserHistory, preloadedState);
+const history = syncHistoryWithStore(browserHistory, store);
+
+function renderDom() {
+  render(
+    <Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem
   );
 }
 
-render();
-store.subscribe(render);
+renderDom();
+store.subscribe(renderDom);

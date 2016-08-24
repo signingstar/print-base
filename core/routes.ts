@@ -79,6 +79,8 @@ export function routes(app: Application, globalModules: any) {
 
   app.get("/order", processRequest('orderController', 'main', processOptions));
 
+  app.get("/order/:category", processRequest('orderController', 'main', processOptions));
+
   app.get("/partner", processRequest('partnerController', 'get', processOptions));
 
   app.post("/partner", processRequest('partnerController', 'post', {

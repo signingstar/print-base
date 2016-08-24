@@ -5,7 +5,8 @@ import { resetAll, CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT
 import { fetchLabelForCategoryAndId } from "../presenter";
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
-  let { type, size, material, coat, quantity, files } = orderApp.selectionState;
+  let { size, material, coat, quantity, files } = orderApp.selectionState;
+  let { type } = orderApp.typeState;
 
   type =  fetchLabelForCategoryAndId(CATEGORY_TYPE, type);
   size = fetchLabelForCategoryAndId(CATEGORY_SIZE, size);

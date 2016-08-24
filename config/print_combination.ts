@@ -14,19 +14,19 @@ const PrintData:{[key: string]: any} = {
       "coat": ["c-1", "c-2", "c-4"],
       "quantity": ["q-1", "q-2", "q-3", "q-4"]
     },
-    "brouchers": {
+    "broucher": {
       "label": "Brouchers",
       "size": ["m-1"],
       "material": ["p-1", "p-2"],
       "coat": ["c-1", "c-4"],
       "quantity": ["q-2", "q-3"]
     },
-    "mugs": {
-      "label": "Coffee Mugs",
-      "size": ["s-1"],
-      "material": ["p-1", "p-3"],
-      "coat": ["c-5"],
-      "quantity": ["q-1"]
+    "flyer": {
+      "label": "Flyers",
+      "size": ["m-1"],
+      "material": ["p-1"],
+      "coat": ["c-2"],
+      "quantity": ["q-2", "q-3"]
     },
     "t_shirts": {
       "label": "T-Shirts",

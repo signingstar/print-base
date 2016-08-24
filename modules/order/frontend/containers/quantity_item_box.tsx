@@ -27,8 +27,8 @@ class QuantityItemBox extends React.Component<any, any> {
   }
 
   render() {
-    let { storeState } = this.props;
-    let { type, size, material, quantity } = storeState;
+    let { type, storeState } = this.props;
+    let { size, material, quantity } = storeState;
 
     if(!type) return null;
 
@@ -53,6 +53,7 @@ class QuantityItemBox extends React.Component<any, any> {
 const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
     storeState: orderApp.selectionState,
+    type: orderApp.typeState.type,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_QUANTITY) > -1
   }
 }
