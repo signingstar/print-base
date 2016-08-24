@@ -1,6 +1,6 @@
 import * as Action_Items from "../actions";
 let { RESET, SET_TYPE, SET_SIZE, SET_SURFACE, SET_COAT, SET_QUANTITY, SET_FILES} = Action_Items;
-let {CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES } = Action_Items;
+let { CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES } = Action_Items;
 
 export interface SelectionStateObject {
   type?: string;
@@ -19,27 +19,25 @@ const defaultState:SelectionStateObject = {
 
 const selectionState = (state = defaultState, action:{type: string, value?: string}): SelectionStateObject => {
   let {type, value} = action;
-
   let newState: SelectionStateObject = state;
 
-  switch (action.type) {
+  switch (type) {
     case RESET:
-      newState = {files: [], updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES]};
+      newState = {files: [], updateComponents: [CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES]};
       break;
     case SET_TYPE:
-      newState = {
-        type: action.value,
+      newState = Object.assign({}, state, {
         size: undefined,
         material: undefined,
         coat: undefined,
         quantity: undefined,
         files: [],
-        updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES]
-      };
+        updateComponents: [CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY, CATEGORY_FILES]
+      });
       break;
     case SET_SIZE:
       newState = Object.assign({}, state, {
-        size: action.value,
+        size: value,
         material: undefined,
         coat: undefined,
         quantity: undefined,
@@ -48,7 +46,7 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
       break;
     case SET_SURFACE:
       newState = Object.assign({}, state, {
-        material: action.value,
+        material: value,
         coat: undefined,
         quantity: undefined,
         updateComponents: [CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY]
@@ -56,20 +54,19 @@ const selectionState = (state = defaultState, action:{type: string, value?: stri
       break;
     case SET_COAT:
       newState = Object.assign({}, state, {
-        coat: action.value,
-        quantity: undefined,
+        coat: value,
         updateComponents: [CATEGORY_COAT, CATEGORY_QUANTITY]
       });
       break;
     case SET_QUANTITY:
       newState =  Object.assign({}, state, {
-        quantity: action.value,
+        quantity: value,
         updateComponents: [CATEGORY_QUANTITY]
       });
       break;
     case SET_FILES:
       newState =  Object.assign({}, state, {
-        files: action.value,
+        files: value,
         updateComponents: [CATEGORY_FILES]
       });
       break;

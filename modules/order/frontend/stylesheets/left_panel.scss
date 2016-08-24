@@ -1,4 +1,14 @@
 .left-panel {
+  width: 70%;
+
+  .print-type {
+    h1 {
+      margin-top: 0;
+      margin-bottom: 25px;
+      text-align: center;
+      font-size: 22px;
+    }
+  }
   .inner-section {
     min-height: 60px;
 
@@ -10,7 +20,7 @@
     label {
       display: inline-block;
       font-size: 17px;
-      font-weight: 600;
+      font-weight: 500;
       width: 200px;
     }
 

@@ -1,27 +1,37 @@
 import * as React from "react";
 import { renderToString } from 'react-dom/server'
-import { createStore } from "redux";
 import { Provider } from "react-redux";
+import { RouterContext, RouterState } from "react-router";
+import { ReactRouterReduxHistory } from "react-router-redux";
+(React as any).__spread = Object.assign;
 
 import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_QUANTITY } from "./frontend/actions";
 import MainContents from "./frontend//components/main_contents";
-import orderApp from "./frontend/reducers";
+import createStore from "./frontend/store";
 
-const ReactComponent = (item: string) => {
+interface RenderProps extends RouterState {
+  router: any,
+  createElement: any
+}
 
+const ReactComponent = (renderProps: RenderProps, history: ReactRouterReduxHistory) => {
+  let {category} = renderProps.params;
   let initialPayload = {
     selectionState: {
-      type: item,
       updateComponents: [CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_QUANTITY]
+    },
+    typeState: {
+      type: category,
+      updateComponents: []
     }
   }
   // Create a new Redux store instance
-  const store = createStore(orderApp, initialPayload);
+  const store = createStore(history, initialPayload);
 
   // Render the component to a string
   const reactHTML = renderToString(
     <Provider store={store}>
-      <MainContents />
+      <RouterContext {...renderProps} />
     </Provider>
   );
 

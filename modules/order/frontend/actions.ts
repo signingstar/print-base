@@ -6,6 +6,7 @@ export const SET_SURFACE = 'SET_SURFACE';
 export const SET_QUANTITY = 'SET_QUANTITY';
 export const SET_FILES = 'SET_FILES';
 export const SET_COAT = 'SET_COAT';
+export const SET_PRELOAD = 'SET_PRELOAD';
 export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
 export const CATEGORY_TYPE = 'type';
 export const CATEGORY_SIZE = 'size';
@@ -66,6 +67,13 @@ export const setFiles = (files: File[]) => {
 export const updateCategories = (category:string) => {
   return {
     type: UPDATE_CATEGORIES,
+    category
+  }
+}
+
+export const setPreload = (category: string) => {
+  return {
+    type: SET_PRELOAD,
     category
   }
 }

@@ -18,6 +18,7 @@ class TypesItemBox extends React.Component<any, any> {
   }
 
   render() {
+    console.log(`Inside rendr`);
     let { type } = this.props;
     let selectedLabel = type && type !== '' ? 'Print Type' : 'What would you like to print';
 
@@ -39,7 +40,7 @@ class TypesItemBox extends React.Component<any, any> {
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
   return {
-    type: orderApp.selectionState.type,
+    type: orderApp.typeState.type,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(CATEGORY_TYPE) > -1
   }
 }

@@ -49,14 +49,14 @@ module.exports = [
         "displayText": "Banners",
         "url": "/marketing/banner",
         "display": true,
-        "internal_url": "t_shirts"
+        "internal_url": "banner"
       },
       {
         "id": "l-3-2",
         "displayText": "Flyers",
         "url": "/marketing/flyer",
         "display": true,
-        "internal_url": "mugs"
+        "internal_url": "flyer"
       },
       {
         "id": "l-3-3",

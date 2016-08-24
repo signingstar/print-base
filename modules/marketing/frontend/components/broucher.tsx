@@ -20,7 +20,7 @@ const Broucher = () => {
                     <p>A single sheet printed on both sides and folded into halves</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order?mode=services&amp;item=brouchers">Place order</a></div>
+                    <div className="button-style"><a href="/order/broucher">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
@@ -36,7 +36,7 @@ const Broucher = () => {
                     <p>A single sheet printed on both sides and folded into thirds</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order?mode=services&amp;item=brouchers">Place order</a></div>
+                    <div className="button-style"><a href="/order/broucher">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
@@ -52,7 +52,7 @@ const Broucher = () => {
                     <p>A single sheet printed on both sides and folded into fourths</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order?mode=services&amp;item=brouchers">Place order</a></div>
+                    <div className="button-style"><a href="/order/broucher">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
