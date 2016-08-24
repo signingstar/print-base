@@ -23,7 +23,14 @@ class TypesItemBox extends React.Component<any, any> {
 
     let optionButtonNodes = this.itemList.map((entry) => {
       let selected = type === entry.id ? true : false;
-      return <OptionBox category={CATEGORY_TYPE} id={entry.id} label={entry.value} selected={selected} onClick={selectType} key={entry.id}/>;
+
+      return <OptionBox
+        category={CATEGORY_TYPE}
+        id={entry.id}
+        label={entry.value}
+        selected={selected}
+        onClick={selectType}
+        key={entry.id}/>;
     });
 
     return <OptionItems optionButtonNodes={optionButtonNodes} label={selectedLabel} />

@@ -3,6 +3,7 @@ import { coreController } from "./controller";
 let debug = require("debug")('Core:AppControllers');
 
 import accountController from "../modules/account/controller";
+import checkoutController from "../modules/checkout/controller";
 import contactUsController from "../modules/contact_us/controller";
 import forgotPasswordController from "../modules/forgot_password/controller";
 import homeController from "../modules/home/controller";
@@ -18,6 +19,7 @@ import whyUsController from "../modules/why_us/controller";
 
 let controllersList = {
   accountController,
+  checkoutController,
   contactUsController,
   forgotPasswordController,
   homeController,

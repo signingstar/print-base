@@ -34,7 +34,13 @@ class SizesItemBox extends React.Component<any, any> {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={CATEGORY_SIZE} optionButtonNodes={optionButtonNodes} label='Print Size' selected={size} onClick={selectSize} placeholder={placeholder} />
+    return <DropdownBox
+      category={CATEGORY_SIZE}
+      optionButtonNodes={optionButtonNodes}
+      label='Print Size'
+      selected={size}
+      onClick={selectSize}
+      placeholder={placeholder} />
   }
 }
 

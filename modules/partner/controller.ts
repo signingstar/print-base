@@ -1,10 +1,11 @@
 import { presenter } from "../header/presenter";
+import partnerPresenter from "./presenter";
 
 const partnerController = function({modules} : {modules: any}) {
   let {pug, logger} = modules;
 
   return {
-    main: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
+    get: function({attributes, responders, page} : {attributes: any, responders: any, page: any}) {
       let {req, res} = attributes;
       let srcPath:string = './modules/partner/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
@@ -23,6 +24,13 @@ const partnerController = function({modules} : {modules: any}) {
       let html = fn(page);
 
       responders.html(html);
+    },
+    post: ({attributes, responders, page} : {attributes: any, responders: any, page: any}) => {
+      let {req, res} = attributes;
+      let refUrl = decodeURI(req.query.ref_url);
+
+      refUrl = partnerPresenter(refUrl, true).parsedUri;
+      responders.redirectWithCookies(refUrl);
     }
   }
 }

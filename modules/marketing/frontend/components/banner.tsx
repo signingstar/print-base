@@ -21,7 +21,7 @@ const Banner = () => {
                     <p>So, an advertising sign can integrate its main purpose with telecommunications antenna and/or public lighting support. Usually the structure has a steel pole with a coupling flange on the above-fitted advertising billboard structure that can contain telecommunications antennas. The lighting power wiring and any antennas are placed inside the structure.</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order?mode=services&amp;item=brouchers">Place order</a></div>
+                    <div className="button-style"><a href="/order?mode=services&item=brouchers">Place order</a></div>
                   </div>
                 </div>
               </figcaption>

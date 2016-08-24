@@ -34,6 +34,7 @@ var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
       'account.css':  corePath + '/frontend/account.scss',
+      'checkout.css':  corePath + '/frontend/checkout.scss',
       'main.css':     corePath + '/frontend/main.scss',
       'session.css':  corePath + '/frontend/session.scss',
       'contact.css':  corePath + '/frontend/contact.scss',
@@ -42,6 +43,7 @@ var clientConfig = extend({}, true, config, {
       'main.js':      corePath + '/frontend/main.ts',
       'order.js':     corePath + '/frontend/order.ts',
       'account.js':   corePath + '/frontend/account.ts',
+      'checkout.js':   corePath + '/frontend/checkout.ts',
       'partner.js':   corePath + '/frontend/partner_us.ts',
       'session.js':   corePath + '/frontend/session.ts',
       'contact.js':   srcPath + '/contact_us/frontend/contact.ts',
@@ -90,7 +92,7 @@ var clientConfig = extend({}, true, config, {
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", "css", "scss"]
   },
-  devtool: 'source-map',
+  // devtool: 'source-map',
   externals: {
     "react": "React",
     "react-dom": "ReactDOM",
