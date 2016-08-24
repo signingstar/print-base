@@ -1,5 +1,6 @@
 import 'core-js/shim';
 import selectionState, { SelectionStateObject } from '../../../modules/order/frontend/reducers/selection_state';
+import TypeState from '../../../modules/order/frontend/reducers/type_state';
 import { expect } from 'chai';
 
 const defaultState: SelectionStateObject = {
@@ -17,13 +18,16 @@ describe('Reducer', function() {
 
       it('should set type when state is empty', () => {
         let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        expect(state).to.have.property('type').and.equal('mugs');
+        let typeState = TypeState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
+        expect(typeState).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.is.undefined;
       });
 
       it('should have all keys present when type is set', () => {
         let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        expect(state).to.have.all.keys('type', 'size', 'quantity', 'material', 'coat', 'updateComponents', 'files');
+        let typeState = TypeState({}, {type: 'SET_TYPE', value: 'mugs'});
+        expect(state).to.have.all.keys('size', 'quantity', 'material', 'coat', 'updateComponents', 'files');
+        expect(typeState).to.have.all.keys('type');
       });
 
       it('should set size when state is empty', () => {
@@ -34,7 +38,8 @@ describe('Reducer', function() {
 
       it('should set surface when state is not empty', () => {
         let state = selectionState({type: 'mugs', size: 'axb', files:[], updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
-        expect(state).to.have.property('type').and.equal('mugs');
+        let typeState = TypeState({type: 'mugs', updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
+        expect(typeState).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
         expect(state).to.have.property('material').and.equal('paper');
         expect(state).to.have.property('coat').to.be.undefined;
@@ -43,11 +48,11 @@ describe('Reducer', function() {
 
       it('should set coating when state is not empty', () => {
         let state = selectionState({type: 'mugs', size: 'axb', material: 'paper', files:[], updateComponents:[]}, {type: 'SET_COAT', value: 'gloss'});
-        expect(state).to.have.property('type').and.equal('mugs');
+        let typeState = TypeState({type: 'mugs', updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
+        expect(typeState).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
         expect(state).to.have.property('material').and.equal('paper');
         expect(state).to.have.property('coat').and.equal('gloss');
-        expect(state).to.have.property('quantity').to.be.undefined;
       });
 
       it('should set size when state is not empty', () => {

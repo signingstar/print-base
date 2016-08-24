@@ -5,7 +5,7 @@ const Marketing = () => {
     <div>
       <header>
         <div id="main-sub-heading" className="heading">
-          <h1>Services we offer</h1>
+          <h1>Printing Marketing Materials</h1>
         </div>
       </header>
       <section>

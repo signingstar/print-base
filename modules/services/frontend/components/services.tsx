@@ -5,7 +5,7 @@ const Services = () => {
     <div>
       <header>
         <div id="main-sub-heading" className="heading">
-          <h1>Services we offer</h1>
+          <h1>Cards & Stationary Printing</h1>
         </div>
       </header>
       <section>
