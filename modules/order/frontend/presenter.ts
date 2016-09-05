@@ -1,6 +1,6 @@
 import { DataFormat } from "./data_types/data_format";
 import PrintData from "../../../config/print_combination";
-import { CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE } from "./actions";
+import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_FOLD } from "./actions";
 
 interface NestedMap {
   [name: string]: any;
@@ -11,6 +11,8 @@ interface PropList {
   size?: string;
   material?: string;
   quantity?: string;
+  coat?: string;
+  fold?: string;
 }
 
 let fetchSpecificCategory = function(type: string) {
@@ -62,19 +64,29 @@ let consolidateList = function(sourceList: string[], lookupList: string[]) {
 export let printableDataWithFilter = function(category: string, filterTypes: PropList) {
   const innerSet = fetchSpecificCategory(category);
   let listForCategory: string[];
-  let {type, size, material} = filterTypes;
+  let {type, size, material, coat, fold} = filterTypes;
 
   if(type) {
-    listForCategory = fetchSpecificFilterByCategory(CATEGORY_TYPE, type, category).slice();
+    listForCategory = fetchSpecificFilterByCategory(TYPE_CATEGORY, type, category).slice();
   }
 
   if(size) {
-    let localList: string[] = fetchSpecificFilterByCategory(CATEGORY_SIZE, size, category);
+    let localList: string[] = fetchSpecificFilterByCategory(TYPE_SIZE, size, category);
     listForCategory = consolidateList(listForCategory, localList);
   }
 
   if(material) {
-    let localList: string[] = fetchSpecificFilterByCategory(CATEGORY_SURFACE, material, category);
+    let localList: string[] = fetchSpecificFilterByCategory(TYPE_SURFACE, material, category);
+    listForCategory = consolidateList(listForCategory, localList);
+  }
+
+  if(coat) {
+    let localList: string[] = fetchSpecificFilterByCategory(TYPE_COAT, material, category);
+    listForCategory = consolidateList(listForCategory, localList);
+  }
+
+  if(fold) {
+    let localList: string[] = fetchSpecificFilterByCategory(TYPE_FOLD, material, category);
     listForCategory = consolidateList(listForCategory, localList);
   }
 

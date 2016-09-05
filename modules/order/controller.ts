@@ -29,8 +29,6 @@ const orderController = function({modules} : {modules: any}) {
       page.set(headerPresenter);
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
-        console.log(`routes:${JSON.stringify(renderProps.params)} `);
-
         if(renderProps) {
           let {reactHTML, preloadedState} = ReactComponent(renderProps, history);
           page.set( {

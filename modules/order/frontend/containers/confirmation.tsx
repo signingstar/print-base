@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
 
 import ConfirmationItems from "../components/confirmation_items";
-import { resetAll, CATEGORY_TYPE, CATEGORY_SIZE, CATEGORY_SURFACE, CATEGORY_COAT, CATEGORY_QUANTITY } from "../actions";
+import { resetAll, TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../actions";
 import { fetchLabelForCategoryAndId } from "../presenter";
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
-  let { size, material, coat, quantity, files } = orderApp.selectionState;
+  let { quantity, files } = orderApp.selectionState;
   let { type } = orderApp.typeState;
 
-  type =  fetchLabelForCategoryAndId(CATEGORY_TYPE, type);
-  size = fetchLabelForCategoryAndId(CATEGORY_SIZE, size);
-  material =  fetchLabelForCategoryAndId(CATEGORY_SURFACE, material);
-  coat =  fetchLabelForCategoryAndId(CATEGORY_COAT, coat);
-  quantity =  fetchLabelForCategoryAndId(CATEGORY_QUANTITY, quantity);
+  type =  fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
+  let { size, material, coat } = ownProps.fieldsLabel;
+  // material =  fetchLabelForCategoryAndId(TYPE_SURFACE, material);
+  // coat =  fetchLabelForCategoryAndId(TYPE_COAT, coat);
+  quantity =  fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
   files = files || [];
   let isComplete = type && size && material && coat && quantity && files;
 
@@ -27,9 +27,9 @@ const mapDispatchToProps = (dispatch: any, ownProps: any) => {
   }
 }
 
-const ConfirmationBox = connect(
+const Confirmation = connect(
   mapStateToProps,
   mapDispatchToProps
 )(ConfirmationItems);
 
-export default ConfirmationBox;
+export default Confirmation;

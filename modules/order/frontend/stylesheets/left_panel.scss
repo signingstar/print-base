@@ -32,17 +32,19 @@
 
     }
 
-    button.select-elem {
+    .select-elem {
       background-color: $select-options;
       border-radius: 6px;
       border: 1px solid $select-options;
       color: $white;
       cursor: pointer;
+      display: inline-block;
       height: 40px;
       font-size: 14px;
       margin-right: 15px;
       min-width: 120px;
       outline: 0;
+      text-align: center;
 
       &:hover {
         background-color: $button-orig-color;
@@ -50,6 +52,10 @@
 
       &.selected {
         background-color: $button-hover-color;
+      }
+
+      span {
+        line-height: 40px;
       }
     }
 

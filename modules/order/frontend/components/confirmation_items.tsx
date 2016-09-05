@@ -2,13 +2,15 @@ import * as React from "react";
 
 import ConfirmationButton from "./checkout_button";
 import { StateObject } from "../data_types/data_format";
-import FilesPreviewBox from "../containers/files_preview_box";
+import FilesPreviewBox from "../containers/files_preview";
 
 class ConfirmationItems extends React.Component<any, {}> {
   hasDisplayed: boolean = false;
 
   render() {
-    let { type, size, material, coat, quantity, files, onReset, isComplete } = this.props;
+    let { fieldsLabel, quantity, files, onReset, isComplete } = this.props;
+
+    let { type, size, material, coat } = fieldsLabel;
     if(!type && !this.hasDisplayed) return null;
 
     this.hasDisplayed = true;
