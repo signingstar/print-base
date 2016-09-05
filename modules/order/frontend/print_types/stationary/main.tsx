@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import OrderPresenter from "../../new_presenter";
+import OrderPresenter from "../../presenter";
 import PrintSize from "../../filters/size";
 import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
