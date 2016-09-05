@@ -27,7 +27,7 @@ describe('Reducer', function() {
         let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
         let typeState = TypeState({}, {type: 'SET_TYPE', value: 'mugs'});
         expect(state).to.have.all.keys('size', 'quantity', 'material', 'coat', 'updateComponents', 'files');
-        expect(typeState).to.have.all.keys('type');
+        expect(typeState).to.have.all.keys('type', 'updateComponents');
       });
 
       it('should set size when state is empty', () => {

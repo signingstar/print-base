@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 
 import SelectBox from "../components/dropdown_items";
-import { fetchLabelForCategoryAndId } from "../presenter";
 
 interface OwnProps {
   category: string;
@@ -12,9 +11,17 @@ interface OwnProps {
   placeholder: string;
 }
 
+const getLabelForValue = (val: string, optionButtonNodes: any) => {
+  if(!val) return;
+
+  let node = optionButtonNodes.find(entry => entry.value === val);
+  return node.label;
+}
+
 const mapStateToProps = (state: any, ownProps: OwnProps) => {
   let { category, id, label, selected, optionButtonNodes, placeholder } = ownProps;
-  let selectedLabel = selected ? fetchLabelForCategoryAndId(category, selected) : undefined;
+
+  let selectedLabel = getLabelForValue(selected, optionButtonNodes);
 
   return {
     state: { id, label, selected: selectedLabel, optionButtonNodes, placeholder }

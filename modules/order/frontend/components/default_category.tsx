@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 
 import { fetchLabelForCategoryAndId } from "../presenter";
-import { CATEGORY_TYPE } from "../actions";
+import { TYPE_CATEGORY } from "../actions";
 
 class DefaultCategory extends React.Component<any, any> {
   render() {
@@ -12,10 +12,8 @@ class DefaultCategory extends React.Component<any, any> {
 }
 
 const mapStateToProps = (orderApp: any, ownProps: any) => {
-  let { type } = orderApp.typeState;
-  type =  fetchLabelForCategoryAndId(CATEGORY_TYPE, type);
   return {
-    type
+    type: ownProps.type
   }
 }
 
