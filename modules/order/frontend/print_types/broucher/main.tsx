@@ -25,7 +25,7 @@ interface Labels {
   fold?: string;
 }
 
-class Stationary extends React.Component<any, any> {
+class Broucher extends React.Component<any, any> {
   presenter: any;
 
   constructor() {
@@ -37,9 +37,9 @@ class Stationary extends React.Component<any, any> {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity, paper_quality }: Labels) {
+  getLabelForFields({ type, size, material, coat, quantity, paper_quality, fold }: Labels) {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let foldLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_FOLD, coat);
+    let foldLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_FOLD, fold);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
 
@@ -95,4 +95,4 @@ const mapStateToProps = (orderApp: any, ownProps: any) => {
 
 export default connect(
   mapStateToProps
-)(Stationary);
+)(Broucher);

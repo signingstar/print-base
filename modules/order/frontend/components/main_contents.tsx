@@ -1,7 +1,6 @@
 import * as React from "react";
 import { connect } from "react-redux";
 
-import SectionBody from "./section_body";
 import { setPreload } from "../actions";
 
 class MainContents extends React.Component<any, {}> {

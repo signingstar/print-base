@@ -23,7 +23,7 @@ interface Labels {
   paper_quality?: string;
 }
 
-class Stationary extends React.Component<any, any> {
+class VisitingCard extends React.Component<any, any> {
   presenter: any;
 
   constructor() {
@@ -91,4 +91,4 @@ const mapStateToProps = (orderApp: any, ownProps: any) => {
 
 export default connect(
   mapStateToProps
-)(Stationary);
+)(VisitingCard);
