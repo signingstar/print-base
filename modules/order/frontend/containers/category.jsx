@@ -26,15 +26,6 @@ const mapStateToProps = (orderApp, ownProps) => {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    setType: (type) => {
-      dispatch(selectPrimaryType(type));
-    }
-  }
-}
-
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+  mapStateToProps
 )(TypesItemBox);
