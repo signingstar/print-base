@@ -55,7 +55,7 @@ var clientConfig = extend({}, true, config, {
   },
   module: {
     loaders: [
-        // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+        // All files with a '.js' or '.jsx' extension will be handled by 'babel-loader'.
         {
           test: /\.jsx?$/,
           loader: "babel-loader",
