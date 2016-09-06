@@ -6,16 +6,12 @@ import { setPaperQuality, TYPE_PAPER_QUALITY } from "../actions";
 import DropdownBox from "../containers/dropdown";
 
 class PaperQuality extends React.Component {
-  itemList: {id: string, value: string}[];
-
   shouldComponentUpdate(nextProps, nextState) {
     return nextProps.shouldUpdate;
   }
 
   render() {
-    let { type, itemList, paper_quality } = this.props;
-
-    if(!type) return null;
+    let { itemList, paper_quality } = this.props;
 
     let placeholder = "Select Paper Quality ...";
 
@@ -24,13 +20,18 @@ class PaperQuality extends React.Component {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={TYPE_PAPER_QUALITY} optionButtonNodes={optionButtonNodes} label='Paper Quality' selected={paper_quality} onClick={setPaperQuality} placeholder={placeholder}/>
+    return <DropdownBox
+      category={TYPE_PAPER_QUALITY}
+      optionButtonNodes={optionButtonNodes}
+      label='Paper Quality'
+      selected={paper_quality}
+      onClick={setPaperQuality}
+      placeholder={placeholder} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type,
     itemList: ownProps.paperQualityList,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_PAPER_QUALITY) > -1
   }

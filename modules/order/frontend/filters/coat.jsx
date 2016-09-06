@@ -10,9 +10,7 @@ class CoatingBox extends React.Component {
   }
 
   render() {
-    let { type, itemList, coat } = this.props;
-
-    if(!type) return null;
+    let { coat, itemList } = this.props;
 
     let placeholder = "Select Coating ...";
 
@@ -21,13 +19,18 @@ class CoatingBox extends React.Component {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={TYPE_COAT} optionButtonNodes={optionButtonNodes} label='Print Coating' selected={coat} onClick={selectCoat} placeholder={placeholder}/>
+    return <DropdownBox
+      category={TYPE_COAT}
+      optionButtonNodes={optionButtonNodes}
+      label='Print Coating'
+      selected={coat}
+      onClick={selectCoat}
+      placeholder={placeholder} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type,
     itemList: ownProps.coatList,
     coat: orderApp.selectionState.coat,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_COAT) > -1

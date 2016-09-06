@@ -15,8 +15,6 @@ import DefaultCategory from "../../components/default_category";
 import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
 
 class Stationary extends React.Component {
-  presenter;
-
   constructor() {
     super();
     this.init();
@@ -44,8 +42,6 @@ class Stationary extends React.Component {
 
   render() {
     let { type, size, material, coat, quantity, pathname } = this.props;
-
-    console.log(`quantity:${quantity}`);
 
     pathname.match(/^\/order\/stationary\-([a-z]+)$/);
     pathname = RegExp.$1;

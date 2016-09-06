@@ -1,16 +1,15 @@
 import { connect } from "react-redux";
 
 import ConfirmationItems from "../components/confirmation_items";
-import { resetAll, TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../actions";
+import { resetAll } from "../actions";
 
 const mapStateToProps = (orderApp, ownProps) => {
   let { files } = orderApp.selectionState;
 
   let { type, size, material, coat, quantity } = ownProps.fieldsLabel;
-  // material =  fetchLabelForCategoryAndId(TYPE_SURFACE, material);
-  // coat =  fetchLabelForCategoryAndId(TYPE_COAT, coat);
+
   files = files || [];
-  let isComplete = type && size && material && coat && quantity && files;
+  let isComplete = type && size && material && coat && quantity;
 
   return { type, size, material, coat, quantity, files, isComplete }
 }

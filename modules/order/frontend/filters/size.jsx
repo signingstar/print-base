@@ -14,9 +14,7 @@ class SizesItemBox extends React.Component {
   }
 
   render() {
-    let { type, size, itemList } = this.props;
-
-    if(!type) return null;
+    let { size, itemList } = this.props;
 
     let placeholder = "Select Size..."
 

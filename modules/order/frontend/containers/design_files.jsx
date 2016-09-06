@@ -12,22 +12,24 @@ class DesignFilesBox extends React.Component {
   }
 
   render() {
-    let { type, files, onDrop } = this.props;
-    if(!type) return null;
+    let { files, onDrop } = this.props;
 
     const placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
     const acceptFiles = 'image/jpeg, image/*, .ai';
 
-    return <DesignFiles label='Print Design' placeholder={placeholder} onDrop={onDrop} files={files} accept={acceptFiles} />
+    return <DesignFiles
+      label='Print Design'
+      placeholder={placeholder}
+      onDrop={onDrop}
+      files={files}
+      accept={acceptFiles} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
   let { files, updateComponents } = orderApp.selectionState;
-  let { type } = ownProps;
 
   return {
-    type,
     files,
     shouldUpdate: updateComponents.indexOf(CATEGORY_FILES) > -1
   }

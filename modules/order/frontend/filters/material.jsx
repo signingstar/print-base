@@ -10,9 +10,7 @@ class MaterialItemBox extends React.Component {
   }
 
   render() {
-    let { type, material, itemList } = this.props;
-
-    if(!type) return null;
+    let { material, itemList } = this.props;
 
     let placeholder = "Select Material ...";
 
@@ -34,7 +32,6 @@ class MaterialItemBox extends React.Component {
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type,
     itemList: ownProps.materialList,
     material: orderApp.selectionState.material,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_SURFACE) > -1

@@ -17,12 +17,8 @@ let { logger } = globalModules;
 
 middleware(app, globalModules);
 
-interface CustomApp extends express.Application {
-  [key: string]: any;
-}
-
 let routingFunctions = function(app) {
-  return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method: string) {
+  return object(map(['get', 'post', 'delete', 'put', 'head','use'], function(method) {
     let func = function(route) {
       logger.info(`[ROUTER] Mounting routes: ${route} | ${method}`);
       return app[method].apply(app, arguments);
@@ -31,11 +27,11 @@ let routingFunctions = function(app) {
   }));
 };
 
-let wrapperApp:any = routingFunctions(app);
+let wrapperApp = routingFunctions(app);
 
 routes(wrapperApp, globalModules);
 
-let port:number = process.env.PORT || 8000;
+let port = process.env.PORT || 8000;
 
 server.listen(port, function() {
   debug(`Server listening on port ${port}`);

@@ -1,25 +1,7 @@
 import React from "react";
-const Dropdown = require("react-dropdown").default;
+import Dropdown from "react-dropdown";
 
-interface ButtonState {
-  id: string;
-  label: string;
-  selected: string;
-  optionButtonNodes: OptionNode[];
-  placeholder: string;
-}
-
-interface OptionNode {
-  label: string;
-  value: string;
-}
-
-interface PropTypes {
-  onClick: ()=> void;
-  state: ButtonState;
-}
-
-const SelectBox = ({onClick, state}: PropTypes) => {
+const SelectBox = ({onClick, state}) => {
   let {id, label, selected, optionButtonNodes, placeholder} = state;
 
   return (

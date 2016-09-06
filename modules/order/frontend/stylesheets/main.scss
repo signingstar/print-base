@@ -24,9 +24,6 @@
     .main-section-body {
       display: flex;
       justify-content: space-between;
-
-      @import './left_panel';
-      @import './right_panel';
     }
   }
 }
@@ -71,5 +68,7 @@
       display: inline-block;
     }
   }
-
 }
+
+@import './left_panel';
+@import './right_panel';
