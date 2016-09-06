@@ -8,7 +8,6 @@
     "webpack": "webpack --progress --watch",
     "start": "npm run webpack & npm run server",
     "test": "karma start",
-    "postinstall": "typings install --overwrite --save"
   },
   "author": "Anil Keshari",
   "license": "MIT",
