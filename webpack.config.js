@@ -40,15 +40,14 @@ var clientConfig = extend({}, true, config, {
       'contact.css':  corePath + '/frontend/contact.scss',
       'services.css': corePath + '/frontend/services.scss',
       'order.css':    corePath + '/frontend/order.scss',
-      'main.js':      corePath + '/frontend/main.ts',
-      'order.js':     corePath + '/frontend/order.ts',
-      'account.js':   corePath + '/frontend/account.ts',
-      'checkout.js':   corePath + '/frontend/checkout.ts',
-      'partner.js':   corePath + '/frontend/partner_us.ts',
-      'session.js':   corePath + '/frontend/session.ts',
-      'contact.js':   srcPath + '/contact_us/frontend/contact.ts',
-      'services.js':  corePath + '/frontend/services.ts',
-      'marketing.js':  corePath + '/frontend/marketing.ts',
+      'account.js':   corePath + '/frontend/account.js',
+      'main.js':      corePath + '/frontend/main.js',
+      'order.js':     corePath + '/frontend/order.js',
+      'checkout.js':   corePath + '/frontend/checkout.js',
+      'partner.js':   corePath + '/frontend/partner_us.js',
+      'session.js':   corePath + '/frontend/session.js',
+      'services.js':  corePath + '/frontend/services.js',
+      'marketing.js':  corePath + '/frontend/marketing.js',
   },
   output: {
     filename: '[name]',
@@ -56,8 +55,15 @@ var clientConfig = extend({}, true, config, {
   },
   module: {
     loaders: [
-        // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-        { test: /\.tsx?$/, loader: "ts-loader" },
+        // All files with a '.js' or '.jsx' extension will be handled by 'babel-loader'.
+        {
+          test: /\.jsx?$/,
+          loader: "babel-loader",
+          exclude: /node_modules/,
+          query: {
+            presets: ['es2015', 'react']
+          }
+        },
 
         {
             test: /\.css$/,
@@ -90,7 +96,7 @@ var clientConfig = extend({}, true, config, {
   ],
 
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", "css", "scss"]
+      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js", "css", "scss"]
   },
   // devtool: 'source-map',
   externals: {
@@ -112,7 +118,7 @@ var serverConfig = extend({}, true, config, {
   name: 'server',
   target: 'node',
   entry: {
-    worker: corePath + '/worker.ts'
+    worker: corePath + '/worker.js'
   },
   output: {
     path: path.join(__dirname, "build"),
@@ -121,11 +127,18 @@ var serverConfig = extend({}, true, config, {
   module: {
     loaders: [
         // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-        { test: /\.tsx?$/, loader: "ts-loader" }
-    ]
+        {
+          test: /\.jsx?$/,
+          loader: "babel-loader",
+          exclude: /node_modules/,
+          query: {
+            presets: ['es2015', 'react']
+          }
+        },
+      ]
   },
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js"]
   },
   plugins:[
     new webpack.BannerPlugin('require("source-map-support").install();',
