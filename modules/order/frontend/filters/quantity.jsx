@@ -10,9 +10,7 @@ class QuantityItemBox extends React.Component {
   }
 
   render() {
-    let { type, itemList, quantity } = this.props;
-
-    if(!type) return null;
+    let { itemList, quantity } = this.props;
 
     let placeholder = "Select Quantity ..."
 
@@ -33,7 +31,6 @@ class QuantityItemBox extends React.Component {
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type,
     quantity: orderApp.selectionState.quantity,
     itemList: ownProps.quantityList,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_QUANTITY) > -1

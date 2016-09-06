@@ -10,7 +10,7 @@ const getLabelForValue = (val, optionButtonNodes) => {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  let { category, id, label, selected, optionButtonNodes, placeholder } = ownProps;
+  let { id, label, selected, optionButtonNodes, placeholder } = ownProps;
 
   let selectedLabel = getLabelForValue(selected, optionButtonNodes);
 

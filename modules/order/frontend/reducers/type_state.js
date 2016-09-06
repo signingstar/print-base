@@ -1,4 +1,4 @@
-import { TYPE_CATEGORY, RESET, SET_TYPE, SET_PRELOAD} from "../actions";
+import { TYPE_CATEGORY, RESET, SET_TYPE, SET_PRIMARY_TYPE, SET_PRELOAD} from "../actions";
 
 const defaultState = {
   updateComponents: [],
@@ -18,6 +18,12 @@ const typeState = (state = defaultState, {type, value}) => {
     case SET_TYPE:
       newState = Object.assign({}, state, {
         type: value,
+        updateComponents: [TYPE_CATEGORY]
+      });
+      break;
+    case SET_PRIMARY_TYPE:
+      newState = Object.assign({}, state, {
+        primaryType: value,
         updateComponents: [TYPE_CATEGORY]
       });
       break;

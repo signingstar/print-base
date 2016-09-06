@@ -10,8 +10,7 @@ class Fold extends React.Component {
   }
 
   render() {
-    let { type, size, material, itemList, fold } = this.props;
-    if(!type) return null;
+    let { itemList, fold } = this.props;
 
     let placeholder = "Select number of folds ...";
 
@@ -20,13 +19,19 @@ class Fold extends React.Component {
       return {value: entry.id, label: entry.value};
     });
 
-    return <DropdownBox category={TYPE_FOLD} optionButtonNodes={optionButtonNodes} label='Print Fold' selected={fold} onClick={selectFold} placeholder={placeholder}/>
+    return <DropdownBox
+      category={TYPE_FOLD}
+      optionButtonNodes={optionButtonNodes}
+      label='Print Fold'
+      selected={fold}
+      onClick={selectFold}
+      placeholder={placeholder} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type,
+    fold: orderApp.selectionState.fold,
     itemList: ownProps.foldList,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_FOLD) > -1
   }

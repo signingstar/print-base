@@ -5,17 +5,12 @@ import { RouterContext, RouterState } from "react-router";
 import { ReactRouterReduxHistory } from "react-router-redux";
 
 import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "./frontend/actions";
-import MainContents from "./frontend//components/main_contents";
 import createStore from "./frontend/store";
 
 const ReactComponent = (renderProps, history) => {
   let pathname = renderProps.location.pathname;
   const orderPath = /^\/order[\/]?([a-z\-]*)$/;
-  let initialPayload = {
-    selectionState: {
-      updateComponents: [TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY]
-    }
-  }
+  let initialPayload = {  }
   // Create a new Redux store instance
   const store = createStore(history, initialPayload);
 

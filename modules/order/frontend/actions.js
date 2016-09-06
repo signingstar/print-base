@@ -1,6 +1,7 @@
 //Action Types
 export const RESET = 'RESET';
 export const SET_TYPE = 'SET_TYPE';
+export const SET_PRIMARY_TYPE = 'SET_PRIMARY_TYPE';
 export const SET_SIZE = 'SET_SIZE';
 export const SET_SURFACE = 'SET_SURFACE';
 export const SET_QUANTITY = 'SET_QUANTITY';
@@ -30,6 +31,13 @@ export const resetAll = () => {
 export const selectType = (id) => {
   return {
     type: SET_TYPE,
+    value: id
+  };
+}
+
+export const selectPrimaryType = (id) => {
+  return {
+    type: SET_PRIMARY_TYPE,
     value: id
   };
 }
