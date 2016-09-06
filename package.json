@@ -7,7 +7,7 @@
     "server": "nodemon build/worker.js",
     "webpack": "webpack --progress --watch",
     "start": "npm run webpack & npm run server",
-    "test": "karma start",
+    "test": "karma start"
   },
   "author": "Anil Keshari",
   "license": "MIT",
