@@ -4,8 +4,8 @@ import { Link } from "react-router";
 import CategoryItem from "../../components/category_item";
 
 const SubCategories = ({label}) => {
-  let vcard = <Link to="/order/visiting-card" className='select-elem'><span>Select</span></Link>;
-  let vvcard = <Link to="/order/visiting-card-vertical" className='select-elem'><span>Select</span></Link>;
+  let vcard = <div className='action-box'><Link to="/order/visiting-card" className='select-elem'>Select</Link></div>;
+  let vvcard = <div className='action-box'><Link to="/order/visiting-card-vertical" className='select-elem'>Select</Link></div>;
 
   return (
     <div>

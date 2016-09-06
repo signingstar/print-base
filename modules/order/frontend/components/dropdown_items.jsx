@@ -1,5 +1,5 @@
 import React from "react";
-import Dropdown from 'react-dropdown';
+import Dropdown from "react-dropdown";
 
 const SelectBox = ({onClick, state}) => {
   let {id, label, selected, optionButtonNodes, placeholder} = state;

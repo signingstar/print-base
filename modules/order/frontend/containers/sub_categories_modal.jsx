@@ -24,7 +24,7 @@ class SubCategoriesModal extends React.Component {
   }
 
   render() {
-    const label = 'See Preview';
+    const label = 'Select Option';
     const modalHeader = 'Selected to upload';
 
     return (

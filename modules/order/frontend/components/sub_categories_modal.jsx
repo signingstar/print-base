@@ -5,7 +5,7 @@ import SubCategoriesContent from "./sub_categories_content";
 
 const customStyles = {
   content: {
-    top          : '50%',
+    top          : '40%',
     left         : '50%',
     right        : 'auto',
     bottom       : 'auto',
@@ -17,7 +17,7 @@ const customStyles = {
 
 const SubCategoriesComponent = ({onClick, onClose, isShowing, modalHeader, label, type}) => {
   return (
-    <div className='file-preview'>
+    <div className='action-box'>
       <a href='javascript:void(0)' onClick={onClick}>{label}</a>
       <Modal
         isOpen={isShowing}

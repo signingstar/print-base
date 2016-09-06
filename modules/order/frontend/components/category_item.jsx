@@ -1,7 +1,6 @@
 import React from "react";
 import Dropdown from "react-dropdown";
 
-
 const CategoryItem = ({label, actionArea, placeholder, imgSrc}) => {
   return (
     <figure className="multi-row">
