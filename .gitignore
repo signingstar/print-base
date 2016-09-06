@@ -42,7 +42,6 @@ jspm_packages
 # Compiled js files
 build
 src/*.js
-core/*.js
 
 public
 
