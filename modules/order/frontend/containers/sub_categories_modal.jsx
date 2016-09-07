@@ -24,8 +24,8 @@ class SubCategoriesModal extends React.Component {
   }
 
   render() {
-    const label = 'Select Option';
     const modalHeader = 'Selected to upload';
+    let {label} = this.props;
 
     return (
       <SubCategoriesModalComponent
@@ -41,7 +41,8 @@ class SubCategoriesModal extends React.Component {
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: ownProps.type
+    type: ownProps.type,
+    label: ownProps.label
   }
 }
 
