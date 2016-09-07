@@ -1,17 +1,17 @@
-import { Application, Request, Response } from 'express';
 import serveStatic from "serve-static";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
 let debug = require("debug")('Core:Middleware');
-let rewrite = require("express-urlrewrite");
 
-const middleware = (app, globalModules) => {
+import errorMiddleware from "../modules/error/middleware";
+
+const middleware = (app, router, globalModules) => {
   let {logger} = globalModules;
 
   app.use(compression({filter: shouldCompress}))
 
-  function shouldCompress(req: Request, res: Response) {
+  const shouldCompress = (req, res) => {
     if (req.headers['x-no-compression']) {
       // don't compress responses with this request header
       return false
@@ -39,7 +39,7 @@ const middleware = (app, globalModules) => {
 
   app.use(cookieParser());
 
-  function setCustomCacheControl (res, path) {
+  const setCustomCacheControl = (res, path) => {
     let lookupPath = serveStatic.mime.lookup(path);
 
     debug(`setCustomCacheControl with path ${path}:lookup path: ${lookupPath}`);
@@ -65,6 +65,10 @@ const middleware = (app, globalModules) => {
       res.setHeader('Cache-Control', 'public, max-age=100000');
     }
   }
+
+  app.use(router);
+
+  app.use(errorMiddleware({logger}));
 }
 
 export default middleware;
