@@ -4,13 +4,13 @@ import { Link } from "react-router";
 import CategoryItem from "../../components/category_item";
 
 const SubCategories = ({label}) => {
-  let vcard = <div className='action-box'><Link to="/order/visiting-card" className='select-elem'>Select</Link></div>;
-  let vvcard = <div className='action-box'><Link to="/order/visiting-card-vertical" className='select-elem'>Select</Link></div>;
+  let vcard = <div className='action-box'><Link to="/order/visiting-card" className='select-elem'>Regular</Link></div>;
+  let vvcard = <div className='action-box'><Link to="/order/visiting-card-vertical" className='select-elem'>Portrait</Link></div>;
 
   return (
     <div>
-      <CategoryItem label='visiting card' imgSrc="/assets/panel1.jpg" actionArea={vcard}/>
-      <CategoryItem label='vertical visiting card' imgSrc="/assets/panel2.jpg"actionArea={vvcard}/>
+      <CategoryItem label='visiting card' imgSrc="/assets/round1.png" actionArea={vcard}/>
+      <CategoryItem label='vertical visiting card' imgSrc="/assets/round2.png"actionArea={vvcard}/>
     </div>
   );
 }

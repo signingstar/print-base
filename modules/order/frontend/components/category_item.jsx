@@ -7,14 +7,8 @@ const CategoryItem = ({label, actionArea, placeholder, imgSrc}) => {
       <div className="item-tile">
         <div className="item-image"><img src={imgSrc}/></div>
         <figcaption>
-          <div className="item-description">
-            <div className="item-text">
-              <h2>{label}</h2>
-              <p>{placeholder}</p>
-            </div>
-            <div className="item-action">
-              {actionArea}
-            </div>
+          <div className="item-action">
+            {actionArea}
           </div>
         </figcaption>
       </div>

@@ -212,7 +212,7 @@ figure.multi-row {
 
   .item-tile {
     align-items: center;
-    width: 280px;
+    width: 240px;
 
     h2 {
       font-size: 18px;
@@ -225,9 +225,13 @@ figure.multi-row {
       margin-top: 5px;
     }
 
-    .item-image img{
-      height: 150px;
-      width: 280px;
+    .item-image {
+      text-align: center;
+
+      img{
+        height: 160px;
+        width: 160px;
+      }
     }
 
     .item-description {
@@ -248,16 +252,16 @@ figure.multi-row {
       display: inline-block;
 
       a {
-        background-color: $link-color-normal;
-        color: $link-color-bg;
+        color: $dark-gray;
         display: block;
-        font-size: 16px;
+        font-size: 20px;
         line-height: 35px;
+        outline: 0;
         text-align: center;
         width: 125px;
 
         &:hover {
-          background-color: $link-color-hover;
+          color: black;
         }
       }
     }

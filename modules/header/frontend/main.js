@@ -21,13 +21,17 @@ export class MainHeader {
   attachHoverEventOnMenuItems() {
     let timer;
     let delay = 100;
+    let contentMouseOut = false;
+
     this.$menuOptions.find('a[aria-haspopup="true"]').on({
       'mouseenter focusin': (e) =>  {
         let $target = $(e.target);
+        let actualDelay = contentMouseOut ? 0 : delay;
+        contentMouseOut = false;
         timer = setTimeout(()=> {
           $target.addClass('focused');
           $target.parent().find('.inner-menu .sub-nav').show();
-        }, delay);
+        }, actualDelay);
       },
       'mouseleave focusout': (e) => {
         clearTimeout(timer);
@@ -45,6 +49,7 @@ export class MainHeader {
       'mouseleave': (e) => {
         $(e.target).parents('li').find('.top-nav-link').removeClass('focused');
         $(e.target).parents('.sub-nav').hide();
+        contentMouseOut = true;
       }
     });
   }

@@ -5,9 +5,10 @@ import CategoryItem from "./category_item";
 import SubCategoriesModal from "../containers/sub_categories_modal";
 
 const Categories = ({label, type}) => {
-  let visiting_card = <SubCategoriesModal type='visiting_card' />;
-  let broucher = <SubCategoriesModal type='broucher' />;
-  let stationary = <SubCategoriesModal type='stationary' />;
+  let visiting_card = <SubCategoriesModal type='visiting_card' label='Visiting Card'/>;
+  let broucher = <SubCategoriesModal type='broucher' label='Broucher'/>;
+  let stationary = <SubCategoriesModal type='stationary'  label='Stationary'/>;
+  let flyers = <SubCategoriesModal type='flyers'  label='Flyers'/>;
 
   return (
     <div className='main-section-body'>
@@ -16,13 +17,16 @@ const Categories = ({label, type}) => {
           <h2>{ label }</h2>
           <div>
             <div className='select-elem'>
-              <CategoryItem label='Visiting Card' actionArea={visiting_card} imgSrc="/assets/panel1.jpg" />
+              <CategoryItem actionArea={visiting_card} imgSrc="/assets/round2.png" />
             </div>
             <div className='select-elem'>
-              <CategoryItem label='Stationary' actionArea={stationary} imgSrc="/assets/panel2.jpg"  />
+              <CategoryItem actionArea={stationary} imgSrc="/assets/round1.png"  />
             </div>
             <div className='select-elem'>
-              <CategoryItem label='Broucher' actionArea={broucher} imgSrc="/assets/panel3.jpg"  />
+              <CategoryItem actionArea={broucher} imgSrc="/assets/round3.png"  />
+            </div>
+            <div className='select-elem'>
+              <CategoryItem actionArea={flyers} imgSrc="/assets/round4.png"  />
             </div>
           </div>
         </div>
