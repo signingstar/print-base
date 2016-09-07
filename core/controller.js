@@ -1,23 +1,21 @@
 import { Request, Response } from "express";
 import { each, extend, map, object } from "underscore";
 
-import { ChainBuilder} from "./chain_builder";
-import { Page } from "./page";
+import ChainBuilder from "./chain_builder";
+import Page from "./page";
 
 let debug = require("debug")('Core:controllers');
 
-export function coreController(controllers, globalModules) {
+const coreController = (controllers, globalModules) => {
   debug('coreController');
 
-  let contextizer = function() {
+  let contextizer = () => {
     let chain = ChainBuilder();
 
     return {
       register: chain.register,
 
-      execute: function(req, res, defaultContext={}) {
-        return chain.execute(defaultContext, req, res);
-      }
+      execute: (req, res, defaultContext={}) => chain.execute(defaultContext, req, res)
     }
   };
 
@@ -43,10 +41,10 @@ export function coreController(controllers, globalModules) {
       extend(modules, globalModules);
       let bootedController = controllers[controller]({modules});
 
-      each(bootedController, function(handler, action) {
+      each(bootedController, (handler, action) => {
         debug('getControllerWithContext iterator');
 
-        bootedController[action] = function(args) {
+        bootedController[action] = (args) => {
           logger.info('[CONTROLLER] %s: %s', controller, action);
           args.page = preController.getPageForAction(controller, action);
 
@@ -67,8 +65,8 @@ export function coreController(controllers, globalModules) {
       return function(req, res, next) {
         let {controller} = preController.getControllerWithContext(controllerName, req, res);
 
-        let responders = object(map(options.responders, function(responder, responderName) {
-          let responderWithLogging = function(res, next) {
+        let responders = object(map(options.responders, (responder, responderName) => {
+          const responderWithLogging = (res, next) => {
             let generatedResponder = responder(res, next);
 
             return function() {
@@ -92,11 +90,11 @@ export function coreController(controllers, globalModules) {
 
     return {
       controllers: controllers,
-      controllerWithContext: function(controller) {
+      controllerWithContext: (controller) => {
         preController.getControllerWithContext(controller, req, res).controller;
       },
 
-      pageForAction: function(controller, action) {
+      pageForAction: (controller, action) => {
         preController.getPageForAction(controller, action);
       }
     };
@@ -104,3 +102,5 @@ export function coreController(controllers, globalModules) {
 
   return preController;
 };
+
+export default coreController;

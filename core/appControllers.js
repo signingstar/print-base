@@ -1,4 +1,4 @@
-import { coreController } from "./controller";
+import coreController from "./controller";
 
 let debug = require("debug")('Core:AppControllers');
 
@@ -34,8 +34,10 @@ let controllersList = {
   whyUsController
 };
 
-export let appControllers = function(globalModules) {
+const appControllers = (globalModules) => {
   debug('export method appControllers');
   let {processRequest} = coreController(controllersList, globalModules);
   return processRequest;
 }
+
+export default appControllers;

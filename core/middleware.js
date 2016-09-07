@@ -6,7 +6,7 @@ import compression from "compression";
 let debug = require("debug")('Core:Middleware');
 let rewrite = require("express-urlrewrite");
 
-export function middleware(app, globalModules) {
+const middleware = (app, globalModules) => {
   let {logger} = globalModules;
 
   app.use(compression({filter: shouldCompress}))
@@ -66,3 +66,5 @@ export function middleware(app, globalModules) {
     }
   }
 }
+
+export default middleware;

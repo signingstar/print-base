@@ -1,29 +1,22 @@
-import { Application, Request, Response } from "express";
-
 let path = require('path');
 let debug = require("debug")('Core:AppControllers');
 
-import { appControllers } from "./appControllers";
-import { responders } from "./responder";
+import appControllers from "./appControllers";
+import responders from "./responder";
 
-export const routes = (app, globalModules) => {
+const routes = (app, globalModules) => {
   debug('export routes');
   let {logger} = globalModules;
 
   let processRequest = appControllers(globalModules);
 
-  let redirectWithLogging = function (res, url, reasonCode, statusCode = 302) {
+  let redirectWithLogging = (res, url, reasonCode, statusCode = 302) => {
     logger.info(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
 
     res.redirect(statusCode, url);
   };
 
-  interface Cookie {
-    key: string,
-    value: string
-  }
-
-  let setCookiesForResponse = function(res, cookies = []) {
+  let setCookiesForResponse = (res, cookies = []) => {
     debug('setCookiesForResponse');
     for(let cookie of cookies) {
       let {key, value} = cookie;
@@ -31,9 +24,9 @@ export const routes = (app, globalModules) => {
     }
   };
 
-  let redirectWithCookies = function(res) {
+  let redirectWithCookies = (res) => {
     debug('redirectWithCookies');
-    return function(url: string, cookies: Cookie[]) {
+    return (url: string, cookies: Cookie[]) => {
       setCookiesForResponse(res, cookies);
       res.redirect(encodeURI(url));
     }
@@ -118,3 +111,5 @@ export const routes = (app, globalModules) => {
 
   app.get("/why-us", processRequest('whyUsController', 'main', processOptions));
 };
+
+export default routes;

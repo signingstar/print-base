@@ -1,4 +1,4 @@
-export class Page {
+class Page {
   constructor(templateName, attrs ={}) {
     this.templateName = templateName;
     this.set(attrs);
@@ -10,3 +10,5 @@ export class Page {
     }
   }
 }
+
+export default Page;
