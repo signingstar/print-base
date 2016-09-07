@@ -1,17 +1,15 @@
 import { clone, extend, object, reduce } from 'underscore';
 import { Request, Response } from "express";
 
-export function ChainBuilder () {
+const ChainBuilder = () => {
   let chainObject = {
     chain: new Array(),
 
-    register: function(name, fn) {
-      return chainObject.chain.push([name, fn]);
-    },
+    register: (name, fn) => chainObject.chain.push([name, fn]),
 
-    execute: function(defaultCtx = {}, ...args) {
+    execute: (defaultCtx = {}, ...args) => {
       let ctx = clone(defaultCtx);
-      let iterator = function(ctx, handler) {
+      const iterator = (ctx, handler) => {
         let out:{};
 
         try {
@@ -29,3 +27,5 @@ export function ChainBuilder () {
 
   return chainObject;
 };
+
+export default ChainBuilder;

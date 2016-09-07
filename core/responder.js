@@ -1,6 +1,6 @@
 import { Response } from 'express';
 
-export let responders = {
+const responders = {
   html: function(res, next) {
     return function(html, err) {
       if(err) {
@@ -44,3 +44,5 @@ export let responders = {
     }
   }
 };
+
+export default responders;
