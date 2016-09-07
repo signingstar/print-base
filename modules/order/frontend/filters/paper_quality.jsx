@@ -33,6 +33,7 @@ class PaperQuality extends React.Component {
 const mapStateToProps = (orderApp, ownProps) => {
   return {
     itemList: ownProps.paperQualityList,
+    paper_quality: orderApp.selectionState.paper_quality,
     shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_PAPER_QUALITY) > -1
   }
 }

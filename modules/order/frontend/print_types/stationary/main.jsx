@@ -9,7 +9,7 @@ import CoatingBox from "../../filters/coat";
 import PrintQuantity from "../../filters/quantity";
 import DesignFilesBox from "../../containers/design_files";
 
-import Confirmation from "../../containers/confirmation";
+import Confirmation from "../../../confirmation/containers/confirmation";
 import DefaultCategory from "../../components/default_category";
 
 import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
@@ -59,11 +59,11 @@ class Stationary extends React.Component {
       <div className='main-section-body'>
         <div className='left-panel'>
           <DefaultCategory type={fieldsLabel.type} />
-          <PrintSize sizeList={sizeList} type={type} />
-          <PrintMaterial materialList={materialList} type={type} />
-          <CoatingBox coatList={coatList} type={type} />
-          <PrintQuantity quantityList={quantityList} type={type} />
-          <DesignFilesBox type={type} />
+          <PrintSize sizeList={sizeList} />
+          <PrintMaterial materialList={materialList} />
+          <CoatingBox coatList={coatList} />
+          <PrintQuantity quantityList={quantityList} />
+          <DesignFilesBox />
         </div>
         <div className='right-panel'>
           <Confirmation fieldsLabel={fieldsLabel} />
