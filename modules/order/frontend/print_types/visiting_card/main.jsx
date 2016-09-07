@@ -2,13 +2,12 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
+import PrintData from "./print_combination";
 import PaperQuality from "../../filters/paper_quality";
 import PrintMaterial from "../../filters/material";
-import PrintData from "./print_combination";
 import CoatingBox from "../../filters/coat";
 import PrintQuantity from "../../filters/quantity";
 import DesignFilesBox from "../../containers/design_files";
-
 import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
@@ -32,11 +31,17 @@ class VisitingCard extends React.Component {
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
     let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
 
+    let labelMap = new Map();
+    labelMap.set('coat', {label: 'Coating', value: coatLabel});
+    labelMap.set('paper_quality', {label: 'Paper Quality', value: paperQualityLabel});
+    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+
+    let isComplete = typeLabel && coatLabel && quantityLabel && paperQualityLabel;
+
     return {
       type: typeLabel,
-      coat: coatLabel,
-      quantity: quantityLabel,
-      paper_quality: paperQualityLabel
+      map: labelMap,
+      isComplete
     }
   }
 

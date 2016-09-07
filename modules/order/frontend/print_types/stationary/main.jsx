@@ -31,12 +31,18 @@ class Stationary extends React.Component {
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
 
+    let labelMap = new Map();
+    labelMap.set('size', {label: 'Print Size', value: sizeLabel});
+    labelMap.set('material', {label: 'Paper Material', value: materialLabel});
+    labelMap.set('coat', {label: 'Coating', value: coatLabel});
+    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+
+    let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
+
     return {
       type: typeLabel,
-      size: sizeLabel,
-      material: materialLabel,
-      coat: coatLabel,
-      quantity: quantityLabel
+      map: labelMap,
+      isComplete
     }
   }
 
