@@ -106,12 +106,11 @@ header .top-header {
           line-height: 40px;
           height: 40px;
 
+          &.focused {
+            border-bottom: 2px solid $button-hover-color;
+          }
           &:focus, &:hover {
             border-bottom: 2px solid $button-hover-color;
-
-            + .inner-menu .sub-nav {
-              display: block;
-            }
           }
         }
       }
@@ -178,10 +177,6 @@ header .top-header {
                 width: 450px;
               }
             }
-          }
-
-          &:hover {
-            display: block;
           }
         }
       }
