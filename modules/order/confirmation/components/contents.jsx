@@ -2,6 +2,7 @@ import React from "react";
 
 import ConfirmationButton from "./button";
 import FilesPreviewBox from "../containers/files_preview";
+import ContentItem from "./content_item";
 
 const ConfirmationItems = ({fieldsLabel, files, onReset, isComplete, itemNodes}) => {
   const fileNodes = files.map((file) =>
@@ -16,6 +17,7 @@ const ConfirmationItems = ({fieldsLabel, files, onReset, isComplete, itemNodes})
           <div className='header'><h4>Order Summary </h4></div>
           <ul className='order-summary'>
             {itemNodes}
+            <ContentItem label='Estimated Price' value={isComplete ? 'Rs. 1000' : ''} />
             <li className='upload-list'>
               <span className='label'>Uploaded Design: </span>
               <span> <FilesPreviewBox /></span>

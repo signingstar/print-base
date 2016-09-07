@@ -12,9 +12,9 @@ const mapStateToProps = (orderApp, ownProps) => {
 
   let itemNodes = [];
 
-  var mapIter = map.keys();
-  for (var v of mapIter) {
-    itemNodes.push(<ContentItem label={map.get(v).label} value={map.get(v).value} key={v} />);
+  var keys = map.keys();
+  for (var key of keys) {
+    itemNodes.push(<ContentItem label={map.get(key).label} value={map.get(key).value} key={key} />);
   }
 
   files = files || [];
