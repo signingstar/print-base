@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 
-import ConfirmationItems from "../components/confirmation_items";
-import { resetAll } from "../actions";
+import ConfirmationItems from "../components/contents";
+import { resetAll } from "../../frontend/actions";
 
 const mapStateToProps = (orderApp, ownProps) => {
   let { files } = orderApp.selectionState;
@@ -11,7 +11,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   files = files || [];
   let isComplete = type && size && material && coat && quantity;
 
-  return { type, size, material, coat, quantity, files, isComplete }
+  return { files, isComplete }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {

@@ -9,7 +9,7 @@ import CoatingBox from "../../filters/coat";
 import PrintQuantity from "../../filters/quantity";
 import DesignFilesBox from "../../containers/design_files";
 
-import Confirmation from "../../containers/confirmation";
+import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
 import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
@@ -30,11 +30,13 @@ class VisitingCard extends React.Component {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
 
     return {
       type: typeLabel,
       coat: coatLabel,
-      quantity: quantityLabel
+      quantity: quantityLabel,
+      paper_quality: paperQualityLabel
     }
   }
 
@@ -46,8 +48,6 @@ class VisitingCard extends React.Component {
 
     type = type || pathname;
 
-    console.log(`type:${type}`);
-
     let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type});
     let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type});
     let paperQualityList = this.presenter.printableDataWithFilter(TYPE_PAPER_QUALITY, {type});
@@ -58,10 +58,10 @@ class VisitingCard extends React.Component {
       <div className='main-section-body'>
         <div className='left-panel'>
           <DefaultCategory type={fieldsLabel.type} />
-          <CoatingBox coatList={coatList} type={type} />
-          <PaperQuality paperQualityList={paperQualityList} type={type} />
-          <PrintQuantity quantityList={quantityList} type={type} />
-          <DesignFilesBox type={type} />
+          <CoatingBox coatList={coatList} />
+          <PaperQuality paperQualityList={paperQualityList} />
+          <PrintQuantity quantityList={quantityList} />
+          <DesignFilesBox />
         </div>
         <div className='right-panel'>
           <Confirmation fieldsLabel={fieldsLabel} />
@@ -72,10 +72,12 @@ class VisitingCard extends React.Component {
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
+  let { coat, paper_quality, quantity } = orderApp.selectionState;
   return {
     type: orderApp.typeState.type,
-    paper_quality: orderApp.selectionState.paper_quality,
-    coat: orderApp.selectionState.coat,
+    coat,
+    paper_quality,
+    quantity,
     pathname: ownProps.location.pathname
   }
 }

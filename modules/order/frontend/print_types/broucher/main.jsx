@@ -10,14 +10,12 @@ import PrintQuantity from "../../filters/quantity";
 import Fold from "../../filters/fold";
 import DesignFilesBox from "../../containers/design_files";
 
-import Confirmation from "../../containers/confirmation";
+import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
 import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY, TYPE_FOLD } from "../../actions";
 
 class Broucher extends React.Component {
-  presenter;
-
   constructor() {
     super();
     this.init();
@@ -32,17 +30,19 @@ class Broucher extends React.Component {
     let foldLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_FOLD, fold);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
 
     return {
       type: typeLabel,
       coat: coatLabel,
       fold: foldLabel,
-      quantity: quantityLabel
+      quantity: quantityLabel,
+      paper_quality: paperQualityLabel
     }
   }
 
   render() {
-    let { type, size, paper_quality, coat, quantity, pathname } = this.props;
+    let { type, paper_quality, fold, coat, quantity, pathname } = this.props;
 
     pathname.match(/^\/order\/broucher\-([0-9a-z\-]+)$/);
     pathname = RegExp.$1;
@@ -54,17 +54,17 @@ class Broucher extends React.Component {
     let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type});
     let paperQualityList = this.presenter.printableDataWithFilter(TYPE_PAPER_QUALITY, {type});
 
-    let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, quantity });
+    let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, fold, quantity });
 
     return (
       <div className='main-section-body'>
         <div className='left-panel'>
           <DefaultCategory type={fieldsLabel.type} />
-          <CoatingBox coatList={coatList} type={type} />
-          <Fold foldList={foldList} type={type} />
-          <PaperQuality paperQualityList={paperQualityList} type={type} />
-          <PrintQuantity quantityList={quantityList} type={type} />
-          <DesignFilesBox type={type} />
+          <CoatingBox coatList={coatList} />
+          <Fold foldList={foldList} />
+          <PaperQuality paperQualityList={paperQualityList} />
+          <PrintQuantity quantityList={quantityList} />
+          <DesignFilesBox />
         </div>
         <div className='right-panel'>
           <Confirmation fieldsLabel={fieldsLabel} />
@@ -75,10 +75,13 @@ class Broucher extends React.Component {
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
+  let {paper_quality, coat, fold, quantity} = orderApp.selectionState;
   return {
     type: orderApp.typeState.type,
-    paper_quality: orderApp.selectionState.paper_quality,
-    coat: orderApp.selectionState.coat,
+    paper_quality,
+    coat,
+    fold,
+    quantity,
     pathname: ownProps.location.pathname
   }
 }

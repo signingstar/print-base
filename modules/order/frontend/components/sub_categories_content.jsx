@@ -6,10 +6,6 @@ import VisitingCardSubCategories from "../print_types/visiting_card/sub_categori
 import BroucherSubCategories from "../print_types/broucher/sub_categories";
 
 const SubCategoriesContent = ({label, type}) => {
-  if(!type) {
-    return null;
-  }
-
   let placeholder = 'Select Item';
   let modalContent;
 
