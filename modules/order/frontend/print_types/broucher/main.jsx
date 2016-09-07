@@ -32,12 +32,18 @@ class Broucher extends React.Component {
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
     let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
 
+    let labelMap = new Map();
+    labelMap.set('coat', {label: 'Coating', value: coatLabel});
+    labelMap.set('fold', {label: 'Print Fold', value: foldLabel});
+    labelMap.set('paper_quality', {label: 'Paper Quality', value: paperQualityLabel});
+    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+
+    let isComplete = foldLabel && coatLabel && quantityLabel && paperQualityLabel;
+
     return {
       type: typeLabel,
-      coat: coatLabel,
-      fold: foldLabel,
-      quantity: quantityLabel,
-      paper_quality: paperQualityLabel
+      map: labelMap,
+      isComplete
     }
   }
 

@@ -1,22 +1,5 @@
 import React from "react";
-import { connect } from "react-redux";
 
-import { fetchLabelForCategoryAndId } from "../presenter";
-import { TYPE_CATEGORY } from "../actions";
+const DefaultCategory = ({type}) => <div className='print-type'><h1>{type} printing</h1></div>
 
-class DefaultCategory extends React.Component {
-  render() {
-    let {type} = this.props;
-    return <div className='print-type'><h1>{type} printing</h1></div>
-  }
-}
-
-const mapStateToProps = (orderApp, ownProps) => {
-  return {
-    type: ownProps.type
-  }
-}
-
-export default connect(
-  mapStateToProps
-)(DefaultCategory);
+export default DefaultCategory;
