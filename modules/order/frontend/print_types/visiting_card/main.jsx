@@ -9,7 +9,7 @@ import CoatingBox from "../../filters/coat";
 import PrintQuantity from "../../filters/quantity";
 import DesignFilesBox from "../../containers/design_files";
 
-import Confirmation from "../../../confirmation/containers/confirmation";
+import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
 import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import ConfirmationButton from "./checkout_button";
+import ConfirmationButton from "./button";
 import FilesPreviewBox from "../containers/files_preview";
 
 const ConfirmationItems = ({fieldsLabel, files, onReset, isComplete}) => {

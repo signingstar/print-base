@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 
-import ConfirmationItems from "../components/confirmation_items";
+import ConfirmationItems from "../components/contents";
 import { resetAll } from "../../frontend/actions";
 
 const mapStateToProps = (orderApp, ownProps) => {
