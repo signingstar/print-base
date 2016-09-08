@@ -9,12 +9,12 @@ import routes from "./frontend/routes";
 let debug = require("debug")('Services:controllers');
 
 const maraketingController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/marketing/main.pug';
+      let srcPath = './modules/marketing/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
       let headerPresenter = presenter({cookies});
@@ -35,8 +35,8 @@ const maraketingController = function({modules}) {
             origConfig,
             promotional_header: false,
             navigational_header: true,
-            javascript: 'marketing',
-            stylesheet: 'services',
+            javascript: jsAsset('marketingjs'),
+            stylesheet: cssAsset('servicescss'),
             title: 'Tisko - Marketing Printing',
             body_class: 'marketing',
             reactHTML,

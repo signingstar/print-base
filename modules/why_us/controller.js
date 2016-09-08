@@ -1,12 +1,12 @@
 import { origConfig, presenter } from "../header/presenter";
 
 const whyUsController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/why_us/main.pug';
+      let srcPath = './modules/why_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
 
@@ -16,8 +16,8 @@ const whyUsController = function({modules}) {
         origConfig,
         promotional_header: false,
         navigational_header: true,
-        javascript: 'main',
-        stylesheet: 'main',
+        javascript: jsAsset('mainjs'),
+        stylesheet: cssAsset('maincss'),
         title: 'Tisko Digital Printing',
         body_class: 'why-us'
       });

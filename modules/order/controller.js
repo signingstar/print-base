@@ -9,8 +9,8 @@ import routes from "./frontend/routes";
 let debug = require("debug")('Modules:Order:Controller');
 
 const orderController = function({modules}) {
-  let {pug, logger} = modules;
-  let srcPath:string = './modules/order/main.pug';
+  let {pug, logger, jsAsset, cssAsset} = modules;
+  let srcPath = './modules/order/main.pug';
 
   return {
     main: function({attributes, responders, page}) {
@@ -37,8 +37,8 @@ const orderController = function({modules}) {
             navigational_header: true,
             reactHTML,
             preloadedState,
-            javascript: 'order',
-            stylesheet: 'order',
+            javascript: jsAsset('orderjs'),
+            stylesheet: cssAsset('ordercss'),
             title: 'Tisko Digital Printing',
             body_class: 'order'
           });
