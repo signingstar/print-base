@@ -28,16 +28,7 @@ fs.readdirSync('node_modules')
       nodeModules[mod] = 'commonjs ' + mod;
   });
 
-var statsJson = function() {
-  this.plugin("done", function(stats) {
-    require("fs").writeFileSync(
-      path.join(__dirname, "/core/frontend/", "stats.json"),
-      JSON.stringify(stats.toJson()));
-  });
-}
-
-var config = {
-}
+var config = {}
 
 var clientConfig = extend({}, true, config, {
   name: 'browser',
