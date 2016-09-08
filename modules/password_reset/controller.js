@@ -1,15 +1,15 @@
 const passwordResetController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/password_reset/main.pug';
+      let srcPath = './modules/password_reset/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        javascript: 'session',
-        stylesheet: 'session',
+        javascript: jsAsset('sessionjs'),
+        stylesheet: cssAsset('sessioncss'),
         title: 'Tisko - Password Reset',
         body_class: 'password-reset'
       })

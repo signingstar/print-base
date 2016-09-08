@@ -12,12 +12,12 @@ let debug = require("debug")('Checkout:controllers');
 
 
 const checkoutController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: ({attributes, responders, page}) => {
       let {req, res} = attributes;
-      let srcPath:string = './modules/checkout/main.pug';
+      let srcPath = './modules/checkout/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {cookies} = req;
@@ -36,8 +36,8 @@ const checkoutController = function({modules}) {
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
           page.set( {
-            javascript: 'checkout',
-            stylesheet: 'checkout',
+            javascript: jsAsset('checkoutjs'),
+            stylesheet: cssAsset('checkoutcss'),
             title: 'Tisko - Checkout',
             body_class: 'checkout',
             reactHTML,
@@ -61,7 +61,7 @@ const checkoutController = function({modules}) {
 
     post: ({attributes, responders, page}) => {
       let {req, res} = attributes;
-      let srcPath:string = './modules/checkout/main.pug';
+      let srcPath = './modules/checkout/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {cookies} = req;
@@ -80,8 +80,8 @@ const checkoutController = function({modules}) {
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
           page.set( {
-            javascript: 'checkout',
-            stylesheet: 'checkout',
+            javascript: jsAsset('checkoutjs'),
+            stylesheet: cssAsset('checkoutcss'),
             title: 'Tisko - Checkout',
             body_class: 'checkout',
             reactHTML,

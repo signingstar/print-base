@@ -12,12 +12,12 @@ let debug = require("debug")('Account:controllers');
 
 
 const accountController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: ({attributes, responders, page}) => {
       let {req, res} = attributes;
-      let srcPath:string = './modules/account/main.pug';
+      let srcPath = './modules/account/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       let {cookies} = req;
@@ -36,8 +36,8 @@ const accountController = function({modules}) {
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history);
 
           page.set( {
-            javascript: 'account',
-            stylesheet: 'account',
+            javascript: jsAsset('accountjs'),
+            stylesheet: cssAsset('accountcss'),
             title: 'Tisko - My Account',
             body_class: 'account',
             reactHTML,

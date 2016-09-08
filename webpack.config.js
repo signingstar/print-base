@@ -5,6 +5,7 @@ var fs = require("fs");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var sass = require("node-sass");
+var AssetsPlugin = require('assets-webpack-plugin');
 
 var DEBUG = !process.argv.includes('--release');
 
@@ -27,31 +28,39 @@ fs.readdirSync('node_modules')
       nodeModules[mod] = 'commonjs ' + mod;
   });
 
+var statsJson = function() {
+  this.plugin("done", function(stats) {
+    require("fs").writeFileSync(
+      path.join(__dirname, "/core/frontend/", "stats.json"),
+      JSON.stringify(stats.toJson()));
+  });
+}
+
 var config = {
 }
 
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
-      'account.css':  corePath + '/frontend/account.scss',
-      'checkout.css': corePath + '/frontend/checkout.scss',
-      'contact.css':  corePath + '/frontend/contact.scss',
-      'main.css':     corePath + '/frontend/main.scss',
-      'session.css':  corePath + '/frontend/session.scss',
-      'services.css': corePath + '/frontend/services.scss',
-      'order.css':    corePath + '/frontend/order.scss',
-      'account.js':   corePath + '/frontend/account.js',
-      'checkout.js':  corePath + '/frontend/checkout.js',
-      'main.js':      corePath + '/frontend/main.js',
-      'marketing.js': corePath + '/frontend/marketing.js',
-      'order.js':     corePath + '/frontend/order.js',
-      'partner.js':   corePath + '/frontend/partner_us.js',
-      'services.js':  corePath + '/frontend/services.js',
-      'session.js':   corePath + '/frontend/session.js',
+      'accountcss':  corePath + '/frontend/account.scss',
+      'checkoutcss': corePath + '/frontend/checkout.scss',
+      'contactcss':  corePath + '/frontend/contact.scss',
+      'maincss':     corePath + '/frontend/main.scss',
+      'sessioncss':  corePath + '/frontend/session.scss',
+      'servicescss': corePath + '/frontend/services.scss',
+      'ordercss':    corePath + '/frontend/order.scss',
+      'accountjs':   corePath + '/frontend/account.js',
+      'checkoutjs':  corePath + '/frontend/checkout.js',
+      'mainjs':      corePath + '/frontend/main.js',
+      'marketingjs': corePath + '/frontend/marketing.js',
+      'orderjs':     corePath + '/frontend/order.js',
+      'partnerjs':   corePath + '/frontend/partner_us.js',
+      'servicesjs':  corePath + '/frontend/services.js',
+      'sessionjs':   corePath + '/frontend/session.js',
   },
   output: {
-    filename: '[name]',
-    path: destPath
+    filename: '[name]![hash].js',
+    path: destPath,
   },
   module: {
     loaders: [
@@ -74,17 +83,28 @@ var clientConfig = extend({}, true, config, {
           test: /\.scss$/i,
           loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
         },
+        { test: /\.json$/, loader: 'json' },
     ],
   },
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name]"),
+      new ExtractTextPlugin("[name]![hash].css"),
       new CopyWebpackPlugin([
         { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
-      ])
+      ]),
+      new AssetsPlugin({
+        prettyPrint: true,
+        fullPath: true,
+        path: path.join(__dirname, 'core'),
+        filename: 'assets_map.js',
+        processOutput: function (assets) {
+          var mapString = JSON.stringify(assets, undefined, "\t");
+          return 'module.exports = ' + mapString + ";";
+        }
+      }),
       // new webpack.optimize.UglifyJsPlugin( {
       //   compress: {
       //     warnings: false

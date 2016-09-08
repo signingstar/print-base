@@ -2,12 +2,12 @@ import { presenter } from "../header/presenter";
 import partnerPresenter from "./presenter";
 
 const partnerController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     get: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/partner/main.pug';
+      let srcPath = './modules/partner/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
       let headerPresenter = presenter({cookies});
@@ -15,8 +15,8 @@ const partnerController = function({modules}) {
       page.set(headerPresenter);
 
       page.set( {
-        javascript: 'session',
-        stylesheet: 'session',
+        javascript: jsAsset('sessionjs'),
+        stylesheet: cssAsset('sessioncss'),
         title: 'Tisko - Be Our Partner',
         body_class: 'partner'
       })

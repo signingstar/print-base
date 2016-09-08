@@ -4,17 +4,17 @@ import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
 
 const loginController = function({modules}) {
-  let {pug, logger} = modules;
+  let {pug, logger, jsAsset, cssAsset} = modules;
 
   return {
     get: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath:string = './modules/login/main.pug';
+      let srcPath = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        javascript: 'session',
-        stylesheet: 'session',
+        javascript: jsAsset('sessionjs'),
+        stylesheet: cssAsset('sessioncss'),
         title: 'Tisko - Login',
         refUrl: presenter(req.query.ref_url).uriWithRef,
         body_class: 'login'
@@ -39,12 +39,12 @@ const loginController = function({modules}) {
           refUrl = presenter(refUrl, true).parsedUri;
           responders.redirectWithCookies(refUrl);
         } else {
-          let srcPath:string = './modules/login/main.pug';
+          let srcPath = './modules/login/main.pug';
           let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
           page.set( {
-            javascript: 'session',
-            stylesheet: 'session',
+            javascript: jsAsset('sessionjs'),
+            stylesheet: cssAsset('sessioncss'),
             title: 'Tisko - Login',
             refUrl: presenter(req.query.ref_url),
             body_class: 'login',

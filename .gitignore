@@ -49,3 +49,5 @@ public
 typings
 
 .DS_Store
+
+core/assets_map.js
