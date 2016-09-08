@@ -1,8 +1,6 @@
-let path = require('path');
-let debug = require("debug")('Core:AppControllers');
-
 import appControllers from "./appControllers";
 import responders from "./responder";
+let debug = require("debug")('Core:AppControllers');
 
 const routes = (app, globalModules) => {
   debug('export routes');

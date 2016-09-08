@@ -4,9 +4,11 @@
   "description": "Temporary project",
   "main": "index.js",
   "scripts": {
+    "debug-server": "DEBUG=* nodemon build/worker.js",
     "server": "nodemon build/worker.js",
     "webpack": "webpack --progress --watch",
     "start": "npm run webpack & npm run server",
+    "debug": "npm run webpack & npm run debug-server",
     "test": "karma start"
   },
   "author": "Anil Keshari",
@@ -21,7 +23,6 @@
     "css-loader": "^0.23.1",
     "debug": "^2.2.0",
     "express": "^4.14.0",
-    "express-urlrewrite": "^1.2.0",
     "extend": "^3.0.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "fs": "0.0.2",

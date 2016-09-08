@@ -43,8 +43,6 @@ const orderController = function({modules}) {
             body_class: 'order'
           });
 
-          debug('Page params:%s', JSON.stringify(page));
-
           let html = fn(page);
 
           responders.html(html);
@@ -52,8 +50,7 @@ const orderController = function({modules}) {
           let redirectionPath = redirectLocation.pathname + redirectLocation.search;
           logger.info(`Redirecting to: ${redirectionPath}`);
           res.redirect(302, redirectionPath);
-        }
-        else {
+        } else {
           logger.info(`renderProps is not passed`);
           responders.error();
         }

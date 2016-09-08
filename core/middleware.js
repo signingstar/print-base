@@ -1,27 +1,18 @@
-import { Application, Request, Response } from 'express';
 import serveStatic from "serve-static";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
+import path from "path";
 let debug = require("debug")('Core:Middleware');
-let rewrite = require("express-urlrewrite");
 
-const middleware = (app, globalModules) => {
+import errorMiddleware from "../modules/error/middleware";
+
+const middleware = (app, router, globalModules) => {
   let {logger} = globalModules;
 
   app.use(compression({filter: shouldCompress}))
 
-  function shouldCompress(req: Request, res: Response) {
-    if (req.headers['x-no-compression']) {
-      // don't compress responses with this request header
-      return false
-    }
-
-    // fallback to standard filter function
-    return compression.filter(req, res);
-  }
-
-  app.use('/assets', serveStatic('./public', {
+  app.use('/assets', serveStatic(path.join(__dirname, '../public'), {
     maxAge: '1d',
     setHeaders: setCustomCacheControl
   }));
@@ -39,7 +30,33 @@ const middleware = (app, globalModules) => {
 
   app.use(cookieParser());
 
-  function setCustomCacheControl (res, path) {
+  app.use("/", router);
+
+  app.use("*", (req,res) => {
+    let options = {
+      root: __dirname + '/../modules/error/',
+      headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+      }
+    };
+
+    res.status(404).sendFile('not_found.html', options);
+  });
+
+  app.use(errorMiddleware({logger}));
+
+  const shouldCompress = (req, res) => {
+    if (req.headers['x-no-compression']) {
+      // don't compress responses with this request header
+      return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res);
+  }
+
+  const setCustomCacheControl = (res, path) => {
     let lookupPath = serveStatic.mime.lookup(path);
 
     debug(`setCustomCacheControl with path ${path}:lookup path: ${lookupPath}`);
