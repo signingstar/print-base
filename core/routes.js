@@ -24,7 +24,7 @@ const routes = (app, globalModules) => {
 
   let redirectWithCookies = (res) => {
     debug('redirectWithCookies');
-    return (url: string, cookies: Cookie[]) => {
+    return (url, cookies) => {
       setCookiesForResponse(res, cookies);
       res.redirect(encodeURI(url));
     }
@@ -55,7 +55,7 @@ const routes = (app, globalModules) => {
 
   app.post("/checkout", processRequest('checkoutController', 'post', processOptions));
 
-  app.get("/contact", processRequest('contactUsController', 'main', processOptions));
+  app.get("/contact-us", processRequest('contactUsController', 'main', processOptions));
 
   app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions));
 
