@@ -35,7 +35,6 @@ var clientConfig = extend({}, true, config, {
   entry: {
       'accountcss':  corePath + '/frontend/account.scss',
       'checkoutcss': corePath + '/frontend/checkout.scss',
-      'contactcss':  corePath + '/frontend/contact.scss',
       'maincss':     corePath + '/frontend/main.scss',
       'sessioncss':  corePath + '/frontend/session.scss',
       'servicescss': corePath + '/frontend/services.scss',

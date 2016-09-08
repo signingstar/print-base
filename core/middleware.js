@@ -41,6 +41,8 @@ const middleware = (app, router, globalModules) => {
       }
     };
 
+    logger.warn(`[ERROR] Invalid URL accessed: ${req.baseUrl}`)
+
     res.status(404).sendFile('not_found.html', options);
   });
 

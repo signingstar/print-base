@@ -4,7 +4,8 @@ const middleware = ({logger}) => {
   debug('init');
 
   return function(err, req, res, next) {
-    debug(`handling ${err.stack}`);
+    debug(`handling [ERROR] ${err.stack}`);
+    logger.error(`[ERROR] ${err.stack}`);
 
     let errorResponseBody = `
       <html>

@@ -10,9 +10,9 @@ const contactUsController = function({modules}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
 
       page.set( {
-        javascript: jsAsset('contactjs'),
+        javascript: jsAsset('sessionjs'),
         stylesheet: cssAsset('sessioncss'),
-        title: 'Tisko - Register',
+        title: 'Tisko - Contact Us',
         origConfig,
         body_class: 'contact-us'
       })
