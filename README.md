@@ -1,2 +1,2 @@
 # Tutorial for beginners ![image](https://travis-ci.org/signingstar/my-printact.svg?branch=master)
-## involving NodeJs, Typescript, Pug, Sass, Webpack, ReactJs
+##  NodeJs App involving Pug, Sass, Webpack, ReactJs using ES2015
