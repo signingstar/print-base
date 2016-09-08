@@ -12,16 +12,6 @@ const middleware = (app, router, globalModules) => {
 
   app.use(compression({filter: shouldCompress}))
 
-  const shouldCompress = (req, res) => {
-    if (req.headers['x-no-compression']) {
-      // don't compress responses with this request header
-      return false
-    }
-
-    // fallback to standard filter function
-    return compression.filter(req, res);
-  }
-
   app.use('/assets', serveStatic(path.join(__dirname, '../public'), {
     maxAge: '1d',
     setHeaders: setCustomCacheControl
@@ -39,6 +29,32 @@ const middleware = (app, router, globalModules) => {
   }));
 
   app.use(cookieParser());
+
+  app.use("/", router);
+
+  app.use("*", (req,res) => {
+    let options = {
+      root: __dirname + '/../modules/error/',
+      headers: {
+        'x-timestamp': Date.now(),
+        'x-sent': true
+      }
+    };
+
+    res.status(404).sendFile('not_found.html', options);
+  });
+
+  app.use(errorMiddleware({logger}));
+
+  const shouldCompress = (req, res) => {
+    if (req.headers['x-no-compression']) {
+      // don't compress responses with this request header
+      return false
+    }
+
+    // fallback to standard filter function
+    return compression.filter(req, res);
+  }
 
   const setCustomCacheControl = (res, path) => {
     let lookupPath = serveStatic.mime.lookup(path);
@@ -66,22 +82,6 @@ const middleware = (app, router, globalModules) => {
       res.setHeader('Cache-Control', 'public, max-age=100000');
     }
   }
-
-  app.use("/", router);
-
-  app.use("*", (req,res) => {
-    let options = {
-      root: __dirname + '/../modules/error/',
-      dotfiles: 'deny',
-      headers: {
-          'x-timestamp': Date.now(),
-          'x-sent': true
-      }
-    };
-    res.status(404).sendFile('not_found.html', options);
-  });
-
-  app.use(errorMiddleware({logger}));
 }
 
 export default middleware;
