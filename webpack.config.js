@@ -118,7 +118,10 @@ var serverConfig = extend({}, true, config, {
   name: 'server',
   target: 'node',
   entry: {
-    worker: corePath + '/worker.js'
+    worker: corePath + '/worker.js',
+  },
+  node: {
+    __dirname: true,
   },
   output: {
     path: path.join(__dirname, "build"),

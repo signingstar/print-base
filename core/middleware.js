@@ -2,6 +2,7 @@ import serveStatic from "serve-static";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 import compression from "compression";
+import path from "path";
 let debug = require("debug")('Core:Middleware');
 
 import errorMiddleware from "../modules/error/middleware";
@@ -21,7 +22,7 @@ const middleware = (app, router, globalModules) => {
     return compression.filter(req, res);
   }
 
-  app.use('/assets', serveStatic('./public', {
+  app.use('/assets', serveStatic(path.join(__dirname, '../public'), {
     maxAge: '1d',
     setHeaders: setCustomCacheControl
   }));
@@ -66,7 +67,19 @@ const middleware = (app, router, globalModules) => {
     }
   }
 
-  app.use(router);
+  app.use("/", router);
+
+  app.use("*", (req,res) => {
+    let options = {
+      root: __dirname + '/../modules/error/',
+      dotfiles: 'deny',
+      headers: {
+          'x-timestamp': Date.now(),
+          'x-sent': true
+      }
+    };
+    res.status(404).sendFile('not_found.html', options);
+  });
 
   app.use(errorMiddleware({logger}));
 }
