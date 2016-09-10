@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { selectQuantity, TYPE_QUANTITY } from "../actions";
+import { selectQuantity, QUANTITY } from "../actions/index";
 import DropdownBox from "../containers/dropdown";
 
 class QuantityItemBox extends React.Component {
@@ -20,7 +20,7 @@ class QuantityItemBox extends React.Component {
     });
 
     return <DropdownBox
-      category={TYPE_QUANTITY}
+      category={QUANTITY}
       optionButtonNodes={optionButtonNodes}
       label='Print Quantity'
       selected={quantity}
@@ -33,7 +33,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     quantity: orderApp.selectionState.quantity,
     itemList: ownProps.quantityList,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_QUANTITY) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(QUANTITY) > -1
   }
 }
 

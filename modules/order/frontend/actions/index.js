@@ -1,36 +1,54 @@
+export const CATEGORY = 'category';
+export const SUB_CATEGORY = 'subCategory';
+
+export const SIZE = 'size';
+export const SURFACE = 'material';
+export const COAT = 'coat';
+export const QUANTITY = 'quantity';
+export const FOLD = 'fold';
+export const PAPER_QUALITY = 'paper_quality';
+export const FILES = 'files';
+
 //Action Types
+export const SET_CATEGORY = 'SET_CATEGORY';
+export const SET_SUB_CATEGORY = 'SET_SUB_CATEGORY';
+export const SET_ALL_CATEGORY = 'SET_ALL_CATEGORY';
+
 export const RESET = 'RESET';
-export const SET_TYPE = 'SET_TYPE';
 export const SET_SIZE = 'SET_SIZE';
 export const SET_SURFACE = 'SET_SURFACE';
 export const SET_QUANTITY = 'SET_QUANTITY';
 export const SET_FILES = 'SET_FILES';
 export const SET_COAT = 'SET_COAT';
 export const SET_FOLD = 'SET_FOLD';
-export const SET_PRELOAD = 'SET_PRELOAD';
 export const SET_PAPER_QUALITY = 'SET_PAPER_QUALITY';
 export const SET_FIELD = 'SET_FIELD';
-export const UPDATE_CATEGORIES = 'UPDATE_CATEGORIES';
-export const TYPE_CATEGORY = 'type';
-export const TYPE_SIZE = 'size';
-export const TYPE_SURFACE = 'material';
-export const TYPE_COAT = 'coat';
-export const TYPE_QUANTITY = 'quantity';
-export const TYPE_FOLD = 'fold';
-export const TYPE_PAPER_QUALITY = 'paper_quality';
-export const CATEGORY_FILES = 'files';
 
+export const setCategory = (category) => {
+  return {
+    type: SET_CATEGORY,
+    category
+  };
+}
+
+export const setSubCategory = (subCategory) => {
+  return {
+    type: SET_SUB_CATEGORY,
+    subCategory
+  };
+}
+
+export const setAllCategory = (category, subCategory) => {
+  return {
+    type: SET_ALL_CATEGORY,
+    category,
+    subCategory
+  };
+}
 
 export const resetAll = () => {
   return {
     type: RESET
-  };
-}
-
-export const selectType = (id) => {
-  return {
-    type: SET_TYPE,
-    value: id
   };
 }
 
@@ -62,7 +80,7 @@ export const selectQuantity = (id) => {
   };
 }
 
-export const selectFold = (id) => {
+export const setFold = (id) => {
   return {
     type: SET_FOLD,
     value: id
@@ -86,13 +104,6 @@ export const setPaperQuality = (quality) => {
 export const updateCategories = (category) => {
   return {
     type: UPDATE_CATEGORIES,
-    category
-  }
-}
-
-export const setPreload = (category) => {
-  return {
-    type: SET_PRELOAD,
     category
   }
 }

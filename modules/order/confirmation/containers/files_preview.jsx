@@ -1,9 +1,9 @@
 import React from "react";
-import { connect} from "react-redux";
+import { connect } from "react-redux";
 
 import FilesPreview from "../components/files_preview";
 
-class FilesPreviewBox extends React.Component {
+class FilesPreviewContainer extends React.Component {
   constructor() {
     super();
 
@@ -48,4 +48,4 @@ const mapStateToProps = (orderApp) => {
 
 export default connect(
   mapStateToProps
-) (FilesPreviewBox);
+) (FilesPreviewContainer);

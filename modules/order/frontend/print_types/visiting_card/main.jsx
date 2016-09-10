@@ -11,7 +11,7 @@ import DesignFilesBox from "../../containers/design_files";
 import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
-import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
+import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY } from "../../actions/index";
 
 class VisitingCard extends React.Component {
   presenter;
@@ -26,10 +26,10 @@ class VisitingCard extends React.Component {
   }
 
   getLabelForFields({ type, size, material, coat, quantity, paper_quality }: Labels) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
-    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, type);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
 
     let labelMap = new Map();
     labelMap.set('coat', {label: 'Coating', value: coatLabel});
@@ -40,7 +40,7 @@ class VisitingCard extends React.Component {
 
     return {
       type: typeLabel,
-      map: labelMap,
+      fieldsMap: labelMap,
       isComplete
     }
   }
@@ -53,9 +53,9 @@ class VisitingCard extends React.Component {
 
     type = type || pathname;
 
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type});
-    let paperQualityList = this.presenter.printableDataWithFilter(TYPE_PAPER_QUALITY, {type});
+    let coatList = this.presenter.printableDataWithFilter(COAT, {type});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {type});
+    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY, {type});
 
     let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, quantity });
 
@@ -79,7 +79,7 @@ class VisitingCard extends React.Component {
 const mapStateToProps = (orderApp, ownProps) => {
   let { coat, paper_quality, quantity } = orderApp.selectionState;
   return {
-    type: orderApp.typeState.type,
+    type: orderApp.categoryState.type,
     coat,
     paper_quality,
     quantity,

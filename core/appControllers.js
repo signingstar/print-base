@@ -16,6 +16,7 @@ import partnerController from "../modules/partner/controller";
 import signOutController from "../modules/signout/controller";
 import signUpController from "../modules/signup/controller";
 import whyUsController from "../modules/why_us/controller";
+import photoInventoryController from "photo-inventory";
 
 let controllersList = {
   accountController,
@@ -31,7 +32,8 @@ let controllersList = {
   passwordResetController,
   signOutController,
   signUpController,
-  whyUsController
+  whyUsController,
+  photoInventoryController
 };
 
 const appControllers = (globalModules) => {

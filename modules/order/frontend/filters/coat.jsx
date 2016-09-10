@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { selectCoat, TYPE_COAT } from "../actions";
+import { selectCoat, COAT } from "../actions/index";
 import DropdownBox from "../containers/dropdown";
 
 class CoatingBox extends React.Component {
@@ -20,7 +20,7 @@ class CoatingBox extends React.Component {
     });
 
     return <DropdownBox
-      category={TYPE_COAT}
+      category={COAT}
       optionButtonNodes={optionButtonNodes}
       label='Print Coating'
       selected={coat}
@@ -33,7 +33,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     itemList: ownProps.coatList,
     coat: orderApp.selectionState.coat,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_COAT) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(COAT) > -1
   }
 }
 

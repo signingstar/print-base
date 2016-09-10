@@ -1,11 +1,11 @@
-import { TYPE_CATEGORY, RESET, SET_TYPE, SET_PRELOAD, SET_FIELD } from "../actions";
+import { CATEGORY, RESET, SET_TYPE, SET_PRELOAD, SET_FIELD } from "../actions/index";
 
 const defaultState = {
   complete: false,
   form: {}
 }
 
-const typeState = (state = defaultState, {type, label, value}) => {
+const categoryState = (state = defaultState, {type, label, value}) => {
   switch (type) {
     case RESET:
       return {complete: false, form: {}};
@@ -16,4 +16,4 @@ const typeState = (state = defaultState, {type, label, value}) => {
   }
 }
 
-export default typeState;
+export default categoryState;

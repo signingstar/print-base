@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { selectSize, TYPE_SIZE } from "../actions";
+import { selectSize, SIZE } from "../actions/index";
 import DropdownContainer from "../containers/dropdown";
 
 class SizesItemBox extends React.Component {
@@ -24,7 +24,7 @@ class SizesItemBox extends React.Component {
     });
 
     return <DropdownContainer
-      category={TYPE_SIZE}
+      category={SIZE}
       optionButtonNodes={optionButtonNodes}
       label='Print Size'
       selected={size}
@@ -37,7 +37,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     itemList: ownProps.sizeList,
     size: orderApp.selectionState.size,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_SIZE) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(SIZE) > -1
   }
 }
 

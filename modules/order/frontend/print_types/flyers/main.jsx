@@ -12,7 +12,7 @@ import DesignFilesBox from "../../containers/design_files";
 import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
 
-import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
+import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY } from "../../actions/index";
 
 class Flyers extends React.Component {
   constructor() {
@@ -25,11 +25,11 @@ class Flyers extends React.Component {
   }
 
   getLabelForFields({ type, size, material, coat, quantity }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SIZE, size);
-    let materialLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SURFACE, material);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, type);
+    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
+    let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
     labelMap.set('size', {label: 'Print Size', value: sizeLabel});
@@ -41,7 +41,7 @@ class Flyers extends React.Component {
 
     return {
       type: typeLabel,
-      map: labelMap,
+      fieldsMap: labelMap,
       isComplete
     }
   }
@@ -54,10 +54,10 @@ class Flyers extends React.Component {
 
     type = type || pathname;
 
-    let sizeList = this.presenter.printableDataWithFilter(TYPE_SIZE, {type});
-    let materialList = this.presenter.printableDataWithFilter(TYPE_SURFACE, {type, size});
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type, size, material});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type, size, material});
+    let sizeList = this.presenter.printableDataWithFilter(SIZE, {type});
+    let materialList = this.presenter.printableDataWithFilter(SURFACE, {type, size});
+    let coatList = this.presenter.printableDataWithFilter(COAT, {type, size, material});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {type, size, material});
 
     let fieldsLabel = this.getLabelForFields({ type, size, material, coat, quantity });
 
@@ -81,7 +81,7 @@ class Flyers extends React.Component {
 
 const mapStateToProps = (orderApp, ownProps) => {
   return {
-    type: orderApp.typeState.type,
+    type: orderApp.categoryState.type,
     size: orderApp.selectionState.size,
     material: orderApp.selectionState.material,
     coat: orderApp.selectionState.coat,

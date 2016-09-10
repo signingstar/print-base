@@ -108,6 +108,8 @@ const routes = (app, globalModules) => {
   ));
 
   app.get("/why-us", processRequest('whyUsController', 'main', processOptions));
+
+  app.post('/upload', processRequest('photoInventoryController', 'main', processOptions));
 };
 
 export default routes;

@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setFiles } from "../actions";
+import { setFiles } from "../actions/index";
 import DesignFiles from "../components/design_files_contents";
-import { CATEGORY_FILES } from "../actions";
+import { FILES } from "../actions/index";
 
 class DesignFilesBox extends React.Component {
 
@@ -15,7 +15,7 @@ class DesignFilesBox extends React.Component {
     let { files, onDrop } = this.props;
 
     const placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
-    const acceptFiles = 'image/jpeg, image/*, .ai';
+    const acceptFiles = 'image/jpeg, image/png, .ai';
 
     return <DesignFiles
       label='Print Design'
@@ -31,7 +31,7 @@ const mapStateToProps = (orderApp, ownProps) => {
 
   return {
     files,
-    shouldUpdate: updateComponents.indexOf(CATEGORY_FILES) > -1
+    shouldUpdate: updateComponents.indexOf(FILES) > -1
   }
 }
 

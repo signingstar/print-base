@@ -15,7 +15,7 @@ const customStyles = {
   overlay: {}
 };
 
-const FilesPreview = ({onClick, onClose, isShowing, files, modalHeader, label}) => {
+const FilesPreview = ({ onClick, onClose, isShowing, files, modalHeader, label }) => {
   if(files.length === 0) {
     return null;
   }
@@ -27,7 +27,7 @@ const FilesPreview = ({onClick, onClose, isShowing, files, modalHeader, label}) 
         isOpen={isShowing}
         onRequestClose={onClose}
         style={customStyles}>
-        <FilesPreviewContent files={files} onClose={onClose} modalHeader={modalHeader}/>
+        <FilesPreviewContent files={files} onClose={onClose} modalHeader={modalHeader} />
       </Modal>
     </div>
   );

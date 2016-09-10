@@ -12,8 +12,9 @@ import DesignFilesBox from "../../containers/design_files";
 
 import Confirmation from "../../../confirmation/containers/main";
 import DefaultCategory from "../../components/default_category";
+import { setCategory } from "../../actions/index";
 
-import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY, TYPE_FOLD } from "../../actions";
+import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY, FOLD } from "../../actions/index";
 
 class Broucher extends React.Component {
   constructor() {
@@ -25,12 +26,12 @@ class Broucher extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity, paper_quality, fold }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let foldLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_FOLD, fold);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
-    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
+  getLabelForFields({ category, size, material, coat, quantity, paper_quality, fold }) {
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let foldLabel = this.presenter.fetchLabelForCategoryAndId(FOLD, fold);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
 
     let labelMap = new Map();
     labelMap.set('coat', {label: 'Coating', value: coatLabel});
@@ -41,31 +42,29 @@ class Broucher extends React.Component {
     let isComplete = foldLabel && coatLabel && quantityLabel && paperQualityLabel;
 
     return {
-      type: typeLabel,
-      map: labelMap,
+      category: typeLabel,
+      fieldsMap: labelMap,
       isComplete
     }
   }
 
+  componentWillMount() {
+  }
+
   render() {
-    let { type, paper_quality, fold, coat, quantity, pathname } = this.props;
+    let { category, subCategory, paper_quality, fold, coat, quantity, pathname, setType } = this.props;
 
-    pathname.match(/^\/order\/broucher\-([0-9a-z\-]+)$/);
-    pathname = RegExp.$1;
+    let coatList = this.presenter.printableDataWithFilter(COAT, {subCategory});
+    let foldList = this.presenter.printableDataWithFilter(FOLD, {subCategory});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {subCategory});
+    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY, {subCategory});
 
-    type = type || pathname;
-
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type});
-    let foldList = this.presenter.printableDataWithFilter(TYPE_FOLD, {type});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type});
-    let paperQualityList = this.presenter.printableDataWithFilter(TYPE_PAPER_QUALITY, {type});
-
-    let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, fold, quantity });
+    let fieldsLabel = this.getLabelForFields({ subCategory, paper_quality, coat, fold, quantity });
 
     return (
       <div className='main-section-body'>
         <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
+          <DefaultCategory type={fieldsLabel.subCategory} />
           <CoatingBox coatList={coatList} />
           <Fold foldList={foldList} />
           <PaperQuality paperQualityList={paperQualityList} />
@@ -82,8 +81,10 @@ class Broucher extends React.Component {
 
 const mapStateToProps = (orderApp, ownProps) => {
   let {paper_quality, coat, fold, quantity} = orderApp.selectionState;
+
   return {
-    type: orderApp.typeState.type,
+    category: orderApp.categoryState.category,
+    subCategory: orderApp.categoryState.subCategory,
     paper_quality,
     coat,
     fold,
@@ -92,6 +93,15 @@ const mapStateToProps = (orderApp, ownProps) => {
   }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setFold: (fold) => {
+      dispatch(setFold(fold));
+    }
+  }
+}
+
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Broucher);

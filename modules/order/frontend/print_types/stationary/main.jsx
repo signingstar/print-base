@@ -2,17 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
-import PrintSize from "../../filters/size";
-import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import DesignFilesBox from "../../containers/design_files";
 
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
-
-import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
+import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY } from "../../actions/index";
 
 class Stationary extends React.Component {
   constructor() {
@@ -24,12 +16,12 @@ class Stationary extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SIZE, size);
-    let materialLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SURFACE, material);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
+  getLabelForFields({ category, size, material, coat, quantity }) {
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
+    let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
     labelMap.set('size', {label: 'Print Size', value: sizeLabel});
@@ -40,57 +32,28 @@ class Stationary extends React.Component {
     let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
 
     return {
-      type: typeLabel,
-      map: labelMap,
+      category: typeLabel,
+      fieldsMap: labelMap,
       isComplete
     }
   }
 
+  getFilterList({ category, size, material, coat, quantity }) {
+    console.log(`category:${category}`);
+    let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
+    console.log(`sizeList:${JSON.stringify(sizeList)}`);
+    let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
+    let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
+
+    return {sizeList, materialList, coatList, quantityList};
+  }
+
   render() {
-    let { type, size, material, coat, quantity, pathname } = this.props;
-
-    pathname.match(/^\/order\/stationary\-([a-z]+)$/);
-    pathname = RegExp.$1;
-
-    type = type || pathname;
-
-    let sizeList = this.presenter.printableDataWithFilter(TYPE_SIZE, {type});
-    let materialList = this.presenter.printableDataWithFilter(TYPE_SURFACE, {type, size});
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type, size, material});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type, size, material});
-
-    let fieldsLabel = this.getLabelForFields({ type, size, material, coat, quantity });
-
     return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
-          <PrintSize sizeList={sizeList} />
-          <PrintMaterial materialList={materialList} />
-          <CoatingBox coatList={coatList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
+      <h1>Override me</h1>
     );
   }
 }
 
-const mapStateToProps = (orderApp, ownProps) => {
-  return {
-    type: orderApp.typeState.type,
-    size: orderApp.selectionState.size,
-    material: orderApp.selectionState.material,
-    coat: orderApp.selectionState.coat,
-    quantity: orderApp.selectionState.quantity,
-    pathname: ownProps.location.pathname
-  }
-}
-
-
-export default connect(
-  mapStateToProps
-)(Stationary);
+export default Stationary;

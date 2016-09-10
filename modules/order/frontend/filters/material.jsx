@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { selectSurface, TYPE_SURFACE } from "../actions";
+import { selectSurface, SURFACE } from "../actions/index";
 import DropdownBox from "../containers/dropdown";
 
 class MaterialItemBox extends React.Component {
@@ -20,7 +20,7 @@ class MaterialItemBox extends React.Component {
     });
 
     return <DropdownBox
-      category={TYPE_SURFACE}
+      category={SURFACE}
       optionButtonNodes={optionButtonNodes}
       label='Print Material'
       selected={material}
@@ -34,7 +34,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     itemList: ownProps.materialList,
     material: orderApp.selectionState.material,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_SURFACE) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(SURFACE) > -1
   }
 }
 
