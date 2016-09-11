@@ -3,10 +3,13 @@ import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
 import PrintData from "./print_combination";
+import Envelope from "./envelope";
+import LetterHead from "./envelope";
+import Notebook from "./envelope";
 
-import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY } from "../../actions/index";
+import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY, setCategory } from "../../actions/index";
 
-class Stationary extends React.Component {
+class Container extends React.Component {
   constructor() {
     super();
     this.init();
@@ -16,32 +19,66 @@ class Stationary extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
+  componentDidMount() {
+    let { location, setCategories } = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
+  getComponent(category, filterList, fieldsLabel) {
+    let component;
+
+    switch (category) {
+      case 'envelope':
+        component = <Envelope filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      case 'letterhead':
+        component = <LetterHead filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      case 'notebook':
+        component = <Notebook filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      default:
+        return <h1>No Container Found</h1>
+    }
+
+    return component;
+  }
+
+  getCategories(location) {
+    const orderPath = /^\/order[\/]?([a-z]+)[a-z0-9\-]*$/;
+    location.pathname.match(orderPath);
+
+    let category = RegExp.$1;
+
+    return { category };
+  }
+
   getLabelForFields({ category, size, material, coat, quantity }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let categoryLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
     let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
-    labelMap.set('size', {label: 'Print Size', value: sizeLabel});
-    labelMap.set('material', {label: 'Paper Material', value: materialLabel});
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+    labelMap.set(SIZE, {label: 'Print Size', value: sizeLabel});
+    labelMap.set(SURFACE, {label: 'Paper Material', value: materialLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
 
     return {
-      category: typeLabel,
+      category: categoryLabel,
       fieldsMap: labelMap,
       isComplete
     }
   }
 
   getFilterList({ category, size, material, coat, quantity }) {
-    console.log(`category:${category}`);
     let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
-    console.log(`sizeList:${JSON.stringify(sizeList)}`);
     let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
     let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
     let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
@@ -50,10 +87,34 @@ class Stationary extends React.Component {
   }
 
   render() {
-    return (
-      <h1>Override me</h1>
-    );
+    let { size, material, coat, quantity, location } = this.props;
+    let category = this.category || this.getCategories(location).category;
+
+    let filterList = this.getFilterList(this.props);
+    let fieldsLabel = this.getLabelForFields({ category, size, material, coat, quantity });
+
+    return this.getComponent(category, filterList, fieldsLabel);
   }
 }
 
-export default Stationary;
+const mapStateToProps = (orderApp, ownProps) => {
+  let { size, material, coat, quantity } = orderApp.selectionState;
+
+  return {
+    pathname: ownProps.location.pathname,
+    size,
+    material,
+    coat,
+    quantity
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCategories: (category) => {
+      dispatch(setCategory(category));
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

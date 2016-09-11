@@ -3,19 +3,11 @@ import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
 import PrintData from "./print_combination";
-import PaperQuality from "../../filters/paper_quality";
-import PrintMaterial from "../../filters/material";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import DesignFilesBox from "../../containers/design_files";
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
+import Component from "./component";
 
-import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY } from "../../actions/index";
+import { CATEGORY, PAPER_QUALITY, COAT, QUANTITY, setCategory } from "../../actions/index";
 
 class VisitingCard extends React.Component {
-  presenter;
-
   constructor() {
     super();
     this.init();
@@ -25,68 +17,85 @@ class VisitingCard extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity, paper_quality }: Labels) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, type);
+  getCategories(location) {
+    let {pathname, query} = location;
+    const orderPath = /^\/order[\/]?([a-z]+)[a-z0-9\-]*$/;
+
+    pathname.match(orderPath);
+
+    let category = RegExp.$1;
+    if(query && query.alignment) {
+      category = `${category}-${query.alignment}`;
+    }
+
+    return { category };
+  }
+
+  componentDidMount() {
+    let {location, setCategories} = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
+  getLabelForFields({ category, paper_quality, coat, quantity }) {
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
-    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
 
     let labelMap = new Map();
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('paper_quality', {label: 'Paper Quality', value: paperQualityLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+    labelMap.set(PAPER_QUALITY, {label: 'Paper Quality', value: paperQualityLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
-    let isComplete = typeLabel && coatLabel && quantityLabel && paperQualityLabel;
+    let isComplete = coatLabel && quantityLabel && paperQualityLabel;
 
     return {
-      type: typeLabel,
+      category: typeLabel,
       fieldsMap: labelMap,
       isComplete
     }
   }
 
   render() {
-    let { type, size, paper_quality, coat, quantity, pathname } = this.props;
+    let { size, paper_quality, coat, quantity, location } = this.props;
+    let category = this.category || this.getCategories(location).category;
 
-    pathname.match(/^\/order\/([a-z\-]+)$/);
-    pathname = RegExp.$1;
+    let coatList = this.presenter.printableDataWithFilter(COAT);
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY);
+    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY);
 
-    type = type || pathname;
+    let fieldsLabel = this.getLabelForFields({ category, paper_quality, coat, quantity });
 
-    let coatList = this.presenter.printableDataWithFilter(COAT, {type});
-    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {type});
-    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY, {type});
-
-    let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, quantity });
-
-    return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
-          <CoatingBox coatList={coatList} />
-          <PaperQuality paperQualityList={paperQualityList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
-    );
+    return <Component
+      coatList={coatList}
+      paperQualityList={paperQualityList}
+      quantityList={quantityList}
+      fieldsLabel={fieldsLabel} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
   let { coat, paper_quality, quantity } = orderApp.selectionState;
+
   return {
-    type: orderApp.categoryState.type,
+    location: ownProps.location,
     coat,
     paper_quality,
-    quantity,
-    pathname: ownProps.location.pathname
+    quantity
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCategories: (category) => {
+      dispatch(setCategory(category));
+    }
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(VisitingCard);

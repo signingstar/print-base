@@ -2,19 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
-import PaperQuality from "../../filters/paper_quality";
-import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import Fold from "../../filters/fold";
-import DesignFilesBox from "../../containers/design_files";
-
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
-import { setCategory } from "../../actions/index";
-
-import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY, FOLD } from "../../actions/index";
+import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY, FOLD, setCategory } from "../../actions/index";
+import Component from "./component";
 
 class Broucher extends React.Component {
   constructor() {
@@ -26,6 +16,22 @@ class Broucher extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
+  getCategories(location) {
+    const orderPath = /^\/order[\/]?([a-z]+)[a-z0-9\-]*$/;
+    location.pathname.match(orderPath);
+
+    let category = RegExp.$1;
+
+    return { category };
+  }
+
+  componentDidMount() {
+    let { location, setCategories } = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
   getLabelForFields({ category, size, material, coat, quantity, paper_quality, fold }) {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let foldLabel = this.presenter.fetchLabelForCategoryAndId(FOLD, fold);
@@ -34,10 +40,10 @@ class Broucher extends React.Component {
     let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
 
     let labelMap = new Map();
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('fold', {label: 'Print Fold', value: foldLabel});
-    labelMap.set('paper_quality', {label: 'Paper Quality', value: paperQualityLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+    labelMap.set(FOLD, {label: 'Print Fold', value: foldLabel});
+    labelMap.set(PAPER_QUALITY, {label: 'Paper Quality', value: paperQualityLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     let isComplete = foldLabel && coatLabel && quantityLabel && paperQualityLabel;
 
@@ -48,55 +54,42 @@ class Broucher extends React.Component {
     }
   }
 
-  componentWillMount() {
-  }
-
   render() {
-    let { category, subCategory, paper_quality, fold, coat, quantity, pathname, setType } = this.props;
+    let { location, paper_quality, fold, coat, quantity, pathname, setType } = this.props;
+    let category = this.category || this.getCategories(location).category;
 
-    let coatList = this.presenter.printableDataWithFilter(COAT, {subCategory});
-    let foldList = this.presenter.printableDataWithFilter(FOLD, {subCategory});
-    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {subCategory});
-    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY, {subCategory});
+    let coatList = this.presenter.printableDataWithFilter(COAT);
+    let foldList = this.presenter.printableDataWithFilter(FOLD);
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY);
+    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY);
 
-    let fieldsLabel = this.getLabelForFields({ subCategory, paper_quality, coat, fold, quantity });
+    let fieldsLabel = this.getLabelForFields({ category, paper_quality, coat, fold, quantity });
 
-    return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.subCategory} />
-          <CoatingBox coatList={coatList} />
-          <Fold foldList={foldList} />
-          <PaperQuality paperQualityList={paperQualityList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
-    );
+    return <Component
+      foldList={foldList}
+      coatList={coatList}
+      paperQualityList={paperQualityList}
+      quantityList={quantityList}
+      fieldsLabel={fieldsLabel} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
-  let {paper_quality, coat, fold, quantity} = orderApp.selectionState;
+  let { paper_quality, coat, fold, quantity } = orderApp.selectionState;
 
   return {
-    category: orderApp.categoryState.category,
-    subCategory: orderApp.categoryState.subCategory,
+    pathname: ownProps.location.pathname,
     paper_quality,
     coat,
     fold,
-    quantity,
-    pathname: ownProps.location.pathname
+    quantity
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    setFold: (fold) => {
-      dispatch(setFold(fold));
+    setCategories: (category) => {
+      dispatch(setCategory(category));
     }
   }
 }

@@ -10,11 +10,9 @@ import routes from "../routes";
 
 let preloadedState = window.__PRELOADED_STATE__;
 
-console.log(`preloadedState:${JSON.stringify(preloadedState)}`);
 let sessionStoreStr = sessionStorage.getItem('orderApp');
 if((!preloadedState || keys(preloadedState.selectionState).length < 3) && sessionStoreStr) {
   let sessionStore = JSON.parse(sessionStoreStr);
-  console.log(`categoryState:${JSON.stringify(preloadedState.categoryState)}`);
   preloadedState = preloadedState.categoryState.type? sessionStore : preloadedState;
 }
 

@@ -6,12 +6,14 @@ import { RouterContext } from "react-router";
 import createStore from "./frontend/store";
 
 const ReactComponent = (renderProps, history) => {
-  let pathname = renderProps.location.pathname;
+  let {pathname} = renderProps.location;
   const orderPath = /^\/order[\/]?([a-z]+)\-?([a-z0-9\-]*)$/;
   pathname.match(orderPath);
 
   let category = RegExp.$1;
   let subCategory = RegExp.$2;
+
+  //TODO Add validation
   let initialPayload = {categoryState: {category, subCategory}};
 
   // Create a new Redux store instance

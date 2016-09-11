@@ -2,8 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { keys } from "underscore";
 
-import { setPreload } from "../actions/index";
-
 class MainContents extends React.Component {
   render () {
     return (
@@ -25,11 +23,8 @@ const mapStateToProps = (orderApp, ownProps) => {
     console.log(`orderApp3:${sessionStore.getItem('orderApp')}`);
   }
   return {
-    children: ownProps.children,
-    orderType: orderApp.categoryState
+    children: ownProps.children
   }
 }
 
-export default connect(
-  mapStateToProps
-)(MainContents);
+export default connect(mapStateToProps)(MainContents);

@@ -38,7 +38,7 @@ export const setSubCategory = (subCategory) => {
   };
 }
 
-export const setAllCategory = (category, subCategory) => {
+export const setAllCategories = (category, subCategory) => {
   return {
     type: SET_ALL_CATEGORY,
     category,

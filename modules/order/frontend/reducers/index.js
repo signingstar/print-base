@@ -6,8 +6,8 @@ import selectionState from "./selection_state";
 import categoryState from "./category_state";
 
 const orderApp = combineReducers({
-  selectionState,
   categoryState,
+  selectionState,
   routing: routerReducer
 })
 

@@ -6,6 +6,7 @@ class OrderPresenter {
   }
 
   fetchSpecificCategory(type) {
+    if(!this.data[type]) { console.log(`no data for type:${type}`);return;};
     return this.data[type];
   }
 
@@ -15,6 +16,7 @@ class OrderPresenter {
 
   fetchSpecificCategoryAndId(type, id) {
     const innerSet = this.fetchSpecificCategory(type);
+    if(!innerSet[id]) { console.log(`no data for filters:${id}`); return;};
 
     return innerSet[id];
   }
@@ -49,7 +51,7 @@ class OrderPresenter {
     return sourceList;
   }
 
-  printableDataWithFilter(filter, filterTypes) {
+  printableDataWithFilter(filter, filterTypes = {}) {
     const innerSet = this.fetchSpecificCategory(filter);
     let listForCategory;
     let {category, size, material, coat, fold, paperQuality} = filterTypes;
@@ -60,7 +62,6 @@ class OrderPresenter {
       listForCategory = this.fetchSpecificFilterByCategory(CATEGORY, category, filter).slice();
     }
 
-    // console.log(`listForCategory1:${JSON.stringify(listForCategory)}`);
     if(size) {
       let localList = this.fetchSpecificFilterByCategory(SIZE, size, filter);
       listForCategory = this.consolidateList(listForCategory, localList);

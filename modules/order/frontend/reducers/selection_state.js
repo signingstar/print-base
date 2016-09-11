@@ -1,5 +1,5 @@
 import * as Action_Items from "../actions/index";
-let { RESET, SET_SIZE, SET_SURFACE, SET_COAT, SET_PAPER_QUALITY, SET_FOLD, SET_QUANTITY, SET_FILES } = Action_Items;
+let { RESET, SET_CATEGORY, SET_SIZE, SET_SURFACE, SET_COAT, SET_PAPER_QUALITY, SET_FOLD, SET_QUANTITY, SET_FILES } = Action_Items;
 let { SIZE, SURFACE, COAT, PAPER_QUALITY, FOLD, QUANTITY, FILES } = Action_Items;
 
 const defaultState = {
@@ -13,7 +13,8 @@ const selectionState = (state = defaultState, action) => {
 
   switch (type) {
     case RESET:
-      return {files: [], updateComponents: [SIZE, SURFACE, COAT, PAPER_QUALITY, FOLD, QUANTITY, FILES]};
+    case SET_CATEGORY:
+      return {files: [],  updateComponents: [SIZE, SURFACE, COAT, PAPER_QUALITY, FOLD, QUANTITY, FILES]};
     case SET_SIZE:
       newState = Object.assign({}, state, {
         size: value,
