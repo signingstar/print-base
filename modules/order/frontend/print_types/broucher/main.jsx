@@ -2,18 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
-import PaperQuality from "../../filters/paper_quality";
-import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import Fold from "../../filters/fold";
-import DesignFilesBox from "../../containers/design_files";
-
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
-
-import { TYPE_CATEGORY, TYPE_PAPER_QUALITY, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY, TYPE_FOLD } from "../../actions";
+import { CATEGORY, PAPER_QUALITY, SURFACE, COAT, QUANTITY, FOLD, setCategory } from "../../actions/index";
+import Component from "./component";
 
 class Broucher extends React.Component {
   constructor() {
@@ -25,73 +16,81 @@ class Broucher extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity, paper_quality, fold }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let foldLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_FOLD, fold);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
-    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_PAPER_QUALITY, paper_quality);
+  getCategories(location) {
+    const orderPath = /^\/order[\/]?([a-z]+)[a-z0-9\-]*$/;
+    location.pathname.match(orderPath);
+
+    let category = RegExp.$1;
+
+    return { category };
+  }
+
+  componentDidMount() {
+    let { location, setCategories } = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
+  getLabelForFields({ category, size, material, coat, quantity, paper_quality, fold }) {
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let foldLabel = this.presenter.fetchLabelForCategoryAndId(FOLD, fold);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('fold', {label: 'Print Fold', value: foldLabel});
-    labelMap.set('paper_quality', {label: 'Paper Quality', value: paperQualityLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
-
-    let isComplete = foldLabel && coatLabel && quantityLabel && paperQualityLabel;
+    labelMap.set(FOLD, {label: 'Print Fold', value: foldLabel});
+    labelMap.set(PAPER_QUALITY, {label: 'Paper Quality', value: paperQualityLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     return {
-      type: typeLabel,
-      map: labelMap,
-      isComplete
+      category: typeLabel,
+      fieldsMap: labelMap
     }
   }
 
   render() {
-    let { type, paper_quality, fold, coat, quantity, pathname } = this.props;
+    let { location, paper_quality, fold, coat, quantity, setType } = this.props;
+    let category = this.category || this.getCategories(location).category;
 
-    pathname.match(/^\/order\/broucher\-([0-9a-z\-]+)$/);
-    pathname = RegExp.$1;
+    let coatList = this.presenter.printableDataWithFilter(COAT);
+    let foldList = this.presenter.printableDataWithFilter(FOLD);
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY);
+    let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY);
 
-    type = type || pathname;
+    let fieldsLabel = this.getLabelForFields({ category, paper_quality, coat, fold, quantity });
 
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type});
-    let foldList = this.presenter.printableDataWithFilter(TYPE_FOLD, {type});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type});
-    let paperQualityList = this.presenter.printableDataWithFilter(TYPE_PAPER_QUALITY, {type});
-
-    let fieldsLabel = this.getLabelForFields({ type, paper_quality, coat, fold, quantity });
-
-    return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
-          <CoatingBox coatList={coatList} />
-          <Fold foldList={foldList} />
-          <PaperQuality paperQualityList={paperQualityList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
-    );
+    return <Component
+      foldList={foldList}
+      coatList={coatList}
+      paperQualityList={paperQualityList}
+      quantityList={quantityList}
+      fieldsLabel={fieldsLabel} />
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
-  let {paper_quality, coat, fold, quantity} = orderApp.selectionState;
+  let { paper_quality, coat, fold, quantity } = orderApp.selectionState;
+
   return {
-    type: orderApp.typeState.type,
     paper_quality,
     coat,
     fold,
-    quantity,
-    pathname: ownProps.location.pathname
+    quantity
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCategories: (category) => {
+      dispatch(setCategory(category));
+    }
   }
 }
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Broucher);

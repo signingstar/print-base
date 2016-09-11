@@ -1,5 +1,5 @@
 const PrintData = {
-  "type":{
+  "category":{
     "letterhead": {
       "label": "Letterhead",
       "size": ["s-1", "m-1"],

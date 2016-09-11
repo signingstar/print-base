@@ -28,14 +28,16 @@
     "fs": "0.0.2",
     "jquery": "^3.1.0",
     "jsx-loader": "^0.13.2",
+    "multer": "^1.2.0",
     "node-sass": "^3.8.0",
     "path": "^0.12.7",
+    "photo-inventory": "signingstar/photo-inventory",
     "pug": "^2.0.0-beta4",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.3.0",
     "react-dom": "^15.2.1",
     "react-dropdown": "^1.1.0",
-    "react-dropzone": "^3.5.3",
+    "react-dropzone": "^3.6.0",
     "react-modal": "^1.4.0",
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
@@ -53,8 +55,10 @@
     "babel-cli": "^6.14.0",
     "babel-core": "^6.14.0",
     "babel-loader": "^6.2.5",
+    "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.14.0",
     "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "json-loader": "^0.5.4",
@@ -70,5 +74,9 @@
     "redux-devtools": "^3.3.1",
     "sinon": "^1.17.5",
     "source-map-support": "^0.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/signingstar/my-printact"
   }
 }

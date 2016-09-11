@@ -1,16 +1,10 @@
 const PrintData = {
-  "type":{
-    "visiting-card": {
-      "label": "Visiting Card",
-      "coat": ["c-1", "c-2"],
-      "quantity": ["q-2", "q-3", "q-4"],
-      "paper_quality": ["pq-2", "pq-3"]
+  "category":{
+    "visitingcard": {
+      "label": "Visiting Card"
     },
-    "visiting-card-vertical": {
-      "label": "Vertical Visiting Card",
-      "coat": ["c-1", "c-2"],
-      "quantity": ["q-2", "q-3"],
-      "paper_quality": ["pq-2", "pq-3"]
+    "visitingcard-vertical": {
+      "label": "Vertical Visiting Card"
     }
   },
 

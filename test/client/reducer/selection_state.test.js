@@ -1,6 +1,6 @@
 import 'core-js/shim';
 import selectionState, { SelectionStateObject } from '../../../modules/order/frontend/reducers/selection_state';
-import TypeState from '../../../modules/order/frontend/reducers/type_state';
+import TypeState from '../../../modules/order/frontend/reducers/category_state';
 import { expect } from 'chai';
 
 const defaultState: SelectionStateObject = {
@@ -13,21 +13,21 @@ describe('Reducer', function() {
       it('should return empty category objects', () => {
         let state = selectionState(defaultState, {type: 'RESET'});
         expect(state).to.have.property('updateComponents');
-        expect(state).to.not.have.keys('type', 'size', 'material', 'quantity');
+        expect(state).to.not.have.keys('size', 'material', 'quantity', 'coat', 'paper_quality');
       });
 
       it('should set type when state is empty', () => {
-        let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        let typeState = TypeState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        expect(typeState).to.have.property('type').and.equal('mugs');
-        expect(state).to.have.property('size').and.is.undefined;
+        let state = selectionState(defaultState, {type: 'SET_CATEGORY', category: 'mugs'});
+        let typeState = TypeState(defaultState, {type: 'SET_CATEGORY', category: 'mugs'});
+        expect(typeState).to.have.property('category').and.equal('mugs');
+        expect(state).to.not.have.property('size');
       });
 
       it('should have all keys present when type is set', () => {
-        let state = selectionState(defaultState, {type: 'SET_TYPE', value: 'mugs'});
-        let typeState = TypeState({}, {type: 'SET_TYPE', value: 'mugs'});
-        expect(state).to.have.all.keys('size', 'quantity', 'material', 'coat', 'updateComponents', 'files');
-        expect(typeState).to.have.all.keys('type', 'updateComponents');
+        let state = selectionState(defaultState, {type: 'SET_CATEGORY', category: 'mugs'});
+        let typeState = TypeState({}, {type: 'SET_CATEGORY', category: 'mugs'});
+        expect(state).to.have.all.keys('files', 'updateComponents');
+        expect(typeState).to.have.all.keys('category');
       });
 
       it('should set size when state is empty', () => {
@@ -37,13 +37,12 @@ describe('Reducer', function() {
       });
 
       it('should set surface when state is not empty', () => {
-        let state = selectionState({type: 'mugs', size: 'axb', files:[], updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
-        let typeState = TypeState({type: 'mugs', updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
-        expect(typeState).to.have.property('type').and.equal('mugs');
+        let state = selectionState({category: 'mugs', size: 'axb', files:[], updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
+        let typeState = TypeState({category: 'mugs', updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
+        expect(typeState).to.have.property('category').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');
         expect(state).to.have.property('material').and.equal('paper');
         expect(state).to.have.property('coat').to.be.undefined;
-        expect(state).to.have.property('quantity').to.be.undefined;
       });
 
       it('should set coating when state is not empty', () => {
@@ -56,11 +55,8 @@ describe('Reducer', function() {
       });
 
       it('should set size when state is not empty', () => {
-        let state = selectionState({type: 'mugs', files:[], updateComponents:[]}, {type: 'SET_SIZE', value: 'axb'});
-        expect(state).to.have.property('type').and.equal('mugs');
+        let state = selectionState({category: 'mugs', files:[], updateComponents:[]}, {type: 'SET_SIZE', value: 'axb'});
         expect(state).to.have.property('size').and.equal('axb');
-        expect(state).to.have.property('quantity').to.be.undefined;
-        expect(state).to.have.property('material').to.be.undefined;
       });
 
       it('should set quantity when state is not empty', () => {

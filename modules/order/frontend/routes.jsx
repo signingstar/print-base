@@ -9,11 +9,13 @@ import Broucher from "./print_types/broucher/main";
 import Flyers from "./print_types/flyers/main";
 
 const routes = <Route path="/order" component={MainContents}>
-      <IndexRoute component={Category} />
-      <Route path="/order/stationary-*" component={Stationary} />
-      <Route path="/order/visiting-card*" component={VisitingCard} />
-      <Route path="/order/broucher-*" component={Broucher} />
-      <Route path="/order/flyers-*" component={Flyers} />
-    </Route>
+  <IndexRoute component={Category} />
+  <Route path="/order/envelope" component={Stationary} />
+  <Route path="/order/letterhead" component={Stationary} />
+  <Route path="/order/notebook" component={Stationary} />
+  <Route path="/order/visitingcard" component={VisitingCard} />
+  <Route path="/order/broucher" component={Broucher} />
+  <Route path="/order/flyers-*" component={Flyers} />
+</Route>
 
 export default routes;

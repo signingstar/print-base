@@ -1,5 +1,5 @@
 const PrintData = {
-  "type":{
+  "category":{
     "short": {
       "label": "Short Flyers",
       "size": ["s-1", "m-1"],

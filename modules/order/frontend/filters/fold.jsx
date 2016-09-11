@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { selectFold, TYPE_FOLD } from "../actions";
+import { setFold, FOLD } from "../actions/index";
 import DropdownBox from "../containers/dropdown";
 
 class Fold extends React.Component {
@@ -20,11 +20,11 @@ class Fold extends React.Component {
     });
 
     return <DropdownBox
-      category={TYPE_FOLD}
+      category={FOLD}
       optionButtonNodes={optionButtonNodes}
       label='Print Fold'
       selected={fold}
-      onClick={selectFold}
+      onClick={setFold}
       placeholder={placeholder} />
   }
 }
@@ -33,7 +33,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     fold: orderApp.selectionState.fold,
     itemList: ownProps.foldList,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_FOLD) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(FOLD) > -1
   }
 }
 

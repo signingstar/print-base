@@ -1,25 +1,7 @@
 const PrintData = {
-  "type":{
-    "2-fold": {
-      "label": "2-fold Broucher",
-      "coat": ["c-1", "c-2"],
-      "quantity": ["q-2", "q-3", "q-4"],
-      "paper_quality": ["pq-2", "pq-3"],
-      "fold": ["f-1"],
-    },
-    "3-fold": {
-      "label": "3-fold Broucher",
-      "coat": ["c-1", "c-2"],
-      "quantity": ["q-2", "q-3"],
-      "paper_quality": ["pq-2", "pq-3"],
-      "fold": ["f-2"],
-    },
-    "4-fold": {
-      "label": "4-fold Broucher",
-      "coat": ["c-1", "c-2"],
-      "quantity": ["q-2", "q-3"],
-      "paper_quality": ["pq-2", "pq-3"],
-      "fold": ["f-1"],
+  "category": {
+    "broucher": {
+      "label": "Broucher"
     }
   },
   "fold": {

@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 
 import SubCategoriesContent from "./sub_categories_content";
+import CategoryItem from "./category_item";
 
 const customStyles = {
   content: {
@@ -15,10 +16,10 @@ const customStyles = {
   overlay: {}
 };
 
-const SubCategoriesComponent = ({onClick, onClose, isShowing, modalHeader, label, type}) => {
+const SubCategoriesComponent = ({onClick, onClose, isShowing, modalHeader, label, type, imgSrc, categoryClass}) => {
   return (
-    <div className='action-box'>
-      <a href='javascript:void(0)' onClick={onClick}>{label}</a>
+    <div className='item-box'>
+      <a href='javascript:void(0)' onClick={onClick}><CategoryItem  label={label} imgSrc={imgSrc}  categoryClass={categoryClass} /></a>
       <Modal
         isOpen={isShowing}
         onRequestClose={onClose}

@@ -1,17 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
-
-import { setPreload } from "../actions";
+import { keys } from "underscore";
 
 class MainContents extends React.Component {
-  componentDidMount() {
-    let {orderType, onSetPreload} = this.props;
-
-    if(orderType.type) {
-      this.props.onSetPreload('type');
-    }
-  }
-
   render () {
     return (
       <section>
@@ -24,21 +15,16 @@ class MainContents extends React.Component {
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
+  let sessionStore = typeof sessionStorage === 'undefined'? undefined : sessionStorage;
+
+  if(sessionStore && keys(orderApp.selectionState).length > 2) {
+    console.log(`orderApp2:${sessionStore.getItem('orderApp')}`);
+    sessionStore.setItem('orderApp', JSON.stringify(orderApp));
+    console.log(`orderApp3:${sessionStore.getItem('orderApp')}`);
+  }
   return {
-    children: ownProps.children,
-    orderType: orderApp.typeState
+    children: ownProps.children
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onSetPreload: (category: string) => {
-      dispatch(setPreload(category))
-    }
-  }
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MainContents);
+export default connect(mapStateToProps)(MainContents);

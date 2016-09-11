@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { printableData, printableDataWithFilter } from "../presenter";
-import { setPaperQuality, TYPE_PAPER_QUALITY } from "../actions";
+import { setPaperQuality, PAPER_QUALITY } from "../actions/index";
 import DropdownBox from "../containers/dropdown";
 
 class PaperQuality extends React.Component {
@@ -21,7 +21,7 @@ class PaperQuality extends React.Component {
     });
 
     return <DropdownBox
-      category={TYPE_PAPER_QUALITY}
+      category={PAPER_QUALITY}
       optionButtonNodes={optionButtonNodes}
       label='Paper Quality'
       selected={paper_quality}
@@ -34,7 +34,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   return {
     itemList: ownProps.paperQualityList,
     paper_quality: orderApp.selectionState.paper_quality,
-    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(TYPE_PAPER_QUALITY) > -1
+    shouldUpdate: orderApp.selectionState.updateComponents.indexOf(PAPER_QUALITY) > -1
   }
 }
 

@@ -2,19 +2,14 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
-import PrintSize from "../../filters/size";
-import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import DesignFilesBox from "../../containers/design_files";
+import Envelope from "./envelope";
+import LetterHead from "./envelope";
+import Notebook from "./envelope";
 
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
+import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY, setCategory } from "../../actions/index";
 
-import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_QUANTITY } from "../../actions";
-
-class Stationary extends React.Component {
+class Container extends React.Component {
   constructor() {
     super();
     this.init();
@@ -24,73 +19,98 @@ class Stationary extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_CATEGORY, type);
-    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SIZE, size);
-    let materialLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_SURFACE, material);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(TYPE_QUANTITY, quantity);
+  componentDidMount() {
+    let { location, setCategories } = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
+  getComponent(category, filterList, fieldsLabel) {
+    let component;
+
+    switch (category) {
+      case 'envelope':
+        component = <Envelope filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      case 'letterhead':
+        component = <LetterHead filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      case 'notebook':
+        component = <Notebook filterList={filterList} fieldsLabel={fieldsLabel} />;
+        break;
+      default:
+        return <h1>No Container Found</h1>
+    }
+
+    return component;
+  }
+
+  getCategories(location) {
+    const orderPath = /^\/order[\/]?([a-z]+)[a-z0-9\-]*$/;
+    location.pathname.match(orderPath);
+
+    let category = RegExp.$1;
+
+    return { category };
+  }
+
+  getLabelForFields({ category, size, material, coat, quantity }) {
+    let categoryLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
+    let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
+    let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
-    labelMap.set('size', {label: 'Print Size', value: sizeLabel});
-    labelMap.set('material', {label: 'Paper Material', value: materialLabel});
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
-
-    let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
+    labelMap.set(SIZE, {label: 'Print Size', value: sizeLabel});
+    labelMap.set(SURFACE, {label: 'Paper Material', value: materialLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     return {
-      type: typeLabel,
-      map: labelMap,
-      isComplete
+      category: categoryLabel,
+      fieldsMap: labelMap
     }
   }
 
+  getFilterList({ category, size, material, coat, quantity }) {
+    let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
+    let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
+    let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
+
+    return {sizeList, materialList, coatList, quantityList};
+  }
+
   render() {
-    let { type, size, material, coat, quantity, pathname } = this.props;
+    let { size, material, coat, quantity, location } = this.props;
+    let category = this.category || this.getCategories(location).category;
 
-    pathname.match(/^\/order\/stationary\-([a-z]+)$/);
-    pathname = RegExp.$1;
+    let filterList = this.getFilterList(this.props);
+    let fieldsLabel = this.getLabelForFields({ category, size, material, coat, quantity });
 
-    type = type || pathname;
-
-    let sizeList = this.presenter.printableDataWithFilter(TYPE_SIZE, {type});
-    let materialList = this.presenter.printableDataWithFilter(TYPE_SURFACE, {type, size});
-    let coatList = this.presenter.printableDataWithFilter(TYPE_COAT, {type, size, material});
-    let quantityList = this.presenter.printableDataWithFilter(TYPE_QUANTITY, {type, size, material});
-
-    let fieldsLabel = this.getLabelForFields({ type, size, material, coat, quantity });
-
-    return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
-          <PrintSize sizeList={sizeList} />
-          <PrintMaterial materialList={materialList} />
-          <CoatingBox coatList={coatList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
-    );
+    return this.getComponent(category, filterList, fieldsLabel);
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
+  let { size, material, coat, quantity } = orderApp.selectionState;
+
   return {
-    type: orderApp.typeState.type,
-    size: orderApp.selectionState.size,
-    material: orderApp.selectionState.material,
-    coat: orderApp.selectionState.coat,
-    quantity: orderApp.selectionState.quantity,
-    pathname: ownProps.location.pathname
+    size,
+    material,
+    coat,
+    quantity
   }
 }
 
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCategories: (category) => {
+      dispatch(setCategory(category));
+    }
+  }
+}
 
-export default connect(
-  mapStateToProps
-)(Stationary);
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

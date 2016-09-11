@@ -1,4 +1,4 @@
-import { TYPE_CATEGORY, TYPE_SIZE, TYPE_SURFACE, TYPE_COAT, TYPE_FOLD, TYPE_PAPER_QUALITY } from "./actions";
+import { CATEGORY, SIZE, SURFACE, COAT, FOLD, PAPER_QUALITY } from "./actions/index";
 
 class OrderPresenter {
   constructor(data) {
@@ -6,6 +6,7 @@ class OrderPresenter {
   }
 
   fetchSpecificCategory(type) {
+    if(!this.data[type]) { console.log(`no data for type:${type}`);return;};
     return this.data[type];
   }
 
@@ -15,6 +16,7 @@ class OrderPresenter {
 
   fetchSpecificCategoryAndId(type, id) {
     const innerSet = this.fetchSpecificCategory(type);
+    if(!innerSet[id]) { console.log(`no data for filters:${id}`); return;};
 
     return innerSet[id];
   }
@@ -49,40 +51,39 @@ class OrderPresenter {
     return sourceList;
   }
 
-  printableDataWithFilter(category, filterTypes) {
-    const innerSet = this.fetchSpecificCategory(category);
+  printableDataWithFilter(filter, filterTypes = {}) {
+    const innerSet = this.fetchSpecificCategory(filter);
     let listForCategory;
-    let {type, size, material, coat, fold, paperQuality} = filterTypes;
+    let {category, size, material, coat, fold, paperQuality} = filterTypes;
 
     // console.log(`category:${category} | filterTypes:${JSON.stringify(filterTypes)}`);
 
-    if(type) {
-      listForCategory = this.fetchSpecificFilterByCategory(TYPE_CATEGORY, type, category).slice();
+    if(category) {
+      listForCategory = this.fetchSpecificFilterByCategory(CATEGORY, category, filter).slice();
     }
 
-    // console.log(`listForCategory1:${JSON.stringify(listForCategory)}`);
     if(size) {
-      let localList = this.fetchSpecificFilterByCategory(TYPE_SIZE, size, category);
+      let localList = this.fetchSpecificFilterByCategory(SIZE, size, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 
     if(material) {
-      let localList = this.fetchSpecificFilterByCategory(TYPE_SURFACE, material, category);
+      let localList = this.fetchSpecificFilterByCategory(SURFACE, material, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 
     if(coat) {
-      let localList = this.fetchSpecificFilterByCategory(TYPE_COAT, material, category);
+      let localList = this.fetchSpecificFilterByCategory(COAT, material, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 
     if(fold) {
-      let localList = this.fetchSpecificFilterByCategory(TYPE_FOLD, material, category);
+      let localList = this.fetchSpecificFilterByCategory(FOLD, material, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 
     if(paperQuality) {
-      let localList = this.fetchSpecificFilterByCategory(TYPE_PAPER_QUALITY, material, category);
+      let localList = this.fetchSpecificFilterByCategory(PAPER_QUALITY, material, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 
