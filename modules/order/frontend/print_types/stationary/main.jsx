@@ -20,10 +20,12 @@ class Container extends React.Component {
   }
 
   componentDidMount() {
-    let { location, setCategories } = this.props;
+    let { categoryFromStore, location, setCategories } = this.props;
     let {category, subCategory} = this.getCategories(location);
 
-    setCategories(category);
+    if(category !== categoryFromStore) {
+      setCategories(category);
+    }
   }
 
   getComponent(category, filterList, fieldsLabel) {
@@ -98,6 +100,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { size, material, coat, quantity } = orderApp.selectionState;
 
   return {
+    categoryFromStore: orderApp.categoryState.category,
     size,
     material,
     coat,
