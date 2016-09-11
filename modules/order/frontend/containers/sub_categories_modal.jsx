@@ -1,5 +1,5 @@
 import React from "react";
-import { connect} from "react-redux";
+import { connect } from "react-redux";
 
 import SubCategoriesModalComponent from "../components/sub_categories_modal";
 
@@ -34,7 +34,7 @@ class SubCategoriesModal extends React.Component {
         isShowing={this.state.isShowingModal}
         label={label}
         modalHeader={modalHeader}
-        type={this.props.type}
+        type={type}
         imgSrc={imgSrc}
         categoryClass={categoryClass}
       />

@@ -8,9 +8,7 @@ const CategoryItem = ({label, imgSrc, categoryClass}) => {
           <div className="item-image"><img src={imgSrc}/></div>
           <figcaption>
             <div className="item-action">
-              <div className='action-box'>
-                {label}
-              </div>
+              {label}
             </div>
           </figcaption>
         </div>

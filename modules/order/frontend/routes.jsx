@@ -4,8 +4,6 @@ import { Route, IndexRoute, browserHistory } from 'react-router';
 import MainContents from "./components/main_contents";
 import Category from "./components/categories";
 import Stationary from "./print_types/stationary/main";
-import LetterHead from "./print_types/stationary/letterhead";
-import Notebook from "./print_types/stationary/notebook";
 import VisitingCard from "./print_types/visiting_card/main";
 import Broucher from "./print_types/broucher/main";
 import Flyers from "./print_types/flyers/main";

@@ -1,9 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import { setFiles } from "../actions/index";
 import DesignFiles from "../components/design_files_contents";
-import { FILES } from "../actions/index";
+import { FILES, setFiles } from "../actions/index";
 
 class DesignFilesBox extends React.Component {
 
