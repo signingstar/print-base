@@ -5,7 +5,7 @@ import OrderPresenter from "../../presenter";
 import PrintData from "./print_combination";
 import Component from "./component";
 
-import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY } from "../../actions/index";
+import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY, setAllCategories } from "../../actions/index";
 
 class Flyers extends React.Component {
   constructor() {
@@ -28,10 +28,12 @@ class Flyers extends React.Component {
   }
 
   componentDidMount() {
-    let { location, setCategories } = this.props;
+    let { categoryFromStore, location, setCategories } = this.props;
     let {category, subCategory} = this.getCategories(location);
 
-    setCategories(category);
+    if(category !== categoryFromStore) {
+      setCategories(category);
+    }
   }
 
   getLabelForFields({ category, size, material, coat, quantity }) {
@@ -75,6 +77,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { size, material, coat, quantity } = orderApp.selectionState;
 
   return {
+    categoryFromStore: orderApp.categoryState.category,
     size,
     material,
     coat,

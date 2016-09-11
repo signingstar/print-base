@@ -32,10 +32,12 @@ class VisitingCard extends React.Component {
   }
 
   componentDidMount() {
-    let {location, setCategories} = this.props;
-    let {category, subCategory} = this.getCategories(location);
+    let { categoryFromStore, location, setCategories } = this.props;
+    let { category, subCategory } = this.getCategories(location);
 
-    setCategories(category);
+    if(category !== categoryFromStore) {
+      setCategories(category);
+    }
   }
 
   getLabelForFields({ category, paper_quality, coat, quantity }) {
@@ -77,7 +79,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { coat, paper_quality, quantity } = orderApp.selectionState;
 
   return {
-    location: ownProps.location,
+    categoryFromStore: orderApp.categoryState.category,
     coat,
     paper_quality,
     quantity

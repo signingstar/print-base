@@ -13,7 +13,7 @@ let preloadedState = window.__PRELOADED_STATE__;
 let sessionStoreStr = sessionStorage.getItem('orderApp');
 if((!preloadedState || keys(preloadedState.selectionState).length < 3) && sessionStoreStr) {
   let sessionStore = JSON.parse(sessionStoreStr);
-  preloadedState = preloadedState.categoryState.type? sessionStore : preloadedState;
+  preloadedState = preloadedState.categoryState.category? sessionStore : preloadedState;
 }
 
 const rootElem = document.getElementById('main-contents');

@@ -17,11 +17,10 @@ class MainContents extends React.Component {
 const mapStateToProps = (orderApp, ownProps) => {
   let sessionStore = typeof sessionStorage === 'undefined'? undefined : sessionStorage;
 
-  if(sessionStore && keys(orderApp.selectionState).length > 2) {
-    console.log(`orderApp2:${sessionStore.getItem('orderApp')}`);
+  if(sessionStore) {
     sessionStore.setItem('orderApp', JSON.stringify(orderApp));
-    console.log(`orderApp3:${sessionStore.getItem('orderApp')}`);
   }
+
   return {
     children: ownProps.children
   }

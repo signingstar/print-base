@@ -26,10 +26,12 @@ class Broucher extends React.Component {
   }
 
   componentDidMount() {
-    let { location, setCategories } = this.props;
+    let { categoryFromStore, location, setCategories } = this.props;
     let {category, subCategory} = this.getCategories(location);
 
-    setCategories(category);
+    if(category !== categoryFromStore) {
+      setCategories(category);
+    }
   }
 
   getLabelForFields({ category, size, material, coat, quantity, paper_quality, fold }) {
@@ -75,6 +77,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { paper_quality, coat, fold, quantity } = orderApp.selectionState;
 
   return {
+    categoryFromStore: orderApp.categoryState.category,
     paper_quality,
     coat,
     fold,
