@@ -33,7 +33,7 @@ const fieldsKeyMap = (fieldsMap) => {
 const getItemNodes = (fieldsMap, fieldsKeyMap) => {
   let itemNodes = [];
 
-  for (var key of fieldsKeyMap) {
+  for (let key of fieldsKeyMap) {
     itemNodes.push(
       <ContentItem
         label={fieldsMap.get(key).label}
@@ -45,9 +45,27 @@ const getItemNodes = (fieldsMap, fieldsKeyMap) => {
   return itemNodes;
 }
 
+const itemCompletetionStatus = (fieldsMap) => {
+  let isComplete = true;
+  let isEmpty = true;
+  let keys = fieldsKeyMap(fieldsMap);
+
+  for (let key of keys) {
+    if(!fieldsMap.get(key).value) {
+      isComplete = false;
+    } else {
+      isEmpty = false;
+    }
+  }
+
+  return { isComplete, isEmpty };
+}
+
 const mapStateToProps = (orderApp, ownProps) => {
   let { files = [] } = orderApp.selectionState;
-  let { category, isComplete, fieldsMap } = ownProps.fieldsLabel;
+  let { category, fieldsMap } = ownProps.fieldsLabel;
+
+  let { isComplete, isEmpty } = itemCompletetionStatus(fieldsMap);
 
   const filesNode = files.map(file =>
     <li className='file-name' key={file.name}>{file.name}</li>
@@ -56,7 +74,7 @@ const mapStateToProps = (orderApp, ownProps) => {
   let fieldsKey = fieldsKeyMap(fieldsMap);
   let itemNodes = getItemNodes(fieldsMap, fieldsKey);
 
-  return { fieldsMap, filesNode, isComplete, itemNodes }
+  return { fieldsMap, filesNode, isComplete, isEmpty, itemNodes }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {

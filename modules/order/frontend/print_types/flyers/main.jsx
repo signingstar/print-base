@@ -47,12 +47,9 @@ class Flyers extends React.Component {
     labelMap.set(COAT, {label: 'Coating', value: coatLabel});
     labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
-    let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
-
     return {
       category: typeLabel,
-      fieldsMap: labelMap,
-      isComplete
+      fieldsMap: labelMap
     }
   }
 

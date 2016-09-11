@@ -49,12 +49,9 @@ class VisitingCard extends React.Component {
     labelMap.set(COAT, {label: 'Coating', value: coatLabel});
     labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
-    let isComplete = coatLabel && quantityLabel && paperQualityLabel;
-
     return {
       category: typeLabel,
-      fieldsMap: labelMap,
-      isComplete
+      fieldsMap: labelMap
     }
   }
 

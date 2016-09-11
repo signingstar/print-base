@@ -1,15 +1,15 @@
 import React from "react";
 
-import ConfirmationButton from "../containers/button";
+import ConfirmationButton from "./button";
 import FilesPreviewContainer from "../containers/files_preview";
 import ContentItem from "./content_item";
 
-const ConfirmationContent = ({fieldsMap, filesNode, onReset, isComplete, onSubmit, itemNodes}) => {
+const ConfirmationContent = ({fieldsMap, filesNode, onReset, isComplete, isEmpty, onSubmit, itemNodes}) => {
   return (
     <div className='right-panel-content'>
       <form method='post' action='/checkout'>
         <div className='confirmation-content'>
-          <div className='clear'>
+          <div className={isEmpty ? 'hide clear' : 'clear'}>
             <span onClick={onReset}>clear</span>
           </div>
           <div className='header'>

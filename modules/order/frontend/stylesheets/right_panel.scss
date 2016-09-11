@@ -57,6 +57,10 @@
       cursor: pointer;
       float: right;
       text-align: center;
+
+      &.hide {
+        display: none;
+      }
     }
   }
 

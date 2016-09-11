@@ -35,9 +35,9 @@ class Broucher extends React.Component {
   getLabelForFields({ category, size, material, coat, quantity, paper_quality, fold }) {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let foldLabel = this.presenter.fetchLabelForCategoryAndId(FOLD, fold);
+    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
-    let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
 
     let labelMap = new Map();
     labelMap.set(FOLD, {label: 'Print Fold', value: foldLabel});
@@ -45,12 +45,9 @@ class Broucher extends React.Component {
     labelMap.set(COAT, {label: 'Coating', value: coatLabel});
     labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
-    let isComplete = foldLabel && coatLabel && quantityLabel && paperQualityLabel;
-
     return {
       category: typeLabel,
-      fieldsMap: labelMap,
-      isComplete
+      fieldsMap: labelMap
     }
   }
 
