@@ -101,7 +101,6 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { size, material, coat, quantity } = orderApp.selectionState;
 
   return {
-    pathname: ownProps.location.pathname,
     size,
     material,
     coat,

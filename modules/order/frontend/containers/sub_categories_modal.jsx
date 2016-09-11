@@ -25,7 +25,7 @@ class SubCategoriesModal extends React.Component {
 
   render() {
     const modalHeader = 'Selected to upload';
-    let {label} = this.props;
+    let {type, label, imgSrc, categoryClass} = this.props;
 
     return (
       <SubCategoriesModalComponent
@@ -34,19 +34,12 @@ class SubCategoriesModal extends React.Component {
         isShowing={this.state.isShowingModal}
         label={label}
         modalHeader={modalHeader}
-        type={this.props.type} />
+        type={this.props.type}
+        imgSrc={imgSrc}
+        categoryClass={categoryClass}
+      />
     )
   }
 }
 
-const mapStateToProps = (orderApp, ownProps) => {
-  return {
-    type: ownProps.type,
-    label: ownProps.label
-  }
-}
-
-
-export default connect(
-  mapStateToProps
-) (SubCategoriesModal);
+export default SubCategoriesModal;

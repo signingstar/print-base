@@ -2,15 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 
 import OrderPresenter from "../../presenter";
-import PrintSize from "../../filters/size";
-import PrintMaterial from "../../filters/material";
 import PrintData from "./print_combination";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
-import DesignFilesBox from "../../containers/design_files";
-
-import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
+import Component from "./component";
 
 import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY } from "../../actions/index";
 
@@ -24,73 +17,84 @@ class Flyers extends React.Component {
     this.presenter = new OrderPresenter(PrintData);
   }
 
-  getLabelForFields({ type, size, material, coat, quantity }) {
-    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, type);
+  getCategories(location) {
+    const orderPath = /^\/order[\/]?([a-z]+)\-([a-z0-9\-]*)$/;
+    location.pathname.match(orderPath);
+
+    let category = RegExp.$1;
+    let subCategory = RegExp.$2;
+
+    return { category, subCategory };
+  }
+
+  componentDidMount() {
+    let { location, setCategories } = this.props;
+    let {category, subCategory} = this.getCategories(location);
+
+    setCategories(category);
+  }
+
+  getLabelForFields({ category, size, material, coat, quantity }) {
+    let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
     let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
     let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
-    labelMap.set('size', {label: 'Print Size', value: sizeLabel});
-    labelMap.set('material', {label: 'Paper Material', value: materialLabel});
-    labelMap.set('coat', {label: 'Coating', value: coatLabel});
-    labelMap.set('quantity', {label: 'Quantity', value: quantityLabel});
+    labelMap.set(SIZE, {label: 'Print Size', value: sizeLabel});
+    labelMap.set(SURFACE, {label: 'Paper Material', value: materialLabel});
+    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     let isComplete = sizeLabel && coatLabel && materialLabel && quantityLabel;
 
     return {
-      type: typeLabel,
+      category: typeLabel,
       fieldsMap: labelMap,
       isComplete
     }
   }
 
   render() {
-    let { type, size, material, coat, quantity, pathname } = this.props;
+    let { size, material, coat, quantity, location } = this.props;
+    let category = this.category || this.getCategories(location).subCategory;
 
-    pathname.match(/^\/order\/flyers\-([a-z]+)$/);
-    pathname = RegExp.$1;
+    let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
+    let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
+    let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
+    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
 
-    type = type || pathname;
-
-    let sizeList = this.presenter.printableDataWithFilter(SIZE, {type});
-    let materialList = this.presenter.printableDataWithFilter(SURFACE, {type, size});
-    let coatList = this.presenter.printableDataWithFilter(COAT, {type, size, material});
-    let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {type, size, material});
-
-    let fieldsLabel = this.getLabelForFields({ type, size, material, coat, quantity });
+    let fieldsLabel = this.getLabelForFields({ category, size, material, coat, quantity });
+    let filtersList = { sizeList, materialList, coatList, quantityList };
 
     return (
-      <div className='main-section-body'>
-        <div className='left-panel'>
-          <DefaultCategory type={fieldsLabel.type} />
-          <PrintSize sizeList={sizeList} />
-          <PrintMaterial materialList={materialList} />
-          <CoatingBox coatList={coatList} />
-          <PrintQuantity quantityList={quantityList} />
-          <DesignFilesBox />
-        </div>
-        <div className='right-panel'>
-          <Confirmation fieldsLabel={fieldsLabel} />
-        </div>
-      </div>
+      <Component filtersList={filtersList} fieldsLabel={fieldsLabel} category={category} />
     );
   }
 }
 
 const mapStateToProps = (orderApp, ownProps) => {
+  let { size, material, coat, quantity } = orderApp.selectionState;
+
   return {
-    type: orderApp.categoryState.type,
-    size: orderApp.selectionState.size,
-    material: orderApp.selectionState.material,
-    coat: orderApp.selectionState.coat,
-    quantity: orderApp.selectionState.quantity,
-    pathname: ownProps.location.pathname
+    size,
+    material,
+    coat,
+    quantity
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    setCategories: (category, subCategory) => {
+      dispatch(setAllCategories(category, subCategory));
+    }
   }
 }
 
 
 export default connect(
-  mapStateToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(Flyers);

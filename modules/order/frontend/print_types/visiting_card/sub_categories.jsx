@@ -9,8 +9,12 @@ const SubCategories = ({label}) => {
 
   return (
     <div>
-      <CategoryItem label='visiting card' imgSrc="/assets/round2.png" actionArea={vcard}/>
-      <CategoryItem label='vertical visiting card' imgSrc="/assets/portrait_visiting.png" actionArea={vvcard}/>
+      <Link to="/order/visitingcard" className='item-box'>
+        <CategoryItem imgSrc="/assets/round2.png" label='Landscape' categoryClass='sub-category' />
+      </Link>
+      <Link to="/order/visitingcard?alignment=vertical" className='item-box'>
+        <CategoryItem imgSrc="/assets/portrait_visiting.png" label='Portrait' categoryClass='sub-category' />
+      </Link>
     </div>
   );
 }

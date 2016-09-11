@@ -55,7 +55,7 @@ class Broucher extends React.Component {
   }
 
   render() {
-    let { location, paper_quality, fold, coat, quantity, pathname, setType } = this.props;
+    let { location, paper_quality, fold, coat, quantity, setType } = this.props;
     let category = this.category || this.getCategories(location).category;
 
     let coatList = this.presenter.printableDataWithFilter(COAT);
@@ -78,7 +78,6 @@ const mapStateToProps = (orderApp, ownProps) => {
   let { paper_quality, coat, fold, quantity } = orderApp.selectionState;
 
   return {
-    pathname: ownProps.location.pathname,
     paper_quality,
     coat,
     fold,

@@ -17,7 +17,7 @@ class SizesItemBox extends React.Component {
     let { size, itemList } = this.props;
 
     let placeholder = "Select Size..."
-
+    console.log(`itemList:${itemList}`);
     let optionButtonNodes = itemList.map((entry) => {
       let selected = size === entry.id ? true : false;
       return {value: entry.id, label: entry.value};
