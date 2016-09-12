@@ -1,30 +1,44 @@
 import React from "react";
 import { connect } from "react-redux";
-import $ from "jquery";
+import { ajax } from "jquery";
 
 import ConfirmationContent from "../components/contents";
 import { resetAll } from "../../frontend/actions/index";
 import ContentItem from "../components/content_item";
 
-const uploadFile = (files) => {
-  var data = new FormData();
+const confirmOrder = (fieldsMap, orderApp, isComplete) => {
+  if(!isComplete) return false;
 
-  data.append('photo', files[0]);
+  let keys = fieldsKeyMap(fieldsMap);
+  let formData = new FormData();
+  let { selectionState, categoryState } = orderApp;
 
-  $.ajax({
-    url: '/upload',
+  for (let key of keys) {
+    formData.append(key, selectionState[key]);
+  }
+
+  formData.append('category', categoryState.category);
+  let {files} = selectionState;
+
+  if(files && files.length) {
+    formData.append('photo', files[0]);
+  }
+
+  ajax({
+    url: '/order',
+    type: 'POST',
     processData: false,
     contentType: false,
-    type: 'POST',
-    data: data,
-    success: function(data) {
-      console.log("File successfully uploaded");
+    data: formData,
+    success: (data) => {
+      window.location.href = data.successUrl;
     },
-    error: function(xhr, status, err) {
-      console.error(status, err.toString());
+    error: (xhr, status, err) => {
+      alert(err.message);
     }
   });
-};
+
+}
 
 const fieldsKeyMap = (fieldsMap) => {
   return fieldsMap.keys();
@@ -74,16 +88,13 @@ const mapStateToProps = (orderApp, ownProps) => {
   let fieldsKey = fieldsKeyMap(fieldsMap);
   let itemNodes = getItemNodes(fieldsMap, fieldsKey);
 
-  return { fieldsMap, filesNode, isComplete, isEmpty, itemNodes }
+  return { fieldsMap, filesNode, isComplete, isEmpty, itemNodes, onSubmit: ()=>confirmOrder(fieldsMap, orderApp, isComplete) }
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onReset: () => {
       dispatch(resetAll())
-    },
-    onSubmit: (files) => {
-      uploadFile(files);
     }
   }
 };

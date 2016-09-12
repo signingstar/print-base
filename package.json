@@ -6,7 +6,7 @@
   "scripts": {
     "debug-server": "DEBUG=* nodemon build/worker.js",
     "server": "nodemon build/worker.js",
-    "webpack": "webpack --progress --watch",
+    "webpack": "webpack --progress --colors --watch",
     "start": "npm run webpack & npm run server",
     "debug": "npm run webpack & npm run debug-server",
     "test": "karma start"
