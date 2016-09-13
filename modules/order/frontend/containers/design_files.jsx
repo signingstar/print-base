@@ -20,7 +20,6 @@ class DesignFilesBox extends React.Component {
       label='Print Design'
       placeholder={placeholder}
       onDrop={onDrop}
-      files={files}
       accept={acceptFiles} />
   }
 }
@@ -36,7 +35,7 @@ const mapStateToProps = (orderApp, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onDrop: (files: File[]) =>
+    onDrop: (files) =>
       dispatch(setFiles(files))
   }
 }

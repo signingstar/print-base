@@ -1,6 +1,5 @@
 import React from "react";
 import { connect } from "react-redux";
-import { keys } from "underscore";
 
 class MainContents extends React.Component {
   render () {

@@ -1,4 +1,4 @@
-import { presenter } from "../header/presenter";
+import { headerPresenter } from "../header/presenter";
 import partnerPresenter from "./presenter";
 
 const partnerController = function({modules}) {
@@ -10,9 +10,8 @@ const partnerController = function({modules}) {
       let srcPath = './modules/partner/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
-      let headerPresenter = presenter({cookies});
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
 
       page.set( {
         javascript: jsAsset('sessionjs'),

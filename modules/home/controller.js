@@ -1,4 +1,4 @@
-import { presenter, origConfig } from "../header/presenter";
+import { headerPresenter, origConfig } from "../header/presenter"
 
 const homeController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
@@ -9,9 +9,8 @@ const homeController = function({modules}) {
       let srcPath = './modules/home/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
-      let headerPresenter = presenter({cookies});
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
 
       page.set({
         origConfig,

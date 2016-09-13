@@ -4,42 +4,18 @@ let debug = require("debug")('Core:AppControllers');
 
 const routes = (app, globalModules) => {
   debug('export routes');
-  let {logger} = globalModules;
+  const {logger} = globalModules;
 
   let processRequest = appControllers(globalModules);
 
-  let redirectWithLogging = (res, url, reasonCode, statusCode = 302) => {
-    logger.info(`[WEB-REDIRECT]` + {url, reasonCode, statusCode});
-
-    res.redirect(statusCode, url);
-  };
-
-  let setCookiesForResponse = (res, cookies = []) => {
-    debug('setCookiesForResponse');
-    for(let cookie of cookies) {
-      let {key, value} = cookie;
-      res.cookie(key, value, cookie);
-    }
-  };
-
-  let redirectWithCookies = (res) => {
-    debug('redirectWithCookies');
-    return (url, cookies) => {
-      setCookiesForResponse(res, cookies);
-      res.redirect(encodeURI(url));
-    }
-  }
-
-  let processOptions = {
+  const processOptions = {
     attributes: function (req, res, next) {
       return {req, res}
     },
-    responders: {
-      html: responders.html,
-      error: responders.error,
-      json: responders.json
-    }
+    responders
   };
+
+  const { redirectWithCookies } = responders;
 
   app.get("/", processRequest('homeController', 'main', processOptions));
 

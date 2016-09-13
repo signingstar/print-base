@@ -2,7 +2,7 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import ReactComponent from "./react_server";
-import { presenter, origConfig } from "../header/presenter";
+import { headerPresenter, origConfig } from "../header/presenter"
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 
@@ -17,7 +17,6 @@ const maraketingController = function({modules}) {
       let srcPath = './modules/marketing/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
-      let headerPresenter = presenter({cookies});
 
       let location = req.url;
       let {category} = req.params;
@@ -25,7 +24,7 @@ const maraketingController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           debug(`error:${error} | renderProps:${renderProps}`);

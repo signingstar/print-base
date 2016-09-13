@@ -3,7 +3,6 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { Router, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { isEmpty, keys } from "underscore";
 
 import configureStore from "../store";
 import routes from "../routes";
@@ -11,7 +10,7 @@ import routes from "../routes";
 let preloadedState = window.__PRELOADED_STATE__;
 
 let sessionStoreStr = sessionStorage.getItem('orderApp');
-if((!preloadedState || keys(preloadedState.selectionState).length < 3) && sessionStoreStr) {
+if((!preloadedState || Object.keys(preloadedState.selectionState).length < 3) && sessionStoreStr) {
   let sessionStore = JSON.parse(sessionStoreStr);
   preloadedState = preloadedState.categoryState.category? sessionStore : preloadedState;
 }
