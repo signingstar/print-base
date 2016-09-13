@@ -46,7 +46,7 @@ describe('Reducer', function() {
       });
 
       it('should set coating when state is not empty', () => {
-        let state = selectionState({type: 'mugs', size: 'axb', material: 'paper', files:[], updateComponents:[]}, {type: 'SET_COAT', value: 'gloss'});
+        let state = selectionState({type: 'mugs', size: 'axb', material: 'paper', files:[], updateComponents:[]}, {type: 'SET_COATING', value: 'gloss'});
         let typeState = TypeState({type: 'mugs', updateComponents:[]}, {type: 'SET_SURFACE', value: 'paper'});
         expect(typeState).to.have.property('type').and.equal('mugs');
         expect(state).to.have.property('size').and.equal('axb');

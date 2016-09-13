@@ -1,4 +1,4 @@
-import { CATEGORY, SIZE, SURFACE, COAT, FOLD, PAPER_QUALITY } from "./actions/index";
+import { CATEGORY, SIZE, SURFACE, COATING, FOLD, PAPER_QUALITY } from "./actions/index";
 
 class OrderPresenter {
   constructor(data) {
@@ -73,7 +73,7 @@ class OrderPresenter {
     }
 
     if(coat) {
-      let localList = this.fetchSpecificFilterByCategory(COAT, material, filter);
+      let localList = this.fetchSpecificFilterByCategory(COATING, material, filter);
       listForCategory = this.consolidateList(listForCategory, localList);
     }
 

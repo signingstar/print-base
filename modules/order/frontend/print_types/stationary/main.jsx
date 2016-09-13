@@ -7,7 +7,7 @@ import Envelope from "./envelope";
 import LetterHead from "./envelope";
 import Notebook from "./envelope";
 
-import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY, setCategory } from "../../actions/index";
+import { CATEGORY, SIZE, SURFACE, COATING, QUANTITY, setCategory } from "../../actions/index";
 
 class Container extends React.Component {
   constructor() {
@@ -61,13 +61,13 @@ class Container extends React.Component {
     let categoryLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
     let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COATING, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
     labelMap.set(SIZE, {label: 'Print Size', value: sizeLabel});
     labelMap.set(SURFACE, {label: 'Paper Material', value: materialLabel});
-    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(COATING, {label: 'Coating', value: coatLabel});
     labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     return {
@@ -79,7 +79,7 @@ class Container extends React.Component {
   getFilterList({ category, size, material, coat, quantity }) {
     let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
     let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
-    let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
+    let coatList = this.presenter.printableDataWithFilter(COATING, {category, size, material});
     let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
 
     return {sizeList, materialList, coatList, quantityList};

@@ -1,37 +1,102 @@
+import React from "react";
 import { connect } from "react-redux";
 
-import SelectBox from "../components/dropdown_items";
+import DropdownComponent from "../components/dropdown";
+import { SIZE, SURFACE, COATING, PAPER_QUALITY, FOLD, QUANTITY, FILES } from "../actions/index";
 
-const getLabelForValue = (val, optionButtonNodes) => {
-  if(!val) return;
+class DropDownContainer extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return nextProps.shouldUpdate;
+  }
 
-  let node = optionButtonNodes.find(entry => entry.value === val);
-  return node.label;
+  getLabelString(category) {
+    let label, placeholder;
+
+    switch(category) {
+      case SIZE:
+        label = 'Print Size';
+        placeholder = 'Select Size...';
+        break;
+      case PAPER_QUALITY:
+        label = 'Paper Quality';
+        placeholder = 'Select Paper Quality ...';
+        break;
+      case COATING:
+        label = 'Coating';
+        placeholder = 'Select Coating Type ...';
+        break;
+      case FOLD:
+        label = 'Print Fold';
+        placeholder = 'Select number of folds ...';
+        break;
+      case QUANTITY:
+        label = 'Print Quantity';
+        placeholder = 'Select Quantity ...';
+        break;
+      case FILES:
+        label = 'Print Design';
+        placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
+        break;
+      case SURFACE:
+        label = 'Print Material';
+        placeholder = 'Select Material ...';
+        break;
+    }
+
+    return { localLabel: label, localPlaceholder: placeholder };
+  }
+
+  getLabelForValue(val, optionButtonNodes) {
+    if(!val) return;
+
+    let node = optionButtonNodes.find(entry => entry.value === val);
+    return node.label;
+  }
+
+  render() {
+    let { category, filter, itemList, label, placeholder, onChange } = this.props;
+
+    let optionButtonNodes = itemList.map((entry) => {
+      let selected = filter === entry.id ? true : false;
+      return {value: entry.id, label: entry.value};
+    });
+
+    let {localLabel, localPlaceholder} = this.getLabelString(category);
+    let selected = this.getLabelForValue(filter, optionButtonNodes);
+
+    label = label ? label : localLabel;
+    placeholder = placeholder ? placeholder : localPlaceholder;
+
+    let state = {label, selected, optionButtonNodes, placeholder};
+
+    return <DropdownComponent
+      state={state}
+      onClick={onChange} />
+  }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  let { id, label, selected, optionButtonNodes, placeholder } = ownProps;
-
-  let selectedLabel = getLabelForValue(selected, optionButtonNodes);
+const mapStateToProps = (orderApp, ownProps) => {
+  let state = orderApp.selectionState;
 
   return {
-    state: { id, label, selected: selectedLabel, optionButtonNodes, placeholder }
+    filter: state[ownProps.category],
+    shouldUpdate: state.updateComponents.indexOf(ownProps.category) > -1
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onClick: (val: any) => {
-      if(ownProps.selected !== val.value) {
-        dispatch(ownProps.onClick(val.value))
+    onChange: (selectBox) => {
+      let { selected, onSelect } = ownProps;
+
+      if(onSelect && selected !== selectBox.value) {
+        dispatch(onSelect(selectBox.value))
       }
     }
   }
 }
 
-const DropdownBox = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(SelectBox)
-
-export default DropdownBox;
+)(DropDownContainer);

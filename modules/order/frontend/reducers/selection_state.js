@@ -1,6 +1,6 @@
 import * as Action_Items from "../actions/index";
-let { RESET, SET_CATEGORY, SET_SIZE, SET_SURFACE, SET_COAT, SET_PAPER_QUALITY, SET_FOLD, SET_QUANTITY, SET_FILES } = Action_Items;
-let { SIZE, SURFACE, COAT, PAPER_QUALITY, FOLD, QUANTITY, FILES } = Action_Items;
+let { RESET, SET_CATEGORY, SET_SIZE, SET_SURFACE, SET_COATING, SET_PAPER_QUALITY, SET_FOLD, SET_QUANTITY, SET_FILES } = Action_Items;
+let { SIZE, SURFACE, COATING, PAPER_QUALITY, FOLD, QUANTITY, FILES } = Action_Items;
 
 const defaultState = {
   files: [],
@@ -14,7 +14,7 @@ const selectionState = (state = defaultState, action) => {
   switch (type) {
     case RESET:
     case SET_CATEGORY:
-      return {files: [],  updateComponents: [SIZE, SURFACE, COAT, PAPER_QUALITY, FOLD, QUANTITY, FILES]};
+      return {files: [],  updateComponents: [SIZE, SURFACE, COATING, PAPER_QUALITY, FOLD, QUANTITY, FILES]};
     case SET_SIZE:
       newState = Object.assign({}, state, {
         size: value,
@@ -25,13 +25,13 @@ const selectionState = (state = defaultState, action) => {
       newState = Object.assign({}, state, {
         material: value,
         coat: undefined,
-        updateComponents: [SURFACE, COAT]
+        updateComponents: [SURFACE, COATING]
       });
       break;
-    case SET_COAT:
+    case SET_COATING:
       newState = Object.assign({}, state, {
         coat: value,
-        updateComponents: [COAT]
+        updateComponents: [COATING]
       });
       break;
     case SET_PAPER_QUALITY:
