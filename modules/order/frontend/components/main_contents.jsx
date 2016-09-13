@@ -18,7 +18,9 @@ const mapStateToProps = (orderApp, ownProps) => {
   let sessionStore = typeof sessionStorage === 'undefined'? undefined : sessionStorage;
 
   if(sessionStore) {
-    sessionStore.setItem('orderApp', JSON.stringify(orderApp));
+    let orderAppToStore = JSON.parse(JSON.stringify(orderApp));
+    delete orderAppToStore.selectionState.files;
+    sessionStore.setItem('orderApp', JSON.stringify(orderAppToStore));
   }
 
   return {

@@ -55,10 +55,6 @@ const orderController = function({modules}) {
           responders.error();
         }
       });
-    },
-
-    post: function({attributes, responders, page}) {
-
     }
   }
 }

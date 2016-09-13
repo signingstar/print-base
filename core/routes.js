@@ -72,6 +72,8 @@ const routes = (app, globalModules) => {
 
   app.get("/order/:category", processRequest('orderController', 'main', processOptions));
 
+  app.post('/order', processRequest('photoInventoryController', 'main', processOptions));
+
   app.get("/partner", processRequest('partnerController', 'get', processOptions));
 
   app.post("/partner", processRequest('partnerController', 'post', {
@@ -108,8 +110,6 @@ const routes = (app, globalModules) => {
   ));
 
   app.get("/why-us", processRequest('whyUsController', 'main', processOptions));
-
-  app.post('/upload', processRequest('photoInventoryController', 'main', processOptions));
 };
 
 export default routes;
