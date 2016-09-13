@@ -1,4 +1,5 @@
 import { Response } from 'express';
+let debug = require("debug")("Core:Responder");
 
 const redirectWithLogging = (res, url, reasonCode, logger, statusCode = 302) => {
   logger.info(`[WEB-REDIRECT]`, {url, reasonCode, statusCode});
@@ -58,8 +59,10 @@ const responders = {
     }
   },
 
-  redirectForAuthentication: (res, next) => {
-    return (url, reasonCode, logger, statusCode) => redirectWithLogging(res, url, reasonCode, logger, statusCode)
+  redirectForAuthentication: (res, next) => (url, reasonCode, logger, statusCode) => {
+    let loginUrl = `/login?ref_url=${encodeURIComponent(url)}`;
+
+    redirectWithLogging(res, loginUrl, reasonCode, logger, statusCode)
   },
 
   redirectWithCookies: (res) => {

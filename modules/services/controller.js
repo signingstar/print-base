@@ -2,7 +2,7 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import ReactComponent from "./react_server";
-import { headerPresenter, origConfig } from "../header/presenter"
+import { headerPresenter, origConfig } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 

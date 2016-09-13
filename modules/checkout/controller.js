@@ -31,7 +31,7 @@ const checkoutController = function({modules}) {
       let {isLogged = false} = headerPresenter({cookies});
 
       if(isSecured && !isLogged) {
-        responders.redirectForAuthentication(`/login?ref_url=${encodeURIComponent(location)}`, "AUTHENTICATION", logger);
+        responders.redirectForAuthentication(location, "authenticate", logger);
         return;
       } else {
         page.set({isLogged});

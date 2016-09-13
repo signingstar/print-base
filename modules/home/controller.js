@@ -1,4 +1,4 @@
-import { headerPresenter, origConfig } from "../header/presenter"
+import { headerPresenter, origConfig } from "../header/presenter";
 
 const homeController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
