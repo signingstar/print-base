@@ -43,6 +43,7 @@ class VisitingCard extends React.Component {
   getLabelForFields({ category, paper_quality, coat, quantity }) {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COATING, coat);
 
     let labelMap = new Map();
     labelMap.set(PAPER_QUALITY, {label: 'Paper Quality', value: paperQualityLabel});

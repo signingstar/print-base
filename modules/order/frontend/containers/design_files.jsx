@@ -13,11 +13,12 @@ class DesignFilesBox extends React.Component {
   render() {
     let { files, onDrop } = this.props;
 
+    const label = 'Print Design';
     const placeholder = 'Drop your files here, or click anywhere in this box to select files to upload';
     const acceptFiles = 'image/jpeg, image/png, .ai';
 
     return <DesignFiles
-      label='Print Design'
+      label={label}
       placeholder={placeholder}
       onDrop={onDrop}
       accept={acceptFiles} />

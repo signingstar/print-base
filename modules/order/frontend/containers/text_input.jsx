@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import TextInputContainer from "../components/text_input";
 import { QUANTITY, setQuantity } from "../actions/index";
 
 class TextInput extends React.Component {
@@ -22,12 +23,10 @@ class TextInput extends React.Component {
     let {localLabel} = this.getLabelString(category);
     label = label ? label : localLabel;
 
-    return (
-      <div className='inner-section' id='print-others'>
-        <label>{label}</label>
-        <input type='text' className='text-input' value={value} onChange={onChange} />
-      </div>
-    );
+    return <TextInputContainer
+      label={label}
+      value={value}
+      onChange={onChange} />
   }
 }
 
