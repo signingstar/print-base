@@ -2,6 +2,7 @@ import { pick } from "underscore";
 
 import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
+let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
@@ -37,7 +38,7 @@ const loginController = function({modules}) {
         if(isValid) {
           res.cookie('isLogged', true, {maxAge: 60*60*1000});
           refUrl = presenter(refUrl, true).parsedUri;
-          responders.redirectWithCookies(refUrl);
+          responders.redirectWithCookies(decodeURIComponent(refUrl));
         } else {
           let srcPath = './modules/login/main.pug';
           let fn = pug.compileFile(srcPath , {cache: false, pretty: true});

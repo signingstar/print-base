@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
 import ReactComponent from "./react_server";
-import { presenter } from "../header/presenter";
+import { headerPresenter } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
@@ -26,9 +26,8 @@ const accountController = function({modules}) {
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
-      let headerPresenter = presenter({cookies});
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {

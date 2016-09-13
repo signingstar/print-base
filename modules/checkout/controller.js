@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
 import ReactComponent from "./react_server";
-import { presenter } from "../header/presenter";
+import { headerPresenter } from "../header/presenter";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
@@ -13,6 +13,7 @@ let debug = require("debug")('Checkout:controllers');
 
 const checkoutController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
+  const isSecured = true;
 
   return {
     main: ({attributes, responders, page}) => {
@@ -26,9 +27,15 @@ const checkoutController = function({modules}) {
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
-      let headerPresenter = presenter({cookies});
 
-      page.set(headerPresenter);
+      let {isLogged = false} = headerPresenter({cookies});
+
+      if(isSecured && !isLogged) {
+        responders.redirectForAuthentication(location, "authenticate", logger);
+        return;
+      } else {
+        page.set({isLogged});
+      }
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
@@ -70,9 +77,8 @@ const checkoutController = function({modules}) {
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
-      let headerPresenter = presenter({cookies});
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {

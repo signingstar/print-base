@@ -1,7 +1,7 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { origConfig, presenter } from "../header/presenter";
+import { headerPresenter, origConfig } from "../header/presenter";
 import ReactComponent from "./react_server";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
@@ -18,7 +18,6 @@ const orderController = function({modules}) {
       let { mode, item } = req.query;
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
-      let headerPresenter = presenter({cookies});
 
       let location = req.url;
       let {category} = req.params;
@@ -26,7 +25,7 @@ const orderController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set(headerPresenter);
+      page.set(headerPresenter({cookies}));
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
