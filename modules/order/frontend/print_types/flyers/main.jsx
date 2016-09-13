@@ -5,7 +5,7 @@ import OrderPresenter from "../../presenter";
 import PrintData from "./print_combination";
 import Component from "./component";
 
-import { CATEGORY, SIZE, SURFACE, COAT, QUANTITY, setAllCategories } from "../../actions/index";
+import { CATEGORY, SIZE, SURFACE, COATING, QUANTITY, setAllCategories } from "../../actions/index";
 
 class Flyers extends React.Component {
   constructor() {
@@ -40,13 +40,13 @@ class Flyers extends React.Component {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let sizeLabel = this.presenter.fetchLabelForCategoryAndId(SIZE, size);
     let materialLabel = this.presenter.fetchLabelForCategoryAndId(SURFACE, material);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
+    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COATING, coat);
     let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
     labelMap.set(SIZE, {label: 'Print Size', value: sizeLabel});
     labelMap.set(SURFACE, {label: 'Paper Material', value: materialLabel});
-    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
+    labelMap.set(COATING, {label: 'Coating', value: coatLabel});
     labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
 
     return {
@@ -61,7 +61,7 @@ class Flyers extends React.Component {
 
     let sizeList = this.presenter.printableDataWithFilter(SIZE, {category});
     let materialList = this.presenter.printableDataWithFilter(SURFACE, {category, size});
-    let coatList = this.presenter.printableDataWithFilter(COAT, {category, size, material});
+    let coatList = this.presenter.printableDataWithFilter(COATING, {category, size, material});
     let quantityList = this.presenter.printableDataWithFilter(QUANTITY, {category, size, material});
 
     let fieldsLabel = this.getLabelForFields({ category, size, material, coat, quantity });

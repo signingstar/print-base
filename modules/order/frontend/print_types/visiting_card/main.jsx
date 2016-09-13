@@ -5,7 +5,7 @@ import OrderPresenter from "../../presenter";
 import PrintData from "./print_combination";
 import Component from "./component";
 
-import { CATEGORY, PAPER_QUALITY, COAT, QUANTITY, setCategory } from "../../actions/index";
+import { CATEGORY, PAPER_QUALITY, COATING, QUANTITY, setCategory } from "../../actions/index";
 
 class VisitingCard extends React.Component {
   constructor() {
@@ -43,13 +43,11 @@ class VisitingCard extends React.Component {
   getLabelForFields({ category, paper_quality, coat, quantity }) {
     let typeLabel = this.presenter.fetchLabelForCategoryAndId(CATEGORY, category);
     let paperQualityLabel = this.presenter.fetchLabelForCategoryAndId(PAPER_QUALITY, paper_quality);
-    let coatLabel = this.presenter.fetchLabelForCategoryAndId(COAT, coat);
-    let quantityLabel = this.presenter.fetchLabelForCategoryAndId(QUANTITY, quantity);
 
     let labelMap = new Map();
     labelMap.set(PAPER_QUALITY, {label: 'Paper Quality', value: paperQualityLabel});
-    labelMap.set(COAT, {label: 'Coating', value: coatLabel});
-    labelMap.set(QUANTITY, {label: 'Quantity', value: quantityLabel});
+    labelMap.set(COATING, {label: 'Coating', value: coatLabel});
+    labelMap.set(QUANTITY, {label: 'Quantity', value: quantity});
 
     return {
       category: typeLabel,
@@ -61,7 +59,7 @@ class VisitingCard extends React.Component {
     let { size, paper_quality, coat, quantity, location } = this.props;
     let category = this.category || this.getCategories(location).category;
 
-    let coatList = this.presenter.printableDataWithFilter(COAT);
+    let coatList = this.presenter.printableDataWithFilter(COATING);
     let quantityList = this.presenter.printableDataWithFilter(QUANTITY);
     let paperQualityList = this.presenter.printableDataWithFilter(PAPER_QUALITY);
 

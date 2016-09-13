@@ -3,7 +3,7 @@ export const SUB_CATEGORY = 'subCategory';
 
 export const SIZE = 'size';
 export const SURFACE = 'material';
-export const COAT = 'coat';
+export const COATING = 'coat';
 export const QUANTITY = 'quantity';
 export const FOLD = 'fold';
 export const PAPER_QUALITY = 'paper_quality';
@@ -19,7 +19,7 @@ export const SET_SIZE = 'SET_SIZE';
 export const SET_SURFACE = 'SET_SURFACE';
 export const SET_QUANTITY = 'SET_QUANTITY';
 export const SET_FILES = 'SET_FILES';
-export const SET_COAT = 'SET_COAT';
+export const SET_COATING = 'SET_COATING';
 export const SET_FOLD = 'SET_FOLD';
 export const SET_PAPER_QUALITY = 'SET_PAPER_QUALITY';
 export const SET_FIELD = 'SET_FIELD';
@@ -52,28 +52,28 @@ export const resetAll = () => {
   };
 }
 
-export const selectSize = (id) => {
+export const setSize = (id) => {
   return {
     type: SET_SIZE,
     value: id
   };
 }
 
-export const selectSurface = (id) => {
+export const setSurface = (id) => {
   return {
     type: SET_SURFACE,
     value: id
   };
 }
 
-export const selectCoat = (id) => {
+export const setCoating = (id) => {
   return {
-    type: SET_COAT,
+    type: SET_COATING,
     value: id
   };
 }
 
-export const selectQuantity = (id) => {
+export const setQuantity = (id) => {
   return {
     type: SET_QUANTITY,
     value: id

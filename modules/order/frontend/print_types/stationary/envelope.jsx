@@ -1,12 +1,10 @@
 import React from "react";
 
-import PrintSize from "../../filters/size";
-import PrintMaterial from "../../filters/material";
-import CoatingBox from "../../filters/coat";
-import PrintQuantity from "../../filters/quantity";
 import DesignFilesBox from "../../containers/design_files";
 import Confirmation from "../../../confirmation/containers/main";
-import DefaultCategory from "../../components/default_category";
+import Heading from "../../components/category_heading";
+import DropDown from"../../containers/dropdown";
+import { setCoating, setQuantity, setSize, setSurface, COATING, QUANTITY, SIZE, SURFACE } from "../../actions/index";
 
 const Envelope = ({filterList, fieldsLabel}) => {
   let { sizeList, materialList, coatList, quantityList } = filterList;
@@ -14,11 +12,23 @@ const Envelope = ({filterList, fieldsLabel}) => {
   return (
     <div className='main-section-body'>
       <div className='left-panel'>
-        <DefaultCategory category={fieldsLabel.category} />
-        <PrintSize sizeList={sizeList} />
-        <PrintMaterial materialList={materialList} />
-        <CoatingBox coatList={coatList} />
-        <PrintQuantity quantityList={quantityList} />
+        <Heading category={fieldsLabel.category} />
+        <DropDown
+          itemList={sizeList}
+          category={SIZE}
+          onSelect={setSize} />
+        <DropDown
+          itemList={materialList}
+          category={SURFACE}
+          onSelect={setSurface} />
+        <DropDown
+          itemList={coatList}
+          category={COATING}
+          onSelect={setCoating} />
+        <DropDown
+          itemList={quantityList}
+          category={QUANTITY}
+          onSelect={setQuantity} />
         <DesignFilesBox />
       </div>
       <div className='right-panel'>
