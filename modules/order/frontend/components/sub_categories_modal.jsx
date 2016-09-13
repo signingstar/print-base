@@ -19,7 +19,13 @@ const customStyles = {
 const SubCategoriesComponent = ({onClick, onClose, isShowing, modalHeader, label, type, imgSrc, categoryClass}) => {
   return (
     <div className='item-box'>
-      <a href='javascript:void(0)' onClick={onClick}><CategoryItem  label={label} imgSrc={imgSrc}  categoryClass={categoryClass} /></a>
+      <a href='javascript:void(0)' onClick={onClick}>
+        <CategoryItem
+          label={label}
+          imgSrc={imgSrc}
+          categoryClass={categoryClass}
+        />
+      </a>
       <Modal
         isOpen={isShowing}
         onRequestClose={onClose}

@@ -13,7 +13,7 @@ const DesignFiles = ({ label, placeholder, onDrop, accept }) => {
           rejectClassName='reject'
           accept={accept}>
           <div className='upload-content'>
-            <div>Drop your file here, or click anywhere in this box to select files to upload.</div>
+            <div>{placeholder}</div>
           </div>
         </Dropzone>
       </div>
