@@ -5,6 +5,11 @@ import CategoryItem from "./category_item";
 import SubCategoriesModal from "../containers/sub_categories_modal";
 
 const Categories = ({label, type}) => {
+  let visiting_card = 'Visiting Card';
+  let broucher = 'Broucher';
+  let stationary = 'Stationary';
+  let flyers = 'Flyers';
+
   return (
     <div className='main-section-body'>
       <div className='left-panel category'>
@@ -13,7 +18,7 @@ const Categories = ({label, type}) => {
           <div>
             <SubCategoriesModal
               type='visiting_card'
-              label='Visiting Card'
+              label={visiting_card}
               imgSrc='/assets/round2.png'
               categoryClass='category'
             />
@@ -21,20 +26,20 @@ const Categories = ({label, type}) => {
               to='/order/broucher'
               className='item-box'>
               <CategoryItem
-                label='Broucher'
+                label={broucher}
                 imgSrc='/assets/round3.png'
                 categoryClass='category'
               />
             </Link>
             <SubCategoriesModal
               type='stationary'
-              label='Stationary'
+              label={stationary}
               imgSrc='/assets/round1.png'
               categoryClass='category'
             />
             <SubCategoriesModal
               type='flyers'
-              label='Flyers'
+              label={flyers}
               imgSrc='/assets/round4.png'
               categoryClass='category'
             />
