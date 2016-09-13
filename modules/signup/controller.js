@@ -1,6 +1,7 @@
 import { find, pick } from "underscore";
 
 import { presenter } from "./presenter";
+import { headerPresenter } from "../header/presenter";
 import updateUserList from "./update_user_list";
 
 const signUpController = function({modules}) {
@@ -12,6 +13,14 @@ const signUpController = function({modules}) {
       let srcPath = './modules/signup/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let refUrl = presenter(req.query.ref_url).uriWithRef;
+      let {cookies} = req;
+      let {isLogged = false} = headerPresenter({cookies});
+
+      if(isLogged) {
+        responders.redirectWithCookies("/");
+        return;
+      }
+
 
       page.set( {
         javascript: jsAsset('sessionjs'),
