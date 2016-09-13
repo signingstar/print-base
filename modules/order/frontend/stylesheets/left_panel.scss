@@ -30,6 +30,16 @@
       width: 200px;
     }
 
+    .text-input {
+      border: solid 1px $button-orig-color;
+      color: $light-black;
+      font-size: 16px;
+      outline: 0;
+      padding-left: 9px;
+      width: 300px;
+      height: 36px;
+    }
+
     h2 {
       display: inline-block;
       font-size: 18px;

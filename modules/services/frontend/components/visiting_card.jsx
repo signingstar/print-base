@@ -20,7 +20,7 @@ const VisitingCard = () => {
                     <p>A single sheet printed on both sides and folded into halves</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order/visiting-card">Place order</a></div>
+                    <div className="button-style"><a href="/order/visitingcard">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
@@ -36,23 +36,7 @@ const VisitingCard = () => {
                     <p>A single sheet printed on both sides and folded into thirds</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order/visiting-card-vertical">Place order</a></div>
-                  </div>
-                </div>
-              </figcaption>
-            </div>
-          </figure>
-          <figure className="multi-row">
-            <div className="item-tile">
-              <div className="item-image"><img src="/assets/panel3.jpg"/></div>
-              <figcaption>
-                <div className="item-description">
-                  <div className="item-text">
-                    <h2>4-Fold Broucher</h2>
-                    <p>A single sheet printed on both sides and folded into fourths</p>
-                  </div>
-                  <div className="item-action">
-                    <div className="button-style"><a href="/order?mode=services&amp;item=brouchers">Place order</a></div>
+                    <div className="button-style"><a href="/order/visitingcard-vertical">Place order</a></div>
                   </div>
                 </div>
               </figcaption>

@@ -8,3 +8,5 @@ const TextInputContainer = ({label, value, onChange}) => {
     </div>
   );
 }
+
+export default TextInputContainer;

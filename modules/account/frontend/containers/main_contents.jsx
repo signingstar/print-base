@@ -30,7 +30,7 @@ class MainContentsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state) => {
   return {
     state
   }
@@ -38,7 +38,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onDetailsLoad: (details: any) => {
+    onDetailsLoad: (details) => {
       dispatch(updateAllStates(details))
     }
   }
