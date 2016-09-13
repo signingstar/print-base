@@ -2,6 +2,7 @@ import { pick } from "underscore";
 
 import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
+import { headerPresenter } from "../header/presenter";
 let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {
@@ -12,6 +13,13 @@ const loginController = function({modules}) {
       let {req, res} = attributes;
       let srcPath = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let {cookies} = req;
+      let {isLogged = false} = headerPresenter({cookies});
+
+      if(isLogged) {
+        responders.redirectWithCookies("/");
+        return;
+      }
 
       page.set( {
         javascript: jsAsset('sessionjs'),

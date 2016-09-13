@@ -10,7 +10,6 @@ import AccountDetails from "./mock_data/details";
 
 let debug = require("debug")('Checkout:controllers');
 
-
 const checkoutController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
   const isSecured = true;
