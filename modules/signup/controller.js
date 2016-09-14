@@ -14,8 +14,7 @@ const signUpController = function({modules}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let refUrl = presenter(req.query.ref_url).uriWithRef;
       let {cookies} = req;
-      let title = 'Tisko - Register';
-
+      const title = 'Tisko - Register';
 
       let {isLogged = false} = headerPresenter({cookies, topNav:false}, page);
 

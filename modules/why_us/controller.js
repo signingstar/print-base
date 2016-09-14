@@ -9,6 +9,8 @@ const whyUsController = function({modules}) {
       let srcPath = './modules/why_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
+      const title =  'Tisko Digital Printing';
+
 
       headerPresenter({cookies}, page);
 
@@ -16,7 +18,7 @@ const whyUsController = function({modules}) {
         promotional_header: false,
         javascript: jsAsset('mainjs'),
         stylesheet: cssAsset('maincss'),
-        title: 'Tisko Digital Printing',
+        title,
         body_class: 'why-us'
       });
 
