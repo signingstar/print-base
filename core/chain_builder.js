@@ -1,5 +1,4 @@
 import { clone, extend, object, reduce } from 'underscore';
-import { Request, Response } from "express";
 
 const ChainBuilder = () => {
   let chainObject = {
@@ -10,7 +9,7 @@ const ChainBuilder = () => {
     execute: (defaultCtx = {}, ...args) => {
       let ctx = clone(defaultCtx);
       const iterator = (ctx, handler) => {
-        let out:{};
+        let out;
 
         try {
           out = handler[1](ctx, ...args);

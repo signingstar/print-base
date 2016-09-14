@@ -1,2 +1,2 @@
-import '../../modules/header/frontend/main';
-import '../../modules/services/frontend/typescripts/main';
+import './base';
+import '../../modules/services/frontend/javascripts/main';

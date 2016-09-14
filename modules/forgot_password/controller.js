@@ -1,3 +1,5 @@
+import headerPresenter from "tisko-header";
+
 const forgotPasswordController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
 
@@ -6,6 +8,8 @@ const forgotPasswordController = function({modules}) {
       let {req, res} = attributes;
       let srcPath = './modules/forgot_password/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+
+      headerPresenter({}, page);
 
       page.set( {
         javascript: jsAsset('sessionjs'),

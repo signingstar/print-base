@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
 import ReactComponent from "./react_server";
-import { headerPresenter } from "../header/presenter";
+import headerPresenter from "tisko-header";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
@@ -27,7 +27,7 @@ const accountController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set(headerPresenter({cookies}));
+      headerPresenter({cookies, topNav: false}, page);
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {

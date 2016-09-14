@@ -2,7 +2,7 @@ import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
 import ReactComponent from "./react_server";
-import { headerPresenter, origConfig } from "../header/presenter";
+import headerPresenter from "tisko-header";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 
@@ -17,6 +17,7 @@ const maraketingController = function({modules}) {
       let srcPath = './modules/marketing/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
+      const title = 'Tisko - Marketing Printing';
 
       let location = req.url;
       let {category} = req.params;
@@ -24,19 +25,18 @@ const maraketingController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set(headerPresenter({cookies}));
+      headerPresenter({cookies}, page);
+
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           debug(`error:${error} | renderProps:${renderProps}`);
           let {reactHTML, preloadedState} = ReactComponent(renderProps, history);
 
           page.set( {
-            origConfig,
             promotional_header: false,
-            navigational_header: true,
             javascript: jsAsset('marketingjs'),
             stylesheet: cssAsset('servicescss'),
-            title: 'Tisko - Marketing Printing',
+            title,
             body_class: 'marketing',
             reactHTML,
             preloadedState

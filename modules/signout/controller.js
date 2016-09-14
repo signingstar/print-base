@@ -1,3 +1,5 @@
+import headerPresenter from "tisko-header";
+
 const signOutController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
 
@@ -7,6 +9,8 @@ const signOutController = function({modules}) {
       let srcPath = './modules/signout/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       res.clearCookie('isLogged');
+
+      headerPresenter({}, page);
 
       page.set( {
         javascript: jsAsset('sessionjs'),

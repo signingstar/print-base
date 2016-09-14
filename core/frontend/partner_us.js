@@ -1,1 +1,1 @@
-import '../../modules/header/frontend/main';
+import './base';

@@ -1,4 +1,4 @@
-import { headerPresenter } from "../header/presenter";
+import headerPresenter from "tisko-header";
 import partnerPresenter from "./presenter";
 
 const partnerController = function({modules}) {
@@ -11,7 +11,7 @@ const partnerController = function({modules}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
 
-      page.set(headerPresenter({cookies}));
+      headerPresenter({cookies, topNav: false}, page);
 
       page.set( {
         javascript: jsAsset('sessionjs'),

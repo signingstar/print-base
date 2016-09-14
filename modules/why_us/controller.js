@@ -1,4 +1,4 @@
-import { headerPresenter, origConfig } from "../header/presenter";
+import headerPresenter from "tisko-header";
 
 const whyUsController = function({modules}) {
   let {pug, logger, jsAsset, cssAsset} = modules;
@@ -9,16 +9,16 @@ const whyUsController = function({modules}) {
       let srcPath = './modules/why_us/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
+      const title =  'Tisko Digital Printing';
 
-      page.set(headerPresenter({cookies}));
+
+      headerPresenter({cookies}, page);
 
       page.set({
-        origConfig,
         promotional_header: false,
-        navigational_header: true,
         javascript: jsAsset('mainjs'),
         stylesheet: cssAsset('maincss'),
-        title: 'Tisko Digital Printing',
+        title,
         body_class: 'why-us'
       });
 
