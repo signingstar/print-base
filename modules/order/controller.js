@@ -15,31 +15,32 @@ const orderController = function({modules}) {
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let { mode, item } = req.query;
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
 
       let location = req.url;
       let {category} = req.params;
-      const memoryHistory = createMemoryHistory(req.url);
+      const memoryHistory = createMemoryHistory(location);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
       page.set(headerPresenter({cookies}));
+      page.set( {
+        origConfig,
+        promotional_header: false,
+        navigational_header: true,
+        javascript: jsAsset('orderjs'),
+        stylesheet: cssAsset('ordercss'),
+        title: 'Tisko - Place an Order',
+        body_class: 'order'
+      });
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           let {reactHTML, preloadedState} = ReactComponent(renderProps, history);
           page.set( {
-            origConfig,
-            promotional_header: false,
-            navigational_header: true,
             reactHTML,
             preloadedState,
-            javascript: jsAsset('orderjs'),
-            stylesheet: cssAsset('ordercss'),
-            title: 'Tisko Digital Printing',
-            body_class: 'order'
           });
 
           let html = fn(page);
