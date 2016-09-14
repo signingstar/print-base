@@ -19,11 +19,7 @@ const rootElem = document.getElementById('main-contents');
 const store = configureStore(browserHistory, preloadedState);
 const history = syncHistoryWithStore(browserHistory, store);
 
-function renderDom() {
-  render(
-    <Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem
-  );
-}
+const renderDom = () => render(<Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem);
 
 renderDom();
 store.subscribe(renderDom);
