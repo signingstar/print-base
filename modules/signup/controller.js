@@ -1,7 +1,7 @@
 import { find, pick } from "underscore";
 
 import { presenter } from "./presenter";
-import { headerPresenter } from "../header/presenter";
+import headerPresenter from "tisko-header";
 import updateUserList from "./update_user_list";
 
 const signUpController = function({modules}) {
@@ -14,18 +14,20 @@ const signUpController = function({modules}) {
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let refUrl = presenter(req.query.ref_url).uriWithRef;
       let {cookies} = req;
-      let {isLogged = false} = headerPresenter({cookies});
+      let title = 'Tisko - Register';
+
+
+      let {isLogged = false} = headerPresenter({cookies, topNav:false}, page);
 
       if(isLogged) {
         responders.redirectWithCookies("/");
         return;
       }
 
-
       page.set( {
         javascript: jsAsset('sessionjs'),
         stylesheet: cssAsset('sessioncss'),
-        title: 'Tisko - Register',
+        title,
         refUrl,
         body_class: 'signup'
       })

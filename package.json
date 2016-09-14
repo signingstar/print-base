@@ -33,7 +33,7 @@
     "multer": "^1.2.0",
     "node-sass": "^3.8.0",
     "path": "^0.12.7",
-    "photo-inventory": "signingstar/photo-inventory",
+    "photo-inventory": "github:signingstar/photo-inventory",
     "pug": "^2.0.0-beta4",
     "react": "^15.2.1",
     "react-addons-css-transition-group": "^15.3.0",
@@ -47,6 +47,7 @@
     "redux": "^3.6.0",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "tisko-header": "github:signingstar/tisko-header",
     "underscore": "^1.8.3",
     "url": "^0.11.0",
     "webpack": "^1.13.1",
@@ -78,7 +79,8 @@
     "sinon": "^1.17.5",
     "source-map-support": "^0.4.2",
     "webpack-dev-middleware": "^1.7.0",
-    "webpack-hot-middleware": "^2.12.2"
+    "webpack-hot-middleware": "^2.12.2",
+    "webpack-node-externals": "^1.3.3"
   },
   "repository": {
     "type": "git",

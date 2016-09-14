@@ -1,7 +1,8 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 
-import { headerPresenter, origConfig } from "../header/presenter";
+import headerPresenter from "tisko-header";
+
 import ReactComponent from "./react_server";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
@@ -17,6 +18,7 @@ const orderController = function({modules}) {
       let {req, res} = attributes;
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
+      const title = 'Tisko - Place an Order';
 
       let location = req.url;
       let {category} = req.params;
@@ -24,14 +26,13 @@ const orderController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      page.set(headerPresenter({cookies}));
+      headerPresenter({cookies, topNav:true}, page);
+
       page.set( {
-        origConfig,
         promotional_header: false,
-        navigational_header: true,
         javascript: jsAsset('orderjs'),
         stylesheet: cssAsset('ordercss'),
-        title: 'Tisko - Place an Order',
+        title,
         body_class: 'order'
       });
 

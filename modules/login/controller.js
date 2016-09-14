@@ -2,7 +2,7 @@ import { pick } from "underscore";
 
 import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
-import { headerPresenter } from "../header/presenter";
+import headerPresenter from "tisko-header";
 let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {
@@ -14,7 +14,9 @@ const loginController = function({modules}) {
       let srcPath = './modules/login/main.pug';
       let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
       let {cookies} = req;
-      let {isLogged = false} = headerPresenter({cookies});
+      let title = 'Tisko - Login';
+
+      let {isLogged = false} = headerPresenter({cookies, topNav:false}, page);
 
       if(isLogged) {
         responders.redirectWithCookies("/");
@@ -24,7 +26,7 @@ const loginController = function({modules}) {
       page.set( {
         javascript: jsAsset('sessionjs'),
         stylesheet: cssAsset('sessioncss'),
-        title: 'Tisko - Login',
+        title,
         refUrl: presenter(req.query.ref_url).uriWithRef,
         body_class: 'login'
       })

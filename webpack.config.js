@@ -6,6 +6,7 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var sass = require("node-sass");
 var AssetsPlugin = require('assets-webpack-plugin');
+var nodeExternals = require('webpack-node-externals');
 
 var DEBUG = !process.argv.includes('--release');
 
@@ -18,15 +19,6 @@ var GLOBALS = {
   'process.env.NODE_ENV': DEBUG ? '"development"' : '"production"',
   __DEV__: DEBUG
 };
-
-var nodeModules = {};
-fs.readdirSync('node_modules')
-  .filter(function(x) {
-      return ['.bin'].indexOf(x) === -1;
-  })
-  .forEach(function(mod) {
-      nodeModules[mod] = 'commonjs ' + mod;
-  });
 
 var config = {}
 
@@ -49,7 +41,7 @@ var clientConfig = extend({}, true, config, {
       'sessionjs':   corePath + '/frontend/session.js',
   },
   output: {
-    filename: '[name]![hash].js',
+    filename: '[name].js',
     path: destPath,
   },
   module: {
@@ -73,17 +65,21 @@ var clientConfig = extend({}, true, config, {
           test: /\.scss$/i,
           loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
         },
-        { test: /\.json$/, loader: 'json' },
     ],
+  },
+
+  sassLoader: {
+    includePaths: [nodeModulesPath]
   },
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name]![hash].css"),
+      new ExtractTextPlugin("[name].css"),
       new CopyWebpackPlugin([
         { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
+        { flatten: true, from: nodeModulesPath + '/tisko-header/src/frontend/images/*', to: destPath},
       ]),
       new AssetsPlugin({
         prettyPrint: true,
@@ -139,7 +135,6 @@ var serverConfig = extend({}, true, config, {
   },
   module: {
     loaders: [
-        // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
         {
           test: /\.jsx?$/,
           loader: "babel-loader",
@@ -160,7 +155,7 @@ var serverConfig = extend({}, true, config, {
   ],
   debug: DEBUG,
   devtool: 'source-map',
-  externals: nodeModules
+  externals: [nodeExternals()]
 });
 
 module.exports = [serverConfig, clientConfig];

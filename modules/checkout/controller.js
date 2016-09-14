@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
 
 import ReactComponent from "./react_server";
-import { headerPresenter } from "../header/presenter";
+import headerPresenter from "tisko-header";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
@@ -26,14 +26,13 @@ const checkoutController = function({modules}) {
       const memoryHistory = createMemoryHistory(req.url);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
+      const title = 'Tisko - Checkout Page'
 
-      let {isLogged = false} = headerPresenter({cookies});
+      let {isLogged = false} = headerPresenter({cookies, topNav: false}, page);
 
       if(isSecured && !isLogged) {
         responders.redirectForAuthentication(location, "authenticate", logger);
         return;
-      } else {
-        page.set({isLogged});
       }
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
@@ -44,7 +43,7 @@ const checkoutController = function({modules}) {
           page.set( {
             javascript: jsAsset('checkoutjs'),
             stylesheet: cssAsset('checkoutcss'),
-            title: 'Tisko - Checkout',
+            title,
             body_class: 'checkout',
             reactHTML,
             preloadedState
