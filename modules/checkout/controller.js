@@ -1,6 +1,7 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
+import path from "path";
 
 import ReactComponent from "./react_server";
 import headerPresenter from "tisko-header";
@@ -11,14 +12,14 @@ import AccountDetails from "./mock_data/details";
 let debug = require("debug")('Checkout:controllers');
 
 const checkoutController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
   const isSecured = true;
 
   return {
     main: ({attributes, responders, page}) => {
       let {req, res} = attributes;
-      let srcPath = './modules/checkout/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
 
       let {cookies} = req;
       let location = req.url;
@@ -66,8 +67,8 @@ const checkoutController = function({modules}) {
 
     post: ({attributes, responders, page}) => {
       let {req, res} = attributes;
-      let srcPath = './modules/checkout/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
 
       let {cookies} = req;
       let location = req.url;

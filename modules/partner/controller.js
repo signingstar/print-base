@@ -1,14 +1,15 @@
 import headerPresenter from "tisko-header";
 import partnerPresenter from "./presenter";
+import path from "path";
 
 const partnerController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     get: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath = './modules/partner/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       let {cookies} = req;
 
       headerPresenter({cookies, topNav: false}, page);

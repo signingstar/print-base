@@ -1,13 +1,14 @@
 import headerPresenter from "tisko-header";
+import path from "path";
 
 const signOutController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath = './modules/signout/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       res.clearCookie('isLogged');
 
       headerPresenter({}, page);

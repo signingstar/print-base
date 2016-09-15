@@ -1,4 +1,5 @@
 import { pick } from "underscore";
+import path from "path";
 
 import { presenter } from "./presenter";
 import verifyUser from "./verify_login";
@@ -6,13 +7,13 @@ import headerPresenter from "tisko-header";
 let debug = require("debug")("Modules:loginController");
 
 const loginController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     get: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath = './modules/login/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       let {cookies} = req;
       let title = 'Tisko - Login';
 
@@ -50,8 +51,8 @@ const loginController = function({modules}) {
           refUrl = presenter(refUrl, true).parsedUri;
           responders.redirectWithCookies(decodeURIComponent(refUrl));
         } else {
-          let srcPath = './modules/login/main.pug';
-          let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+          let srcPath = path.join(__dirname, './', 'main');
+          let fn = pugCompiler(srcPath);
 
           page.set( {
             javascript: jsAsset('sessionjs'),

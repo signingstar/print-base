@@ -1,6 +1,7 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { omit } from "underscore";
+import path from "path";
 
 import ReactComponent from "./react_server";
 import headerPresenter from "tisko-header";
@@ -10,24 +11,29 @@ import AccountDetails from "./mock_data/details";
 
 let debug = require("debug")('Account:controllers');
 
-
-const accountController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+const controller = ({modules}) => {
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const isSecured = true;
+  const title = 'Tisko - My Account';
 
   return {
     main: ({attributes, responders, page}) => {
-      let {req, res} = attributes;
-      let srcPath = './modules/account/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      const {req, res} = attributes;
+      const srcPath = path.join(__dirname, './', 'main');
+      const fn = pugCompiler(srcPath);
 
-      let {cookies} = req;
-      let location = req.url;
-      let {category} = req.params;
-      const memoryHistory = createMemoryHistory(req.url);
+      const {cookies, url:location, params:{category}} = req;
+
+      const memoryHistory = createMemoryHistory(location);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      headerPresenter({cookies, topNav: false}, page);
+      const {isLogged = false} = headerPresenter({cookies, topNav: false}, page);
+
+      if(isSecured && !isLogged) {
+        responders.redirectForAuthentication(location, "authenticate", logger);
+        return;
+      }
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
@@ -37,13 +43,13 @@ const accountController = function({modules}) {
           page.set( {
             javascript: jsAsset('accountjs'),
             stylesheet: cssAsset('accountcss'),
-            title: 'Tisko - My Account',
             body_class: 'account',
+            title,
             reactHTML,
             preloadedState
           });
 
-          let html = fn(page);
+          const html = fn(page);
 
           responders.html(html);
         } else if (redirectLocation) {
@@ -70,4 +76,4 @@ const accountController = function({modules}) {
   }
 }
 
-export default accountController;
+export default controller;

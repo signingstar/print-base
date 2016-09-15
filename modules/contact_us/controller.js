@@ -1,15 +1,15 @@
 import headerPresenter from "tisko-header";
+import path from "path";
 
 const contactUsController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let { req, res } = attributes;
-      let srcPath = './modules/contact_us/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       const title = 'Tisko - Contact Us';
-
 
       headerPresenter({topNav: false}, page);
 

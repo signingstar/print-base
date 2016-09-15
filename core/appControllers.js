@@ -9,7 +9,7 @@ import forgotPasswordController from "../modules/forgot_password/controller";
 import homeController from "../modules/home/controller";
 import loginController from "../modules/login/controller";
 import marketingController from "../modules/marketing/controller";
-import orderController from "../modules/order/controller";
+import orderController from "order-page";
 import ourServicesController from "../modules/services/controller";
 import passwordResetController from "../modules/password_reset/controller";
 import partnerController from "../modules/partner/controller";

@@ -1,2 +1,2 @@
 import './base';
-import '../../modules/order/frontend/main';
+import 'order-page/frontend';
