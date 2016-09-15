@@ -1,11 +1,13 @@
 import * as winston from "winston";
-const pug = require("pug");
+import pug from "pug";
+import pugCompiler from "./pugWrapper";
 
 import assetsMap from "./assets_map";
 
 const globalModules = {
   logger: winston,
-  pug: pug,
+  pug,
+  pugCompiler,
   jsAsset: (key) => assetsMap[key].js,
   cssAsset: (key) => assetsMap[key].css
 };

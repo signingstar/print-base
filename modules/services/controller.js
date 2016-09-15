@@ -1,5 +1,6 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
+import path from "path";
 
 import ReactComponent from "./react_server";
 import headerPresenter from "tisko-header";
@@ -9,13 +10,13 @@ import routes from "./frontend/routes";
 let debug = require("debug")('Services:controllers');
 
 const ourServicesController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     main: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath = './modules/services/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       let {cookies} = req;
       const title = 'Tisko - Our Services';
 

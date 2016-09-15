@@ -1,17 +1,18 @@
 import { find, pick } from "underscore";
+import path from "path";
 
 import { presenter } from "./presenter";
 import headerPresenter from "tisko-header";
 import updateUserList from "./update_user_list";
 
 const signUpController = function({modules}) {
-  let {pug, logger, jsAsset, cssAsset} = modules;
+  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
 
   return {
     get: function({attributes, responders, page}) {
       let {req, res} = attributes;
-      let srcPath = './modules/signup/main.pug';
-      let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+      let srcPath = path.join(__dirname, './', 'main');
+      let fn = pugCompiler(srcPath);
       let refUrl = presenter(req.query.ref_url).uriWithRef;
       let {cookies} = req;
       const title = 'Tisko - Register';
@@ -51,8 +52,8 @@ const signUpController = function({modules}) {
           refUrl = presenter(refUrl, true).parsedUri;
           responders.redirectWithCookies(refUrl);
         } else {
-          let srcPath = './modules/signup/main.pug';
-          let fn = pug.compileFile(srcPath , {cache: false, pretty: true});
+          let srcPath = path.join(__dirname, './', 'main');
+          let fn = pugCompiler(srcPath);
 
           page.set( {
             javascript: jsAsset('sessionjs'),
