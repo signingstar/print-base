@@ -17,7 +17,7 @@ const config = {
 }
 
 const compileWrapper = (fileName, module) => {
-  const fileSrc = path.join(__dirname, `../`, `${fileName}.pug`);
+  const fileSrc = path.resolve(__dirname, `../`, `${fileName}.pug`);
   return pug.compileFile(fileSrc, config);
 }
 
