@@ -35,10 +35,11 @@ const maraketingController = function({modules}) {
 
           page.set( {
             promotional_header: false,
+            showFooter: true,
             javascript: jsAsset('marketingjs'),
             stylesheet: cssAsset('servicescss'),
-            title,
             body_class: 'marketing',
+            title,
             reactHTML,
             preloadedState
           });

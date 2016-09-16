@@ -35,10 +35,11 @@ const ourServicesController = function({modules}) {
 
           page.set( {
             promotional_header: false,
+            showFooter: true,
             javascript: jsAsset('servicesjs'),
             stylesheet: cssAsset('servicescss'),
-            title,
             body_class: 'our-services',
+            title,
             reactHTML,
             preloadedState
           });

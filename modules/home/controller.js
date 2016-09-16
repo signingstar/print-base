@@ -17,6 +17,7 @@ const homeController = function({modules}) {
 
       page.set({
         promotional_header: false,
+        showFooter: true,
         javascript: jsAsset('mainjs'),
         stylesheet: cssAsset('maincss'),
         title,
