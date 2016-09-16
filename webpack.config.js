@@ -79,7 +79,7 @@ var clientConfig = extend({}, true, config, {
         { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
-        { flatten: true, from: nodeModulesPath + '/tisko-header/src/frontend/images/*', to: destPath},
+        { flatten: true, from: nodeModulesPath + '/tisko-layout/src/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/order-page/src/frontend/images/*', to: destPath},
       ]),
       new AssetsPlugin({

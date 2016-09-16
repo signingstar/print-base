@@ -1,4 +1,4 @@
-import headerPresenter from "tisko-header";
+import headerPresenter from "tisko-layout";
 import partnerPresenter from "./presenter";
 import path from "path";
 
