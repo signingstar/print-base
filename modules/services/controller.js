@@ -3,7 +3,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import path from "path";
 
 import ReactComponent from "./react_server";
-import headerPresenter from "tisko-header";
+import headerPresenter from "tisko-layout";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 
@@ -35,10 +35,11 @@ const ourServicesController = function({modules}) {
 
           page.set( {
             promotional_header: false,
+            showFooter: true,
             javascript: jsAsset('servicesjs'),
             stylesheet: cssAsset('servicescss'),
-            title,
             body_class: 'our-services',
+            title,
             reactHTML,
             preloadedState
           });

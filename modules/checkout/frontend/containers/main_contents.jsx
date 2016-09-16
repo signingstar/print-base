@@ -17,15 +17,15 @@ class MainContentsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state) => {
   return {
     state
   }
 }
 
-const mapDispatchToProps = (dispatch: any, ownProps: any) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onDetailsLoad: (details: any) => {
+    onDetailsLoad: (details) => {
       dispatch(updateAllStates(details))
     }
   }

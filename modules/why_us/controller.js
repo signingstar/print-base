@@ -1,4 +1,4 @@
-import headerPresenter from "tisko-header";
+import headerPresenter from "tisko-layout";
 import path from "path";
 
 const whyUsController = function({modules}) {
@@ -17,6 +17,7 @@ const whyUsController = function({modules}) {
 
       page.set({
         promotional_header: false,
+        showFooter: true,
         javascript: jsAsset('mainjs'),
         stylesheet: cssAsset('maincss'),
         title,
