@@ -29,7 +29,7 @@ const checkoutController = function({modules}) {
       const history = syncHistoryWithStore(memoryHistory, store);
       const title = 'Tisko - Checkout Page'
 
-      let {isLogged = false} = headerPresenter({cookies, topNav: false}, page);
+      let {isLogged = false} = headerPresenter({cookies, topNav: false}, page, {jsAsset});
 
       if(isSecured && !isLogged) {
         responders.redirectForAuthentication(location, "authenticate", logger);

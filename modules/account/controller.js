@@ -28,7 +28,7 @@ const controller = ({modules}) => {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      const {isLogged = false} = headerPresenter({cookies, topNav: false}, page);
+      const {isLogged = false} = headerPresenter({cookies, topNav: false}, page, {jsAsset});
 
       if(isSecured && !isLogged) {
         responders.redirectForAuthentication(location, "authenticate", logger);
