@@ -26,7 +26,7 @@ const ourServicesController = function({modules}) {
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      headerPresenter({cookies}, page);
+      headerPresenter({cookies}, page, {jsAsset});
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {

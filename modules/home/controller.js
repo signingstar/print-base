@@ -13,7 +13,7 @@ const homeController = function({modules}) {
       let {cookies} = req;
       const title = 'Tisko Digital Printing';
 
-      headerPresenter({cookies}, page);
+      headerPresenter({cookies}, page, {jsAsset, logger});
 
       page.set({
         promotional_header: false,

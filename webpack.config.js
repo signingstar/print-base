@@ -7,6 +7,7 @@ var CopyWebpackPlugin = require("copy-webpack-plugin");
 var sass = require("node-sass");
 var AssetsPlugin = require('assets-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
+var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
 
 var DEBUG = !process.argv.includes('--release');
 
@@ -55,7 +56,6 @@ var clientConfig = extend({}, true, config, {
             presets: ['es2015', 'react']
           }
         },
-
         {
             test: /\.css$/,
             loader: ExtractTextPlugin.extract("style-loader", "css-loader")
@@ -75,6 +75,11 @@ var clientConfig = extend({}, true, config, {
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
       new ExtractTextPlugin("[name].css"),
+      new CommonsChunkPlugin({
+        name: "core",
+        filename: "layout-core.js",
+        chunks: ["mainjs", "accountjs", "checkoutjs", "marketingjs", "orderjs", "partnerjs", "servicesjs", "sessionjs"]
+      }),
       new CopyWebpackPlugin([
         { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},

@@ -21,7 +21,7 @@ const Stationary = () => {
                     <p>Letterheads are generally printed by either the offset or letterpress methods. Generallly, company letterheads are printed A4 in size (210 mm x 297 mm)</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order/stationary-letterhead">Place order</a></div>
+                    <div className="button-style"><a href="/order/letterhead">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
@@ -38,7 +38,7 @@ const Stationary = () => {
                     <p>Traditional envelopes are made from sheets of paper cut to one of three shapes: a rhombus, a short-arm cross, or a kite. These shapes allow for the creation of the envelope structure by folding the sheet sides around a central rectangular area. In this manner, a rectangle-faced enclosure is formed with an arrangement of four flaps on the reverse side</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order/stationary-envelope">Place order</a></div>
+                    <div className="button-style"><a href="/order/envelope">Place order</a></div>
                   </div>
                 </div>
               </figcaption>
@@ -55,7 +55,7 @@ const Stationary = () => {
                     <p>Notebook pages can be recycled via standard paper recycling. Recycled notebooks are available, differing in recycled percentage and paper quality.</p>
                   </div>
                   <div className="item-action">
-                    <div className="button-style"><a href="/order/stationary-notebook">Place order</a></div>
+                    <div className="button-style"><a href="/order/notebook">Place order</a></div>
                   </div>
                 </div>
               </figcaption>

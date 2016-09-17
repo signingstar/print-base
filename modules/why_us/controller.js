@@ -13,7 +13,7 @@ const whyUsController = function({modules}) {
       const title =  'Tisko Digital Printing';
 
 
-      headerPresenter({cookies}, page);
+      headerPresenter({cookies}, page, {jsAsset});
 
       page.set({
         promotional_header: false,

@@ -11,7 +11,7 @@ const contactUsController = function({modules}) {
       let fn = pugCompiler(srcPath);
       const title = 'Tisko - Contact Us';
 
-      headerPresenter({topNav: false}, page);
+      headerPresenter({topNav: false}, page, {jsAsset});
 
       page.set( {
         javascript: jsAsset('sessionjs'),

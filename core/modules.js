@@ -1,15 +1,30 @@
-import * as winston from "winston";
-import pug from "pug";
+import * as logger from "winston";
 import pugCompiler from "./pugWrapper";
 
 import assetsMap from "./assets_map";
+let coreAssetsMap = {};
+
+const jsAsset = (key) => {
+  if(assetsMap[key]) {
+    return assetsMap[key].js;
+  }
+
+  return;
+}
+
+const cssAsset = (key) => {
+  if(assetsMap[key]) {
+    return assetsMap[key].css;
+  }
+
+  return;
+}
 
 const globalModules = {
-  logger: winston,
-  pug,
+  logger,
   pugCompiler,
-  jsAsset: (key) => assetsMap[key].js,
-  cssAsset: (key) => assetsMap[key].css
+  jsAsset,
+  cssAsset
 };
 
 export default globalModules;
