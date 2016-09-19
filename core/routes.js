@@ -81,7 +81,7 @@ const routes = (app, globalModules) => {
   app.post("/signup", processRequest('signUpController', 'post',
     {
       attributes: processOptions.attributes,
-      responders: { redirectWithCookies }
+      responders: { redirectWithCookies, html: responders.html }
     }
   ));
 

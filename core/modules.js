@@ -1,8 +1,8 @@
 import * as logger from "winston";
-import pugCompiler from "./pugWrapper";
 
+import pugCompiler from "./pugWrapper";
 import assetsMap from "./assets_map";
-let coreAssetsMap = {};
+import queryDb from "./postgres";
 
 const jsAsset = (key) => {
   if(assetsMap[key]) {
@@ -24,7 +24,8 @@ const globalModules = {
   logger,
   pugCompiler,
   jsAsset,
-  cssAsset
+  cssAsset,
+  queryDb
 };
 
 export default globalModules;
