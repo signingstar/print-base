@@ -34,6 +34,7 @@
     "node-sass": "^3.8.0",
     "order-page": "github:signingstar/order-page",
     "path": "^0.12.7",
+    "pg": "^6.1.0",
     "photo-inventory": "github:signingstar/photo-inventory",
     "pug": "^2.0.0-beta4",
     "react": "^15.2.1",
