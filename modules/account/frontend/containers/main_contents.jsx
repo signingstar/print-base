@@ -1,15 +1,15 @@
-import React from "react";
-import { connect } from "react-redux";
-import { ajax } from "jquery";
+import React from "react"
+import { connect } from "react-redux"
+import { ajax } from "jquery"
 
-import MainContents from "../components/main_contents";
-import { updateAllStates } from "../actions";
+import MainContents from "../components/main_contents"
+import { updateAllStates } from "../actions"
 
 class MainContentsContainer extends React.Component {
   componentDidMount() {
-    let { onDetailsLoad, location } = this.props;
-    let url = '/account/details';
-    let { pathname } = location;
+    let { onDetailsLoad, location } = this.props
+    let url = '/account/details'
+    let { pathname } = location
 
     ajax({
       url,
@@ -18,13 +18,13 @@ class MainContentsContainer extends React.Component {
       dataType: 'json',
       success: (data: any) => onDetailsLoad(data) ,
       error: function(xhr, status, err) {
-        console.error(url, status, err.toString());
+        console.error(url, status, err.toString())
       }.bind(this)
-    });
+    })
   }
 
   render() {
-    let {state, children} = this.props;
+    let {state, children} = this.props
 
     return <MainContents children={children} />
   }
@@ -47,4 +47,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainContentsContainer);
+)(MainContentsContainer)

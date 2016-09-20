@@ -1,7 +1,7 @@
-import { combineReducers, createStore, compose, applyMiddleware } from "redux";
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { combineReducers, createStore, compose, applyMiddleware } from "redux"
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 
-import checkoutApp from "./reducers";
+import checkoutApp from "./reducers"
 
 const configureStore = (history, initialState?) => {
   const checkoutStore = createStore(
@@ -14,7 +14,7 @@ const configureStore = (history, initialState?) => {
     )
   )
 
-  return checkoutStore;
+  return checkoutStore
 }
 
-export default configureStore;
+export default configureStore

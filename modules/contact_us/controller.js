@@ -1,17 +1,17 @@
-import layoutPresenter from "tisko-layout";
-import path from "path";
+import layoutPresenter from "tisko-layout"
+import path from "path"
 
 const controller = ({modules}) => {
-  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
-  const srcPath = path.join(__dirname, './', 'main');
-  const renderHTML = pugCompiler(srcPath);
-  const title = 'Tisko - Contact Us';
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules
+  const srcPath = path.join(__dirname, './', 'main')
+  const renderHTML = pugCompiler(srcPath)
+  const title = 'Tisko - Contact Us'
 
   return {
     main: ({attributes, responders, page}) => {
-      const { req, res } = attributes;
+      const { req, res } = attributes
 
-      layoutPresenter({session: req.session, topNav: false}, page, {jsAsset});
+      layoutPresenter({session: req.session, topNav: false}, page, {jsAsset})
 
       page.set( {
         javascript: jsAsset('sessionjs'),
@@ -20,9 +20,9 @@ const controller = ({modules}) => {
         body_class: 'contact-us'
       })
 
-      responders.html(renderHTML(page));
+      responders.html(renderHTML(page))
     }
   }
 }
 
-export default controller;
+export default controller

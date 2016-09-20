@@ -1,4 +1,4 @@
-import { UPDATE_ALL} from "../actions";
+import { UPDATE_ALL} from "../actions"
 
 const defaultSubscriptionState = {
   loaded: false
@@ -7,11 +7,11 @@ const defaultSubscriptionState = {
 const paymentState = (state = defaultSubscriptionState, {type, details}) => {
   switch (type) {
     case UPDATE_ALL:
-      return Object.assign({}, state, details['payment']);
+      return Object.assign({}, state, details['payment'])
     default:
-      return state;
+      return state
   }
 
 }
 
-export default paymentState;
+export default paymentState

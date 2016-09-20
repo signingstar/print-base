@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
-import SingleRowTile from "./single_row_tiles";
+import SingleRowTile from "./single_row_tiles"
 
 const Banner = ({mainHeading, innerHeading, images, innerContent, deeplinks}) => {
-  let linkLabel = 'Place Order';
+  let linkLabel = 'Place Order'
   return (
     <div>
       <header>
@@ -37,7 +37,7 @@ const Banner = ({mainHeading, innerHeading, images, innerContent, deeplinks}) =>
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default Banner;
+export default Banner

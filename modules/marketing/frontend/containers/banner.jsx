@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import { connect } from "react-redux"
 
-import BannnerComponent from "../components/banner";
+import BannnerComponent from "../components/banner"
 
 const mapStateToProps = () => {
-  let mainHeading = 'Banner Printing';
-  let innerHeading = ['Multi-purpose banner', 'Digital banner', 'Mobile banner'];
-  let images = ['/assets/panel1.jpg', '/assets/panel2.jpg', '/assets/panel3.jpg'];
+  let mainHeading = 'Banner Printing'
+  let innerHeading = ['Multi-purpose banner', 'Digital banner', 'Mobile banner']
+  let images = ['/assets/panel1.jpg', '/assets/panel2.jpg', '/assets/panel3.jpg']
   let innerContent = [
     {
       line1: 'Some billboards are not used only for advertising, but can be multi-purpose. ',
@@ -20,8 +20,8 @@ const mapStateToProps = () => {
       line1: 'Outdoor Advertising, such as a mobile billboard, is effective because it is difficult to ignore',
       line2: 'Unlike a typical billboard, mobile billboards are able to go directly to their target audience. They can be placed wherever there is heavy foot traffic due to an event - including convention centers, train stations, airports and sports arenas.'
     }
-  ];
-  let deeplinks = ['/order?mode=services&item=brouchers', '/order?mode=services&amp;item=brouchers', '/order?mode=services&amp;item=brouchers'];
+  ]
+  let deeplinks = ['/order?mode=services&item=brouchers', '/order?mode=services&ampitem=brouchers', '/order?mode=services&ampitem=brouchers']
 
   return {
     mainHeading, innerHeading, images, innerContent, deeplinks
@@ -30,6 +30,6 @@ const mapStateToProps = () => {
 
 const Banner = connect(
   mapStateToProps
-)(BannnerComponent);
+)(BannnerComponent)
 
-export default Banner;
+export default Banner

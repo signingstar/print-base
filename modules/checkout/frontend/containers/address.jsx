@@ -1,15 +1,15 @@
-import React from "react";
-import {connect} from "react-redux";
+import React from "react"
+import {connect} from "react-redux"
 
-import Address from "../components/address";
+import Address from "../components/address"
 
 class AddressContainer extends React.Component{
   constructor() {
-    super();
+    super()
   }
 
   render() {
-    let { state } = this.props;
+    let { state } = this.props
 
     return <Address state={state} />
   }
@@ -23,4 +23,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps
-)(AddressContainer);
+)(AddressContainer)

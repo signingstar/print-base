@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
 const SavedItems = ({state}) => {
   return (
     <h3>My Saved Items - {state.savedItem}</h3>
-  );
+  )
 }
 
-export default SavedItems;
+export default SavedItems

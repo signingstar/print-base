@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Stationary = () => {
   return (
@@ -64,7 +64,7 @@ const Stationary = () => {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default Stationary;
+export default Stationary

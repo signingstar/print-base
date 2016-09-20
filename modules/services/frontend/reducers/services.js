@@ -2,8 +2,7 @@ const defaultOrderState = {
 }
 
 const servicesState = (state = defaultOrderState, {type, details}) => {
-  console.log(`type:${type}`);
-  return state;
+  return state
 }
 
-export default servicesState;
+export default servicesState

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const SingleRowTile = ({imageSrc, innerHeading, innerContent, deeplink, linkLabel}) => {
   return (
@@ -19,7 +19,7 @@ const SingleRowTile = ({imageSrc, innerHeading, innerContent, deeplink, linkLabe
         </figcaption>
       </div>
     </figure>
-  );
+  )
 }
 
-export default SingleRowTile;
+export default SingleRowTile

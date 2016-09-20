@@ -1,15 +1,15 @@
-import React from "react";
-import {connect} from "react-redux";
+import React from "react"
+import {connect} from "react-redux"
 
-import MyProfile from "../components/profile";
+import MyProfile from "../components/profile"
 
 class ProfileContainer extends React.Component {
   constructor() {
-    super();
+    super()
   }
 
   render() {
-    let { state } = this.props;
+    let { state } = this.props
 
     return <MyProfile state={state} />
   }
@@ -23,4 +23,4 @@ const mapStateToProps = (state, ownProps) => {
 
 export default connect(
   mapStateToProps
-)(ProfileContainer);
+)(ProfileContainer)

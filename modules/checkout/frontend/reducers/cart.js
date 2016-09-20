@@ -1,4 +1,4 @@
-import { UPDATE_ALL} from "../actions";
+import { UPDATE_ALL} from "../actions"
 
 const defaultOrderState = {
   loaded: false
@@ -7,11 +7,11 @@ const defaultOrderState = {
 const cartState = (state = defaultOrderState, {type, details}) => {
   switch (type) {
     case UPDATE_ALL:
-      return Object.assign({}, state, details['cart']);
+      return Object.assign({}, state, details['cart'])
     default:
-      return state;
+      return state
   }
 
 }
 
-export default cartState;
+export default cartState

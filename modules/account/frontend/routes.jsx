@@ -1,11 +1,11 @@
-import React from "react";
-import { Route, IndexRoute, browserHistory } from 'react-router';
+import React from "react"
+import { Route, IndexRoute, browserHistory } from 'react-router'
 
-import ProfileContainer from "./containers/profile";
-import OrdersContainer from "./containers/orders";
-import SubscriptionsContainer from "./containers/subscriptions";
-import SavedItemsContainer from "./containers/saved_items";
-import MainContentsContainer from "./containers/main_contents";
+import ProfileContainer from "./containers/profile"
+import OrdersContainer from "./containers/orders"
+import SubscriptionsContainer from "./containers/subscriptions"
+import SavedItemsContainer from "./containers/saved_items"
+import MainContentsContainer from "./containers/main_contents"
 
 const routes = <Route path="/account" component={MainContentsContainer}>
       <IndexRoute component={ProfileContainer} />
@@ -15,4 +15,4 @@ const routes = <Route path="/account" component={MainContentsContainer}>
       <Route path="saved-items" component={SavedItemsContainer} />
     </Route>
 
-export default routes;
+export default routes
