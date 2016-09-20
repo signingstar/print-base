@@ -1,19 +1,18 @@
-import headerPresenter from "tisko-layout";
+import layoutPresenter from "tisko-layout";
 import path from "path";
 
 const whyUsController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, './', 'main');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko - Why Us';
 
   return {
     main: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let srcPath = path.join(__dirname, './', 'main');
-      let fn = pugCompiler(srcPath);
-      let {cookies} = req;
-      const title =  'Tisko Digital Printing';
+      const {req, res} = attributes;
+      const {session} = req;
 
-
-      headerPresenter({cookies}, page, {jsAsset});
+      layoutPresenter({session}, page, {jsAsset});
 
       page.set({
         promotional_header: false,
@@ -24,9 +23,7 @@ const whyUsController = function({modules}) {
         body_class: 'why-us'
       });
 
-      let html = fn(page);
-
-      responders.html(html);
+      responders.html(renderHTML(page));
     }
   }
 }

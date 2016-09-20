@@ -4,7 +4,7 @@ import { omit } from "underscore";
 import path from "path";
 
 import ReactComponent from "./react_server";
-import headerPresenter from "tisko-layout";
+import layoutPresenter from "tisko-layout";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 import AccountDetails from "./mock_data/details";
@@ -12,23 +12,22 @@ import AccountDetails from "./mock_data/details";
 let debug = require("debug")('Account:controllers');
 
 const controller = ({modules}) => {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
   const isSecured = true;
   const title = 'Tisko - My Account';
+  const srcPath = path.join(__dirname, './', 'main');
+  const renderHTML = pugCompiler(srcPath);
 
   return {
     main: ({attributes, responders, page}) => {
       const {req, res} = attributes;
-      const srcPath = path.join(__dirname, './', 'main');
-      const fn = pugCompiler(srcPath);
-
-      const {cookies, url:location, params:{category}} = req;
+      const {session, url: location, params: {category}} = req;
 
       const memoryHistory = createMemoryHistory(location);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      const {isLogged = false} = headerPresenter({cookies, topNav: false}, page, {jsAsset});
+      const {isLogged = false} = layoutPresenter({session, topNav: false}, page, {jsAsset});
 
       if(isSecured && !isLogged) {
         responders.redirectForAuthentication(location, "authenticate", logger);
@@ -49,9 +48,7 @@ const controller = ({modules}) => {
             preloadedState
           });
 
-          const html = fn(page);
-
-          responders.html(html);
+          responders.html(renderHTML(page));
         } else if (redirectLocation) {
           let redirectionPath = redirectLocation.pathname + redirectLocation.search;
           logger.info(`Redirecting to: ${redirectionPath}`);

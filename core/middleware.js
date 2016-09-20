@@ -5,12 +5,15 @@ import compression from "compression";
 import path from "path";
 let debug = require("debug")('Core:Middleware');
 
+import expressSession from "./session";
 import errorMiddleware from "../modules/error/middleware";
 
 const middleware = (app, router, globalModules) => {
   let {logger} = globalModules;
 
   app.use(compression({filter: shouldCompress}))
+
+  app.use(expressSession(app));
 
   app.use('/assets', serveStatic(path.join(__dirname, '../public'), {
     maxAge: '1d',

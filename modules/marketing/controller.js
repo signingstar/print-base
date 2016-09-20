@@ -1,32 +1,30 @@
 import { createMemoryHistory, match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import path from "path";
+import layoutPresenter from "tisko-layout";
 
 import ReactComponent from "./react_server";
-import headerPresenter from "tisko-layout";
 import configureStore from "./frontend/store";
 import routes from "./frontend/routes";
 
 let debug = require("debug")('Services:controllers');
 
-const maraketingController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+const controller = function({modules}) {
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, './', 'main');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko - Marketing Printing';
 
   return {
     main: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let srcPath = path.join(__dirname, './', 'main');
-      let fn = pugCompiler(srcPath);
-      let {cookies} = req;
-      const title = 'Tisko - Marketing Printing';
+      const {req, res} = attributes;
+      const {session, url: location, params: {category}} = req;
 
-      let location = req.url;
-      let {category} = req.params;
-      const memoryHistory = createMemoryHistory(req.url);
+      const memoryHistory = createMemoryHistory(location);
       const store = configureStore(memoryHistory);
       const history = syncHistoryWithStore(memoryHistory, store);
 
-      headerPresenter({cookies}, page, {jsAsset});
+      layoutPresenter({session}, page, {jsAsset});
 
       match({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
@@ -44,9 +42,7 @@ const maraketingController = function({modules}) {
             preloadedState
           });
 
-          let html = fn(page);
-
-          responders.html(html);
+          responders.html(renderHTML(page));
         } else if (redirectLocation) {
           let redirectionPath = redirectLocation.pathname + redirectLocation.search;
           logger.info(`Redirecting to: ${redirectionPath}`);
@@ -61,4 +57,4 @@ const maraketingController = function({modules}) {
   }
 }
 
-export default maraketingController;
+export default controller;

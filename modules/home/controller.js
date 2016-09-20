@@ -1,19 +1,18 @@
-import headerPresenter from "tisko-layout";
+import layoutPresenter from "tisko-layout";
 import path from "path";
 
 const homeController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, './', 'main');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko Digital Printing';
 
   return {
     main: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let srcPath = path.join(__dirname, './', 'main');
+      const {req, res} = attributes;
+      const {session} = req;
 
-      let fn = pugCompiler(srcPath);
-      let {cookies} = req;
-      const title = 'Tisko Digital Printing';
-
-      headerPresenter({cookies}, page, {jsAsset, logger});
+      layoutPresenter({session}, page, {jsAsset, logger});
 
       page.set({
         promotional_header: false,
@@ -24,9 +23,7 @@ const homeController = function({modules}) {
         body_class: 'home'
       });
 
-      let html = fn(page);
-
-      responders.html(html);
+      responders.html(renderHTML(page));
     }
   }
 }
