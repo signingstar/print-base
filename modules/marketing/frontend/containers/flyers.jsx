@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from "react"
+import { connect } from "react-redux"
 
-import FlyersComponent from "../components/banner";
+import FlyersComponent from "../components/banner"
 
 const mapStateToProps = () => {
-  let mainHeading = 'Flyers Printing';
-  let innerHeading = ['Small Flyers', 'Medium Flyers', 'Large Flyers'];
-  let images = ['/assets/panel1.jpg', '/assets/panel2.jpg', '/assets/panel3.jpg'];
+  let mainHeading = 'Flyers Printing'
+  let innerHeading = ['Small Flyers', 'Medium Flyers', 'Large Flyers']
+  let images = ['/assets/panel1.jpg', '/assets/panel2.jpg', '/assets/panel3.jpg']
   let innerContent = [
     {
       line1: 'Some billboards are not used only for advertising, but can be multi-purpose. ',
@@ -20,8 +20,8 @@ const mapStateToProps = () => {
       line1: 'Outdoor Advertising, such as a mobile billboard, is effective because it is difficult to ignore',
       line2: 'Unlike a typical billboard, mobile billboards are able to go directly to their target audience. They can be placed wherever there is heavy foot traffic due to an event - including convention centers, train stations, airports and sports arenas.'
     }
-  ];
-  let deeplinks = ['/order/flyers-short', '/order/flyers-medium', '/order/flyers-large'];
+  ]
+  let deeplinks = ['/order/flyers-short', '/order/flyers-medium', '/order/flyers-large']
 
   return {
     mainHeading, innerHeading, images, innerContent, deeplinks
@@ -30,6 +30,6 @@ const mapStateToProps = () => {
 
 const Flyers = connect(
   mapStateToProps
-)(FlyersComponent);
+)(FlyersComponent)
 
-export default Flyers;
+export default Flyers

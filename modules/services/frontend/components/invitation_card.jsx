@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const InvitationCard = () => {
   return (
@@ -61,7 +61,7 @@ const InvitationCard = () => {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default InvitationCard;
+export default InvitationCard

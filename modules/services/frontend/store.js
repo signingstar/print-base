@@ -1,7 +1,7 @@
-import { combineReducers, createStore, compose, applyMiddleware } from "redux";
-import { routerReducer, routerMiddleware } from 'react-router-redux';
+import { combineReducers, createStore, compose, applyMiddleware } from "redux"
+import { routerReducer, routerMiddleware } from 'react-router-redux'
 
-import servicesApp from "./reducers";
+import servicesApp from "./reducers"
 
 const configureStore = (history, initialState?) => {
   const servicesStore = createStore(
@@ -14,7 +14,7 @@ const configureStore = (history, initialState?) => {
     )
   )
 
-  return servicesStore;
+  return servicesStore
 }
 
-export default configureStore;
+export default configureStore

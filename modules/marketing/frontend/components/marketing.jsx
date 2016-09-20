@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Marketing = () => {
   return (
@@ -55,7 +55,7 @@ const Marketing = () => {
         <div id="visiting-cards-footer" className="sub-footer"><a href="/order">Place an order</a></div>
       </footer>
     </div>
-  );
+  )
 }
 
-export default Marketing;
+export default Marketing

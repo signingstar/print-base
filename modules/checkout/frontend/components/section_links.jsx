@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, IndexLink } from "react-router";
+import React from "react"
+import { Link, IndexLink } from "react-router"
 
 const SectionLinks = () => {
   return (
@@ -22,7 +22,7 @@ const SectionLinks = () => {
       </nav>
       <div className='separator' />
     </div>
-  );
+  )
 }
 
-export default SectionLinks;
+export default SectionLinks

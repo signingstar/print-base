@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { ajax } from "jquery";
+import React from "react"
+import { connect } from "react-redux"
+import { ajax } from "jquery"
 
-import MainContents from "../components/main_contents";
-import { updateAllStates } from "../actions";
+import MainContents from "../components/main_contents"
+import { updateAllStates } from "../actions"
 
 class MainContentsContainer extends React.Component {
   componentDidMount() {
@@ -11,7 +11,7 @@ class MainContentsContainer extends React.Component {
   }
 
   render() {
-    let {state, children} = this.props;
+    let {state, children} = this.props
 
     return <MainContents children={children} />
   }
@@ -34,4 +34,4 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(MainContentsContainer);
+)(MainContentsContainer)

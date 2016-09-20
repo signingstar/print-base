@@ -1,7 +1,7 @@
-import { combineReducers } from "redux";
+import { combineReducers } from "redux"
 import { routerReducer } from 'react-router-redux'
 
-import servicesState from "./services";
+import servicesState from "./services"
 
 const accountApp = combineReducers({
   servicesState,

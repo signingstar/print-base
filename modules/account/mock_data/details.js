@@ -13,4 +13,4 @@ const AccountDetails = {
   }
 }
 
-export default AccountDetails;
+export default AccountDetails

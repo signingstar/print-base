@@ -1,6 +1,6 @@
-import React from "react";
+import React from "react"
 
-import SectionLinks from "./section_links";
+import SectionLinks from "./section_links"
 
 const MainContents = ({children}) => {
   return (
@@ -9,7 +9,7 @@ const MainContents = ({children}) => {
         {children}
       </div>
     </section>
-  );
+  )
 }
 
-export default MainContents;
+export default MainContents

@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Services = () => {
   return (
@@ -55,7 +55,7 @@ const Services = () => {
         <div id="visiting-cards-footer" className="sub-footer"><a href="/order">Place an order</a></div>
       </footer>
     </div>
-  );
+  )
 }
 
-export default Services;
+export default Services

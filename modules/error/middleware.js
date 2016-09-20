@@ -1,11 +1,11 @@
-let debug = require("debug")('error:middleware');
+let debug = require("debug")('error:middleware')
 
 const middleware = ({logger}) => {
-  debug('init');
+  debug('init')
 
   return function(err, req, res, next) {
-    debug(`handling [ERROR] ${err.stack}`);
-    logger.error(`[ERROR] ${err.stack}`);
+    debug(`handling [ERROR] ${err.stack}`)
+    logger.error(`[ERROR] ${err.stack}`)
 
     let errorResponseBody = `
       <html>
@@ -13,17 +13,17 @@ const middleware = ({logger}) => {
           <title>Error Page</title>
         </head>
         <body>
-          <div style="width: 800px;margin:100px auto;text-align:center;">
-            <span><img src='/assets/sad-smiley.png' style="height:200px; width:200px;margin-bottom: 50px;"/></span>
-            <h1 style="font-size: 20px;">Internal Server Error! Sorry, We are having bad day.</h1>
+          <div style="width: 800pxmargin:100px autotext-align:center">
+            <span><img src='/assets/sad-smiley.png' style="height:200px width:200pxmargin-bottom: 50px"/></span>
+            <h1 style="font-size: 20px">Internal Server Error! Sorry, We are having bad day.</h1>
           </div>
         </body>
       </html>
     `
 
-    res.status(500);
-    res.end(errorResponseBody);
+    res.status(500)
+    res.end(errorResponseBody)
   }
 }
 
-export default middleware;
+export default middleware

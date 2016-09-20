@@ -1,4 +1,4 @@
-import React from "react";
+import React from "react"
 
 const Broucher = () => {
   return (
@@ -61,7 +61,7 @@ const Broucher = () => {
         </div>
       </section>
     </div>
-  );
+  )
 }
 
-export default Broucher;
+export default Broucher
