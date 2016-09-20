@@ -1,38 +1,38 @@
-import headerPresenter from "tisko-layout";
-import partnerPresenter from "./presenter";
+import layoutPresenter from "tisko-layout";
+import presenter from "./presenter";
 import path from "path";
 
-const partnerController = function({modules}) {
-  let {pugCompiler, logger, jsAsset, cssAsset} = modules;
+const controller = ({modules}) => {
+  const {pugCompiler, logger, jsAsset, cssAsset} = modules;
+  const srcPath = path.join(__dirname, './', 'main');
+  const renderHTML = pugCompiler(srcPath);
+  const title = 'Tisko - Be Our Partner';
 
   return {
-    get: function({attributes, responders, page}) {
-      let {req, res} = attributes;
-      let srcPath = path.join(__dirname, './', 'main');
-      let fn = pugCompiler(srcPath);
-      let {cookies} = req;
+    get: ({attributes, responders, page}) => {
+      const {req, res} = attributes;
+      const {session} = req;
 
-      headerPresenter({cookies, topNav: false}, page);
+      layoutPresenter({session, topNav: false}, page, {jsAsset});
 
       page.set( {
         javascript: jsAsset('sessionjs'),
         stylesheet: cssAsset('sessioncss'),
-        title: 'Tisko - Be Our Partner',
-        body_class: 'partner'
+        body_class: 'partner',
+        title
       })
 
-      let html = fn(page);
-
-      responders.html(html);
+      responders.html(renderHTML(page));
     },
-    post: ({attributes, responders, page}) => {
-      let {req, res} = attributes;
-      let refUrl = decodeURI(req.query.ref_url);
 
-      refUrl = partnerPresenter(refUrl, true).parsedUri;
-      responders.redirectWithCookies(refUrl);
+    post: ({attributes, responders, page}) => {
+      const {req, res} = attributes;
+      const refUrl = decodeURI(req.query.ref_url);
+
+      const parsedRefUrl = presenter(refUrl, true).parsedUri;
+      responders.redirectWithCookies(parsedRefUrl);
     }
   }
 }
 
-export default partnerController;
+export default controller;
