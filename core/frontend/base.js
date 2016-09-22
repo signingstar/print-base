@@ -1,1 +1,1 @@
-import 'tisko-layout/frontend';
+import 'tisko-layout/frontend'

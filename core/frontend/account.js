@@ -1,2 +1,2 @@
-import './base';
-import '../../modules/account/frontend/main';
+import './base'
+import '../../modules/account/frontend/main'

@@ -1,8 +1,8 @@
-import session from "express-session";
-import RedisConnect from "connect-redis";
-import crypto from "crypto";
+import session from "express-session"
+import RedisConnect from "connect-redis"
+import crypto from "crypto"
 
-const RedisConnectSession = RedisConnect(session);
+const RedisConnectSession = RedisConnect(session)
 
 const RedisClientConfig = {
   host: '127.0.0.1',
@@ -11,10 +11,10 @@ const RedisClientConfig = {
   logErrors: true
 }
 
-const store = new RedisConnectSession(RedisClientConfig);
+const store = new RedisConnectSession(RedisClientConfig)
 const sessionConfig = {
   name: 'wibele',
-  secret: crypto.createHmac('sha512', 'secret-week-1').digest('hex'),
+  secret: crypto.createHmac('sha256', 'secret-week-1').digest('hex'),
   saveUninitialized: false,
   resave: true,
   cookie: {
@@ -24,7 +24,7 @@ const sessionConfig = {
   },
   unset: 'destroy',
   store
-};
+}
 
 const expressSession = (app) => {
   if (app.get('env') === 'production') {
@@ -32,7 +32,7 @@ const expressSession = (app) => {
     sessionConfig.cookie.secure = true // serve secure cookies
   }
 
-  return session(sessionConfig);
+  return session(sessionConfig)
 }
 
-export default expressSession;
+export default expressSession

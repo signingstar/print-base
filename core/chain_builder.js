@@ -1,4 +1,4 @@
-import { clone, extend, object, reduce } from 'underscore';
+import { clone, extend, object, reduce } from 'underscore'
 
 const ChainBuilder = () => {
   let chainObject = {
@@ -7,24 +7,24 @@ const ChainBuilder = () => {
     register: (name, fn) => chainObject.chain.push([name, fn]),
 
     execute: (defaultCtx = {}, ...args) => {
-      let ctx = clone(defaultCtx);
+      let ctx = clone(defaultCtx)
       const iterator = (ctx, handler) => {
-        let out;
+        let out
 
         try {
-          out = handler[1](ctx, ...args);
+          out = handler[1](ctx, ...args)
         } catch (e) {
-          throw e;
+          throw e
         }
 
-        return extend(ctx, object([[handler[0], out]]));
-      };
+        return extend(ctx, object([[handler[0], out]]))
+      }
 
-      return reduce(chainObject.chain, iterator, ctx);
+      return reduce(chainObject.chain, iterator, ctx)
     }
   }
 
-  return chainObject;
-};
+  return chainObject
+}
 
-export default ChainBuilder;
+export default ChainBuilder

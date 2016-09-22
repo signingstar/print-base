@@ -1,4 +1,4 @@
-import pg from "pg";
+import pg from "pg"
 
 // create a config to configure both pooling behavior
 // and client options
@@ -12,33 +12,33 @@ const config = {
   port: 5432, //env var: PGPORT
   max: 10, // max number of clients in the pool
   idleTimeoutMillis: 30000, // how long a client is allowed to remain idle before being closed
-};
+}
+
+const noErr = null
 
 
 //this initializes a connection pool
-const pool = new pg.Pool(config);
+const pool = new pg.Pool(config)
 
 const queryDb = (query, params, modules, cb) => {
-  const { logger } = modules;
-  const callback = cb;
+  const { logger } = modules
+  const callback = cb
 
-  pool.connect((err, client, done) => {
-    if(err) {
-      console.error('error fetching client from pool', err);
-      callback(err);
-      return;
-    }
-
-    client.query(query, params, (err, result) => {
-      done();
-
-      if(err) {
-        console.error('error running query', err);
-      }
-
-      callback(err, result);
-    });
-  });
+  pool.connect().then(client => {
+    client.query(query, params).then(res => {
+      client.release()
+      callback(noErr, res)
+    })
+    .catch(e => {
+      client.release()
+      logger.error('error running query', e.message, e.stack)
+      callback(e, null)
+    })
+  })
+  .catch(e => {
+    console.error('error fetching client from pool', e.message, e.stack )
+    callback(e)
+  })
 }
 
 pool.on('error', function (err, client) {
@@ -49,6 +49,6 @@ pool.on('error', function (err, client) {
   // between your application and the database, the database restarts, etc.
   // and so you might want to handle it and at least log it out
   console.error('idle client error', err.message, err.stack)
-});
+})
 
-export default queryDb;
+export default queryDb

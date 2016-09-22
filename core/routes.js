@@ -1,91 +1,91 @@
-import appControllers from "./appControllers";
-import responders from "./responder";
-let debug = require("debug")('Core:AppControllers');
+import appControllers from "./appControllers"
+import responders from "./responder"
+let debug = require("debug")('Core:AppControllers')
 
 const routes = (app, globalModules) => {
-  debug('export routes');
-  const {logger} = globalModules;
+  debug('export routes')
+  const {logger} = globalModules
 
-  let processRequest = appControllers(globalModules);
+  let processRequest = appControllers(globalModules)
 
   const processOptions = {
     attributes: function (req, res, next) {
       return {req, res}
     },
     responders
-  };
+  }
 
-  const { redirectWithCookies } = responders;
+  const { redirectWithCookies } = responders
 
-  app.get("/", processRequest('homeController', 'main', processOptions));
+  app.get("/", processRequest('homeController', 'main', processOptions))
 
-  app.get("/account", processRequest('accountController', 'main', processOptions));
+  app.get("/account", processRequest('accountController', 'main', processOptions))
 
-  app.get("/account/details", processRequest('accountController', 'details', processOptions));
+  app.get("/account/details", processRequest('accountController', 'details', processOptions))
 
-  app.get("/account/:category", processRequest('accountController', 'main', processOptions));
+  app.get("/account/:category", processRequest('accountController', 'main', processOptions))
 
-  app.get("/checkout", processRequest('checkoutController', 'main', processOptions));
+  app.get("/checkout", processRequest('checkoutController', 'main', processOptions))
 
-  app.get("/checkout/:category", processRequest('checkoutController', 'details', processOptions));
+  app.get("/checkout/:category", processRequest('checkoutController', 'details', processOptions))
 
-  app.post("/checkout", processRequest('checkoutController', 'post', processOptions));
+  app.post("/checkout", processRequest('checkoutController', 'post', processOptions))
 
-  app.get("/contact-us", processRequest('contactUsController', 'main', processOptions));
+  app.get("/contact-us", processRequest('contactUsController', 'main', processOptions))
 
-  app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions));
+  app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions))
 
-  app.get("/login", processRequest('loginController', 'get', processOptions));
+  app.get("/login", processRequest('loginController', 'get', processOptions))
 
   app.post("/login", processRequest('loginController', 'post',
     {
       attributes: processOptions.attributes,
       responders: { redirectWithCookies, html: responders.html }
     }
-  ));
+  ))
 
-  app.get("/order", processRequest('orderController', 'main', processOptions));
+  app.get("/order", processRequest('orderController', 'main', processOptions))
 
-  app.get("/order/:category", processRequest('orderController', 'main', processOptions));
+  app.get("/order/:category", processRequest('orderController', 'main', processOptions))
 
-  app.post('/order', processRequest('photoInventoryController', 'main', processOptions));
+  app.post('/order', processRequest('photoInventoryController', 'main', processOptions))
 
-  app.get("/partner", processRequest('partnerController', 'get', processOptions));
+  app.get("/partner", processRequest('partnerController', 'get', processOptions))
 
   app.post("/partner", processRequest('partnerController', 'post', {
       attributes: processOptions.attributes,
       responders: { redirectWithCookies }
     }
-  ));
+  ))
 
-  app.get("/services", processRequest('ourServicesController', 'main', processOptions));
+  app.get("/services", processRequest('ourServicesController', 'main', processOptions))
 
-  app.get("/services/:category", processRequest('ourServicesController', 'main', processOptions));
+  app.get("/services/:category", processRequest('ourServicesController', 'main', processOptions))
 
-  app.get("/password-reset", processRequest('passwordResetController', 'main', processOptions));
+  app.get("/password-reset", processRequest('passwordResetController', 'main', processOptions))
 
   app.post("/password-reset", processRequest('passwordResetController', 'reset_password', {
       attributes: processOptions.attributes,
       responders: { redirectWithCookies }
     }
-  ));
+  ))
 
-  app.get("/marketing", processRequest('marketingController', 'main', processOptions));
+  app.get("/marketing", processRequest('marketingController', 'main', processOptions))
 
-  app.get("/marketing/:category", processRequest('marketingController', 'main', processOptions));
+  app.get("/marketing/:category", processRequest('marketingController', 'main', processOptions))
 
-  app.get("/signout", processRequest('signOutController', 'main', processOptions));
+  app.get("/signout", processRequest('signOutController', 'main', processOptions))
 
-  app.get("/signup", processRequest('signUpController', 'get', processOptions));
+  app.get("/signup", processRequest('signUpController', 'get', processOptions))
 
   app.post("/signup", processRequest('signUpController', 'post',
     {
       attributes: processOptions.attributes,
       responders: { redirectWithCookies, html: responders.html }
     }
-  ));
+  ))
 
-  app.get("/why-us", processRequest('whyUsController', 'main', processOptions));
-};
+  app.get("/why-us", processRequest('whyUsController', 'main', processOptions))
+}
 
-export default routes;
+export default routes

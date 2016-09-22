@@ -1,2 +1,2 @@
-import './base';
-import '../../modules/services/frontend/javascripts/main';
+import './base'
+import '../../modules/services/frontend/javascripts/main'

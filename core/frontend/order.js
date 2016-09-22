@@ -1,2 +1,2 @@
-import './base';
-import 'order-page/frontend';
+import './base'
+import 'order-page/frontend'
