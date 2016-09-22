@@ -1,2 +1,2 @@
-import './base';
-import '../../modules/marketing/frontend/typescripts/main';
+import './base'
+import '../../modules/marketing/frontend/typescripts/main'

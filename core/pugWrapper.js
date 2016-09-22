@@ -1,13 +1,13 @@
-import path from "path";
-import pug from "pug";
-import resolve from "resolve";
+import path from "path"
+import pug from "pug"
+import resolve from "resolve"
 
 const npmResolverPlugin = () => {
   return {
     resolve(filename, source, options) {
-      return resolve.sync(filename, {basedir: path.dirname(source)});
+      return resolve.sync(filename, {basedir: path.dirname(source)})
     }
-  };
+  }
 }
 
 const config = {
@@ -17,8 +17,8 @@ const config = {
 }
 
 const compileWrapper = (fileName, module) => {
-  const fileSrc = path.resolve(__dirname, `../`, `${fileName}.pug`);
-  return pug.compileFile(fileSrc, config);
+  const fileSrc = path.resolve(__dirname, `../`, `${fileName}.pug`)
+  return pug.compileFile(fileSrc, config)
 }
 
-export default compileWrapper;
+export default compileWrapper

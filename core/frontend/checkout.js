@@ -1,2 +1,2 @@
-import './base';
-import '../../modules/checkout/frontend/main';
+import './base'
+import '../../modules/checkout/frontend/main'
