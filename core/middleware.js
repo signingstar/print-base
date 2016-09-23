@@ -3,6 +3,7 @@ import bodyParser from "body-parser"
 import cookieParser from "cookie-parser"
 import compression from "compression"
 import path from "path"
+import flash from "express-flash"
 let debug = require("debug")('Core:Middleware')
 
 import expressSession from "./session"
@@ -32,6 +33,8 @@ const middleware = (app, router, globalModules) => {
   }))
 
   app.use(cookieParser())
+
+  app.use(flash())
 
   app.use("/", router)
 

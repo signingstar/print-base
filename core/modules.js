@@ -3,6 +3,7 @@ import * as logger from "winston"
 import pugCompiler from "./pugWrapper"
 import assetsMap from "./assets_map"
 import queryDb from "./postgres"
+import Mailer from "./mailer"
 
 const jsAsset = (key) => {
   if(assetsMap[key]) {
@@ -25,7 +26,8 @@ const globalModules = {
   pugCompiler,
   jsAsset,
   cssAsset,
-  queryDb
+  queryDb,
+  Mailer
 }
 
 export default globalModules

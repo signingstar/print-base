@@ -13,8 +13,8 @@ const middleware = ({logger}) => {
           <title>Error Page</title>
         </head>
         <body>
-          <div style="width: 800pxmargin:100px autotext-align:center">
-            <span><img src='/assets/sad-smiley.png' style="height:200px width:200pxmargin-bottom: 50px"/></span>
+          <div style="width: 800px;margin:100px auto;text-align:center">
+            <span><img src='/assets/sad-smiley.png' style="height:200px;width:200px;margin-bottom: 50px;"/></span>
             <h1 style="font-size: 20px">Internal Server Error! Sorry, We are having bad day.</h1>
           </div>
         </body>
