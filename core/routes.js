@@ -35,6 +35,8 @@ const routes = (app, globalModules) => {
 
   app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions))
 
+  app.post("/forgot-password", processRequest('forgotPasswordController', 'post', processOptions))
+
   app.get("/login", processRequest('loginController', 'get', processOptions))
 
   app.post("/login", processRequest('loginController', 'post',
@@ -62,13 +64,9 @@ const routes = (app, globalModules) => {
 
   app.get("/services/:category", processRequest('ourServicesController', 'main', processOptions))
 
-  app.get("/password-reset", processRequest('passwordResetController', 'main', processOptions))
+  app.get("/password-reset/:token", processRequest('passwordResetController', 'main', processOptions))
 
-  app.post("/password-reset", processRequest('passwordResetController', 'reset_password', {
-      attributes: processOptions.attributes,
-      responders: { redirectWithCookies }
-    }
-  ))
+  app.post("/password-reset/:token", processRequest('passwordResetController', 'post', processOptions))
 
   app.get("/marketing", processRequest('marketingController', 'main', processOptions))
 
