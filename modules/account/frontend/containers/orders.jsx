@@ -10,12 +10,14 @@ class OrdersContainer extends React.Component {
 
   render() {
     let { state } = this.props
+    console.log(`state:${JSON.stringify(state)}`)
 
     return <Orders state={state} />
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
+  console.log(`state:${JSON.stringify(state)}`)
   return {
     state: state.ordersState
   }

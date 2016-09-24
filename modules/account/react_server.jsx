@@ -1,17 +1,15 @@
 import React from "react"
 import { renderToString } from 'react-dom/server'
-import { Provider } from "react-redux"
-import { RouterContext, RouterState } from "react-router"
+import { Provider as StoreProvider } from "react-redux"
+import { ServerRouter, createServerRenderContext } from "react-router"
 import { ReactRouterReduxHistory } from "react-router-redux"
+import { matchRoutesToLocation } from 'react-router-addons-routes';
+import { trigger } from 'redial'
 
-import MainContents from "./frontend/components/main_contents"
 import createStore from "./frontend/store"
 import AccountDetails from "./mock_data/details"
-
-interface RenderProps extends RouterState {
-  router: any,
-  createElement: any
-}
+import App from "./frontend/components/app"
+import routes from "./frontend/routes"
 
 const mapUrlToState = (category = '') => {
   switch(category) {
@@ -35,23 +33,33 @@ const mapUrlToState = (category = '') => {
   }
 }
 
-const ReactComponent = (renderProps, category, history) => {
+
+const ReactComponent = (path, category, cb) => {
   let initialPayload = mapUrlToState(category)
-
+  console.log(`initialPayload:${JSON.stringify(initialPayload)}`)
   // Create a new Redux store instance
-  const store = createStore(history, initialPayload)
+  const store = createStore(initialPayload)
 
-  // Render the component to a string
-  const reactHTML = renderToString(
-    <Provider store={store}>
-      <RouterContext {...renderProps} />
-    </Provider>
-  )
+  const context = createServerRenderContext();
 
-  // Grab the initial state from our Redux store
-  const preloadedState = store.getState()
+  const matchedRoutes = matchRoutesToLocation(routes, { pathname: path })
+  const components = matchedRoutes.map(route => route.component)
+  const { dispatch } = store
+  const locals = { dispatch }
 
-  return { reactHTML, preloadedState}
+      // Render the component to a string
+      const reactHTML = renderToString(
+        <StoreProvider store={store}>
+          <ServerRouter location={path} context={context}>
+            <App />
+          </ServerRouter>
+        </StoreProvider>
+      )
+
+      // Grab the initial state from our Redux store
+      const preloadedState = store.getState()
+
+      cb(null, reactHTML, preloadedState)
 }
 
 export default ReactComponent

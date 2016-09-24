@@ -24,9 +24,9 @@ class MainContentsContainer extends React.Component {
   }
 
   render() {
-    let {state, children} = this.props
+    let {state, routes} = this.props
 
-    return <MainContents children={children} />
+    return <MainContents routes={routes} />
   }
 }
 

@@ -1,16 +1,15 @@
 import React from "react"
+import { MatchWithRoutes } from 'react-router-addons-routes'
 
-import SectionLinks from "./section_links"
+import Navigation from "./section_links"
 
-const MainContents = ({children}) => {
-  return (
-    <section>
-      <SectionLinks />
-      <div className='account-items'>
-        {children}
-      </div>
-    </section>
-  )
-}
+const Root = ({ routes }) => (
+  <section>
+    <Navigation />
+    <div className='account-items'>
+      { routes.map((route, i) => <MatchWithRoutes key={i} {...route} />) }
+    </div>
+  </section>
+)
 
-export default MainContents
+export default Root
