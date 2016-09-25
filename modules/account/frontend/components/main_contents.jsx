@@ -1,14 +1,21 @@
 import React from "react"
-import { MatchWithRoutes } from 'react-router-addons-routes'
+import Match from 'react-router/Match'
+import Miss from 'react-router/Miss'
 
-import Navigation from "./section_links"
+import Navigation from "./navigation"
+import Profile from "../containers/profile"
+import Orders from "../containers/orders"
+import Subscriptions from "../containers/subscriptions"
+import SavedItems from "../containers/saved_items"
 
-const Root = ({ routes }) => (
+const Root = () => (
   <section>
     <Navigation />
-    <div className='account-items'>
-      { routes.map((route, i) => <MatchWithRoutes key={i} {...route} />) }
-    </div>
+    <Match pattern="/account/profile" component={Profile} />
+    <Match pattern="/account/orders" component={Orders} />
+    <Match pattern="/account/subscriptions" component={Subscriptions} />
+    <Match pattern="/account/saved-items" component={SavedItems} />
+    <Miss component={()=> <div>Not Found</div>} />
   </section>
 )
 

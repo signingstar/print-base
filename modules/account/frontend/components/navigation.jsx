@@ -1,5 +1,6 @@
 import React from "react"
-import { Link } from "react-router"
+import Router from 'react-router/BrowserRouter'
+import Link from "react-router/Link"
 
 const SectionLinks = () => {
   return (

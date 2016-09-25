@@ -30,8 +30,16 @@ const controller = ({modules}) => {
       }
 
       ReactComponent(location, category, (err, reactHTML, preloadedState) => {
+        console.log(`err:${JSON.stringify(err)}`);
         if(err) {
-          res.status(500).end()
+          if(err.reason === 'redirect') {
+            res.writeHead(301, {
+              Location: result.redirect.pathname
+            })
+            res.end()
+          } else if(err.reason === 'missed') {
+            // res.writeHead(404)
+          }
         }
         page.set( {
           javascript: jsAsset('accountjs'),

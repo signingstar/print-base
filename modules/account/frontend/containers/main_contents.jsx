@@ -30,9 +30,10 @@ class MainContentsContainer extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
-    state
+    state,
+    location: ownProps.location
   }
 }
 
