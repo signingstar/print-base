@@ -4,7 +4,6 @@ import path from "path"
 
 import ReactComponent from "./react_server"
 import layoutPresenter from "tisko-layout"
-import configureStore from "./frontend/store"
 import AccountDetails from "./mock_data/details"
 import routes from "./frontend/routes"
 

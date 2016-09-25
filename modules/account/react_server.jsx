@@ -30,7 +30,6 @@ const mapUrlToState = (category = '') => {
   }
 }
 
-
 const ReactComponent = (path, category, cb) => {
   let initialPayload = mapUrlToState(category)
 
