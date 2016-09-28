@@ -1,10 +1,10 @@
-import { updateUserInfo } from "../query/update"
+import { updatePassword } from "../query/update"
 
-const addAddress = (userData, modules, cb) => {
+const updateAccountPassword = (userData, modules, cb) => {
   const { queryDb, logger } = modules
   const callback = cb;
 
-  queryDb(updateUserInfo, userData, { logger}, (err, result) => {
+  queryDb(updatePassword, userData, { logger}, (err, result) => {
     if(err || result.rowCount === 0) {
       logger.error(`[DATABASE] error while updating user details`)
       callback(err, result)
@@ -16,4 +16,4 @@ const addAddress = (userData, modules, cb) => {
   })
 }
 
-export default addAddress
+export default updateAccountPassword

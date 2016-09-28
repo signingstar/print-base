@@ -31,6 +31,8 @@ const routes = (app, globalModules) => {
 
   app.post("/account/profile/update",  processRequest('accountController', 'updateProfile', processOptions))
 
+  app.post("/account/secret/update",  processRequest('accountController', 'updatePassword', processOptions))
+
   app.post("/account/address/add",  processRequest('accountController', 'addAddress', processOptions))
 
   app.post("/account/address/update",  processRequest('accountController', 'updateAddress', processOptions))
