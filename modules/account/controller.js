@@ -6,11 +6,12 @@ import ReactComponent from "./react_server"
 import layoutPresenter from "tisko-layout"
 import AccountDetails from "./mock_data/details"
 import getUserAddress from "./database/api/getUserAddress"
-import {filterAndValidate, filterAndValidateAddress, validateAddressId, filterAndValidateAddressToUpdate, filterAndValidateProfileFields} from "./presenters/filter_validate"
+import {filterAndValidate, filterAndValidateAddress, validateAddressId, filterAndValidateAddressToUpdate, filterAndValidateProfileFields, filterAndValidatePasswords} from "./presenters/filter_validate"
 import addUserAddress from "./database/api/addUserAddress"
 import updateUserAddress from "./database/api/update_user_address"
 import updateUserInfo from "./database/api/update_user_info"
 import deleteUserAddress from "./database/api/deleteUserAddress"
+import updateAccountPassword from "./database/api/update_password"
 
 let debug = require("debug")('Account:controllers')
 
@@ -211,6 +212,32 @@ const controller = ({modules}) => {
       userData.push(userid)
 
       updateUserInfo(userData, {logger, queryDb}, (err, result) => {
+        if(!err) {
+          responders.json(result)
+        }
+        responders.json(null, {message: 'Bad Input'}, 400 )
+      })
+    },
+
+    updatePassword:({attributes, responders, page}) => {
+      const {req, res} = attributes
+      const {session} = req
+
+      if(!session || !session.user || !session.user.id) {
+        responders.json(null, {message: 'session timed out'}, 401 )
+        return
+      }
+
+      const { err, userData } = filterAndValidatePasswords(req.body)
+      if(err) {
+        responders.json(null, {message: 'Bad Input'}, 400 )
+        return
+      }
+
+      const userid = session.user.id
+      userData.unshift(userid)
+
+      updateAccountPassword(userData, {logger, queryDb}, (err, result) => {
         if(!err) {
           responders.json(result)
         }

@@ -118,3 +118,16 @@ export const updateProfile = (data, cb) => {
     error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
   })
 }
+
+export const updateAccountPassword = (data, cb) => {
+  const url = '/account/secret/update'
+
+  ajax({
+    url,
+    method: 'POST',
+    data,
+    dataType: 'json',
+    success: (res) => cb(),
+    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+  })
+}

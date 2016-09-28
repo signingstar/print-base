@@ -5,7 +5,7 @@ import Miss from 'react-router/Miss'
 
 import ProfileInfo from "../containers/profile_info"
 import Address from "../components/address"
-import PasswordChange from "../components/password_change"
+import PasswordChange from "../containers/password_change"
 import EditAddress from "../containers/edit_address"
 
 const MyProfile = ({state, address, pathname}) => {

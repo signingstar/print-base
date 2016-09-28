@@ -48,3 +48,14 @@ export const filterAndValidateProfileFields = (bodyContent, cb) => {
 
   return { userData: [first_name, last_name, email, phone_number] }
 }
+
+export const filterAndValidatePasswords = (bodyContent, cb) => {
+  const { password, confirm_password } = bodyContent
+  // const {err, formData} = validateAddressForm({ address_line1, address_line2, city, state, zipcode, landmark })
+  //
+  // if(err) {
+  //   return {err}
+  // }
+
+  return { userData: [password] }
+}
