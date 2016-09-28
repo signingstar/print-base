@@ -42,12 +42,8 @@ const responders = {
     res.end('Internal Server Error')
   },
 
-  json: (res, next) => (json, err) => {
-    if(err) {
-      return next(err)
-    }
-
-    res.writeHead(200, {
+  json: (res, next) => (json, err, statusCode = 200) => {
+    res.writeHead(statusCode, {
       "Content-Type": "application/json"
     })
 

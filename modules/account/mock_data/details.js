@@ -4,12 +4,6 @@ const AccountDetails = {
   },
   "orders": {
     count: 5
-  },
- "subscriptions": {
-    subscription: "Daily Newsletter"
-  },
-  "saved-items": {
-    savedItem: "Orange"
   }
 }
 

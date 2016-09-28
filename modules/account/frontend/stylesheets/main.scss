@@ -1,0 +1,13 @@
+@import "./top_panel";
+@import "./left_panel";
+@import "./right_panel";
+
+.nav-content {
+  display: flex;
+  margin-top: 30px;
+  min-height: 250px;
+}
+
+.separator {
+  border-top: 1px dotted $light-gray;
+}

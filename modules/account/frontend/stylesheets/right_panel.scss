@@ -1,0 +1,111 @@
+.nav-content .right-panel {
+  margin: 0 20px 0 40px;
+
+  h3 {
+    margin-top: 10px;
+  }
+
+  .address-box {
+    display: flex;
+    justify-content: flex-start;
+
+    .saved-addresses {
+      margin: 0 50px;
+      display: flex;
+      flex-direction: column;
+
+      .saved-address {
+        margin-bottom: 20px;
+
+        &:first-child {
+          margin-top: 0;
+        }
+
+        .play-address {
+          margin-top: 10px;
+
+          .edit {
+          }
+
+          .delete {
+            cursor: pointer;
+            color: $theme-color;
+            margin-right: 30px;
+          }
+        }
+      }
+    }
+
+    .add-address{
+      margin-right: 50px;
+
+      &.edit {
+        .back {
+          margin-right: 30px;
+          padding: 5px 15px;
+        }
+      }
+    }
+  }
+
+  .fields {
+    label {
+      display: inline-block;
+      width: 140px;
+    }
+
+    .field {
+      margin: 10px 0;
+      input {
+        font-size: 14px;
+        height: 28px;
+        outline: 0;
+        width: 180px;
+      }
+    }
+
+    .large-field {
+      @extend .field;
+
+      input {
+        width: 300px;
+      }
+    }
+
+    .medium-field {
+      @extend .field;
+
+      input {
+        width: 220px;
+      }
+    }
+
+    .small-field {
+      @extend .field;
+
+      input {
+        width: 100px;
+      }
+    }
+
+    .submit-button {
+      margin: 40px 45px 0 0;
+      text-align: center;
+
+      input {
+        background-color: $button-orig-color;
+        border: 1px solid $button-hover-color;
+        color: $link-color-bg;
+        cursor: pointer;
+        font-size: 14px;
+        height: 36px;
+        outline: 0;
+        width: 160px;
+
+        &:hover {
+          background-color: $button-hover-color;
+        }
+      }
+    }
+  }
+}
