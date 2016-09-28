@@ -25,6 +25,18 @@ const routes = (app, globalModules) => {
 
   app.get("/account/:category", processRequest('accountController', 'main', processOptions))
 
+  app.get("/account/:category/:subCategory", processRequest('accountController', 'main', processOptions))
+
+  app.get("/account/:category/:subCategory/get", processRequest('accountController', 'subDetails', processOptions))
+
+  app.post("/account/profile/update",  processRequest('accountController', 'updateProfile', processOptions))
+
+  app.post("/account/address/add",  processRequest('accountController', 'addAddress', processOptions))
+
+  app.post("/account/address/update",  processRequest('accountController', 'updateAddress', processOptions))
+
+  app.post("/account/address/delete",  processRequest('accountController', 'deleteAddress', processOptions))
+
   app.get("/checkout", processRequest('checkoutController', 'main', processOptions))
 
   app.get("/checkout/:category", processRequest('checkoutController', 'details', processOptions))
