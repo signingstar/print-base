@@ -5,48 +5,40 @@ import { Provider as StoreProvider } from "react-redux"
 import { ServerRouter, createServerRenderContext } from "react-router"
 import { ReactRouterReduxHistory } from "react-router-redux"
 
-import getUserDetails from "./database/api/getUserDetails"
-import getUserAddress from "./database/api/getUserAddress"
 import createStore from "./frontend/store"
-import AccountDetails from "./mock_data/details"
-import App from "./frontend/containers/main_contents"
+import App from "./frontend/components/app"
+import RequestBuilder from "./request_builder"
 
-const updateStoreWithInfo = (data, category='') => {
+const updateStoreWithInfo = (data) => {
   let state = {}
   for(let category in data) {
     switch(category) {
+      case '':
+      case 'profile':
+        state['profileState'] = {data: data[category]}
+        break;
       case 'order':
         state['ordersState'] = data[category]
         break;
-      case 'profile':
-        state['profileState'] = {data: data[category]}
+      case 'address':
+        state['profileState'] = {address: data[category]}
+        break;
     }
   }
 
   return state
-
 }
 
 const ReactComponent = ({location, category, userid}, {logger, queryDb}, cb) => {
 
   // Create a new Redux store instance
   let err = null
+  const requests = RequestBuilder({location, category, userid}, {logger, queryDb})
 
   async.waterfall(
     [
       (done) => {
-        async.parallel({
-          profile: (cb) => {
-            getUserDetails([userid], {logger, queryDb}, (err, user) => {
-              cb(err, user)
-            })
-          },
-          order: (cb) => {
-            const ordersState = {loaded: true, count: 6}
-            cb(err, ordersState)
-          }
-        },
-        (err, results) => {
+        async.parallel(requests, (err, results) => {
           done(err, results)
         })
       },

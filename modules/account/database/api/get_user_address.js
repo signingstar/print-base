@@ -11,13 +11,8 @@ const getAddress = (userData, modules, cb) => {
 
     const { rows } = result
 
-    if(rows.length >= 1 && rows[0].id ) {
-      logger.info(`[DATABASE] ${result.rowCount} USER ADDRESS retreived successfully for user: ${userData[0]}`)
-      callback(err, rows)
-    } else {
-      const message = '[DATABASE] No address exists for user: ${userData[0]}'
-      callback({message, rowCount: 0})
-    }
+    logger.info(`[DATABASE] ${result.rowCount} USER ADDRESS retreived for user: ${userData[0]}`)
+    callback(err, rows)
   })
 }
 

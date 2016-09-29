@@ -10,7 +10,7 @@ const addAddress = (userData, modules, cb) => {
       callback(err, result)
       return
     }
-    console.log(`result:${JSON.stringify(result)}`)
+
     logger.info(`[DATABASE] USER ADDRESS add successfully for user: ${userData[0]}`)
     callback(err, result.rows[0])
   })

@@ -23,11 +23,11 @@ const routes = (app, globalModules) => {
 
   app.get("/account/details", processRequest('accountController', 'details', processOptions))
 
+  app.get("/account/:category/get", processRequest('accountController', 'subDetails', processOptions))
+
   app.get("/account/:category", processRequest('accountController', 'main', processOptions))
 
   app.get("/account/:category/:subCategory", processRequest('accountController', 'main', processOptions))
-
-  app.get("/account/:category/:subCategory/get", processRequest('accountController', 'subDetails', processOptions))
 
   app.post("/account/profile/update",  processRequest('accountController', 'updateProfile', processOptions))
 

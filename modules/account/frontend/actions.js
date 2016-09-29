@@ -3,6 +3,7 @@ import {ajax} from "jquery"
 //Action Types
 export const UPDATE_ALL = 'UPDATE_ALL'
 export const UPDATE_PROFILE = 'UPDATE_PROFILE'
+export const SET_PROFILE = 'SET_PROFILE'
 export const ADDRESS_SET = 'ADDRESS_SET'
 export const ADDRESS_ADD = 'ADDRESS_ADD'
 export const ADDRESS_UPDATE = 'ADDRESS_UPDATE'
@@ -50,8 +51,15 @@ export const updateProfileInfo = (profile) => {
   }
 }
 
+export const setAccountData = (data) => {
+  return {
+    type: SET_PROFILE,
+    details: data
+  }
+}
+
 export const getAddresses = ({loadAddress, pathname}) => {
-  let url = '/account/profile/address/get'
+  let url = '/account/address/get'
 
   ajax({
     url,
@@ -128,6 +136,18 @@ export const updateAccountPassword = (data, cb) => {
     data,
     dataType: 'json',
     success: (res) => cb(),
+    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+  })
+}
+
+export const getAccountData = (data, cb) => {
+  const url = '/account/profile/get'
+
+  ajax({
+    url,
+    data,
+    dataType: 'json',
+    success: (res) => cb(res),
     error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
   })
 }

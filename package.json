@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "debug-server": "DEBUG=* nodemon build/worker.js",
+    "server-inspect": "node --inspect build/worker.js",
     "server": "nodemon build/worker.js",
     "webpack": "webpack --progress --colors --watch",
     "start": "npm run webpack & npm run server",
@@ -69,6 +70,7 @@
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",
     "babel-cli": "^6.14.0",
+    "babel-code-frame": "^6.16.0",
     "babel-loader": "^6.2.5",
     "babel-plugin-add-module-exports": "^0.2.1",
     "babel-preset-es2015": "^6.14.0",
