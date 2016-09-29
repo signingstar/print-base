@@ -1,9 +1,9 @@
-export const updateUserInfo = `UPDATE user_account.users
-  SET first_name=$1, last_name=$2, email=$3, phone_number=$4
-  WHERE id=$5`
+export const userInfo = `UPDATE user_account.users
+  SET first_name=$2, last_name=$3, email=$4, phone_number=$5
+  WHERE id=$1`
 
-export const updateUserAddress = `UPDATE user_account.addresses
-  SET address_line1=$1, address_line2=$2, city=$3, state=$4, zipcode=$5, landmark=$6
-  WHERE id=$7`
+export const userAddress = `UPDATE user_account.addresses
+  SET address_line1=$3, address_line2=$4, city=$5, state=$6, zipcode=$7, landmark=$8
+  WHERE id=$2 AND user_id=$1`
 
-export const updatePassword = `UPDATE user_account.logins SET password=crypt($2, gen_salt('bf',8)) WHERE user_id=$1`
+export const userPassword = `UPDATE user_account.logins SET password=crypt($2, gen_salt('bf',8)) WHERE user_id=$1`

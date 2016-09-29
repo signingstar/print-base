@@ -1,10 +1,10 @@
 import React from "react"
 import { connect } from "react-redux"
 
-import ProfileInfoComponent from "../components/profile_info"
+import Component from "../components/personal_info"
 import { updateProfileInfo, updateProfile } from "../actions"
 
-class ProfileInfo extends React.Component {
+class PersonalInfo extends React.Component {
   constructor() {
     super()
 
@@ -13,7 +13,19 @@ class ProfileInfo extends React.Component {
   }
 
   componentWillMount() {
-    this.setState(JSON.parse(JSON.stringify(this.props.data)))
+    const {profileData} = this.props
+
+    if(profileData) {
+      this.setState(JSON.parse(JSON.stringify(profileData)))
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {profileData} = nextProps
+
+    if(profileData) {
+      this.setState(JSON.parse(JSON.stringify(profileData)))
+    }
   }
 
   handleChange(e) {
@@ -23,13 +35,13 @@ class ProfileInfo extends React.Component {
 
   render() {
     const { onUpdate } = this.props
-    return <ProfileInfoComponent data={this.state} onChange={this.handleChange} onSubmit={()=> onUpdate(this.state)}/>
+    return <Component data={this.state} onChange={this.handleChange} onSubmit={()=> onUpdate(this.state)}/>
   }
 }
 
 const mapStateToProps = (store, ownProps) => {
   return {
-    data: store.profileState.data
+    profileData: store.profileState.data
   }
 }
 
@@ -41,4 +53,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
 export default connect(
   mapStateToProps,
-  mapDispatchToProps)(ProfileInfo)
+  mapDispatchToProps
+)(PersonalInfo)

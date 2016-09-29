@@ -15,7 +15,7 @@ const getUserDetails = (userData, modules, cb) => {
       logger.info(`[DATABASE] USER RECORD retreived successfully for user: ${userData[0]}`)
       callback(err, rows[0])
     } else {
-      const message = '[DATABASE] User not found, who requested for account details'
+      const message = 'User not found, who requested for account details'
       callback({message})
     }
   })

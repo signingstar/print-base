@@ -1,7 +1,7 @@
 import React from "react"
 import Link from "react-router/Link"
 
-const SectionLinks = () => {
+const TopNavigation = () => {
   return (
       <div className='nav-header'>
         <nav className='account-nav' role='navigation'>
@@ -19,4 +19,4 @@ const SectionLinks = () => {
   )
 }
 
-export default SectionLinks
+export default TopNavigation

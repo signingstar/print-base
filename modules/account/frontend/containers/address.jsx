@@ -57,7 +57,9 @@ class Address extends Component {
           onSubmit={this.onAddAddress}
         />
         <div className='saved-addresses'>
-          {addressList.length === 1 ? <h3>Saved Address</h3> : addressList.length > 1 ? <h3>Saved Addresses</h3> : ''}
+          {addressList.length === 1 ?
+            <h3>Saved Address</h3> :
+              addressList.length > 1 ? <h3>Saved Addresses</h3> : <h3>No Saved Address</h3>}
           {addressList}
         </div>
       </div>

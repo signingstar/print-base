@@ -1,6 +1,6 @@
 import {extend} from "jquery"
 
-import { UPDATE_ALL, ADDRESS_UPDATE, ADDRESS_ADD, ADDRESS_SET, ADDRESS_DELETE } from "../actions"
+import { UPDATE_ALL, UPDATE_PROFILE, SET_PROFILE, ADDRESS_UPDATE, ADDRESS_ADD, ADDRESS_SET, ADDRESS_DELETE } from "../actions"
 
 const defaultProfileState = {
   loaded: false
@@ -36,6 +36,9 @@ const profileState = (state = defaultProfileState, {type, details}) => {
   switch (type) {
     case UPDATE_ALL:
       return Object.assign({}, state, details['profile'])
+    case UPDATE_PROFILE:
+    case SET_PROFILE:
+      return Object.assign({}, state, {data: details})
     case ADDRESS_SET:
       return Object.assign({}, state, {address: details})
     case ADDRESS_ADD:

@@ -1,31 +1,24 @@
-import { ServerRouter, createServerRenderContext } from 'react-router'
-import { omit } from "underscore"
 import path from "path"
 
 import ReactComponent from "./react_server"
 import layoutPresenter from "tisko-layout"
-import AccountDetails from "./mock_data/details"
-import getUserAddress from "./database/api/getUserAddress"
-import {filterAndValidate, filterAndValidateAddress, validateAddressId, filterAndValidateAddressToUpdate, filterAndValidateProfileFields, filterAndValidatePasswords} from "./presenters/filter_validate"
-import addUserAddress from "./database/api/addUserAddress"
-import updateUserAddress from "./database/api/update_user_address"
-import updateUserInfo from "./database/api/update_user_info"
-import deleteUserAddress from "./database/api/deleteUserAddress"
-import updateAccountPassword from "./database/api/update_password"
+import { getAccountDetails, addUserAddress, updateAccountDetails, deleteUserAddress } from "./presenters/api_executor"
+import { ACCOUNT_INFO, ACCOUNT_PASSWORD, USER_ADDRESS} from "./modules"
 
 let debug = require("debug")('Account:controllers')
 
 const controller = ({modules}) => {
-  const {pugCompiler, logger, jsAsset, cssAsset, queryDb} = modules
+  const { pugCompiler, logger, jsAsset, cssAsset, queryDb } = modules
   const isSecured = true
   const title = 'Tisko - My Account'
   const srcPath = path.join(__dirname, './', 'main')
   const renderHTML = pugCompiler(srcPath)
+  const localModule = { logger, queryDb }
 
   return {
     main: ({attributes, responders, page}) => {
       const {req, res} = attributes
-      const {session, url: location, params: {category = ''}} = req
+      const {session, url: location, params} = req
 
       const {isLogged = false} = layoutPresenter({session, topNav: false}, page, {jsAsset})
 
@@ -33,6 +26,10 @@ const controller = ({modules}) => {
         responders.redirectForAuthentication(location, "authenticate", logger)
         return
       }
+
+      let {category = '', subCategory} = params
+
+      category = subCategory ? subCategory : category
 
       const userid = session.user.id
 
@@ -60,190 +57,17 @@ const controller = ({modules}) => {
       })
     },
 
-    details: ({attributes, responders, page}) => {
-      let {req, res} = attributes
-      let { pathname } = req.query
+    subDetails: ({attributes, responders, page}) => getAccountDetails({attributes, responders, page}, localModule),
 
-      pathname = pathname.replace('/account/', '')
-      let json = omit(AccountDetails, (value, key) => key === pathname)
+    addAddress:({attributes, responders, page}) => addUserAddress({attributes, responders, page}, localModule),
 
-      responders.json(json)
-    },
+    deleteAddress:({attributes, responders, page}) => deleteUserAddress({attributes, responders, page}, localModule),
 
-    subDetails: ({attributes, responders, page}) => {
-      let {req, res} = attributes
-      const {category, subCategory} = req.params
-      const {session} = req
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
+    updateAddress:({attributes, responders, page}) => updateAccountDetails(USER_ADDRESS, {attributes, responders, page}, localModule),
 
-      const userid = session.user.id
+    updateProfile:({attributes, responders, page}) => updateAccountDetails(ACCOUNT_INFO, {attributes, responders, page}, localModule),
 
-      getUserAddress([userid], {logger, queryDb}, (err, addresses) => {
-        if(!err) {
-          responders.json(addresses)
-        } else if(err.rowCount === 0) {
-          responders.json({rowCount: 0})
-        } else {
-          responders.json(err, {message: 'no records'}, 400 )
-        }
-      })
-    },
-
-    addAddress:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, addressData } = filterAndValidateAddress(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-
-      addressData.unshift(userid)
-
-      addUserAddress(addressData, {logger, queryDb}, (err, result) => {
-        if(!err) {
-          responders.json(result)
-        }
-        responders.json(null, {message: 'Bad Input'}, 400 )
-      })
-    },
-
-    updateAddress:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, addressData } = filterAndValidateAddressToUpdate(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-
-      updateUserAddress(addressData, {logger, queryDb}, (err, result) => {
-        if(!err) {
-          responders.json(result)
-        }
-        responders.json(null, {message: 'Bad Input'}, 400 )
-      })
-    },
-
-    deleteAddress:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, addressData } = validateAddressId(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-
-      addressData.push(userid)
-
-      deleteUserAddress(addressData, {logger, queryDb}, (err, result) => {
-        responders.json({count: result.rowCount})
-      })
-    },
-
-    updateAddress:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, addressData } = filterAndValidateAddressToUpdate(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-
-      updateUserAddress(addressData, {logger, queryDb}, (err, result) => {
-        if(!err) {
-          responders.json(result)
-        }
-        responders.json(null, {message: 'Bad Input'}, 400 )
-      })
-    },
-
-    updateProfile:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, userData } = filterAndValidateProfileFields(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-      userData.push(userid)
-
-      updateUserInfo(userData, {logger, queryDb}, (err, result) => {
-        if(!err) {
-          responders.json(result)
-        }
-        responders.json(null, {message: 'Bad Input'}, 400 )
-      })
-    },
-
-    updatePassword:({attributes, responders, page}) => {
-      const {req, res} = attributes
-      const {session} = req
-
-      if(!session || !session.user || !session.user.id) {
-        responders.json(null, {message: 'session timed out'}, 401 )
-        return
-      }
-
-      const { err, userData } = filterAndValidatePasswords(req.body)
-      if(err) {
-        responders.json(null, {message: 'Bad Input'}, 400 )
-        return
-      }
-
-      const userid = session.user.id
-      userData.unshift(userid)
-
-      updateAccountPassword(userData, {logger, queryDb}, (err, result) => {
-        if(!err) {
-          responders.json(result)
-        }
-        responders.json(null, {message: 'Bad Input'}, 400 )
-      })
-    }
+    updatePassword:({attributes, responders, page}) => updateAccountDetails(ACCOUNT_PASSWORD, {attributes, responders, page}, localModule)
   }
 }
 

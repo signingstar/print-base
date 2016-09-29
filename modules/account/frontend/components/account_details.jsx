@@ -3,12 +3,12 @@ import Match from 'react-router/Match'
 import Link from "react-router/Link"
 import Miss from 'react-router/Miss'
 
-import ProfileInfo from "../containers/profile_info"
+import PersonalInfo from "../containers/personal_info"
 import Address from "../components/address"
-import PasswordChange from "../containers/password_change"
 import EditAddress from "../containers/edit_address"
+import PasswordChange from "../containers/password_change"
 
-const MyProfile = ({state, address, pathname}) => {
+const AccountDetails = ({pathname}) => {
   return (
     <div className='nav-content'>
       <div className='left-panel'>
@@ -19,8 +19,8 @@ const MyProfile = ({state, address, pathname}) => {
         </ul>
       </div>
       <div className='right-panel'>
-        <Match pattern={pathname} exactly component={ProfileInfo} />
-        <Match pattern={`${pathname}/address`} component={Address} />
+        <Match pattern={pathname} exactly component={PersonalInfo} />
+        <Match exactly pattern={`${pathname}/address`} component={Address} />
         <Match pattern={`${pathname}/address/edit`} component={EditAddress} />
         <Match pattern={`${pathname}/password-change`} component={PasswordChange} />
         <Miss component={()=> <div>Not Found inner</div>} />
@@ -29,4 +29,4 @@ const MyProfile = ({state, address, pathname}) => {
   )
 }
 
-export default MyProfile
+export default AccountDetails
