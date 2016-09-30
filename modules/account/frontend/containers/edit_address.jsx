@@ -1,19 +1,15 @@
 import React from "react"
 import { connect } from "react-redux"
+import DOMPurify from "dompurify"
 
 import UpdateAddress from "../components/address_upsert"
-import { updateAddress, updateAddressInProfile } from "../actions"
+import { setError, setSuccess, updateAddress, updateAddressInProfile, clearAllErrors } from "../actions"
 
 class EditAddress extends React.Component {
   constructor() {
     super()
 
     this.handleChange = this.handleChange.bind(this)
-  }
-
-  handleChange(e) {
-    const {name, value} = e.target
-    this.setState({[name]: value})
   }
 
   componentWillMount() {
@@ -23,11 +19,29 @@ class EditAddress extends React.Component {
     this.setState(JSON.parse(JSON.stringify(addressFromList)))
   }
 
+  componentWillUnmount() {
+    const { clearErrors } = this.props
+    clearErrors()
+  }
+
+  handleChange(e) {
+    const {name, value} = e.target
+    this.setState({[name]: DOMPurify.sanitize(value)})
+  }
+
   render() {
-    const { onChange, mode, onUpdate, location: {state: {id}} } = this.props
+    const { onChange, mode, onUpdate, location: {state: {id}}, message } = this.props
+
     return (
       <div className='address-box'>
-        <UpdateAddress id={id} address={this.state} mode={mode} onChange={this.handleChange} onSubmit={()=> onUpdate(this.state)} />
+        <UpdateAddress
+          id={id}
+          address={this.state}
+          mode={mode}
+          onChange={this.handleChange}
+          onSubmit={()=> onUpdate(this.state)}
+          message={message}
+        />
       </div>
     )
   }
@@ -36,13 +50,25 @@ class EditAddress extends React.Component {
 const mapStateToProps = (store, ownProps) => {
   return {
     addresses: store.profileState.address,
-    mode: 'edit'
+    mode: 'edit',
+    message: store.error.message || {}
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onUpdate: (data) => updateAddress(data, () => dispatch(updateAddressInProfile(data)))
+    onUpdate: (data) => {
+      dispatch(updateAddressInProfile(data))
+      dispatch(clearAllErrors())
+      updateAddress(data, ({err}) => {
+        if(err) {
+          dispatch(setError(err))
+        } else {
+          dispatch(setSuccess())
+        }
+      })
+    },
+    clearErrors: () => dispatch(clearAllErrors())
   }
 }
 

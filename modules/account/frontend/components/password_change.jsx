@@ -1,12 +1,16 @@
 import React from "react"
 
-const PasswordChange = ({onChange, onSubmit, data}) => {
-  const {password, confirm_password, message} = data
+const PasswordChange = ({onChange, onSubmit, data, message}) => {
+  const {password, confirm_password} = data
+
+  const hasError = !isEmpty(message)
+  const messageClass = 'message ' + (message.success ? 'success' : 'error')
+  const messageText = message.success ? 'Successfully Changed' : hasError ? 'Please enter the appropriate Value' : ''
 
   return (
     <div className='password-change fields'>
-      <h3>Change Password</h3>
-      <div className='message'>{message}</div>
+      <h2>Change Password</h2>
+      <div className={messageClass}>{messageText}</div>
       <div className='form'>
         <div className="password-input field">
           <label htmlFor="password">Password</label>
@@ -22,6 +26,15 @@ const PasswordChange = ({onChange, onSubmit, data}) => {
       </div>
     </div>
   )
+}
+
+const isEmpty = (obj) => {
+  for(let prop in obj) {
+    if(obj.hasOwnProperty(prop))
+      return false
+  }
+
+  return true
 }
 
 export default PasswordChange

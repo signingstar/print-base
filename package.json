@@ -7,7 +7,8 @@
     "debug-server": "DEBUG=* nodemon build/worker.js",
     "server-inspect": "node --inspect build/worker.js",
     "server": "nodemon build/worker.js",
-    "webpack": "webpack --progress --colors --watch",
+    "webpack-prod": "webpack --colors",
+    "webpack": "webpack --config webpack.dev.config.js --progress --colors --watch",
     "start": "npm run webpack & npm run server",
     "debug": "npm run webpack & npm run debug-server",
     "test": "karma start",
@@ -27,6 +28,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "debug": "^2.2.0",
+    "dompurify": "^0.8.3",
     "express": "^4.14.0",
     "express-flash": "0.0.2",
     "express-session": "^1.14.1",
@@ -35,6 +37,7 @@
     "fs": "0.0.2",
     "history": "^4.2.0",
     "jquery": "^3.1.0",
+    "jsdom": "^9.5.0",
     "jsx-loader": "^0.13.2",
     "multer": "^1.2.0",
     "node-sass": "^3.8.0",
@@ -64,8 +67,10 @@
     "underscore": "^1.8.3",
     "url": "^0.11.0",
     "user-sessions": "github:signingstar/user-sessions",
+    "validator": "^6.0.0",
     "webpack": "^1.13.1",
-    "winston": "^2.2.0"
+    "winston": "^2.2.0",
+    "xss-filters": "^1.2.7"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",

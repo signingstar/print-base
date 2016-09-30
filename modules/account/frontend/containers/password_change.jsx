@@ -2,7 +2,7 @@ import React from "react"
 import {connect} from "react-redux"
 
 import Passwords from "../components/password_change"
-import { updateAccountPassword } from "../actions"
+import { setError, setSuccess, updateAccountPassword, clearAllErrors } from "../actions"
 
 class PasswordChange extends React.Component {
   constructor() {
@@ -25,12 +25,52 @@ class PasswordChange extends React.Component {
   }
 
   updatePassword() {
-    updateAccountPassword(this.state, () => this.setState(this.initialState))
+    const { onChange } = this.props
+    onChange(this.state, () => this.setState(this.initialState))
+  }
+
+  componentWillUnmount() {
+    const { clearErrors } = this.props
+    clearErrors()
   }
 
   render() {
-    return <Passwords onChange={this.handleChange} data={this.state} onSubmit={this.updatePassword} />
+    const { message } = this.props
+    return (
+      <Passwords
+        onChange={this.handleChange}
+        data={this.state}
+        onSubmit={this.updatePassword}
+        message={message}
+      />
+    )
   }
 }
 
-export default PasswordChange
+const mapStateToProps = (store, ownProps) => {
+  return {
+    message: store.error.message || {}
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onChange: (data, resetFields) => {
+      dispatch(clearAllErrors())
+      updateAccountPassword(data, ({err}) => {
+        resetFields()
+        if(err) {
+          dispatch(setError(err))
+        } else {
+          dispatch(setSuccess())
+        }
+      })
+    },
+    clearErrors: () => dispatch(clearAllErrors())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PasswordChange)

@@ -1,10 +1,11 @@
 import React, {Component} from "react"
 import { ajax } from "jquery"
 import { connect } from "react-redux"
+import DOMPurify from "dompurify"
 
 import InsertAddress from "../components/address_upsert"
-import SavedAddress from "../components/saved_address"
-import { addAddress, addAddressInProfile, deleteAddress, updateDeletedAddress } from "../actions"
+import SavedAddress from "../containers/saved_address"
+import { setError, setSuccess, addAddress, addAddressInProfile, deleteAddress, updateDeletedAddress, clearAllErrors } from "../actions"
 
 const initialState = {
   address_line1: '',
@@ -28,26 +29,22 @@ class Address extends Component {
 
   handleChange(e) {
     const {name, value} = e.target
-    this.setState({[name]: value})
+    this.setState({[name]: DOMPurify.sanitize(value)})
   }
 
   onAddAddress() {
     const { onAdd } = this.props
     let address = JSON.parse(JSON.stringify(this.state))
-    this.setState(initialState)
-    onAdd(address)
+    onAdd(address, () => this.setState(initialState))
+  }
+
+  componentWillUnmount() {
+    const { clearErrors } = this.props
+    clearErrors()
   }
 
   render() {
-    const {addresses = [], onAdd, onDelete, pathname} = this.props
-
-    const addressList = addresses.map(address => <SavedAddress
-      id={address.id}
-      key={address.id}
-      address={address}
-      onDelete={onDelete}
-      pathname={pathname} />
-    )
+    const {addresses = [], onAdd, onDelete, pathname, message} = this.props
 
     return (
       <div className='address-box'>
@@ -55,35 +52,37 @@ class Address extends Component {
           onChange={this.handleChange}
           address={this.state}
           onSubmit={this.onAddAddress}
+          message={message}
         />
-        <div className='saved-addresses'>
-          {addressList.length === 1 ?
-            <h3>Saved Address</h3> :
-              addressList.length > 1 ? <h3>Saved Addresses</h3> : <h3>No Saved Address</h3>}
-          {addressList}
-        </div>
+        <SavedAddress pathname={pathname} />
       </div>
     )
   }
 }
 
 const mapStateToProps = (store, ownProps) => {
+  const { message } = store.error
+
   return {
-    addresses: store.profileState.address
+    message: message ?  (message.address ?  message.address : {}) : {}
   }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    onDelete: (e) => {
-      const addressId = e.target.id
-      deleteAddress(addressId, () => dispatch(updateDeletedAddress(addressId)))
-    },
-    onAdd: (data) => {
-      addAddress(data, (finalData) => {
-        dispatch(addAddressInProfile(finalData))
+    onAdd: (data, resetFields) => {
+      dispatch(clearAllErrors())
+      addAddress(data, ({err, data}) => {
+        if(err) {
+          dispatch(setError({address:err}))
+        } else {
+          dispatch(addAddressInProfile(data))
+          dispatch(setSuccess({address:{success: true}}))
+          resetFields()
+        }
       })
-    }
+    },
+    clearErrors: () => dispatch(clearAllErrors())
   }
 }
 

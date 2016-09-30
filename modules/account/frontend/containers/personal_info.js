@@ -1,8 +1,9 @@
 import React from "react"
 import { connect } from "react-redux"
+import DOMPurify from "dompurify"
 
 import Component from "../components/personal_info"
-import { updateProfileInfo, updateProfile } from "../actions"
+import { setError, setSuccess, clearAllErrors, updateProfileInfo, updateProfile } from "../actions"
 
 class PersonalInfo extends React.Component {
   constructor() {
@@ -28,26 +29,48 @@ class PersonalInfo extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { clearErrors } = this.props
+    clearErrors()
+  }
+
   handleChange(e) {
     const {name, value} = e.target
-    this.setState({[name]: value})
+    this.setState({[name]: DOMPurify.sanitize(value)})
   }
 
   render() {
-    const { onUpdate } = this.props
-    return <Component data={this.state} onChange={this.handleChange} onSubmit={()=> onUpdate(this.state)}/>
+    const { onUpdate, message } = this.props
+    return <Component
+      data={this.state}
+      message={message}
+      onChange={this.handleChange}
+      onSubmit={()=> onUpdate(this.state)}
+           />
   }
 }
 
 const mapStateToProps = (store, ownProps) => {
   return {
-    profileData: store.profileState.data
+    profileData: store.profileState.data,
+    message: store.error.message || {}
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onUpdate: (data) => updateProfile(data, () => dispatch(updateProfileInfo(data)))
+    onUpdate: (data) => {
+      dispatch(updateProfileInfo(data))
+      dispatch(clearAllErrors())
+      updateProfile(data, ({err}) => {
+        if(err) {
+          dispatch(setError(err))
+        } else {
+          dispatch(setSuccess())
+        }
+      })
+    },
+    clearErrors: () => dispatch(clearAllErrors())
   }
 }
 
