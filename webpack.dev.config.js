@@ -83,7 +83,7 @@ var clientConfig = extend({}, true, config, {
       new CopyWebpackPlugin([
         { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
         { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
-        { from: nodeModulesPath + '/dompurify/dist/purify.min.js', to: destPath},
+        { from: nodeModulesPath + '/dompurify/src/purify.js', to: destPath},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/tisko-layout/src/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/order-page/src/frontend/images/*', to: destPath},
@@ -123,7 +123,8 @@ var clientConfig = extend({}, true, config, {
     //   amd: 'react-addons-css-transition-group',
     //   root: ['React','addons','CSSTransitionGroup']
     // },
-    'react-addons-css-transition-group': 'React.addons.TransitionGroup'
+    'react-addons-css-transition-group': 'React.addons.TransitionGroup',
+    'dompurify': 'DOMPurify',
   }
 });
 

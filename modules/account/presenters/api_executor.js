@@ -25,84 +25,6 @@ const apiCallType = (type) => {
   return apiType
 }
 
-export const updateAccountDetails = (type, {attributes, responders, page}, {logger, queryDb}) => {
-  const {req, res} = attributes
-  const {session} = req
-
-  if(!session || !session.user || !session.user.id) {
-    responders.json(null, {message: 'session timed out'}, 401 )
-    return
-  }
-
-  const { err, accountData } = filterAndValidateAccountDetails(type, req.body)
-  if(err) {
-    responders.json(null, {message: 'Bad Input'}, 400 )
-    return
-  }
-
-  const userid = session.user.id
-  accountData.unshift(userid)
-  const apiType = apiCallType(type)
-
-  apiType(accountData, {logger, queryDb}, (err, result) => {
-    if(!err) {
-      responders.json(result)
-    }
-    responders.json(null, {message: 'Internal Server Error'}, 500 )
-  })
-}
-
-export const deleteUserAddress = ({attributes, responders, page}, {logger, queryDb}) => {
-  const {req, res} = attributes
-  const {session} = req
-
-  if(!session || !session.user || !session.user.id) {
-    responders.json(null, {message: 'session timed out'}, 401 )
-    return
-  }
-
-  const { err, addressData } = validateAddressId(req.body)
-  if(err) {
-    responders.json(null, {message: 'Bad Input'}, 400 )
-    return
-  }
-
-  const userid = session.user.id
-
-  addressData.push(userid)
-
-  deleteAddress(addressData, {logger, queryDb}, (err, result) => {
-    responders.json({count: result.rowCount})
-  })
-}
-
-export const addUserAddress = ({attributes, responders, page}, {logger, queryDb}) => {
-  const {req, res} = attributes
-  const {session} = req
-
-  if(!session || !session.user || !session.user.id) {
-    responders.json(null, {message: 'session timed out'}, 401 )
-    return
-  }
-
-  const { err, addressData } = filterAndValidateAddress(req.body)
-  if(err) {
-    responders.json(null, {message: 'Bad Input'}, 400 )
-    return
-  }
-
-  const userid = session.user.id
-
-  addressData.unshift(userid)
-
-  addAddress(addressData, {logger, queryDb}, (err, result) => {
-    if(!err) {
-      responders.json(result)
-    }
-    responders.json(null, {message: 'Bad Input'}, 400 )
-  })
-}
-
 export const getAccountDetails = ({attributes, responders, page}, {logger, queryDb}) => {
   let {req, res} = attributes
   const {category} = req.params
@@ -123,5 +45,86 @@ export const getAccountDetails = ({attributes, responders, page}, {logger, query
     } else {
       responders.json(err, {message: 'no records'}, 400 )
     }
+  })
+}
+
+export const updateAccountDetails = (type, {attributes, responders, page}, {logger, queryDb}) => {
+  const {req, res} = attributes
+  const {session} = req
+
+  if(!session || !session.user || !session.user.id) {
+    responders.json(null, {message: 'session timed out'}, 401 )
+    return
+  }
+
+  const { err, accountData } = filterAndValidateAccountDetails(type, req.body)
+  if(err) {
+    responders.json(err, {message: 'Bad Input1'}, 400 )
+    return
+  }
+
+  const userid = session.user.id
+  accountData.unshift(userid)
+  const apiType = apiCallType(type)
+
+  apiType(accountData, {logger, queryDb}, (err, result) => {
+    if(!err) {
+      responders.json(result)
+    }
+    responders.json(null, {message: 'Internal Server Error'}, 500 )
+  })
+}
+
+export const addUserAddress = ({attributes, responders, page}, {logger, queryDb}) => {
+  const {req, res} = attributes
+  const {session} = req
+
+  if(!session || !session.user || !session.user.id) {
+    responders.json(null, {message: 'session timed out'}, 401 )
+    return
+  }
+
+  const { err, accountData } = filterAndValidateAccountDetails(USER_ADDRESS, req.body)
+  if(err) {
+    responders.json(err, {message: 'Bad Input'}, 400 )
+    return
+  }
+
+  const userid = session.user.id
+  accountData.splice(0, 1)
+  accountData.unshift(userid)
+
+  addAddress(accountData, {logger, queryDb}, (err, result) => {
+    if(!err) {
+      responders.json(result)
+    }
+    responders.json(null, {message: 'Bad Input'}, 400 )
+  })
+}
+
+export const deleteUserAddress = ({attributes, responders, page}, {logger, queryDb}) => {
+  const {req, res} = attributes
+  const {session} = req
+
+  if(!session || !session.user || !session.user.id) {
+    responders.json(null, {message: 'session timed out'}, 401 )
+    return
+  }
+
+  const { err, formData } = validateAddressId(req.body)
+  if(err) {
+    responders.json(err, {message: 'Bad Input'}, 400 )
+    return
+  }
+
+  const userid = session.user.id
+
+  formData.unshift(userid)
+
+  deleteAddress(formData, {logger, queryDb}, (err, result) => {
+    if(!err) {
+      responders.json({count: result.rowCount})
+    }
+    responders.json(err, {message: 'Bad Input'}, 500 )
   })
 }

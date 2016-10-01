@@ -1,4 +1,4 @@
-import { validateAddressForm, validateUserDetailsForm} from "./form_validator"
+import { validateAddressForm, validatePeronalInfoForm, validateUserAddressId, validatePasswordChangeForm } from "./form_validator"
 import { ACCOUNT_INFO, ACCOUNT_PASSWORD, USER_ADDRESS} from "../modules"
 
 export const filterAndValidateFields = (bodyContent, cb) => {
@@ -27,7 +27,7 @@ export const filterAndValidateAddress = (bodyContent, cb) => {
 export const filterAndValidateAccountDetails = (type, bodyContent) => {
   switch(type) {
     case ACCOUNT_INFO:
-      return filterAndValidateAccountInfo(bodyContent)
+      return filterAndValidatePersonalInfo(bodyContent)
     case ACCOUNT_PASSWORD:
       return filterAndValidatePasswords(bodyContent)
     case USER_ADDRESS:
@@ -36,39 +36,46 @@ export const filterAndValidateAccountDetails = (type, bodyContent) => {
 }
 
 const filterAndValidateAddressToUpdate = (bodyContent, cb) => {
-  const { id, address_line1, address_line2, city, state, zipcode, landmark } = bodyContent
-  const {err, formData} = validateAddressForm({ address_line1, address_line2, city, state, zipcode, landmark, id })
+  const { id, address_line1, address_line2, city, state, country, zipcode, landmark } = bodyContent
+  const {err, formData} = validateAddressForm({ id, address_line1, address_line2, city, state, country, zipcode, landmark })
 
   if(err) {
     return {err}
   }
 
-  return { accountData: [id, address_line1, address_line2, city, state, zipcode, landmark] }
+  return { accountData: [id, address_line1, address_line2, city, state, country, zipcode, landmark] }
 }
 
 export const validateAddressId = (bodyContent, cb) => {
   const { id } = bodyContent
-  return {addressData: [id]}
+
+  const {err, formData} = validateUserAddressId({ id })
+
+  if(err) {
+    return {err}
+  }
+
+  return {formData: [id]}
 }
 
-const filterAndValidateAccountInfo = (bodyContent, cb) => {
+const filterAndValidatePersonalInfo = (bodyContent, cb) => {
   const { first_name, last_name, email, phone_number } = bodyContent
-  // const {err, formData} = validateAddressForm({ address_line1, address_line2, city, state, zipcode, landmark })
-  //
-  // if(err) {
-  //   return {err}
-  // }
+  const {err, formData} = validatePeronalInfoForm({ first_name, last_name, email, phone_number })
+
+  if(err) {
+    return {err}
+  }
 
   return { accountData: [first_name, last_name, email, phone_number] }
 }
 
 const filterAndValidatePasswords = (bodyContent, cb) => {
   const { password, confirm_password } = bodyContent
-  // const {err, formData} = validateAddressForm({ address_line1, address_line2, city, state, zipcode, landmark })
-  //
-  // if(err) {
-  //   return {err}
-  // }
+  const {err, formData} = validatePasswordChangeForm({ password, confirm_password })
+
+  if(err) {
+    return {err}
+  }
 
   return { accountData: [password] }
 }

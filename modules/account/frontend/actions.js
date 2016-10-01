@@ -9,6 +9,12 @@ export const ADDRESS_ADD = 'ADDRESS_ADD'
 export const ADDRESS_UPDATE = 'ADDRESS_UPDATE'
 export const ADDRESS_DELETE = 'ADDRESS_DELETE'
 
+//Error related
+export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS'
+export const CLEAR_ERROR = 'CLEAR_ERROR'
+export const SET_ERROR = 'SET_ERROR'
+export const SET_SUCCESS = 'SET_SUCCESS'
+
 export const updateAllStates = (details) => {
   return {
     type: UPDATE_ALL,
@@ -58,6 +64,33 @@ export const setAccountData = (data) => {
   }
 }
 
+export const clearAllErrors = () => {
+  return {
+    type: CLEAR_ALL_ERRORS
+  }
+}
+
+export const clearError = (category) => {
+  return {
+    type: CLEAR_ERROR,
+    details: category
+  }
+}
+
+export const setError = (message) => {
+  return {
+    type: SET_ERROR,
+    details: message
+  }
+}
+
+export const setSuccess = (message) => {
+  return {
+    type: SET_SUCCESS,
+    details: message || {success: true}
+  }
+}
+
 export const getAddresses = ({loadAddress, pathname}) => {
   let url = '/account/address/get'
 
@@ -72,6 +105,19 @@ export const getAddresses = ({loadAddress, pathname}) => {
   })
 }
 
+export const updateProfile = (data, cb) => {
+  const url = '/account/profile/update'
+
+  ajax({
+    url,
+    method: 'POST',
+    data,
+    dataType: 'json'
+  })
+  .done((res, textStatus) => cb({res}))
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
+}
+
 export const addAddress = (data, cb) => {
   const url = '/account/address/add'
 
@@ -79,13 +125,13 @@ export const addAddress = (data, cb) => {
     url,
     method: 'POST',
     data,
-    dataType: 'json',
-    success: (res) => {
-      data.id = res.id
-      cb(data)
-    },
-    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+    dataType: 'json'
   })
+  .done((res, textStatus) => {
+    data.id = res.id
+    cb({data})
+  })
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
 }
 
 export const updateAddress = (data, cb) => {
@@ -95,10 +141,11 @@ export const updateAddress = (data, cb) => {
     url,
     method: 'POST',
     data,
-    dataType: 'json',
-    success: (res) => cb(),
-    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+    dataType: 'json'
   })
+  .done((res, textStatus) => cb({res}))
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
+
 }
 
 export const deleteAddress = (id, cb) => {
@@ -108,23 +155,10 @@ export const deleteAddress = (id, cb) => {
     url,
     method: 'POST',
     data: {id},
-    dataType: 'json',
-    success: (res) => cb(),
-    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+    dataType: 'json'
   })
-}
-
-export const updateProfile = (data, cb) => {
-  const url = '/account/profile/update'
-
-  ajax({
-    url,
-    method: 'POST',
-    data,
-    dataType: 'json',
-    success: (res) => cb(),
-    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
-  })
+  .done((res, textStatus) => cb({}))
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
 }
 
 export const updateAccountPassword = (data, cb) => {
@@ -134,10 +168,10 @@ export const updateAccountPassword = (data, cb) => {
     url,
     method: 'POST',
     data,
-    dataType: 'json',
-    success: (res) => cb(),
-    error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
+    dataType: 'json'
   })
+  .done((res, textStatus) => cb({}))
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
 }
 
 export const getAccountData = (data, cb) => {

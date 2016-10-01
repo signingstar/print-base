@@ -4,4 +4,8 @@ export const getUserInfo = `
   WHERE id=$1;
   `
 
-export const getUserAddress = `SELECT * from user_account.addresses where user_id=$1 ORDER BY id DESC;`
+export const getUserAddress = `
+  SELECT id, address_line1, address_line2, city, state, country, zipcode, landmark, category
+  FROM user_account.addresses
+  WHERE user_id=$1 and active=true
+  ORDER BY id DESC;`
