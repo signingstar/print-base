@@ -1,5 +1,5 @@
 export const getUserInfo = `
-  SELECT id, first_name, last_name, phone_number, email, date_of_birth, gender
+  SELECT id, first_name, last_name, phone_number, email
   FROM user_account.users
   WHERE id=$1;
   `

@@ -47,6 +47,10 @@ const responders = {
       "Content-Type": "application/json"
     })
 
+    if(statusCode >= 400) {
+      return res.end(JSON.stringify(err))
+    }
+
     res.end(JSON.stringify(json))
   },
 

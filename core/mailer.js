@@ -23,17 +23,10 @@ const templates = {
   }
 }
 
-const Mailing = ({sender, receiver, subject, content}) => {
-  const mailOptions = {
-    to: receiver,
-    from: sender,
-    subject,
-    text: content
-  }
-
+const Mailing = (...args) => {
   const client = nodemailer.createTransport(sgTransport(options))
 
-  return (cb) => client.sendMail(mailOptions, (err, info) => cb(err, info))
+  return (cb) => client.sendMail(...args, (err, info) => cb(err, info))
 }
 
 export default Mailing

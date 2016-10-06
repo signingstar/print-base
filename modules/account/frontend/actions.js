@@ -157,7 +157,7 @@ export const deleteAddress = (id, cb) => {
     data: {id},
     dataType: 'json'
   })
-  .done((res, textStatus) => cb({}))
+  .done((res, textStatus) => cb({res}))
   .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
 }
 

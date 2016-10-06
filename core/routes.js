@@ -62,9 +62,19 @@ const routes = (app, globalModules) => {
 
   app.get("/order", processRequest('orderController', 'main', processOptions))
 
+  app.get("/order/products", processRequest('orderController', 'main', processOptions))
+
   app.get("/order/:category", processRequest('orderController', 'main', processOptions))
 
-  app.post('/order', processRequest('photoInventoryController', 'main', processOptions))
+  app.post('/order/create', processRequest('orderController', 'create', processOptions))
+
+  app.post('/order/process', processRequest('orderController', 'process', processOptions))
+
+  app.post('/order/confirm', processRequest('orderController', 'confirm', processOptions))
+
+  app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
+
+  app.post('/myorder/:orderid', processRequest('orderController', 'viewOwner', processOptions))
 
   app.get("/partner", processRequest('partnerController', 'get', processOptions))
 
