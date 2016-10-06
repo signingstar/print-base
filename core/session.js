@@ -1,15 +1,13 @@
 import session from "express-session"
 import RedisConnect from "connect-redis"
 import crypto from "crypto"
+import RedisConfig from "./redis_config"
 
 const RedisConnectSession = RedisConnect(session)
 
-const RedisClientConfig = {
-  host: '127.0.0.1',
-  port: 6379,
-  prefix: 'session:',
-  logErrors: true
-}
+const RedisClientConfig = Object.assign({}, RedisConfig, {
+  prefix: 'session:'
+})
 
 const store = new RedisConnectSession(RedisClientConfig)
 const sessionConfig = {

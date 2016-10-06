@@ -10,6 +10,7 @@ import homeController from "../modules/home/controller"
 import loginController from "user-sessions/lib/login/controller"
 import marketingController from "../modules/marketing/controller"
 import orderController from "order-page"
+import customerOrderController from "order-page/lib/customer/controller"
 import ourServicesController from "../modules/services/controller"
 import passwordResetController from "user-sessions/lib/password_reset/controller"
 import partnerController from "../modules/partner/controller"
@@ -27,6 +28,7 @@ let controllersList = {
   loginController,
   marketingController,
   orderController,
+  customerOrderController,
   ourServicesController,
   partnerController,
   passwordResetController,

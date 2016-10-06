@@ -26,6 +26,7 @@ const controller = ({modules}) => {
         responders.redirectForAuthentication(location, "authenticate", logger)
         return
       }
+      
 
       let {category = '', subCategory} = params
 
@@ -33,7 +34,7 @@ const controller = ({modules}) => {
 
       const userid = session.user.id
 
-      ReactComponent({location, category, userid}, {logger, queryDb}, (err, reactHTML, preloadedState) => {
+      ReactComponent({location, category, userid}, localModule, (err, reactHTML, preloadedState) => {
         if(err) {
           if(err.reason === 'redirect') {
             res.writeHead(301, {
