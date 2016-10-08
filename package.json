@@ -42,6 +42,7 @@
     "mkdirp": "^0.5.1",
     "multer": "^1.2.0",
     "node-sass": "^3.8.0",
+    "node-uuid": "^1.4.7",
     "nodemailer": "^2.6.4",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "order-page": "github:signingstar/order-page",

@@ -2,10 +2,7 @@ import nodemailer from "nodemailer"
 import sgTransport from "nodemailer-sendgrid-transport"
 
 const options = {
-  auth: {
-    api_user: 'anilkeshari',
-    api_key: 'bde0garh'
-  }
+
 }
 
 const templates = {
@@ -24,9 +21,10 @@ const templates = {
 }
 
 const Mailing = (...args) => {
-  const client = nodemailer.createTransport(sgTransport(options))
-
-  return (cb) => client.sendMail(...args, (err, info) => cb(err, info))
+  return (cb) => logger.info(`Mock mail sent`)
+  // const client = nodemailer.createTransport(sgTransport(options))
+  //
+  // return (cb) => client.sendMail(...args, (err, info) => cb(err, info))
 }
 
 export default Mailing

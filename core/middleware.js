@@ -21,6 +21,11 @@ const middleware = (app, router, globalModules) => {
     setHeaders: setCustomCacheControl
   }))
 
+  app.use('/uploads', serveStatic(path.join(__dirname, '../uploads'), {
+    maxAge: '1d',
+    setHeaders: setCustomCacheControl
+  }))
+
   app.use(bodyParser.json({
     limit: '1mb',
     type: ['application/json']
