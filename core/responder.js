@@ -63,7 +63,12 @@ const responders = {
   redirectWithCookies: (res) => (url, cookies, logger) => {
     setCookiesForResponse(res, cookies)
     redirectWithLogging(res, encodeURI(url), 'general', logger)
+  },
+
+  redirectWithoutCookies: (res) => (url, logger, reasonCode) => {
+    redirectWithLogging(res, encodeURI(url), reasonCode, logger)
   }
+
 }
 
 export default responders

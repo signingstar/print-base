@@ -70,6 +70,8 @@ const routes = (app, globalModules) => {
 
   app.post('/order/process', processRequest('orderController', 'process', processOptions))
 
+  app.post('/order/upload', processRequest('photoInventoryController', 'main', processOptions));
+
   app.post('/order/confirm', processRequest('orderController', 'confirm', processOptions))
 
   app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
