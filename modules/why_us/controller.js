@@ -10,9 +10,9 @@ const whyUsController = function({modules}) {
   return {
     main: function({attributes, responders, page}) {
       const {req, res} = attributes
-      const {session} = req
+      const {session: {user}} = req
 
-      layoutPresenter({session}, page, {jsAsset})
+      layoutPresenter({user}, page, {jsAsset})
 
       page.set({
         promotional_header: false,

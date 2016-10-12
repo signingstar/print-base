@@ -74,7 +74,15 @@ const routes = (app, globalModules) => {
 
   app.post('/order/confirm', processRequest('orderController', 'confirm', processOptions))
 
+  app.post('/order/customer/notify', processRequest('customerOrderController', 'customerFeedback', processOptions))
+
+  app.get('/order/customer/feedback', processRequest('customerOrderController', 'getReaction', processOptions))
+
+  app.post('/order/customer/adduser', processRequest('customerOrderController', 'addUser', processOptions))
+
   app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
+
+  app.get('/order/:users/:orderId/:image_id', processRequest('customerOrderController', 'viewCustomer', processOptions))
 
   app.post('/myorder/:orderid', processRequest('orderController', 'viewOwner', processOptions))
 

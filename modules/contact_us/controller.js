@@ -10,8 +10,9 @@ const controller = ({modules}) => {
   return {
     main: ({attributes, responders, page}) => {
       const { req, res } = attributes
+      const {session: {user}} = req
 
-      layoutPresenter({session: req.session, topNav: false}, page, {jsAsset})
+      layoutPresenter({user, topNav: false}, page, {jsAsset})
 
       page.set( {
         javascript: jsAsset('sessionjs'),

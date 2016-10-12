@@ -10,9 +10,9 @@ const homeController = function({modules}) {
   return {
     main: function({attributes, responders, page}) {
       const {req, res} = attributes
-      const {session} = req
+      const {session: {user}} = req
 
-      layoutPresenter({session}, page, {jsAsset, logger})
+      layoutPresenter({user}, page, {jsAsset, logger})
 
       page.set({
         promotional_header: false,

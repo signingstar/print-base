@@ -18,21 +18,20 @@ const controller = ({modules}) => {
   return {
     main: ({attributes, responders, page}) => {
       const {req, res} = attributes
-      const {session, url: location, params} = req
+      const {session: {user}, url: location, params} = req
 
-      const {isLogged = false} = layoutPresenter({session, topNav: false}, page, {jsAsset})
+      const {isLogged = false} = layoutPresenter({user, topNav: false}, page, {jsAsset})
 
       if(isSecured && !isLogged) {
         responders.redirectForAuthentication(location, "authenticate", logger)
         return
       }
-      
 
       let {category = '', subCategory} = params
 
       category = subCategory ? subCategory : category
 
-      const userid = session.user.id
+      const userid = user.id
 
       ReactComponent({location, category, userid}, localModule, (err, reactHTML, preloadedState) => {
         if(err) {
