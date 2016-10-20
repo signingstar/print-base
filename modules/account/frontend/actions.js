@@ -8,6 +8,7 @@ export const ADDRESS_SET = 'ADDRESS_SET'
 export const ADDRESS_ADD = 'ADDRESS_ADD'
 export const ADDRESS_UPDATE = 'ADDRESS_UPDATE'
 export const ADDRESS_DELETE = 'ADDRESS_DELETE'
+export const SET_ORDERS = 'SET_ORDERS'
 
 //Error related
 export const CLEAR_ALL_ERRORS = 'CLEAR_ALL_ERRORS'
@@ -90,6 +91,15 @@ export const setSuccess = (message) => {
     details: message || {success: true}
   }
 }
+
+export const ordersUpdate = (orders) => {
+  return {
+    type: SET_ORDERS,
+    params: orders
+  }
+}
+
+// ------------------------ AJAX Calls ----------------------------
 
 export const getAddresses = ({loadAddress, pathname}) => {
   let url = '/account/address/get'
@@ -184,4 +194,14 @@ export const getAccountData = (data, cb) => {
     success: (res) => cb(res),
     error: (xhr, status, err) => console.log(`err:${JSON.stringify(err)}`)
   })
+}
+
+export const viewOrders = (cb) => {
+  ajax({
+    method: 'GET',
+    url: '/orders',
+    dataType: 'json'
+  })
+  .done((res, textStatus) => cb({res}))
+  .fail((xhr, status, err) => cb({err: xhr.responseJSON, status: xhr.status}))
 }

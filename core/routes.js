@@ -27,6 +27,8 @@ const routes = (app, globalModules) => {
 
   app.get("/account/:category", processRequest('accountController', 'main', processOptions))
 
+  app.get('/myorders', processRequest('accountController', 'main', processOptions))
+
   app.get("/account/:category/:subCategory", processRequest('accountController', 'main', processOptions))
 
   app.post("/account/profile/update",  processRequest('accountController', 'updateProfile', processOptions))
@@ -74,17 +76,25 @@ const routes = (app, globalModules) => {
 
   app.post('/order/confirm', processRequest('orderController', 'confirm', processOptions))
 
+  app.post('/order/album/add', processRequest('orderController', 'addAlbum', processOptions))
+
+  app.post('/order/album/update', processRequest('orderController', 'updateAlbum', processOptions))
+
+  app.get('/orders/:orderid', processRequest('orderController', 'viewOrder', processOptions))
+
+  app.get('/orders', processRequest('orderController', 'viewOrders', processOptions))
+
   app.post('/order/customer/notify', processRequest('customerOrderController', 'customerFeedback', processOptions))
 
   app.get('/order/customer/feedback', processRequest('customerOrderController', 'getReaction', processOptions))
 
   app.post('/order/customer/adduser', processRequest('customerOrderController', 'addUser', processOptions))
 
+  app.post('/order/customer/deleteuser', processRequest('customerOrderController', 'deactivateUser', processOptions))
+
   app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
 
   app.get('/order/:users/:orderId/:image_id', processRequest('customerOrderController', 'viewCustomer', processOptions))
-
-  app.post('/myorder/:orderid', processRequest('orderController', 'viewOwner', processOptions))
 
   app.get("/partner", processRequest('partnerController', 'get', processOptions))
 

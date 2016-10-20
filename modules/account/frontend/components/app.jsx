@@ -9,8 +9,8 @@ import Orders from "../containers/orders"
 const App = () => (
   <section>
     <Navigation />
-    <Match pattern="/account/profile" component={AccountDetails} />
-    <Match exactly pattern="/account/orders" component={Orders} />
+    <Match pattern="/account" component={AccountDetails} />
+    <Match exactly pattern="/myorders" component={Orders} />
     <Miss component={()=> <div>Not Found</div>} />
   </section>
 )

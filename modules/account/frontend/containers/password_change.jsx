@@ -8,12 +8,10 @@ class PasswordChange extends React.Component {
   constructor() {
     super()
 
-    this.initialState = {
+    this.state = {
       password: '',
       confirm_password: ''
     }
-
-    this.state = this.initialState
 
     this.handleChange = this.handleChange.bind(this)
     this.updatePassword = this.updatePassword.bind(this)
@@ -24,9 +22,11 @@ class PasswordChange extends React.Component {
     this.setState({[name]: value})
   }
 
-  updatePassword() {
+  updatePassword(e) {
+    e.preventDefault()
+
     const { onChange } = this.props
-    onChange(this.state, () => this.setState(this.initialState))
+    onChange(this.state, () => this.setState({password: '', confirm_password: ''}))
   }
 
   componentWillUnmount() {

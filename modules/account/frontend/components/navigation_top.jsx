@@ -7,10 +7,10 @@ const TopNavigation = () => {
         <nav className='account-nav' role='navigation'>
           <ul className='menu-options'>
             <li className='nav-item' >
-              <Link className='top-nav-link' activeClassName='selected' to='/account/profile' role='menuitem'>My Account</Link>
+              <Link className='top-nav-link' activeClassName='selected' to='/account' role='menuitem'>My Account</Link>
             </li>
             <li className='nav-item' >
-              <Link className='top-nav-link' activeClassName='selected' to='/account/orders' role='menuitem'>My Orders</Link>
+              <Link className='top-nav-link' activeClassName='selected' to='/myorders' role='menuitem'>My Orders</Link>
             </li>
           </ul>
         </nav>
