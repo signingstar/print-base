@@ -21,7 +21,7 @@ const templates = {
 }
 
 const Mailing = (...args) => {
-  return (cb) => logger.info(`Mock mail sent`)
+  return (cb) => console.log(`Mock mail sent`)
   // const client = nodemailer.createTransport(sgTransport(options))
   //
   // return (cb) => client.sendMail(...args, (err, info) => cb(err, info))

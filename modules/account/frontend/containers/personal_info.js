@@ -10,6 +10,7 @@ class PersonalInfo extends React.Component {
     super()
 
     this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
     this.state = {}
   }
 
@@ -30,8 +31,7 @@ class PersonalInfo extends React.Component {
   }
 
   componentWillUnmount() {
-    const { clearErrors } = this.props
-    clearErrors()
+    this.props.clearErrors()
   }
 
   handleChange(e) {
@@ -39,14 +39,22 @@ class PersonalInfo extends React.Component {
     this.setState({[name]: DOMPurify.sanitize(value)})
   }
 
+  handleSubmit(e) {
+    e.preventDefault()
+    this.props.onUpdate(this.state)
+  }
+
   render() {
     const { onUpdate, message } = this.props
-    return <Component
-      data={this.state}
-      message={message}
-      onChange={this.handleChange}
-      onSubmit={()=> onUpdate(this.state)}
-           />
+
+    return (
+      <Component
+        data={this.state}
+        message={message}
+        onChange={this.handleChange}
+        onSubmit={this.handleSubmit}
+      />
+    )
   }
 }
 
@@ -61,7 +69,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onUpdate: (data) => {
       dispatch(updateProfileInfo(data))
-      dispatch(clearAllErrors())
       updateProfile(data, ({err}) => {
         if(err) {
           dispatch(setError(err))

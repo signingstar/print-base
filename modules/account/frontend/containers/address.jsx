@@ -32,7 +32,8 @@ class Address extends Component {
     this.setState({[name]: DOMPurify.sanitize(value)})
   }
 
-  onAddAddress() {
+  onAddAddress(e) {
+    e.preventDefault()
     const { onAdd } = this.props
     let address = JSON.parse(JSON.stringify(this.state))
     onAdd(address, () => this.setState(initialState))
