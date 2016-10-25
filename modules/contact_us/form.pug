@@ -1,6 +1,9 @@
-form
+form(
+  method='post'
+  action= refUrl
+  )
   fieldset
-    .name-input.field
+    .large-field
       label(
         for='username'
         ) Full Name
@@ -10,17 +13,17 @@ form
         required
         type='text'
         )
-    .email-input.field
+    .large-field
       label(
         for='userid'
         ) Email Id
       input#userid-value(
         name='userid'
-        placeholder='youremail@gmail.com'
+        placeholder='example@domain.com'
         required
         type='email'
         )
-    .phone-input.field
+    .field
       label(
         for='telephone'
         ) Mobile Number
@@ -30,16 +33,18 @@ form
         required
         type='tel'
         )
-    .message-type.field
+    .large-field
       label(
-        for='query-type'
+        for='query_type'
         ) Query Type
       select(
-        name='query-type'
+        name='query_type'
         )
-        option General Enquiry
+        option(
+          value='query'
+          ) General Enquiry
         option Related to your order
-    .contact-message.field
+    .large-field
       label(
         for='query'
         ) Your Message
@@ -49,6 +54,5 @@ form
     .button
       input(
         type='submit'
-        name='submit'
-        value='Submit'
+        value='Send Message'
         )

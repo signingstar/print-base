@@ -47,7 +47,9 @@ const routes = (app, globalModules) => {
 
   app.post("/checkout", processRequest('checkoutController', 'post', processOptions))
 
-  app.get("/contact-us", processRequest('contactUsController', 'main', processOptions))
+  app.get("/contact-us", processRequest('contactUsController', 'get', processOptions))
+
+  app.post("/contact-us", processRequest('contactUsController', 'post', processOptions))
 
   app.get("/forgot-password", processRequest('forgotPasswordController', 'main', processOptions))
 
@@ -79,6 +81,8 @@ const routes = (app, globalModules) => {
   app.post('/order/album/add', processRequest('orderController', 'addAlbum', processOptions))
 
   app.post('/order/album/update', processRequest('orderController', 'updateAlbum', processOptions))
+
+  app.post('/order/file/delete', processRequest('orderController', 'deleteFile', processOptions))
 
   app.get('/orders/:orderid', processRequest('orderController', 'viewOrder', processOptions))
 
@@ -128,6 +132,8 @@ const routes = (app, globalModules) => {
   ))
 
   app.get("/why-us", processRequest('whyUsController', 'main', processOptions))
+
+  app.get("/landing", processRequest('placeholderController', 'main', processOptions))
 }
 
 export default routes
