@@ -14,6 +14,8 @@ var DEBUG = !process.argv.includes('--release');
 var srcPath = path.join(__dirname, "./modules");
 var destPath = path.join(__dirname, "./public");
 var corePath = path.join(__dirname, "./core");
+var coreJsPath = path.join(__dirname, "./core/frontend/js");
+var coreCssPath = path.join(__dirname, "./core/frontend/css");
 var nodeModulesPath = path.join(__dirname, "./node_modules");
 
 var GLOBALS = {
@@ -26,25 +28,25 @@ var config = {}
 var clientConfig = extend({}, true, config, {
   name: 'browser',
   entry: {
-    'accountcss':  corePath + '/frontend/account.scss',
-    'checkoutcss': corePath + '/frontend/checkout.scss',
-    'maincss':     corePath + '/frontend/main.scss',
-    'sessioncss':  corePath + '/frontend/session.scss',
-    'servicescss': corePath + '/frontend/services.scss',
-    'ordercss':    corePath + '/frontend/order.scss',
-    'customercss':    corePath + '/frontend/customer_order.scss',
-    'accountjs':   corePath + '/frontend/account.js',
-    'checkoutjs':  corePath + '/frontend/checkout.js',
-    'mainjs':      corePath + '/frontend/main.js',
-    'marketingjs': corePath + '/frontend/marketing.js',
-    'orderjs':     corePath + '/frontend/order.js',
-    'customerjs':     corePath + '/frontend/customer_order.js',
-    'partnerjs':   corePath + '/frontend/partner_us.js',
-    'servicesjs':  corePath + '/frontend/services.js',
-    'sessionjs':   corePath + '/frontend/session.js',
+    'accountcss':  coreCssPath + '/account.scss',
+    'checkoutcss': coreCssPath + '/checkout.scss',
+    'maincss':     coreCssPath + '/main.scss',
+    'sessioncss':  coreCssPath + '/session.scss',
+    'servicescss': coreCssPath + '/services.scss',
+    'ordercss':    coreCssPath + '/order.scss',
+    'customercss':    coreCssPath + '/customer_order.scss',
+    'accountjs':   coreJsPath + '/account.js',
+    'checkoutjs':  coreJsPath + '/checkout.js',
+    'mainjs':      coreJsPath + '/main.js',
+    'marketingjs': coreJsPath + '/marketing.js',
+    'orderjs':     coreJsPath + '/order.js',
+    'customerjs':     coreJsPath + '/customer_order.js',
+    'partnerjs':   coreJsPath + '/partner_us.js',
+    'servicesjs':  coreJsPath + '/services.js',
+    'sessionjs':   coreJsPath + '/session.js',
   },
   output: {
-    filename: '[name].js',
+    filename: 'js/[name].js',
     path: destPath,
   },
   module: {
@@ -67,6 +69,10 @@ var clientConfig = extend({}, true, config, {
           test: /\.scss$/i,
           loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
         },
+        {
+            test: /\.(eot|svg|ttf|woff|woff2)$/,
+            loader: 'file?name=[name].[ext]'
+        }
     ],
   },
 
@@ -76,16 +82,17 @@ var clientConfig = extend({}, true, config, {
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name].css"),
+      new ExtractTextPlugin("css/[name].css"),
       new CommonsChunkPlugin({
         name: "core",
         filename: "layout-core.js",
         chunks: ["mainjs", "accountjs", "checkoutjs", "marketingjs", "orderjs", "partnerjs", "servicesjs", "sessionjs"]
       }),
       new CopyWebpackPlugin([
-        { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
-        { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
-        { from: nodeModulesPath + '/dompurify/src/purify.js', to: destPath},
+        { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath + '/js' },
+        { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath + '/js'},
+        { from: nodeModulesPath + '/dompurify/src/purify.js', to: destPath + '/js'},
+        { from: nodeModulesPath + '/tisko-layout/src/frontend/fonts/bootstrap', to: destPath + '/css'},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/tisko-layout/src/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/order-page/src/frontend/images/*', to: destPath},
