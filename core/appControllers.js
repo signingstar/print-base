@@ -18,6 +18,7 @@ import signOutController from "user-sessions/lib/signout/controller"
 import signUpController from "user-sessions/lib/signup/controller"
 import whyUsController from "../modules/why_us/controller"
 import photoInventoryController from "photo-inventory"
+import placeholderController from "../modules/placeholder/controller"
 
 let controllersList = {
   accountController,
@@ -35,7 +36,8 @@ let controllersList = {
   signOutController,
   signUpController,
   whyUsController,
-  photoInventoryController
+  photoInventoryController,
+  placeholderController
 }
 
 const appControllers = (globalModules) => {

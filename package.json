@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Temporary project",
   "main": "index.js",
+  "private": true,
   "scripts": {
     "debug-server": "DEBUG=* nodemon build/worker.js",
     "server-inspect": "node --inspect build/worker.js",

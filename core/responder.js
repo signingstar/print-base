@@ -68,7 +68,6 @@ const responders = {
   redirectWithoutCookies: (res) => (url, logger, reasonCode) => {
     redirectWithLogging(res, encodeURI(url), reasonCode, logger)
   }
-
 }
 
 export default responders
