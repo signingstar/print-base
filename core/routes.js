@@ -88,6 +88,8 @@ const routes = (app, globalModules) => {
 
   app.get('/orders', processRequest('orderController', 'viewOrders', processOptions))
 
+  app.get('/orders/:orderid/preview', processRequest('customerOrderController', 'viewPreview', processOptions))
+
   app.post('/order/customer/notify', processRequest('customerOrderController', 'customerFeedback', processOptions))
 
   app.get('/order/customer/feedback', processRequest('customerOrderController', 'getReaction', processOptions))
@@ -95,6 +97,8 @@ const routes = (app, globalModules) => {
   app.post('/order/customer/adduser', processRequest('customerOrderController', 'addUser', processOptions))
 
   app.post('/order/customer/deleteuser', processRequest('customerOrderController', 'deactivateUser', processOptions))
+
+  app.post('/order/customer/qualify', processRequest('customerOrderController', 'qualifyImage', processOptions))
 
   app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
 

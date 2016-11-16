@@ -44,7 +44,7 @@ var clientConfig = extend({}, true, config, {
       'sessionjs':   corePath + '/frontend/session.js',
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]![hash].js',
     path: destPath,
   },
   module: {
@@ -76,7 +76,7 @@ var clientConfig = extend({}, true, config, {
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name].css"),
+      new ExtractTextPlugin("[name]![hash].css"),
       new CommonsChunkPlugin({
         name: "core",
         filename: "layout-core.js",
@@ -100,20 +100,19 @@ var clientConfig = extend({}, true, config, {
           return 'module.exports = ' + mapString + ";";
         }
       }),
-      // new webpack.optimize.UglifyJsPlugin( {
-      //   compress: {
-      //     warnings: false
-      //   },
-      //   mangle: {
-      //     except: ['$', 'exports', 'require']
-      //   }
-      // })
+      new webpack.optimize.UglifyJsPlugin( {
+        compress: {
+          warnings: false
+        },
+        mangle: {
+          except: ['$', 'exports', 'require']
+        }
+      })
   ],
 
   resolve: {
       extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js", "css", "scss"]
   },
-  // devtool: 'source-map',
   externals: {
     "react": "React",
     "react-dom": "ReactDOM",
@@ -162,8 +161,6 @@ var serverConfig = extend({}, true, config, {
       { raw: true, entryOnly: false }),
 
   ],
-  debug: DEBUG,
-  devtool: 'source-map',
   externals: [nodeExternals()]
 });
 

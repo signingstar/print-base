@@ -8,6 +8,7 @@ var sass = require("node-sass");
 var AssetsPlugin = require('assets-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
+var autoprefixer = require('autoprefixer')
 
 var DEBUG = !process.argv.includes('--release');
 
@@ -34,13 +35,14 @@ var clientConfig = extend({}, true, config, {
     'sessioncss':  coreCssPath + '/session.scss',
     'servicescss': coreCssPath + '/services.scss',
     'ordercss':    coreCssPath + '/order.scss',
-    'customercss':    coreCssPath + '/customer_order.scss',
+    'customercss': coreCssPath + '/customer_order.scss',
     'accountjs':   coreJsPath + '/account.js',
     'checkoutjs':  coreJsPath + '/checkout.js',
     'mainjs':      coreJsPath + '/main.js',
     'marketingjs': coreJsPath + '/marketing.js',
     'orderjs':     coreJsPath + '/order.js',
-    'customerjs':     coreJsPath + '/customer_order.js',
+    'customerjs':  coreJsPath + '/customer_order.js',
+    'preview':     coreJsPath + '/customer_order_preview.js',
     'partnerjs':   coreJsPath + '/partner_us.js',
     'servicesjs':  coreJsPath + '/services.js',
     'sessionjs':   coreJsPath + '/session.js',
@@ -61,19 +63,23 @@ var clientConfig = extend({}, true, config, {
           }
         },
         {
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
-        },
-        // All files with a '.scss' extension will be handled by 'sass-loader'.
-        {
           test: /\.scss$/i,
           loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
         },
+        {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract("postcss-loader", "style-loader", "css-loader")
+        },
+        // All files with a '.scss' extension will be handled by 'sass-loader'.
         {
             test: /\.(eot|svg|ttf|woff|woff2)$/,
             loader: 'file?name=[name].[ext]'
         }
     ],
+  },
+
+  postcss: function () {
+      return [require('autoprefixer'), require('precss')];
   },
 
   sassLoader: {
@@ -89,9 +95,9 @@ var clientConfig = extend({}, true, config, {
         chunks: ["mainjs", "accountjs", "checkoutjs", "marketingjs", "orderjs", "partnerjs", "servicesjs", "sessionjs"]
       }),
       new CopyWebpackPlugin([
-        { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath + '/js' },
-        { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath + '/js'},
-        { from: nodeModulesPath + '/dompurify/src/purify.js', to: destPath + '/js'},
+        { from: nodeModulesPath + '/react/dist/react-with-addons.js', to: destPath },
+        { from: nodeModulesPath + '/react-dom/dist/react-dom.js', to: destPath},
+        { from: nodeModulesPath + '/dompurify/src/purify.js', to: destPath},
         { from: nodeModulesPath + '/tisko-layout/src/frontend/fonts/bootstrap', to: destPath + '/css'},
         { flatten: true, from: './modules/*/frontend/images/*', to: destPath},
         { flatten: true, from: nodeModulesPath + '/tisko-layout/src/frontend/images/*', to: destPath},
