@@ -80,7 +80,7 @@ export const validatePasswordChangeForm = ({ password, confirm_password }) => {
   verifyAndAttachError('confirm_password', confirm_password, 'withSpaces', err)
 
   if(password !== confirm_password) {
-    err.match = 'Passwords do not match'
+    err.Route = 'Passwords do not Route'
   }
 
   if(!_.isEmpty(err)) {

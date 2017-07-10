@@ -1,23 +1,25 @@
 import React from "react"
 import { render } from "react-dom"
 import { Provider } from "react-redux"
-import { Router, browserHistory } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
+import Router from 'react-router-dom/BrowserRouter'
 
-import MainContents from "./main_contents"
-import configureStore from "../store"
-import routes from "../routes"
+import createStore from "../store"
+import App from "./app"
 
-
-let preloadedState = window.__PRELOADED_STATE__
-
+const preloadedState = window.__PRELOADED_STATE__
+const store = createStore(preloadedState)
 const rootElem = document.getElementById('main-contents')
-const store = configureStore(browserHistory, preloadedState)
-const history = syncHistoryWithStore(browserHistory, store)
 
-function renderDom() {
+const renderDom = () => {
   render(
-    <Provider store={store} ><Router routes={routes} history={history} /></Provider>, rootElem
+    <Provider store={store}>
+      <Router>
+        {({router}) => (
+          <App />
+        )}
+      </Router>
+    </Provider>,
+    rootElem
   )
 }
 

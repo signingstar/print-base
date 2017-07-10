@@ -4,11 +4,9 @@ var webpack = require("webpack");
 var fs = require("fs");
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var sass = require("node-sass");
 var AssetsPlugin = require('assets-webpack-plugin');
 var nodeExternals = require('webpack-node-externals');
 var CommonsChunkPlugin = require("webpack/lib/optimize/CommonsChunkPlugin");
-var autoprefixer = require('autoprefixer')
 
 var DEBUG = !process.argv.includes('--release');
 
@@ -52,38 +50,42 @@ var clientConfig = extend({}, true, config, {
     path: destPath,
   },
   module: {
-    loaders: [
+    rules: [
         // All files with a '.js' or '.jsx' extension will be handled by 'babel-loader'.
         {
           test: /\.jsx?$/,
-          loader: "babel-loader",
           exclude: /node_modules/,
-          query: {
-            presets: ['es2015', 'react']
+          use: {
+            loader: "babel-loader",
+            query: {
+              presets: ['es2015', 'react']
+            },
           }
         },
         {
-          test: /\.scss$/i,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
-        },
-        {
-            test: /\.css$/,
-            loader: ExtractTextPlugin.extract("postcss-loader", "style-loader", "css-loader")
+          test: /\.css$/,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: 'css-loader'
+          })
         },
         // All files with a '.scss' extension will be handled by 'sass-loader'.
         {
+          test: /\.scss$/i,
+          use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+              'css-loader',
+              'postcss-loader',
+              'sass-loader'
+            ]
+          })
+        },
+        {
             test: /\.(eot|svg|ttf|woff|woff2)$/,
-            loader: 'file?name=[name].[ext]'
+            use: 'file-loader?name=[name].[ext]'
         }
     ],
-  },
-
-  postcss: function () {
-      return [require('autoprefixer'), require('precss')];
-  },
-
-  sassLoader: {
-    includePaths: [nodeModulesPath]
   },
 
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
@@ -124,7 +126,7 @@ var clientConfig = extend({}, true, config, {
   ],
 
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js", "css", "scss"]
+      extensions: [".webpack.js", ".web.js", ".jsx", ".js", ".css", ".scss"]
   },
   // devtool: 'source-map',
   externals: {
@@ -169,14 +171,15 @@ var serverConfig = extend({}, true, config, {
       ]
   },
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js"]
+      extensions: [".webpack.js", ".web.js", ".jsx", ".js", ".css", ".scss"]
   },
   plugins:[
-    new webpack.BannerPlugin('require("source-map-support").install();',
-      { raw: true, entryOnly: false }),
-
+    new webpack.BannerPlugin({
+      banner: 'require("source-map-support").install();',
+      raw: true,
+      entryOnly: false
+    }),
   ],
-  debug: DEBUG,
   devtool: 'source-map',
   externals: [nodeExternals()]
 });

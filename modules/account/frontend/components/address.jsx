@@ -1,11 +1,11 @@
 import React from "react"
-import Match from 'react-router/Match'
+import Route from 'react-router/Route'
 
 import AddAddress from "../containers/address"
 
 const Address = ({pathname}) => {
   return (
-      <Match pattern={pathname} exactly component={AddAddress} />
+      <Route pattern={pathname} exactly component={AddAddress} />
   )
 }
 

@@ -1,5 +1,3 @@
-import { createMemoryHistory, match } from 'react-router'
-import { syncHistoryWithStore } from 'react-router-redux'
 import path from "path"
 import layoutPresenter from "tisko-layout"
 
@@ -20,38 +18,35 @@ const ourServicesController = function({modules}) {
       const {req, res} = attributes
       const {session, url: location, params: {category}} = req
 
-      const memoryHistory = createMemoryHistory(location)
-      const store = configureStore(memoryHistory)
-      const history = syncHistoryWithStore(memoryHistory, store)
-
       layoutPresenter({session}, page, {jsAsset})
 
-      match({routes, location, history}, (error, redirectLocation, renderProps) => {
-        if(renderProps) {
-          debug(`error:${error} | renderProps:${renderProps}`)
-          let {reactHTML, preloadedState} = ReactComponent(renderProps, history)
+      ReactComponent({location}, (err, reactHTML, preloadedState) => {
+        if(err) {
+          if(err.reason === 'redirect') {
+            res.writeHead(302, {
+              Location: err.location
+            })
 
-          page.set( {
-            promotional_header: false,
-            showFooter: true,
-            javascript: jsAsset('servicesjs'),
-            stylesheet: cssAsset('servicescss'),
-            body_class: 'our-services',
-            title,
-            reactHTML,
-            preloadedState
-          })
+            return res.end()
+          } else if(err.reason === 'missed') {
+            res.status(404)
+          } else if(err.reason === 'order_not_found') {
+            res.redirect('/')
+          }
+        }
 
-          responders.html(renderHTML(page))
-        } else if (redirectLocation) {
-          let redirectionPath = redirectLocation.pathname + redirectLocation.search
-          logger.info(`Redirecting to: ${redirectionPath}`)
-          res.redirect(302, redirectionPath)
-        }
-        else {
-          logger.info(`renderProps is not passed`)
-          responders.error()
-        }
+        page.set( {
+          promotional_header: false,
+          showFooter: true,
+          javascript: jsAsset('servicesjs'),
+          stylesheet: cssAsset('servicescss'),
+          body_class: 'our-services',
+          title,
+          reactHTML,
+          preloadedState
+        })
+
+        responders.html(renderHTML(page))
       })
     }
   }

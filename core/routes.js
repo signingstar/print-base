@@ -100,6 +100,10 @@ const routes = (app, globalModules) => {
 
   app.post('/order/customer/qualify', processRequest('customerOrderController', 'qualifyImage', processOptions))
 
+  app.post('/order/customer/byuser', processRequest('customerOrderController', 'fetchImagesByUser', processOptions))
+
+  app.post('/order/customer/finalize', processRequest('customerOrderController', 'finalizeOrderByCustomer', processOptions))
+
   app.get('/order/:users/:orderId', processRequest('customerOrderController', 'viewCustomer', processOptions))
 
   app.get('/order/:users/:orderId/:image_id', processRequest('customerOrderController', 'viewCustomer', processOptions))
