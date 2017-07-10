@@ -1,4 +1,4 @@
-import { createMemoryHistory, match } from 'react-router'
+import { createMemoryHistory, Route } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import path from "path"
 import layoutPresenter from "tisko-layout"
@@ -26,7 +26,7 @@ const controller = function({modules}) {
 
       layoutPresenter({session}, page, {jsAsset})
 
-      match({routes, location, history}, (error, redirectLocation, renderProps) => {
+      Route({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           debug(`error:${error} | renderProps:${renderProps}`)
           let {reactHTML, preloadedState} = ReactComponent(renderProps, history)

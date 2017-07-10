@@ -44,7 +44,7 @@ var clientConfig = extend({}, true, config, {
       'sessionjs':   corePath + '/frontend/session.js',
   },
   output: {
-    filename: '[name].js',
+    filename: '[name]![hash].js',
     path: destPath,
   },
   module: {
@@ -60,23 +60,19 @@ var clientConfig = extend({}, true, config, {
         },
         {
             test: /\.css$/,
-            loader: ExtractTextPlugin.extract("style-loader", "css-loader")
+            loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader' })
         },
         // All files with a '.scss' extension will be handled by 'sass-loader'.
         {
           test: /\.scss$/i,
-          loader: ExtractTextPlugin.extract("style-loader", "css-loader!sass-loader")
+          loader: ExtractTextPlugin.extract({ fallback: 'style-loader', use: 'css-loader!sass-loader' })
         },
     ],
   },
 
-  sassLoader: {
-    includePaths: [nodeModulesPath]
-  },
-
   // Use the plugin to specify the resulting filename (and add needed behavior to the compiler)
   plugins: [
-      new ExtractTextPlugin("[name].css"),
+      new ExtractTextPlugin("[name]![hash].css"),
       new CommonsChunkPlugin({
         name: "core",
         filename: "layout-core.js",
@@ -100,31 +96,22 @@ var clientConfig = extend({}, true, config, {
           return 'module.exports = ' + mapString + ";";
         }
       }),
-      // new webpack.optimize.UglifyJsPlugin( {
-      //   compress: {
-      //     warnings: false
-      //   },
-      //   mangle: {
-      //     except: ['$', 'exports', 'require']
-      //   }
-      // })
+      new webpack.optimize.UglifyJsPlugin( {
+        compress: {
+          warnings: false
+        },
+        mangle: {
+          except: ['$', 'exports', 'require']
+        }
+      })
   ],
 
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js", "css", "scss"]
+      extensions: [".webpack.js", ".web.js", ".jsx", ".js", ".css", ".scss"]
   },
-  // devtool: 'source-map',
   externals: {
     "react": "React",
     "react-dom": "ReactDOM",
-    // 'react': { commonjs: 'react', commonjs2: 'react', amd: 'react', root: 'React' },
-    // 'react-dom': { commonjs: 'react-dom', commonjs2: 'react-dom', amd: 'react-dom', root: 'ReactDOM' },
-    // 'react-addons-css-transition-group': {
-    //   commonjs: 'react-addons-css-transition-group',
-    //   commonjs2: 'react-addons-css-transition-group',
-    //   amd: 'react-addons-css-transition-group',
-    //   root: ['React','addons','CSSTransitionGroup']
-    // },
     'react-addons-css-transition-group': 'React.addons.TransitionGroup'
   }
 });
@@ -155,15 +142,15 @@ var serverConfig = extend({}, true, config, {
       ]
   },
   resolve: {
-      extensions: ["", ".webpack.js", ".web.js", ".jsx", ".js"]
+      extensions: [".webpack.js", ".web.js", ".jsx", ".js", ".scss", ".css"]
   },
   plugins:[
-    new webpack.BannerPlugin('require("source-map-support").install();',
-      { raw: true, entryOnly: false }),
-
+    new webpack.BannerPlugin({
+      banner: 'require("source-map-support").install();',
+      raw: true,
+      entryOnly: false
+    }),
   ],
-  debug: DEBUG,
-  devtool: 'source-map',
   externals: [nodeExternals()]
 });
 

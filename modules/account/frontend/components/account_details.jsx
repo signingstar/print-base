@@ -1,7 +1,9 @@
 import React from "react"
-import Match from 'react-router/Match'
-import Link from "react-router/Link"
-import Miss from 'react-router/Miss'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom'
 
 import PersonalInfo from "../containers/personal_info"
 import Address from "../components/address"
@@ -10,22 +12,26 @@ import PasswordChange from "../containers/password_change"
 
 const AccountDetails = ({pathname}) => {
   return (
-    <div className='nav-content'>
-      <div className='left-panel'>
-        <ul>
-          <li><Link to={pathname} activeOnlyWhenExact activeClassName="selected">Personal Information</Link></li>
-          <li><Link to={`${pathname}/address`} activeClassName="selected">Address</Link></li>
-          <li><Link to={`${pathname}/password-change`} activeClassName="selected">Change Password</Link></li>
-        </ul>
-      </div>
-      <div className='right-panel'>
-        <Match pattern={pathname} exactly component={PersonalInfo} />
-        <Match exactly pattern={`${pathname}/address`} component={Address} />
-        <Match pattern={`${pathname}/address/edit`} component={EditAddress} />
-        <Match pattern={`${pathname}/password-change`} component={PasswordChange} />
-        <Miss component={()=> <div>Not Found inner</div>} />
-      </div>
-    </div>
+    <Router>
+      <Switch>
+        <div className='nav-content'>
+          <div className='left-panel'>
+            <ul>
+              <li><Link to={pathname} activeOnlyWhenExact activeClassName="selected">Personal Information</Link></li>
+              <li><Link to={`${pathname}/address`} activeClassName="selected">Address</Link></li>
+              <li><Link to={`${pathname}/password-change`} activeClassName="selected">Change Password</Link></li>
+            </ul>
+          </div>
+          <div className='right-panel'>
+            <Route path={pathname} exact component={PersonalInfo} />
+            <Route exact path={`${pathname}/address`} component={Address} />
+            <Route path={`${pathname}/address/edit`} component={EditAddress} />
+            <Route path={`${pathname}/password-change`} component={PasswordChange} />
+            <Route component={()=> <div>Not Found inner</div>} />
+          </div>
+        </div>
+      </Switch>
+    </Router>
   )
 }
 

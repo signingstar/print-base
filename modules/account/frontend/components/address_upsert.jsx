@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "react-router/Link"
+import Link from "react-router-dom/Link"
 
 const AddEditAddress = ({onChange, onSubmit, mode='add', pathname, address = {}, message}) => {
   let { address_line1, address_line2, city, state, country, zipcode, landmark } = address

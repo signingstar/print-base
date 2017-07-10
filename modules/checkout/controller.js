@@ -1,4 +1,4 @@
-import { createMemoryHistory, match } from 'react-router'
+import { createMemoryHistory, Route } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 import { omit } from "underscore"
 import path from "path"
@@ -34,7 +34,7 @@ const checkoutController = function({modules}) {
         return
       }
 
-      match({routes, location, history}, (error, redirectLocation, renderProps) => {
+      Route({routes, location, history}, (error, redirectLocation, renderProps) => {
         if(renderProps) {
           debug(`error:${error} | renderProps:${renderProps}`)
           let {reactHTML, preloadedState} = ReactComponent(renderProps, category, history)
