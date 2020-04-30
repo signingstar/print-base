@@ -14,9 +14,7 @@ const renderDom = () => {
   render(
     <Provider store={store}>
       <Router>
-        {({router}) => (
-          <App />
-        )}
+        <App />
       </Router>
     </Provider>,
     rootElem
@@ -24,4 +22,3 @@ const renderDom = () => {
 }
 
 renderDom()
-store.subscribe(renderDom)

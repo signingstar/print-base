@@ -12,17 +12,13 @@ import InvitationCard from "./invitation_card"
 import VisitingCard from "./visiting_card"
 
 const App = () => (
-  <Router>
-    <Switch>
-      <div className='main-section-content'>
-        <Route path="/services" component={MainContents} />
-        <Route exact path="/services/stationary" component={Stationary} />
-        <Route exact path="/services/invitation-card" component={InvitationCard} />
-        <Route exact path="/services/visiting-card" component={VisitingCard} />
-        <Route component={()=> <div>Not Found</div>} />
-      </div>
-    </Switch>
-  </Router>
+  <div className='main-section-content'>
+    <Route path="/services" component={MainContents} />
+    <Route exact path="/services/stationary" component={Stationary} />
+    <Route exact path="/services/invitation-card" component={InvitationCard} />
+    <Route exact path="/services/visiting-card" component={VisitingCard} />
+    <Route component={()=> <div>Not Found</div>} />
+  </div>
 )
 
 export default App

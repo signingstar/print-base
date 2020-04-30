@@ -1,5 +1,5 @@
 import React from "react"
-import { Link, IndexLink } from "react-router"
+import { Link, NavLink } from "react-router-dom"
 
 const SectionLinks = () => {
   return (
@@ -7,13 +7,13 @@ const SectionLinks = () => {
       <nav id="service-item" role='navigation'>
         <ul>
           <li id="visiting-cards-nav" className="visiting-cards-nav">
-            <Link to="/services/visiting-card" activeClassName='selected'>Visiting Cards</Link>
+            <NavLink to="/services/visiting-card" activeClassName='selected'>Visiting Cards</NavLink>
           </li>
           <li id="stationary-nav" className="stationary-nav">
-            <Link to="/services/stationary" activeClassName='selected'>Stationary Items</Link>
+            <NavLink to="/services/stationary" activeClassName='selected'>Stationary Items</NavLink>
           </li>
           <li id="invitation-card-nav" className="brouchers-nav">
-            <Link to="/services/invitation-card" activeClassName='selected'>Invitation Cards</Link>
+            <NavLink to="/services/invitation-card" activeClassName='selected'>Invitation Cards</NavLink>
           </li>
         </ul>
       </nav>
