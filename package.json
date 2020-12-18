@@ -29,7 +29,7 @@
     "copy-webpack-plugin": "^3.0.1",
     "css-loader": "^0.23.1",
     "debug": "^2.3.2",
-    "dompurify": "^0.8.3",
+    "dompurify": "^2.0.17",
     "express": "^4.15.2",
     "express-flash": "0.0.2",
     "express-session": "^1.14.1",
