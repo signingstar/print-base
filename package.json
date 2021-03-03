@@ -49,7 +49,7 @@
     "path": "^0.12.7",
     "pg": "^6.1.0",
     "photo-inventory": "github:signingstar/photo-inventory",
-    "pug": "^2.0.0-beta4",
+    "pug": "^3.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-dropdown": "^1.2.0",
