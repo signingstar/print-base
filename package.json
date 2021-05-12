@@ -43,7 +43,7 @@
     "multer": "^1.2.0",
     "node-sass": "^3.13.0",
     "node-uuid": "^1.4.7",
-    "nodemailer": "^2.7.2",
+    "nodemailer": "^6.4.16",
     "nodemailer-sendgrid-transport": "^0.2.0",
     "order-page": "github:signingstar/order-page",
     "path": "^0.12.7",
