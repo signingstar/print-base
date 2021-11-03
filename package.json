@@ -72,7 +72,7 @@
     "underscore": "^1.8.3",
     "url": "^0.11.0",
     "user-sessions": "github:signingstar/user-sessions",
-    "validator": "^6.0.0",
+    "validator": "^13.7.0",
     "webpack": "^2.2.1",
     "winston": "^2.2.0",
     "xss-filters": "^1.2.7"
